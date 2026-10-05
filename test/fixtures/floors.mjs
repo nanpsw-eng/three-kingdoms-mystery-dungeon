@@ -28,6 +28,7 @@ export function asciiFloor(rows, options) {
     modifier: options.modifier ?? null,
     boss: options.boss ?? false,
     alarmNetwork: options.alarmNetwork ?? false,
+    mechanics: options.mechanics ?? [],
     attempt: 0,
   };
 }
