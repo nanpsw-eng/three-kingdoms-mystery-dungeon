@@ -11,10 +11,14 @@
 2. Merge MVP branch `feature/headless-battle-engine` into `main`; continue on `feature/story-expansion`.
 3. The user will not issue further instructions; Claude decides by documented recommendation (logged in DEC-023/DEC-024 tables).
 
+## Production deploy
+- APPROVED by the user (2026-10-05, "프로덕션 배포도 승인할게").
+
 ## Still requires explicit human approval
-- Production deploy/release, paid services, repository visibility changes.
+- Paid services, repository visibility changes.
 
 ## Auto-decision log (expansion)
 | ID | Decision | Rationale |
 |---|---|---|
 | B-01 | Merge method for MVP → main: merge commit (keeps history, no rewrite) | traceability |
+| B-02 | Production hosting: GitHub Pages via Actions on every `main` push (tests must pass first) | free for public repo, no new vendor, static site fits |
