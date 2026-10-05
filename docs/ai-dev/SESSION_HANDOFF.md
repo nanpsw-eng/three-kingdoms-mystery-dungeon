@@ -1,7 +1,7 @@
 # SESSION HANDOFF — 2026-10-05 (two parallel tracks)
 
 이 파일은 두 작업 트랙의 최소 Context Index다. 각 트랙은 자기 섹션만 갱신한다.
-- **Track A — Story/Engine (Claude)**: `feature/story-expansion` · `src/**`, `test/**`, `scripts/simulate.mjs`, `docs/**`(아트 제외)
+- **Track A — Story/Engine (Claude)**: `ccr-bb39f6f8-g46bbv` (session branch; `feature/story-expansion` merged) · `src/**`, `test/**`, `scripts/simulate.mjs`, `docs/**`(아트 제외)
 - **Track B — Art (Codex)**: `art/ink-graphic-novel-v1` · `web/style.css`, `web/src/{sprites,portraits,pixel,map,assets}.ts`, `web/assets/**`, `docs/art/**`
 
 ## Shared
@@ -14,7 +14,7 @@
 
 ## Track A — Story/Engine (Claude)
 - Gate: `STORY_EXPANSION_COMPLETE (S0–S5) / HUMAN_PLAYTEST_NEXT`
-- Local: `npm test` 154/0 PASS · `build:web` PASS · sim smart 200: E1 35.0% · E2 28.0% · E3 29.5% · E4 24.5% · E5 28.0% · E6 24.0% · E7 24.0% · E8 27.0% · E9 27.0% · E1 renown1 16.0% · campaign chain → ending PASS (22 runs)
+- Local: `npm test` 156/0 PASS · `build:web` PASS · sim smart 200: E1 35.0% · E2 28.0% · E3 29.5% · E4 24.5% · E5 28.0% · E6 24.0% · E7 24.0% · E8 27.0% · E9 27.0% · E1 renown1 16.0% · campaign chain → ending PASS (22 runs)
 
 | Stage | Report |
 |---|---|
@@ -26,6 +26,7 @@
 | S4 E6 형주·익주 · E7 이릉 | `docs/reports/STORY_S4_JING_YI_YILING.md` |
 | S5 E8 남만 · E9 북벌 · 엔딩 · 명성 | `docs/reports/STORY_S5_NANMAN_NORTHERN_ENDING.md` |
 | Summary | `docs/reports/STORY_EXPANSION_COMPLETE.md` |
+| Polish (saves · codex · scenes) | `docs/reports/POLISH_CODEX_SCENES_SAVES.md` |
 
 DO_NOT_REPEAT
 - MVP battle/dungeon/run/content/sim/web
@@ -35,6 +36,7 @@ DO_NOT_REPEAT
 NEXT_SAFE_ACTION
 1. Human playtest on the deployed site; tune first-boss walls (E2 화웅, E6 마초) from feedback in campaign module files only
 2. Keep merging Track B art; remove `ART_ALIASES` entries as real art lands
+3. Remote branch cleanup needs the user (sandbox git proxy refuses deletes): `fix/pages-deploy`, `feature/headless-battle-engine`, optionally `feature/story-expansion`
 3. Each stage: validateContent clean, sim 20–35%, tests, report, PR → main, deploy; check Track B branch and merge art
 
 ## Track B — Art (Codex) — as recorded by Codex
