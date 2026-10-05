@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Builds the static web client into site/ (no bundler: browser-native ES modules).
-import { cpSync, mkdirSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { createRequire } from "node:module";
 
@@ -10,4 +10,5 @@ execFileSync(process.execPath, [tsc, "-p", "tsconfig.web.json"], { stdio: "inher
 mkdirSync("site", { recursive: true });
 cpSync("web/index.html", "site/index.html");
 cpSync("web/style.css", "site/style.css");
+if (existsSync("web/assets")) cpSync("web/assets", "site/assets", { recursive: true });
 console.log("site/ ready — serve with: npm run serve");

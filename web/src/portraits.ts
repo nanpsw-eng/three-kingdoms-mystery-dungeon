@@ -1,4 +1,5 @@
 // Procedural 32×32 bust portraits that share the FigureSpec parts with the 16×16 field sprites.
+import { assetPortrait } from "./assets.js";
 import { finish, shade } from "./pixel.js";
 import { CHARACTER_FIGURES, ENEMY_FIGURES, type FigureSpec } from "./sprites.js";
 
@@ -191,6 +192,8 @@ const BOSSES = new Set(["장보", "장량", "장각", "화웅"]);
 const FIERCE = new Set(["zhang-fei", "guan-yu", "xiahou-dun", "gan-ning", "zhang-liao", "cao-cao"]);
 
 export function portraitUrl(key: string): string {
+  const external = assetPortrait(key);
+  if (external !== undefined) return external;
   let url = cache.get(key);
   if (url !== undefined) return url;
   const spec = CHARACTER_FIGURES[key] ?? ENEMY_FIGURES[key];

@@ -3,6 +3,7 @@ import {
   type AbilityTargeting, type BattleCommand, type Direction, type FormationSlot, type MetaState, type RunCommand, type RunEvent, type RunOptions,
 } from "../../src/index.js";
 import { drawMap, tileAt } from "./map.js";
+import { loadAssets } from "./assets.js";
 import { portraitUrl } from "./portraits.js";
 import { figureUrl, iconUrl, spriteImg } from "./sprites.js";
 import { CLASS_NAMES, DANGER_NAMES, MODIFIER_NAMES, SLOT_NAMES, STATUS_NAMES, contentName, describeRunEvent } from "./text.js";
@@ -499,3 +500,4 @@ window.addEventListener("resize", () => render());
 };
 
 render();
+void loadAssets(() => render());

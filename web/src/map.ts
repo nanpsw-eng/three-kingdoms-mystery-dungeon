@@ -1,4 +1,5 @@
 import type { DungeonEngine, Point } from "../../src/index.js";
+import { assetTile } from "./assets.js";
 import { figureCanvas, iconCanvas } from "./sprites.js";
 
 export const VIEW_RADIUS = 7;
@@ -123,6 +124,13 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
     const s = cell * scale;
     ctx.drawImage(image, x + (cell - s) / 2, y + (cell - s) / 2 - lift, s, s);
   };
+  /** Draws a named tileset tile when one is loaded, else the procedural fallback. */
+  const terrain = (name: string, fallback: CanvasImageSource, p: Point, variant = 0): void => {
+    const tile = assetTile(name, variant);
+    if (tile === null) { blit(fallback, p); return; }
+    const [x, y] = at(p);
+    ctx.drawImage(tile.image, tile.sx, tile.sy, tile.size, tile.size, x, y, cell, cell);
+  };
   const passable = (p: Point): boolean => { const t = dungeon.tile(p); return t === "room" || t === "corridor" || t === "gate"; };
   const fog: Point[] = [];
   for (let vy = 0; vy < VIEW; vy++) {
@@ -134,23 +142,26 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
         const below = { x: p.x, y: p.y + 1 };
         const seen = [[0, 1], [1, 0], [-1, 0], [0, -1], [1, 1], [-1, 1], [1, -1], [-1, -1]].some(([dx, dy]) => { const q = { x: p.x + dx!, y: p.y + dy! }; return dungeon.isExplored(q) && passable(q); });
         if (!seen) continue;
-        blit(passable(below) && dungeon.isExplored(below) ? WALL_FACE : WALL_CAP, p);
+        const face = passable(below) && dungeon.isExplored(below);
+        terrain(face ? "wall-face" : "wall-cap", face ? WALL_FACE : WALL_CAP, p, hash(p.x, p.y, 3));
         if (!dungeon.isVisible(p)) fog.push(p);
         continue;
       }
       if (!dungeon.isExplored(p)) continue;
       const variant = hash(p.x, p.y);
-      blit(tile === "gate" ? GATE : tile === "room" ? FLOOR[Math.floor(variant * FLOOR.length)]! : CORRIDOR[Math.floor(variant * CORRIDOR.length)]!, p);
+      if (tile === "gate") terrain("gate", GATE, p);
+      else if (tile === "room") terrain("floor", FLOOR[Math.floor(variant * FLOOR.length)]!, p, variant);
+      else terrain("corridor", CORRIDOR[Math.floor(variant * CORRIDOR.length)]!, p, variant);
       if (!dungeon.isVisible(p)) fog.push(p);
     }
   }
   const stairs = dungeon.floor.stairs;
-  if (dungeon.isExplored(stairs)) blit(STAIRS, stairs);
+  if (dungeon.isExplored(stairs)) terrain("stairs", STAIRS, stairs);
   for (const trap of dungeon.revealedTraps()) {
     if (!dungeon.isExplored(trap.pos)) continue;
     let image = TRAPS.get(trap.type);
     if (!image) { image = trapTile(trap.type); TRAPS.set(trap.type, image); }
-    blit(image, trap.pos);
+    terrain("trap-" + trap.type, image, trap.pos);
   }
   for (const object of dungeon.objects()) {
     if (!dungeon.isExplored(object.pos)) continue;
