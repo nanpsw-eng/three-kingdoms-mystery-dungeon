@@ -170,3 +170,22 @@ registerMechanic("pursuit", (params) => {
     },
   };
 });
+
+/** E9 목우유마 보급 호송: supply carts arrive every `interval` turns (+food) while raiders shadow the convoy. */
+registerMechanic("wooden-ox", (params) => {
+  const interval = params.interval ?? 30;
+  const food = params.food ?? 6;
+  const raidEvery = params.raidEvery ?? 2;
+  let convoys = 0;
+  return {
+    type: "wooden-ox",
+    onTurnEnd(ctx) {
+      if (ctx.turn === 0 || ctx.turn % interval !== 0) return;
+      convoys += 1;
+      ctx.addFood(food);
+      ctx.emit("목우유마 보급대가 도착했다. 군량 +" + food);
+      if (convoys % raidEvery === 0) { ctx.reinforce(); ctx.emit("위군이 보급로를 노린다!"); }
+    },
+    status(turn) { return { label: "보급", value: (interval - (turn % interval)) + "턴", urgent: false }; },
+  };
+});

@@ -235,3 +235,25 @@ test("X3 pursuit: reinforcements arrive on schedule and the status turns urgent"
   for (let i = 0; i < 12 && d.status === "exploring"; i++) all.push(...d.execute({ type: "wait" }).events);
   assert.ok(all.filter((e) => e.type === "mechanic" && e.mechanic === "pursuit").length >= 2);
 });
+
+test("S4: E6 형주·익주 15F (매복·번성 수공, 우금·방덕→조인) and E7 이릉 12F (매복·숲 화계, 육손 2페이즈)", () => {
+  const camp = (id) => MVP_CONTENT.campaigns.find((c) => c.id === id);
+  const group = (id) => MVP_CONTENT.enemyGroups.find((g) => g.id === id);
+  const withMechanic = (c, type) => c.floors.filter((f) => (f.mechanics ?? []).some((m) => m.type === type)).map((f) => f.depth);
+  const e6 = camp("jing-yi");
+  assert.equal(e6.floors.length, 15);
+  assert.deepEqual(withMechanic(e6, "ambush"), [3, 6, 7, 8, 9]);
+  assert.deepEqual(withMechanic(e6, "flood"), [11, 12, 13, 14, 15]);
+  assert.equal(group("boss-yu-jin").nextPhase, "boss-cao-ren");
+  assert.equal(group("boss-ma-chao").recruit.characterId, "ma-chao");
+  const e7 = camp("yiling");
+  assert.equal(e7.floors.length, 12);
+  assert.deepEqual(withMechanic(e7, "spreading-fire"), [9, 10, 11, 12]);
+  assert.equal(group("boss-lu-xun").nextPhase, "boss-lu-xun-2");
+  let meta = { ...initialMeta(MVP_CONTENT), unlockedCampaigns: ["red-cliffs"] };
+  const base = { cleared: true, defeatedGroups: [], recruited: [], itemsSeen: [], level: 9, turns: 1, battles: 1 };
+  meta = applyRunToMeta(meta, { ...base, campaignId: "red-cliffs", depthReached: 15 }, MVP_CONTENT);
+  meta = applyRunToMeta(meta, { ...base, campaignId: "jing-yi", depthReached: 15, defeatedGroups: ["boss-xiahou-yuan"] }, MVP_CONTENT);
+  assert.ok(meta.unlockedCampaigns.includes("jing-yi") && meta.unlockedCampaigns.includes("yiling"));
+  for (const id of ["wei-yan", "fa-zheng", "xu-huang"]) assert.ok(meta.unlockedCharacters.includes(id), id);
+});

@@ -1,0 +1,92 @@
+{
+  "campaignId": "jing-yi",
+  "runs": 200,
+  "battleMode": "smart",
+  "clearRate": 0.24,
+  "outcomes": {
+    "failed": 152,
+    "cleared": 48
+  },
+  "failDepth": {
+    "5": 40,
+    "6": 14,
+    "7": 18,
+    "8": 9,
+    "9": 1,
+    "11": 9,
+    "12": 19,
+    "13": 18,
+    "14": 14,
+    "15": 10
+  },
+  "failCause": {
+    "battle": 152
+  },
+  "depthReached": {
+    "5": 40,
+    "6": 14,
+    "7": 18,
+    "8": 9,
+    "9": 1,
+    "11": 9,
+    "12": 19,
+    "13": 18,
+    "14": 14,
+    "15": 58
+  },
+  "byRuler": {
+    "liu-bei": {
+      "runs": 67,
+      "cleared": 12
+    },
+    "cao-cao": {
+      "runs": 67,
+      "cleared": 24
+    },
+    "sun-quan": {
+      "runs": 66,
+      "cleared": 12
+    }
+  },
+  "byGeneral": {
+    "guan-yu": {
+      "runs": 75,
+      "cleared": 16
+    },
+    "zhang-fei": {
+      "runs": 68,
+      "cleared": 18
+    },
+    "zhang-liao": {
+      "runs": 66,
+      "cleared": 12
+    },
+    "xiahou-dun": {
+      "runs": 65,
+      "cleared": 18
+    },
+    "taishi-ci": {
+      "runs": 63,
+      "cleared": 15
+    },
+    "gan-ning": {
+      "runs": 63,
+      "cleared": 17
+    }
+  },
+  "perRunAverage": {
+    "level": 8.25,
+    "turns": 1587.81,
+    "battles": 37.9,
+    "recruits": 1.26,
+    "surprisesAlly": 0.35,
+    "surprisesEnemy": 0.01,
+    "gatesOpened": 0,
+    "retreats": 0,
+    "traitPicks": 18.14,
+    "itemsUsed": 12.79,
+    "secretsFound": 0,
+    "reinforcements": 12.2
+  },
+  "ms": 82507
+}

@@ -92,6 +92,14 @@ const ART_ALIASES: Readonly<Record<string, string>> = {
   "lu-su": "hua-tuo", "huang-gai": "huang-zhong", "pang-tong": "jia-xu", "cheng-pu": "xiahou-dun",
   "조조군 보병": "동탁군 극병", "청주병": "황건 창병", "호표기": "서량 기병", "형주 수군": "황건 술사", "몽충": "관문 수비대",
   "조조군 궁병": "동탁군 궁병", "하후은": "화웅", "채모": "장량", "장윤": "화웅", "조조": "cao-cao", "허저": "zhang-fei",
+  // E6 형주·익주
+  "ma-chao": "zhao-yun", "wei-yan": "guan-yu", "fa-zheng": "jia-xu", "xu-huang": "xiahou-dun", "xiahou-yuan": "taishi-ci",
+  "유장군 보병": "황건 창병", "서량 철기": "서량 기병", "위군 정예": "동탁군 극병", "위군 궁병": "동탁군 궁병", "복병": "황건 기병",
+  "칠군 병사": "관문 수비대", "마초": "zhao-yun", "하후연": "taishi-ci", "방덕": "화웅", "우금": "xiahou-dun", "조인": "xiahou-dun",
+  // E7 이릉
+  "lu-xun": "zhou-yu", "lu-meng": "zhang-liao", "zhou-tai": "zhang-fei",
+  "오군 보병": "황건 창병", "오군 궁병": "동탁군 궁병", "오군 복병": "황건 기병", "강동 수군": "황건 술사", "해번군": "관문 수비대",
+  "감녕": "gan-ning", "주연": "taishi-ci", "주태": "zhang-fei", "육손": "zhou-yu",
 };
 export function artKey(key: string): string {
   return ART_ALIASES[key] ?? key;
