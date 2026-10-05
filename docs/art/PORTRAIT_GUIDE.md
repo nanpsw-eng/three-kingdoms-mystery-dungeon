@@ -61,6 +61,21 @@ no text, no watermark, no frame, centered, square composition
 | gate-guard | 관문 수비대 | heavy gate guard, steel armor, large red shield |
 | boss-hua-xiong | 화웅 | Hua Xiong the fearsome general, horned black helmet, dark armor, red beard, huge broad blade |
 
+### 스토리 확장 추가분 (E2 반동탁연합) — 현재 `web/src/story.ts`의 `ART_ALIASES`로 기존 그림을 임시 대체 중
+그림을 추가하면 해당 id/이름의 별칭 줄을 삭제하면 된다. 적·보스 도트는 유닛 이름(한글)이 키다.
+| id / 키 | 이름 | 프롬프트 |
+|---|---|---|
+| lu-bu | 여포 | peerless warrior, pheasant-tail feathers on a golden crown, crimson and black armor, Sky Piercer halberd, arrogant gaze |
+| sun-jian | 손견 | fierce southern general, red headscarf, crimson lamellar armor, ancient sword, short beard, tiger-like eyes |
+| yuan-shao | 원소 | aristocratic coalition leader, golden armor over white robe, tall noble crown, neat beard, proud expression |
+| cao-ren | 조인 | stalwart defensive general, heavy navy armor, large round shield, square jaw, short beard |
+| hua-xiong | 화웅 | (기존 `boss-hua-xiong`과 동일 인물) Hua Xiong, horned black helmet, dark armor, red beard, huge broad blade |
+| 여포 (적) | 여포 | lu-bu와 동일 그림 사용 가능 |
+| 동탁 | 동탁 | corpulent tyrant chancellor, dark crimson court robe with gold, black official's hat, thick beard, cruel smile |
+| 이유 | 이유 | scheming advisor, black robe, thin face, narrow eyes, holding a poison cup |
+| 방화병 | 방화병 | Dong Zhuo's arsonist soldier, soot-stained red armor, burning torch |
+| 서량 친위대 | 서량 친위대 | elite Xiliang bodyguard, fur-trimmed lamellar armor, spear, scarred face |
+
 ## 4. 전달 방법
 1. 생성한 PNG를 채팅에 첨부(파일명 유지)하거나 `web/assets/portraits/` 에 커밋
 2. Claude가 `web/assets/manifest.json` 의 `"portraits"` 목록에 id를 추가 → 다음 빌드부터 해당 캐릭터만 교체, 나머지는 기존 도트 초상화 유지

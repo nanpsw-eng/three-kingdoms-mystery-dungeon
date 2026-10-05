@@ -148,3 +148,38 @@ test("E1 ships story scenes and timeline metadata", () => {
   const run = new RunEngine(MVP_CONTENT, { seed: "e1", campaignId: "yellow-turban", rulerId: "cao-cao", generalIds: ["guan-yu", "zhang-fei"] });
   assert.equal(run.scene("yt-intro").lines[1].speaker, "cao-cao");
 });
+
+test("S1: E2 반동탁연합 — 12F, 화웅 duel, 여포/동탁 two-phase, 관문 3·7F, 낙양 화재 9–12F", () => {
+  const e2 = MVP_CONTENT.campaigns.find((c) => c.id === "anti-dong");
+  assert.equal(e2.floors.length, 12);
+  assert.deepEqual(e2.floors.filter((f) => f.bossGroupId).map((f) => [f.depth, f.bossGroupId]), [[4, "boss-sishui-hua-xiong"], [8, "boss-lu-bu"], [12, "boss-dong-zhuo"]]);
+  assert.deepEqual(e2.floors.filter((f) => f.gateDefenderGroupId).map((f) => f.depth), [3, 7]);
+  assert.deepEqual(e2.floors.filter((f) => (f.mechanics ?? []).some((m) => m.type === "burning-capital")).map((f) => f.depth), [9, 10, 11, 12]);
+  const group = (id) => MVP_CONTENT.enemyGroups.find((g) => g.id === id);
+  assert.equal(group("boss-sishui-hua-xiong").duel.unitIndex, 0);
+  assert.equal(group("boss-sishui-hua-xiong").recruit.characterId, "hua-xiong");
+  assert.equal(group("boss-lu-bu").nextPhase, "boss-lu-bu-2");
+  assert.equal(group("boss-lu-bu-2").recruit.characterId, "lu-bu");
+  assert.equal(group("boss-dong-zhuo").nextPhase, "boss-dong-zhuo-2");
+  for (const id of ["lu-bu", "sun-jian", "yuan-shao", "cao-ren", "hua-xiong"]) assert.equal(MVP_CONTENT.characters.find((c) => c.id === id)?.kind, "general", id);
+  assert.equal(MVP_CONTENT.campaigns.some((c) => c.id === "hulao-gate"), false);
+});
+
+test("S1: clearing E1 opens E2; E2 bosses and clear unlock 손견·조인·원소; recruits persist", () => {
+  let meta = initialMeta(MVP_CONTENT);
+  const base = { cleared: false, depthReached: 1, defeatedGroups: [], recruited: [], itemsSeen: [], level: 1, turns: 1, battles: 1 };
+  meta = applyRunToMeta(meta, { ...base, campaignId: "yellow-turban", cleared: true, depthReached: 15 }, MVP_CONTENT);
+  assert.ok(meta.unlockedCampaigns.includes("anti-dong"));
+  assert.deepEqual(meta.clearedCampaigns, ["yellow-turban"]);
+  meta = applyRunToMeta(meta, { ...base, campaignId: "anti-dong", cleared: true, depthReached: 12, defeatedGroups: ["boss-sishui-hua-xiong", "boss-lu-bu-2"], recruited: ["lu-bu"] }, MVP_CONTENT);
+  for (const id of ["sun-jian", "cao-ren", "yuan-shao", "lu-bu"]) assert.ok(meta.unlockedCharacters.includes(id), id);
+  assert.ok(meta.achievements.includes("반동탁연합 승리"));
+});
+
+test("S1: E2 autopilot is deterministic and terminates", () => {
+  const meta = { ...initialMeta(MVP_CONTENT), unlockedCampaigns: ["yellow-turban", "anti-dong"] };
+  const options = { seed: "e2-det", campaignId: "anti-dong", rulerId: "sun-quan", generalIds: ["guan-yu", "zhang-fei"], meta };
+  const a = runAutopilot(MVP_CONTENT, options);
+  assert.deepEqual(a, runAutopilot(MVP_CONTENT, options));
+  assert.notEqual(a.outcome, "stalled");
+});

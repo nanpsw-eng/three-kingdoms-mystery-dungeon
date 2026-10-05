@@ -6,7 +6,7 @@ import { MVP_CONTENT, initialMeta, runAutopilot } from "../dist/index.js";
 const runs = Number(process.argv[2] ?? 100);
 const campaignId = process.argv[3] ?? "yellow-turban";
 const battleMode = process.argv[4] ?? "smart";
-const meta = { ...initialMeta(MVP_CONTENT), unlockedCampaigns: ["yellow-turban", "hulao-gate"] };
+const meta = { ...initialMeta(MVP_CONTENT), unlockedCampaigns: MVP_CONTENT.campaigns.map((c) => c.id) };
 const rulers = ["liu-bei", "cao-cao", "sun-quan"];
 const generals = MVP_CONTENT.startingUnlocks.characters.filter((id) => !rulers.includes(id));
 const PAIRS = generals.flatMap((a, i) => generals.slice(i + 1).map((b) => [a, b]));

@@ -6,7 +6,7 @@ import { drawMap, tileAt } from "./map.js";
 import { loadAssets } from "./assets.js";
 import { portraitUrl } from "./portraits.js";
 import { figureUrl, iconUrl, spriteImg } from "./sprites.js";
-import { isStoryPhase, storySheet } from "./story.js";
+import { artKey, isStoryPhase, storySheet, timelinePanel } from "./story.js";
 import { CLASS_NAMES, DANGER_NAMES, MODIFIER_NAMES, SLOT_NAMES, STATUS_NAMES, contentName, describeRunEvent } from "./text.js";
 
 const content = MVP_CONTENT;
@@ -58,7 +58,7 @@ function put(...children: Child[]): void {
   for (const child of children) if (child !== null && child !== undefined && child !== false) app.append(child);
 }
 
-const pic = (key: string, size: number, alt = ""): HTMLImageElement => spriteImg(portraitUrl(key), size, alt, "px portrait");
+const pic = (key: string, size: number, alt = ""): HTMLImageElement => spriteImg(portraitUrl(artKey(key)), size, alt, "px portrait");
 const icon = (id: string, size = 28): HTMLImageElement => spriteImg(iconUrl(id), size, "", "px icon");
 let hitIds = new Set<string>();
 
@@ -175,10 +175,11 @@ function renderTitle(): void {
       h("h1", {}, "삼국지 미스터리 던전"),
       h("p", { class: "subtitle" }, "군주와 장수를 골라 원정을 떠나라. 원정이 끝나면 레벨·장비는 사라지고, 새 장수와 전역만 남는다.")),
     saved ? h("div", { class: "panel row" }, h("span", { class: "grow" }, "진행 중인 원정이 있다."), button("이어하기", () => startRun(saved.options, saved.log), { class: "primary" }), button("포기", () => { remove(SAVE_KEY); render(); })) : null,
-    h("div", { class: "panel" }, h("h2", {}, "전역"), h("div", { class: "row" }, ...content.campaigns.map((c) => {
-      const locked = !meta.unlockedCampaigns.includes(c.id);
-      return button((locked ? "🔒 " : "") + c.name, () => { title.campaignId = c.id; render(); }, { class: title.campaignId === c.id ? "selected" : "", disabled: locked });
-    }))),
+    timelinePanel([...content.campaigns].sort((a, b) => (a.order ?? 99) - (b.order ?? 99)).map((c) => ({
+      id: c.id, name: c.name, era: c.era ?? "", summary: c.summary ?? "", floors: c.floors.length,
+      locked: !meta.unlockedCampaigns.includes(c.id), selected: title.campaignId === c.id,
+      best: meta.bestDepth[c.id] ?? 0, cleared: (meta.clearedCampaigns ?? []).includes(c.id),
+    })), (id) => { title.campaignId = id; render(); }),
     h("div", { class: "panel" }, h("h2", {}, "군주"), h("div", { class: "grid3" }, ...rulers.map((c) =>
       h("button", { class: "pick " + (title.rulerId === c.id ? "selected" : ""), onclick: () => { title.rulerId = c.id; render(); } }, pic(c.id, 64, c.name), h("span", {}, c.name))))),
     h("div", { class: "panel" }, h("h2", {}, "자유 장수 (2명)"), h("div", { class: "grid3" }, ...generals.map((c) => {
@@ -264,9 +265,9 @@ function renderDungeon(): void {
   );
   const enemyKey = (groupId: string): string => {
     const units = r.group(groupId)?.units ?? [];
-    return (units.find((u) => !u.name.includes(" ")) ?? units[0])?.name ?? "";
+    return artKey((units.find((u) => !u.name.includes(" ")) ?? units[0])?.name ?? "");
   };
-  requestAnimationFrame(() => drawMap(canvas, r.dungeon, { playerKey: r.party()[0]?.characterId ?? "liu-bei", enemyKey }));
+  requestAnimationFrame(() => drawMap(canvas, r.dungeon, { playerKey: artKey(r.party()[0]?.characterId ?? "liu-bei"), enemyKey }));
 }
 
 // ---------- battle ----------
@@ -323,7 +324,7 @@ function renderBattle(): void {
     return side === "enemy" ? [rear, front] : [front, rear];
   };
   const timeline = h("div", { class: "timeline" }, ...[...(active ? [active] : []), ...snap.timeline].slice(0, 8).map((event, index) =>
-    h("span", { class: (event.actorId.includes("#") ? "enemy" : "ally") + (index === 0 && active ? " now" : "") }, spriteImg(figureUrl(event.actorId.includes("#") ? unitName(event.actorId) : event.actorId), 16, "", "px"), unitName(event.actorId))));
+    h("span", { class: (event.actorId.includes("#") ? "enemy" : "ally") + (index === 0 && active ? " now" : "") }, spriteImg(figureUrl(artKey(event.actorId.includes("#") ? unitName(event.actorId) : event.actorId)), 16, "", "px"), unitName(event.actorId))));
   const controls: HTMLElement[] = [];
   if (activeAlly && autoMode === "manual") {
     const actor = snap.units.find((u) => u.id === active.actorId)!;

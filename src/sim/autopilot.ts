@@ -105,7 +105,8 @@ function dungeonTurn(run: RunEngine, act: (command: Parameters<RunEngine["act"]>
   const stairs = dungeon.floor.stairs;
   const onStairs = dungeon.position.x === stairs.x && dungeon.position.y === stairs.y;
   const bossAlive = dungeon.floor.boss && !dungeon.bossDefeated;
-  const leaving = (dungeon.danger !== "stable" || run.food <= 10) && dungeon.isExplored(stairs) && !bossAlive;
+  const urgent = dungeon.mechanicStatus().some((status) => status.urgent);
+  const leaving = (dungeon.danger !== "stable" || run.food <= 10 || urgent) && dungeon.isExplored(stairs) && !bossAlive;
   if (onStairs && !bossAlive && (leaving || dungeon.frontierDirection() === null)) { act({ type: "dungeon", command: { type: "descend" } }); return; }
   if (leaving) {
     const direction = dungeon.travelDirection(stairs);

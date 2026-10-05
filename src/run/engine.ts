@@ -7,6 +7,7 @@ import { SeededRng, type Seed } from "../core/rng.js";
 import { DungeonEngine, type DungeonCommand, type DungeonEvent, type Encounter, type ExpeditionMember } from "../dungeon/engine.js";
 import { generateFloor, pickWeighted, type FloorSpec } from "../dungeon/floor.js";
 import {
+  DUEL_CHAMPION_HP_RATIO,
   DUEL_DEFAULT_PENALTY,
   DUEL_LOSS_ENEMY_ENERGY,
   ENHANCE_CAP,
@@ -958,7 +959,7 @@ export class RunEngine {
       seed: String(this.#seed) + "::duel::" + this.#floorIndex + "::" + group.id + "::" + this.#battles,
       participants: [
         { unit: { id: characterId, side: "ally", stats: this.#stats(member) }, slot: "front-center", basicAttackReach: character.reach, skillIds: this.#skillIds(member), entry: { hp: member.hp, energy: 0 } },
-        { unit: { id: enemyId, side: "enemy", stats: unit.stats }, slot: "front-center", basicAttackReach: unit.reach, skillIds: unit.skillIds ?? [], entry: { hp: Math.max(1, Math.round(unit.stats.maxHp * queued.encounter.enemyHpRatio)), energy: 0 } },
+        { unit: { id: enemyId, side: "enemy", stats: unit.stats }, slot: "front-center", basicAttackReach: unit.reach, skillIds: unit.skillIds ?? [], entry: { hp: Math.max(1, Math.round(unit.stats.maxHp * queued.encounter.enemyHpRatio * DUEL_CHAMPION_HP_RATIO)), energy: 0 } },
       ],
       skills: this.content.skills,
       retreatAllowed: false,

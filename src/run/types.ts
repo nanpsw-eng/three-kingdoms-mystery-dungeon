@@ -209,4 +209,6 @@ export interface MetaState {
   readonly runs: number;
   readonly clears: number;
   readonly bestDepth: Readonly<Record<string, number>>;
+  /** Campaign ids cleared at least once (optional for saves made before the story expansion). */
+  readonly clearedCampaigns?: readonly string[];
 }

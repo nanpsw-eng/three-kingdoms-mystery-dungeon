@@ -51,7 +51,16 @@ function unit(key: keyof typeof ARCH, slot: FormationSlot, scale: number): Enemy
   };
 }
 
-function boss(name: string, stats: [number, number, number, number, number], reach: "melee" | "ranged", skills: string[], slot: FormationSlot): EnemyUnitDefinition {
+/** Generic scaled enemy unit (campaign modules define their own archetypes). */
+export function scaledUnit(name: string, stats: readonly [number, number, number, number, number], reach: "melee" | "ranged", skills: readonly string[], slot: FormationSlot, scale: number): EnemyUnitDefinition {
+  const [maxHp, atk, def, spd, int] = stats;
+  return {
+    name, reach, skillIds: skills, slot,
+    stats: { maxHp: Math.round(maxHp * scale), atk: Math.round(atk * scale), def: Math.round(def * scale), spd: Math.round(spd * (1 + (scale - 1) * 0.3)), int: Math.round(int * scale) },
+  };
+}
+
+export function boss(name: string, stats: [number, number, number, number, number], reach: "melee" | "ranged", skills: string[], slot: FormationSlot): EnemyUnitDefinition {
   const [maxHp, atk, def, spd, int] = stats;
   return { name, stats: { maxHp, atk, def, spd, int }, reach, skillIds: skills, slot };
 }
@@ -59,7 +68,6 @@ function boss(name: string, stats: [number, number, number, number, number], rea
 const T1 = 0.85;
 const T2 = 1.32;
 const T3 = 1.65;
-const HULAO = 0.95;
 
 export const ENEMY_GROUPS: readonly EnemyGroupDefinition[] = [
   // Yellow Turban tier 1 (1-4F)
@@ -79,9 +87,4 @@ export const ENEMY_GROUPS: readonly EnemyGroupDefinition[] = [
   { id: "boss-zhang-bao", name: "지공장군 장보", boss: true, exp: 70, gold: 60, units: [boss("장보", [300, 100, 96, 100, 118], "ranged", ["bao-thunder", "bao-sorcery"], "rear-left"), unit("spear", "front-left", T1 * 1.1), unit("spear", "front-right", T1 * 1.1)], loot: [{ id: "jade-seal", weight: 1 }], lootChance: 1 },
   { id: "boss-zhang-liang", name: "인공장군 장량", boss: true, exp: 130, gold: 100, units: [boss("장량", [440, 120, 116, 104, 138], "ranged", ["liang-hex", "liang-wind"], "rear-left"), unit("spear", "front-left", T2), unit("chanter", "rear-right", T2), unit("raider", "front-right", T2)], loot: [{ id: "dragon-armor", weight: 1 }], lootChance: 1 },
   { id: "boss-zhang-jiao", name: "천공장군 장각", boss: true, exp: 0, gold: 0, units: [boss("장각", [640, 130, 130, 108, 160], "ranged", ["jiao-heaven", "jiao-talisman", "jiao-yellow-sky"], "rear-left"), unit("spear", "front-left", T3), unit("spear", "front-right", T3), unit("chanter", "rear-right", T3), unit("raider", "front-center", T3)] },
-  // Hulao Gate preview
-  { id: "dong-soldiers", name: "동탁군 보병", exp: 22, gold: 16, units: [unit("dongInf", "front-left", HULAO), unit("dongInf", "front-right", HULAO), unit("dongArcher", "rear-left", HULAO)], loot: [{ id: "medicine", weight: 1 }, { id: "scale-armor", weight: 1 }], lootChance: 0.35 },
-  { id: "xiliang-cavalry", name: "서량 철기", exp: 24, gold: 18, units: [unit("xiliang", "front-left", HULAO), unit("xiliang", "front-center", HULAO), unit("xiliang", "front-right", HULAO)], loot: [{ id: "swift-boots", weight: 1 }, { id: "herb", weight: 2 }], lootChance: 0.35 },
-  { id: "dong-gate-guard", name: "호로관 수비대", exp: 30, gold: 24, units: [unit("gateGuard", "front-left", HULAO), unit("gateGuard", "front-right", HULAO), unit("dongArcher", "rear-left", HULAO)], loot: [{ id: "tiger-tally", weight: 1 }], lootChance: 0.5 },
-  { id: "boss-hua-xiong", name: "효기교위 화웅", boss: true, exp: 0, gold: 0, units: [boss("화웅", [520, 140, 126, 106, 90], "melee", ["hua-cleave", "hua-challenge"], "front-center"), unit("dongInf", "front-left", HULAO), unit("dongArcher", "rear-left", HULAO), unit("dongArcher", "rear-right", HULAO)] },
 ];

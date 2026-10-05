@@ -11,7 +11,7 @@ test("run start validates ruler + 2 unlocked generals and campaign unlocks", () 
   assert.throws(() => new RunEngine(MVP_CONTENT, { ...START, campaignId: "yellow-turban", generalIds: ["guan-yu"] }), /exactly 2/);
   assert.throws(() => new RunEngine(MVP_CONTENT, { ...START, campaignId: "yellow-turban", generalIds: ["guan-yu", "zhuge-liang"] }), /locked/);
   assert.throws(() => new RunEngine(MVP_CONTENT, { ...START, campaignId: "yellow-turban", rulerId: "guan-yu" }), /Not a ruler/);
-  assert.throws(() => new RunEngine(MVP_CONTENT, { ...START, campaignId: "hulao-gate" }), /locked/);
+  assert.throws(() => new RunEngine(MVP_CONTENT, { ...START, campaignId: "anti-dong" }), /locked/);
   const run = new RunEngine(MVP_CONTENT, { ...START, campaignId: "yellow-turban" });
   assert.equal(run.phase, "scene");
   run.act({ type: "scene" });
@@ -135,7 +135,7 @@ test("safe zone heals, sells, enhances, then the final boss clears the run and m
   const summary = run.summary();
   assert.equal(summary.cleared, true);
   const meta = applyRunToMeta(initialMeta(MVP_CONTENT), { ...summary, campaignId: "yellow-turban", depthReached: 15 }, MVP_CONTENT);
-  assert.ok(meta.unlockedCampaigns.includes("hulao-gate"));
+  assert.ok(meta.unlockedCampaigns.includes("anti-dong"));
   assert.ok(meta.unlockedCharacters.includes("zhuge-liang") && meta.unlockedCharacters.includes("zhao-yun") && meta.unlockedCharacters.includes("jia-xu"));
   assert.deepEqual([meta.runs, meta.clears], [1, 1]);
 });
@@ -165,9 +165,9 @@ test("meta progression never carries run resources and counts runs", () => {
   assert.equal("gold" in meta || "level" in meta, false);
 });
 
-test("P13: a small autopilot batch terminates (no stalls) on both campaigns", () => {
-  const meta = { ...initialMeta(MVP_CONTENT), unlockedCampaigns: ["yellow-turban", "hulao-gate"] };
-  for (const campaignId of ["yellow-turban", "hulao-gate"]) {
+test("P13: a small autopilot batch terminates (no stalls) on every campaign", () => {
+  const meta = { ...initialMeta(MVP_CONTENT), unlockedCampaigns: MVP_CONTENT.campaigns.map((c) => c.id) };
+  for (const campaignId of MVP_CONTENT.campaigns.map((c) => c.id)) {
     for (let i = 0; i < 3; i++) {
       const r = runAutopilot(MVP_CONTENT, { seed: "smoke-" + i, campaignId, rulerId: ["liu-bei", "cao-cao", "sun-quan"][i], generalIds: ["guan-yu", "taishi-ci"], meta });
       assert.notEqual(r.outcome, "stalled", campaignId + " " + i);
