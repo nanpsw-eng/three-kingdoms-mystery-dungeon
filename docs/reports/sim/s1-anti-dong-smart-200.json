@@ -1,0 +1,95 @@
+{
+  "campaignId": "anti-dong",
+  "runs": 200,
+  "battleMode": "smart",
+  "clearRate": 0.28,
+  "outcomes": {
+    "failed": 144,
+    "cleared": 56
+  },
+  "failDepth": {
+    "2": 1,
+    "3": 2,
+    "4": 38,
+    "5": 3,
+    "6": 12,
+    "7": 6,
+    "8": 4,
+    "9": 8,
+    "10": 26,
+    "11": 23,
+    "12": 21
+  },
+  "failCause": {
+    "battle": 138,
+    "starvation": 6
+  },
+  "depthReached": {
+    "2": 1,
+    "3": 2,
+    "4": 38,
+    "5": 3,
+    "6": 12,
+    "7": 6,
+    "8": 4,
+    "9": 8,
+    "10": 26,
+    "11": 23,
+    "12": 77
+  },
+  "byRuler": {
+    "liu-bei": {
+      "runs": 67,
+      "cleared": 13
+    },
+    "cao-cao": {
+      "runs": 67,
+      "cleared": 33
+    },
+    "sun-quan": {
+      "runs": 66,
+      "cleared": 10
+    }
+  },
+  "byGeneral": {
+    "guan-yu": {
+      "runs": 75,
+      "cleared": 21
+    },
+    "zhang-fei": {
+      "runs": 68,
+      "cleared": 15
+    },
+    "zhang-liao": {
+      "runs": 66,
+      "cleared": 22
+    },
+    "xiahou-dun": {
+      "runs": 65,
+      "cleared": 17
+    },
+    "taishi-ci": {
+      "runs": 63,
+      "cleared": 17
+    },
+    "gan-ning": {
+      "runs": 63,
+      "cleared": 20
+    }
+  },
+  "perRunAverage": {
+    "level": 8.49,
+    "turns": 1416.7,
+    "battles": 32.65,
+    "recruits": 1.25,
+    "surprisesAlly": 1.07,
+    "surprisesEnemy": 0.01,
+    "gatesOpened": 1.65,
+    "retreats": 0,
+    "traitPicks": 18.7,
+    "itemsUsed": 11.95,
+    "secretsFound": 0,
+    "reinforcements": 2.79
+  },
+  "ms": 69288
+}

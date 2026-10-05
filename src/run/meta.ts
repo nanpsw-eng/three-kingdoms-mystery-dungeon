@@ -12,6 +12,7 @@ export function initialMeta(content: ContentPack): MetaState {
     runs: 0,
     clears: 0,
     bestDepth: {},
+    clearedCampaigns: [],
   };
 }
 
@@ -53,5 +54,6 @@ export function applyRunToMeta(meta: MetaState, summary: RunSummary, content: Co
     runs,
     clears: meta.clears + (summary.cleared ? 1 : 0),
     bestDepth,
+    clearedCampaigns: union(meta.clearedCampaigns ?? [], [...cleared]),
   };
 }

@@ -30,11 +30,16 @@ const DEFAULT_SLOT: Record<CharacterDefinition["characterClass"], CharacterDefin
   infantry: "front-center", cavalry: "front-left", archer: "rear-left", strategist: "rear-right", support: "rear-right",
 };
 
-export const CHARACTERS: readonly CharacterDefinition[] = ROWS.map(([id, name, kind, cls, roles, [maxHp, atk, def, spd, int], skills, traits]) => ({
-  id, name, kind, characterClass: cls, roleTags: roles, stats: { maxHp, atk, def, spd, int },
-  reach: cls === "archer" || cls === "strategist" || cls === "support" ? "ranged" : "melee",
-  skillIds: skills, traitIds: traits, defaultSlot: kind === "ruler" ? "front-right" : DEFAULT_SLOT[cls],
-}));
+export type CharacterRow = Row;
+export function defineCharacters(rows: readonly Row[]): CharacterDefinition[] {
+  return rows.map(([id, name, kind, cls, roles, [maxHp, atk, def, spd, int], skills, traits]) => ({
+    id, name, kind, characterClass: cls, roleTags: roles, stats: { maxHp, atk, def, spd, int },
+    reach: cls === "archer" || cls === "strategist" || cls === "support" ? "ranged" : "melee",
+    skillIds: skills, traitIds: traits, defaultSlot: kind === "ruler" ? "front-right" : DEFAULT_SLOT[cls],
+  }));
+}
+
+export const CHARACTERS: readonly CharacterDefinition[] = defineCharacters(ROWS);
 
 export const CHARACTER_SKILLS: readonly SkillDefinition[] = [
   // 유비: 격려 / 인의검 / 한실의 기치

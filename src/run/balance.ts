@@ -39,3 +39,5 @@ export const SAFE_ZONE_HEAL_RATIO = 1 as const;
 export const DUEL_DEFAULT_PENALTY = 0.5 as const;
 /** X5 일기토: losing the duel leaves your general at 1 HP and fires up the enemy (initial energy). */
 export const DUEL_LOSS_ENEMY_ENERGY = 30 as const;
+/** X5 일기토: the champion's duel HP as a share of its max HP (a boss has ~3× a general's HP). */
+export const DUEL_CHAMPION_HP_RATIO = 0.6 as const;

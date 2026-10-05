@@ -70,3 +70,46 @@ function duelSheet(ui: StoryUi, groupId: string, champion: string): HTMLElement[
     btn("응하지 않는다", () => { ui.act({ type: "duel", characterId: null }); ui.render(); }),
   ];
 }
+
+/**
+ * Art fallbacks for characters/enemies added by story campaigns until Codex draws them
+ * (remove an entry once `web/assets` or portraits.ts has art for that key).
+ */
+const ART_ALIASES: Readonly<Record<string, string>> = {
+  // E2 playable
+  "lu-bu": "zhang-liao", "sun-jian": "sun-quan", "yuan-shao": "cao-cao", "cao-ren": "xiahou-dun", "hua-xiong": "화웅",
+  // E2 enemies
+  "여포": "zhang-liao", "동탁": "장각", "이유": "장량", "방화병": "황건 술사", "서량 친위대": "서량 기병",
+};
+export function artKey(key: string): string {
+  return ART_ALIASES[key] ?? key;
+}
+
+export interface TimelineEntry {
+  readonly id: string;
+  readonly name: string;
+  readonly era: string;
+  readonly summary: string;
+  readonly floors: number;
+  readonly locked: boolean;
+  readonly selected: boolean;
+  readonly best: number;
+  readonly cleared: boolean;
+}
+
+/** X2 연표: campaigns in historical order with progress; `onPick` selects an unlocked campaign. */
+export function timelinePanel(entries: readonly TimelineEntry[], onPick: (id: string) => void): HTMLElement {
+  const list = el("div", "campaign-timeline");
+  list.style.cssText = "display:grid;gap:6px";
+  for (const entry of entries) {
+    const item = btn("", () => onPick(entry.id), "choice campaign-item" + (entry.selected ? " selected" : "") + (entry.locked ? " locked" : ""));
+    item.disabled = entry.locked;
+    item.style.cssText = "display:block;width:100%;max-width:100%;white-space:normal;overflow-wrap:anywhere;text-align:left";
+    const progress = entry.cleared ? " · 평정" : entry.best > 0 ? ` · 최고 ${entry.best}/${entry.floors}F` : "";
+    item.append(el("span", "",
+      el("b", "", (entry.locked ? "🔒 " : "") + entry.era + " " + entry.name),
+      el("small", "", entry.locked ? "이전 전역을 평정하면 열린다." : `${entry.floors}층${progress} — ${entry.summary}`)));
+    list.append(item);
+  }
+  return el("div", "panel", el("h2", "", "전역 연표"), list);
+}
