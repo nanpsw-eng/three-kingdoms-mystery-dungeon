@@ -24,6 +24,7 @@ import {
   SORCERY_ENEMY_ENERGY,
   STARTING_GENERALS,
   STARTING_GOLD,
+  STARTING_ITEMS,
   TRAIT_LEVELS,
   TRAIT_OPTIONS,
   TRAIT_RELATED_TAG_WEIGHT,
@@ -218,6 +219,16 @@ export class RunEngine {
     const root = new SeededRng(options.seed).fork("run");
     this.#rng = { traits: root.fork("traits"), loot: root.fork("loot"), shop: root.fork("shop"), recruit: root.fork("recruit"), floors: root.fork("floors") };
     this.#battleMode = options.battleMode ?? "manual";
+    for (const itemId of STARTING_ITEMS) if (this.#items.has(itemId)) this.#addToBag(itemId);
+    const startLevel = Math.min(PARTY_LEVEL_CAP, Math.max(1, campaign.startLevel ?? 1));
+    if (startLevel > 1) {
+      this.#level = startLevel;
+      this.#exp = LEVEL_EXP_TABLE[startLevel - 1]!;
+      for (const member of this.#party) {
+        member.hp = this.#stats(member).maxHp;
+        for (const level of TRAIT_LEVELS) if (level <= startLevel) this.#pending.push({ kind: "trait", characterId: member.characterId, options: this.#traitOptions(member), level });
+      }
+    }
     this.#enterFloor(0, []);
   }
 

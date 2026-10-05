@@ -28,3 +28,6 @@
 | A-20 | Run | Food 0 removes trait entry-energy bonuses (battle start penalty) | DUNGEON_SPEC §7 "전투 시작 페널티" |
 | A-21 | Content | Starting unlocks: 3 rulers + 관우/장비/장료/하후돈/태사자/감녕; others unlock via depth/boss/run-count rules; Hulao unlocks on Yellow Turban clear | DEC-002 lateral unlocks |
 | A-22 | Smart Auto | Overkill penalty capped at 15 (< lethal bonus 35) | fixed bug: Smart Auto guarded instead of killing a 1-HP enemy |
+| A-23 | Run | Starting supplies: herb ×2, bun ×1 | first-floor attrition fix found by simulation |
+| A-24 | Content | Campaign `startLevel` (Hulao preview starts at Lv.5 with Lv.2/4 trait picks) | preview of a later expedition must be playable without meta stat growth (DEC-016 kept) |
+| A-25 | Balance | Tier scales / 조조 kit / Yellow Turban alarm from 6F — simulation-tuned, NOT_VALIDATED for humans | P13 evidence |

@@ -61,12 +61,14 @@ test("recruit offer joins at the shared party level with catch-up trait picks", 
 
 test("items: a healing item is consumed and spends one dungeon turn", () => {
   const run = new RunEngine(TEST_CONTENT, START);
+  assert.deepEqual(run.inventory().map((e) => e.itemId), ["herb", "herb", "bun"]); // A-23 starting supplies
   walkTo(run, objectOf(run, "item").pos);
-  const herb = run.inventory().find((e) => e.kind === "item").uid;
+  const size = run.inventory().length;
+  const herb = run.inventory().find((e) => e.kind === "item" && e.itemId === "herb").uid;
   const turn = run.dungeon.turn;
   run.act({ type: "use-item", uid: herb, targetId: "liu-bei" });
   assert.equal(run.dungeon.turn, turn + 1);
-  assert.equal(run.inventory().length, 0);
+  assert.equal(run.inventory().length, size - 1);
 });
 
 test("battle: manual mode waits for ally input, enemies act automatically, victory pays rewards and loot", () => {
@@ -159,6 +161,16 @@ test("meta progression never carries run resources and counts runs", () => {
   assert.ok(!meta.unlockedCharacters.includes("zhao-yun"));
   assert.deepEqual(meta.codex.enemies, ["yt-rabble"]);
   assert.equal("gold" in meta || "level" in meta, false);
+});
+
+test("P13: a small autopilot batch terminates (no stalls) on both campaigns", () => {
+  const meta = { ...initialMeta(MVP_CONTENT), unlockedCampaigns: ["yellow-turban", "hulao-gate"] };
+  for (const campaignId of ["yellow-turban", "hulao-gate"]) {
+    for (let i = 0; i < 3; i++) {
+      const r = runAutopilot(MVP_CONTENT, { seed: "smoke-" + i, campaignId, rulerId: ["liu-bei", "cao-cao", "sun-quan"][i], generalIds: ["guan-yu", "taishi-ci"], meta });
+      assert.notEqual(r.outcome, "stalled", campaignId + " " + i);
+    }
+  }
 });
 
 test("FR-001: autopilot runs are deterministic for the same seed", () => {

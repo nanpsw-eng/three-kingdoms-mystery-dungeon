@@ -1,0 +1,81 @@
+{
+  "campaignId": "hulao-gate",
+  "runs": 60,
+  "battleMode": "smart",
+  "clearRate": 0.6166666666666667,
+  "outcomes": {
+    "failed": 23,
+    "cleared": 37
+  },
+  "failDepth": {
+    "1": 6,
+    "2": 6,
+    "3": 1,
+    "4": 10
+  },
+  "failCause": {
+    "battle": 22,
+    "starvation": 1
+  },
+  "depthReached": {
+    "1": 6,
+    "2": 6,
+    "3": 1,
+    "4": 47
+  },
+  "byRuler": {
+    "liu-bei": {
+      "runs": 20,
+      "cleared": 14
+    },
+    "cao-cao": {
+      "runs": 20,
+      "cleared": 15
+    },
+    "sun-quan": {
+      "runs": 20,
+      "cleared": 8
+    }
+  },
+  "byGeneral": {
+    "guan-yu": {
+      "runs": 30,
+      "cleared": 18
+    },
+    "zhang-fei": {
+      "runs": 18,
+      "cleared": 8
+    },
+    "zhang-liao": {
+      "runs": 18,
+      "cleared": 12
+    },
+    "xiahou-dun": {
+      "runs": 18,
+      "cleared": 9
+    },
+    "taishi-ci": {
+      "runs": 18,
+      "cleared": 16
+    },
+    "gan-ning": {
+      "runs": 18,
+      "cleared": 11
+    }
+  },
+  "perRunAverage": {
+    "level": 7.63,
+    "turns": 532.57,
+    "battles": 14.15,
+    "recruits": 0.73,
+    "surprisesAlly": 1.32,
+    "surprisesEnemy": 0,
+    "gatesOpened": 2.53,
+    "retreats": 0,
+    "traitPicks": 13.9,
+    "itemsUsed": 5.57,
+    "secretsFound": 0,
+    "reinforcements": 1.33
+  },
+  "ms": 8639
+}

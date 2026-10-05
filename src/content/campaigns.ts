@@ -43,13 +43,13 @@ function ytFloor(depth: number): FloorPlan {
   if (depth === 15) return { depth, enemyGroups: [{ id: "yt-vanguard", weight: 1 }, { id: "yt-zealots", weight: 1 }], enemyCount: [2, 3], traps: YT_TRAPS, trapCount: [1, 2], bossGroupId: "boss-zhang-jiao", objects: objects(ITEM_POOL_LATE, [1, 2], 0, 0), alarmNetwork: true, sorceryFormations: 1 };
   const tier = depth <= 4 ? 1 : depth <= 9 ? 2 : 3;
   const groups: Weighted[] = tier === 1
-    ? [{ id: "yt-rabble", weight: 3 }, { id: "yt-band", weight: 2 }, { id: "yt-raiders", weight: 2 }]
+    ? (depth <= 2 ? [{ id: "yt-scouts", weight: 3 }, { id: "yt-rabble", weight: 2 }, { id: "yt-raiders", weight: 1 }] : [{ id: "yt-rabble", weight: 3 }, { id: "yt-band", weight: 2 }, { id: "yt-raiders", weight: 2 }])
     : tier === 2 ? [{ id: "yt-elite", weight: 2 }, { id: "yt-cult", weight: 2 }, { id: "yt-warband", weight: 2 }]
     : [{ id: "yt-vanguard", weight: 2 }, { id: "yt-zealots", weight: 2 }, { id: "yt-host", weight: 1 }];
   return {
-    depth, enemyGroups: groups, enemyCount: tier === 1 ? [3, 4] : [3, 5], traps: YT_TRAPS, trapCount: [2, 2 + tier],
+    depth, enemyGroups: groups, enemyCount: tier === 1 ? [3, 4] : [3, 5], traps: tier === 1 ? BASIC_TRAPS : YT_TRAPS, trapCount: [2, 2 + tier],
     objects: objects(tier === 1 ? ITEM_POOL_EARLY : tier === 2 ? ITEM_POOL_MID : ITEM_POOL_LATE, [2, 3], depth >= 2 && depth <= 12 ? 0.3 : 0, 0.35),
-    modifierChance: depth === 1 ? 0 : 0.3, modifiers: MODIFIERS, alarmNetwork: true, sorceryFormations: tier === 1 ? 0 : tier === 2 ? 1 : 2,
+    modifierChance: depth === 1 ? 0 : 0.3, modifiers: MODIFIERS, alarmNetwork: tier > 1, sorceryFormations: tier === 1 ? 0 : tier === 2 ? 1 : 2,
   };
 }
 
@@ -67,6 +67,7 @@ export const HULAO_PREVIEW: CampaignDefinition = {
   id: "hulao-gate",
   name: "호로관 (Preview)",
   preview: true,
+  startLevel: 5,
   floors: [
     { depth: 1, enemyGroups: HULAO_GROUPS, enemyCount: [3, 4], traps: BASIC_TRAPS, trapCount: [2, 3], objects: objects(ITEM_POOL_MID, [2, 3], 0.4, 0.3), gateDefenderGroupId: "dong-gate-guard" },
     { depth: 2, enemyGroups: HULAO_GROUPS, enemyCount: [3, 5], traps: BASIC_TRAPS, trapCount: [2, 3], objects: objects(ITEM_POOL_MID, [2, 3], 0.4, 0.3), gateDefenderGroupId: "dong-gate-guard", modifierChance: 0.3, modifiers: MODIFIERS, safeZoneAfter: true },

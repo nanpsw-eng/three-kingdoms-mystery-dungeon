@@ -129,6 +129,8 @@ export interface CampaignDefinition {
   readonly id: string;
   readonly name: string;
   readonly preview?: boolean;
+  /** Party level at run start (preview expeditions start mid-run; trait picks for passed levels are granted). */
+  readonly startLevel?: number;
   readonly floors: readonly FloorPlan[];
   readonly shopItems: readonly Weighted[];
   readonly shopEquipment: readonly Weighted[];

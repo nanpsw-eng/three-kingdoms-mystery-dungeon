@@ -19,6 +19,8 @@ export const MAX_RECRUITS_PER_RUN = 2 as const;
 export const STARTING_GENERALS = 2 as const;
 export const INVENTORY_SLOTS = 10 as const;
 export const STARTING_GOLD = 30 as const;
+/** A-23: starting supplies in the shared bag. */
+export const STARTING_ITEMS: readonly string[] = ["herb", "herb", "bun"];
 export const ENHANCE_CAP = 3 as const;
 /** Each enhancement level adds this share of the base equipment stats (rounded, min +1). */
 export const ENHANCE_STEP = 0.25 as const;

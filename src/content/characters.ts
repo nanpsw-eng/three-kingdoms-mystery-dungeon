@@ -42,9 +42,9 @@ export const CHARACTER_SKILLS: readonly SkillDefinition[] = [
   active("liu-sword", 30, enemyOne("front"), [physical(34)]),
   ultimate("liu-banner", allyUpTo(5), [heal(26), energy(15)]),
   // 조조: 간웅의 검 / 용병지략 / 위무천하
-  active("cao-sword", 30, enemyOne("front"), [physical(32), status("defense-down", 2, { magnitude: 0.2 })]),
-  active("cao-strategy", 40, allyOne(), [extraAction("targets", "interrupt")]),
-  ultimate("cao-dominion", enemyUpTo(5), [strategy(44, { modifier: 0.75 }), shift(20)]),
+  active("cao-sword", 30, enemyOne("front"), [physical(36), status("defense-down", 2, { magnitude: 0.25 })]),
+  active("cao-strategy", 30, allyOne(), [extraAction("targets", "interrupt"), heal(18)]),
+  ultimate("cao-dominion", enemyUpTo(5), [strategy(48, { modifier: 0.8 }), shift(25)]),
   // 손권: 강동의 격려 / 수성지휘 / 강동결집
   active("sun-encourage", 25, allyOne(), [energy(25), heal(12)]),
   active("sun-defense", 30, allyOne(), [cleanse(), heal(20)]),

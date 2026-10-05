@@ -12,6 +12,8 @@ export interface AutopilotResult {
 export interface AutopilotOptions extends Omit<RunOptions, "battleMode"> {
   readonly battleMode?: Exclude<BattleAutoMode, "manual">;
   readonly maxActions?: number;
+  /** Observer for every Run event (metrics collection). */
+  readonly onEvent?: (event: RunEvent, run: RunEngine) => void;
 }
 
 /**
@@ -20,12 +22,16 @@ export interface AutopilotOptions extends Omit<RunOptions, "battleMode"> {
  * accept recruits, buy consumables in safe zones, leave the floor when explored or danger rises.
  */
 export function runAutopilot(content: ContentPack, options: AutopilotOptions): AutopilotResult {
-  const run = new RunEngine(content, { ...options, battleMode: options.battleMode ?? "smart" });
+  const { onEvent: _onEvent, maxActions: _maxActions, ...runOptions } = options;
+  const run = new RunEngine(content, { ...runOptions, battleMode: options.battleMode ?? "smart" });
   const maxActions = options.maxActions ?? 20_000;
   let actions = 0;
   let failCause: "battle" | "starvation" | null = null;
   const note = (events: readonly RunEvent[]): void => {
-    for (const event of events) if (event.type === "run-failed") failCause = event.cause;
+    for (const event of events) {
+      if (event.type === "run-failed") failCause = event.cause;
+      options.onEvent?.(event, run);
+    }
   };
   const act = (command: Parameters<RunEngine["act"]>[0]): void => { actions += 1; note(run.act(command)); };
 
@@ -95,11 +101,28 @@ function dungeonTurn(run: RunEngine, act: (command: Parameters<RunEngine["act"]>
     if (direction !== null) { act({ type: "dungeon", command: { type: "move", direction } }); return; }
   }
   const visible = dungeon.visibleEnemies();
+  // Rest (natural recovery) while hurt, the floor is calm and food allows it.
+  const living = party.filter((member) => member.hp > 0);
+  const hpRatio = living.reduce((sum, member) => sum + member.hp / member.maxHp, 0) / Math.max(1, living.length);
+  if (visible.length === 0 && hpRatio < 0.7 && dungeon.danger === "stable" && run.food > 30 && !onStairs) {
+    act({ type: "dungeon", command: { type: "wait" } });
+    return;
+  }
   if (visible.length > 0) {
     const target = [...visible].sort((a, b) => Math.abs(a.pos.x - dungeon.position.x) + Math.abs(a.pos.y - dungeon.position.y) - (Math.abs(b.pos.x - dungeon.position.x) + Math.abs(b.pos.y - dungeon.position.y)))[0]!;
     const direction = dungeon.travelDirection(target.pos);
     act(direction !== null ? { type: "dungeon", command: { type: "move", direction } } : { type: "dungeon", command: { type: "wait" } });
     return;
+  }
+  // Collect explored objects (recruits/events always; items when the bag has room).
+  const bagFull = run.inventory().length >= 10;
+  const wanted = dungeon.objects()
+    .filter((object) => object.kind !== "sorcery" && dungeon.isExplored(object.pos) && !(object.kind === "item" && bagFull))
+    .filter((object) => object.pos.x !== dungeon.position.x || object.pos.y !== dungeon.position.y)
+    .sort((a, b) => Math.abs(a.pos.x - dungeon.position.x) + Math.abs(a.pos.y - dungeon.position.y) - (Math.abs(b.pos.x - dungeon.position.x) + Math.abs(b.pos.y - dungeon.position.y)));
+  for (const object of wanted) {
+    const direction = dungeon.travelDirection(object.pos);
+    if (direction !== null) { act({ type: "dungeon", command: { type: "move", direction } }); return; }
   }
   const before = dungeon.turn;
   const beforePos = dungeon.position;

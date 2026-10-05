@@ -56,15 +56,16 @@ function boss(name: string, stats: [number, number, number, number, number], rea
   return { name, stats: { maxHp, atk, def, spd, int }, reach, skillIds: skills, slot };
 }
 
-const T1 = 1;
-const T2 = 1.3;
-const T3 = 1.6;
-const HULAO = 1.15;
+const T1 = 0.85;
+const T2 = 1.32;
+const T3 = 1.65;
+const HULAO = 0.95;
 
 export const ENEMY_GROUPS: readonly EnemyGroupDefinition[] = [
   // Yellow Turban tier 1 (1-4F)
   { id: "yt-rabble", name: "황건 잡병", exp: 12, gold: 8, units: [unit("spear", "front-left", T1), unit("spear", "front-right", T1), unit("archer", "rear-left", T1)], loot: [{ id: "bun", weight: 3 }, { id: "herb", weight: 2 }], lootChance: 0.3 },
   { id: "yt-band", name: "황건 무리", exp: 14, gold: 10, units: [unit("spear", "front-center", T1), unit("raider", "front-left", T1), unit("sorcerer", "rear-right", T1)], loot: [{ id: "herb", weight: 2 }, { id: "iron-sword", weight: 1 }], lootChance: 0.3 },
+  { id: "yt-scouts", name: "황건 척후", exp: 9, gold: 6, units: [unit("spear", "front-center", T1), unit("archer", "rear-left", T1)], loot: [{ id: "bun", weight: 2 }, { id: "herb", weight: 2 }], lootChance: 0.3 },
   { id: "yt-raiders", name: "황건 약탈대", exp: 13, gold: 12, units: [unit("raider", "front-left", T1), unit("raider", "front-right", T1)], loot: [{ id: "bun", weight: 2 }, { id: "leather-armor", weight: 1 }], lootChance: 0.3 },
   // tier 2 (6-9F)
   { id: "yt-elite", name: "황건 정예", exp: 26, gold: 18, units: [unit("spear", "front-left", T2), unit("spear", "front-right", T2), unit("archer", "rear-left", T2), unit("sorcerer", "rear-right", T2)], loot: [{ id: "medicine", weight: 2 }, { id: "long-spear", weight: 1 }, { id: "scale-armor", weight: 1 }], lootChance: 0.35 },
