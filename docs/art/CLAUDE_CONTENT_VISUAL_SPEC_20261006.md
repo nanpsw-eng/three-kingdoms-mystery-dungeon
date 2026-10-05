@@ -141,3 +141,15 @@ Visual study: `concepts/story-scene-ui-20261006.jpg`.
 4. Expand item-family icon silhouettes and enemy faction visual language after the Codex tab concepts are stable.
 
 No separate Codex implementation assignment is being issued; these are design tasks for this Work.
+
+
+## 13. E2 Campaign Boss Trio Concept Review
+
+Visual study: `concepts/e2-boss-trio-yuan-shao-cao-cao-cao-ren-20261006.jpg`.
+- Yuan Shao: tall ivory/plum silhouette, formal staff, aristocratic authority.
+- Cao Cao battle variant: compact charcoal mass, clipped beard, short command sword, one deep-crimson cue. Keep the campaign boss variant compatible with, but visually distinct in pose from, the original ruler master.
+- Cao Ren: broad slate/blue-gray defender, shield-first silhouette, straight spear, restrained beige under-layer.
+- Each column pairs bust, full body, and small token to test same-character continuity; the token shapes are readable by staff, short sword, and shield.
+- This is a generated concept sheet, not production art. Keep all three at `CONCEPT`; reduce residual metal/headpiece detail, verify small-token recognition, and create separate clean masters before approval.
+- This asset set follows the E2 finale priority already listed in `STORY_ART_QUEUE.md`; character ids and story aliases remain unchanged.
+
