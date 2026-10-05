@@ -3,6 +3,8 @@ import {
   type AbilityTargeting, type BattleCommand, type Direction, type FormationSlot, type MetaState, type RunCommand, type RunEvent, type RunOptions,
 } from "../../src/index.js";
 import { drawMap, tileAt } from "./map.js";
+import { portraitUrl } from "./portraits.js";
+import { iconUrl, spriteImg } from "./sprites.js";
 import { CLASS_NAMES, DANGER_NAMES, MODIFIER_NAMES, SLOT_NAMES, STATUS_NAMES, contentName, describeRunEvent } from "./text.js";
 
 const content = MVP_CONTENT;
@@ -53,6 +55,10 @@ const bar = (value: number, max: number, cls = ""): HTMLElement => h("div", { cl
 function put(...children: Child[]): void {
   for (const child of children) if (child !== null && child !== undefined && child !== false) app.append(child);
 }
+
+const pic = (key: string, size: number, alt = ""): HTMLImageElement => spriteImg(portraitUrl(key), size, alt, "px portrait");
+const icon = (id: string, size = 28): HTMLImageElement => spriteImg(iconUrl(id), size, "", "px icon");
+let hitIds = new Set<string>();
 
 function say(message: string): void { log = [message, ...log].slice(0, 60); }
 
@@ -134,6 +140,7 @@ function narrateBattle(command: BattleCommand): void {
     if (prev === undefined || prev === u.hp) return null;
     return (names.get(u.id) ?? u.id) + (u.hp < prev ? " -" + (prev - u.hp) : " +" + (u.hp - prev)) + (u.knockedOut ? "(KO)" : "");
   }).filter(Boolean);
+  hitIds = new Set(after.filter((u) => { const prev = before.get(u.id); return prev !== undefined && u.hp < prev; }).map((u) => u.id));
   say(actor + " · " + verb + (changes.length ? " → " + changes.join(", ") : ""));
   sayEvents(events);
 }
@@ -143,7 +150,7 @@ function render(): void {
   app.replaceChildren();
   if (run === null) renderTitle();
   else if (run.phase === "cleared" || run.phase === "failed") renderEnd();
-  else if (run.phase === "battle") renderBattle();
+  else if (run.phase === "battle") { renderBattle(); hitIds = new Set(); }
   else if (run.phase === "safe-zone") renderSafeZone();
   else renderDungeon();
   if (run !== null && (run.phase === "trait-choice" || run.phase === "recruit" || run.phase === "event")) renderDecision();
@@ -160,22 +167,24 @@ function renderTitle(): void {
   const saved = load<SaveData>(SAVE_KEY);
   title.generals = title.generals.filter((id) => unlockedChars.has(id));
   put(
-    h("h1", {}, "삼국지 미스터리 던전"),
-    h("p", {}, "군주와 장수를 골라 원정을 떠나라. 원정이 끝나면 레벨·장비는 사라지고, 새 장수와 전역만 남는다."),
+    h("header", { class: "title-banner" },
+      h("div", { class: "title-row" }, ...rulers.map((c) => pic(c.id, 56, c.name))),
+      h("h1", {}, "삼국지 미스터리 던전"),
+      h("p", { class: "subtitle" }, "군주와 장수를 골라 원정을 떠나라. 원정이 끝나면 레벨·장비는 사라지고, 새 장수와 전역만 남는다.")),
     saved ? h("div", { class: "panel row" }, h("span", { class: "grow" }, "진행 중인 원정이 있다."), button("이어하기", () => startRun(saved.options, saved.log), { class: "primary" }), button("포기", () => { remove(SAVE_KEY); render(); })) : null,
     h("div", { class: "panel" }, h("h2", {}, "전역"), h("div", { class: "row" }, ...content.campaigns.map((c) => {
       const locked = !meta.unlockedCampaigns.includes(c.id);
       return button((locked ? "🔒 " : "") + c.name, () => { title.campaignId = c.id; render(); }, { class: title.campaignId === c.id ? "selected" : "", disabled: locked });
     }))),
     h("div", { class: "panel" }, h("h2", {}, "군주"), h("div", { class: "grid3" }, ...rulers.map((c) =>
-      button(c.name, () => { title.rulerId = c.id; render(); }, { class: title.rulerId === c.id ? "selected" : "" })))),
+      h("button", { class: "pick " + (title.rulerId === c.id ? "selected" : ""), onclick: () => { title.rulerId = c.id; render(); } }, pic(c.id, 64, c.name), h("span", {}, c.name))))),
     h("div", { class: "panel" }, h("h2", {}, "자유 장수 (2명)"), h("div", { class: "grid3" }, ...generals.map((c) => {
       const locked = !unlockedChars.has(c.id);
       const chosen = title.generals.includes(c.id);
-      return button((locked ? "🔒 " : "") + c.name, () => {
-        title.generals = chosen ? title.generals.filter((id) => id !== c.id) : [...title.generals, c.id].slice(-2);
-        render();
-      }, { class: chosen ? "selected" : "", disabled: locked, title: CLASS_NAMES[c.characterClass] + " · " + c.roleTags.join("/") });
+      return h("button", {
+        class: "pick " + (chosen ? "selected" : "") + (locked ? " locked" : ""), disabled: locked, title: CLASS_NAMES[c.characterClass] + " · " + c.roleTags.join("/"),
+        onclick: () => { title.generals = chosen ? title.generals.filter((id) => id !== c.id) : [...title.generals, c.id].slice(-2); render(); },
+      }, pic(c.id, 48, c.name), h("span", {}, locked ? "🔒" : c.name), h("small", {}, locked ? "미해금" : CLASS_NAMES[c.characterClass] ?? ""));
     }))),
     button("원정 시작", () => {
       if (title.generals.length !== 2) { say("장수를 2명 선택하라."); return; }
@@ -204,9 +213,9 @@ function hud(): HTMLElement {
 }
 
 function partyBars(): HTMLElement {
-  return h("div", { class: "panel grid2" }, ...run!.party().map((m) => h("div", { class: "member" },
-    h("span", {}, m.name, m.hp <= 0 ? " (KO)" : ""), h("span", { class: "muted" }, m.hp + "/" + m.maxHp),
-    h("div", { style: "grid-column: 1 / -1" }, bar(m.hp, m.maxHp)))));
+  return h("div", { class: "panel party" }, ...run!.party().map((m) => h("div", { class: "member" + (m.hp <= 0 ? " ko" : "") },
+    pic(m.characterId, 32, m.name),
+    h("div", { class: "member-info" }, h("div", { class: "row tight" }, h("span", { class: "grow" }, m.name), h("span", { class: "num" }, m.hp <= 0 ? "KO" : m.hp + "/" + m.maxHp)), bar(m.hp, m.maxHp)))));
 }
 
 const PAD: (Direction | null)[] = ["nw", "n", "ne", "w", null, "e", "sw", "s", "se"];
@@ -298,10 +307,11 @@ function renderBattle(): void {
         const command: BattleCommand = { type: "formation", actorId: active.actorId, targetSlot: slot }; selection = null; narrateBattle(command); render(); return;
       }
       onUnit(id);
-    }, { class: cls }).appendChild(h("span", {}, h("b", {}, unitName(id)), " ", unit.hp + "/" + unit.stats.maxHp)).parentElement!
+    }, { class: cls + (hitIds.has(id) ? " hit" : "") }).appendChild(h("div", { class: "unit-head" }, pic(id.includes("#") ? unitName(id) : id, 40, unitName(id)),
+      h("div", { class: "unit-meta" }, h("b", {}, unitName(id)), h("span", { class: "num" }, unit.hp + "/" + unit.stats.maxHp)))).parentElement!
       .appendChild(bar(unit.hp, unit.stats.maxHp)).parentElement!
       .appendChild(bar(unit.energy, 100, "energy")).parentElement!
-      .appendChild(h("span", {}, ...(statuses.get(id) ?? []).map((s) => h("span", { class: "tag" }, (STATUS_NAMES[s.type] ?? s.type) + (s.stacks > 1 ? "×" + s.stacks : ""))))).parentElement!;
+      .appendChild(h("span", { class: "tags" }, ...(statuses.get(id) ?? []).map((s) => h("span", { class: "tag" }, (STATUS_NAMES[s.type] ?? s.type) + (s.stacks > 1 ? "×" + s.stacks : ""))))).parentElement!;
   };
   const rows = (side: "ally" | "enemy"): HTMLElement[] => {
     const front = h("div", { class: "formation" }, card(side, "front-left"), card(side, "front-center"), card(side, "front-right"));
@@ -338,10 +348,9 @@ function renderBattle(): void {
   put(
     h("div", { class: "hud" }, h("span", {}, h("b", {}, r.depth + "F 전투")), r.encounter?.boss ? h("span", { class: "danger-danger" }, "보스") : null,
       r.encounter?.surprise ? h("span", {}, r.encounter.surprise === "ally" ? "아군 기습" : "적의 기습") : null),
-    ...rows("enemy"), timeline, ...rows("ally"),
-    h("div", { class: "row" },
+    h("div", { class: "field" }, ...rows("enemy"), timeline, ...rows("ally")),
+    h("div", { class: "modes" },
       ...(["manual", "smart", "all-attack", "repeat"] as const).map((mode) => button({ manual: "수동", smart: "스마트", "all-attack": "전체공격", repeat: "반복" }[mode], () => { autoMode = mode; selection = null; render(); }, { class: "small " + (autoMode === mode ? "selected" : "") })),
-      h("span", { class: "grow" }),
       ...[1, 2, 3].map((value) => button("×" + value, () => { speed = value; render(); }, { class: "small " + (speed === value ? "selected" : "") }))),
     ...controls,
     h("div", { class: "panel log" }, ...log.slice(0, 10).map((line) => h("div", {}, line))),
@@ -370,12 +379,12 @@ function renderDecision(): void {
   const r = run!;
   const pending = r.pending()[0]!;
   if (pending.kind === "trait") {
-    sheet(h("h2", {}, `Lv.${pending.level} 특성 — ${r.character(pending.characterId).name}`),
+    sheet(h("div", { class: "row" }, pic(pending.characterId, 64), h("h2", {}, `Lv.${pending.level} 특성 — ${r.character(pending.characterId).name}`)),
       ...pending.options.map((id) => { const trait = r.trait(id); return button("", () => { act({ type: "choose-trait", traitId: id }); render(); }, { class: "choice" }).appendChild(h("span", {}, h("b", {}, trait.name), h("small", {}, trait.description + (trait.ownerId ? " · 고유" : " · 공용")))).parentElement!; }),
       button(`다시 뽑기 (${r.rerolls})`, () => { act({ type: "reroll-traits" }); render(); }, { disabled: r.rerolls <= 0 }));
   } else if (pending.kind === "recruit") {
     const c = r.character(pending.characterId);
-    sheet(h("h2", {}, "장수 조우: " + c.name), h("p", {}, `${CLASS_NAMES[c.characterClass]} · ${c.roleTags.join(" / ")} — HP ${c.stats.maxHp} ATK ${c.stats.atk} DEF ${c.stats.def} SPD ${c.stats.spd} INT ${c.stats.int}`),
+    sheet(h("div", { class: "center" }, pic(c.id, 128, c.name)), h("h2", { class: "center" }, "장수 조우: " + c.name), h("p", {}, `${CLASS_NAMES[c.characterClass]} · ${c.roleTags.join(" / ")} — HP ${c.stats.maxHp} ATK ${c.stats.atk} DEF ${c.stats.def} SPD ${c.stats.spd} INT ${c.stats.int}`),
       h("div", { class: "grid2" }, button("영입한다", () => { act({ type: "recruit", accept: true }); render(); }, { class: "primary" }), button("보낸다", () => { act({ type: "recruit", accept: false }); render(); })));
   } else {
     const event = r.event(pending.eventId)!;
@@ -405,13 +414,13 @@ function renderBag(): void {
         } else act({ type: "use-item", uid: entry.uid });
         render();
       };
-      return h("div", { class: "row" }, h("span", { class: "grow" }, item.name), item.use.kind !== "battle" ? button("사용", use, { class: "small", disabled: !usable }) : h("span", { class: "muted" }, "전투용"),
+      return h("div", { class: "row item-row" }, icon(item.id), h("span", { class: "grow" }, item.name), item.use.kind !== "battle" ? button("사용", use, { class: "small", disabled: !usable }) : h("span", { class: "muted" }, "전투용"),
         button("버림", () => { act({ type: "discard", uid: entry.uid }); render(); }, { class: "small" }));
     }
     const definition = r.equipmentDef(entry.equipment.equipmentId)!;
     const name = entry.equipment.identified ? definition.name + (entry.equipment.enhance ? " +" + entry.equipment.enhance : "") : "미식별 장비 (" + definition.slot + ")";
     const stats = entry.equipment.identified ? Object.entries(definition.stats).map(([k, v]) => k.toUpperCase() + (v! > 0 ? "+" : "") + v).join(" ") : "?";
-    return h("div", { class: "row" }, h("span", { class: "grow" }, name, h("small", { class: "muted" }, " " + stats)),
+    return h("div", { class: "row item-row" }, entry.equipment.identified ? icon(definition.id) : h("span", { class: "icon unknown" }, "?"), h("span", { class: "grow" }, name, h("small", { class: "muted" }, " " + stats)),
       button("장착", () => { pickTarget = { label: name + " — 장착할 장수", options: members.map((m) => ({ id: m.characterId, label: m.name })), onPick: (id) => { act({ type: "equip", characterId: id, uid: entry.uid }); render(); } }; render(); }, { class: "small", disabled: !usable }),
       button("버림", () => { act({ type: "discard", uid: entry.uid }); render(); }, { class: "small" }));
   });
@@ -423,7 +432,7 @@ function renderParty(): void {
   sheet(h("h2", {}, `부대 Lv.${r.level} (EXP ${r.exp})`), ...r.party().map((m) => {
     const c = r.character(m.characterId);
     return h("div", { class: "panel" },
-      h("div", { class: "row" }, h("b", { class: "grow" }, m.name + " · " + CLASS_NAMES[c.characterClass]), h("span", { class: "muted" }, SLOT_NAMES[m.slot] ?? m.slot)),
+      h("div", { class: "row" }, pic(m.characterId, 64, m.name), h("div", { class: "grow" }, h("b", {}, m.name + " · " + CLASS_NAMES[c.characterClass]), h("div", { class: "muted" }, SLOT_NAMES[m.slot] ?? m.slot))),
       h("p", {}, `HP ${m.hp}/${m.maxHp} ATK ${m.stats.atk} DEF ${m.stats.def} SPD ${m.stats.spd} INT ${m.stats.int}`),
       h("p", {}, "스킬: " + m.skillIds.map((id) => content.skillNames[id] ?? id).join(", ")),
       m.traits.length ? h("p", {}, "특성: " + m.traits.map((id) => r.trait(id).name).join(", ")) : null,
@@ -439,7 +448,7 @@ function renderSafeZone(): void {
     h("h1", {}, "안전 정비구역"), h("p", {}, "부대가 완전히 회복되었다. 정비를 마치면 다음 층으로 향한다."),
     h("div", { class: "hud" }, h("span", {}, "금 ", h("b", {}, String(r.gold))), h("span", {}, "가방 " + r.inventory().length + "/10")),
     h("div", { class: "panel" }, h("h2", {}, "상점"), ...r.shop().map((offer, index) => h("div", { class: "row" },
-      h("span", { class: "grow" }, contentName(r, offer.contentId)), h("span", { class: "muted" }, offer.price + "금"),
+      icon(offer.contentId), h("span", { class: "grow" }, contentName(r, offer.contentId)), h("span", { class: "muted num" }, offer.price + "금"),
       button(offer.sold ? "품절" : "구매", () => { act({ type: "shop-buy", offerIndex: index }); render(); }, { class: "small", disabled: offer.sold || r.gold < offer.price })))),
     h("div", { class: "panel" }, h("h2", {}, "강화 (최대 +3)"), ...(equipped.length ? equipped.map(({ m, slot, e }) => h("div", { class: "row" },
       h("span", { class: "grow" }, m.name + " · " + contentName(r, e.equipmentId) + (e.enhance ? " +" + e.enhance : "")),
