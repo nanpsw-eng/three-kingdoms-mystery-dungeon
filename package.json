@@ -1,0 +1,17 @@
+{
+  "name": "three-kingdoms-mystery-dungeon",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "check": "npm test",
+    "build:web": "node scripts/build-web.mjs",
+    "serve": "node scripts/serve.mjs",
+    "simulate": "npm run build && node scripts/simulate.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}

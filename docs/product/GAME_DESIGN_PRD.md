@@ -286,11 +286,18 @@ Run 종료 시 초기화:
 
 ## 11. Requirement Traceability
 
-현재 구현은 시작되지 않았다.
+구현 상태 (2026-10-05, branch `feature/headless-battle-engine`; 상세 `docs/reports/`):
 
 | Requirement | Implementation | Test | Verification |
 |---|---|---|---|
-| FR-001~007 | NOT_STARTED | NOT_RUN | NOT_RUN |
+| FR-001 Deterministic Run State | `src/core`, `src/battle`, `src/dungeon`, `src/run` seeded | battle/dungeon/run replay hash tests | PASS (automated) |
+| FR-002 Dungeon Turn Engine | `src/dungeon/engine.ts` | `test/dungeon.test.mjs` | PASS (automated) |
+| FR-003 Procedural Floor Generation | `src/dungeon/floor.ts` | 300-seed generator tests | PASS (automated) |
+| FR-004 Party Battle | `src/battle` | battle/skill/status/modes tests | PASS (automated) |
+| FR-005 Run Growth | `src/run/engine.ts` | `test/run.test.mjs` | PASS (automated) |
+| FR-006 Run Economy | `src/run/engine.ts` | `test/run.test.mjs` | PASS (automated) |
+| FR-007 MVP Content | `src/content` | autopilot sims (`docs/reports/sim`) | SIM_PASS / HUMAN_PLAYTEST_NOT_RUN |
+| NFR-003 Mobile UX | `web/` | headless Chromium smoke | REAL_DEVICE_NOT_RUN |
 
 ## 12. Extension Activation
 - Product Management: ACTIVE

@@ -28,6 +28,7 @@ Status: `SEED / NOT_VALIDATED`
 - Kill: +12
 - Critical: +5
 - Ultimate: -100
+- Guard damage multiplier candidate: 0.70
 
 ### Surprise
 - Initial energy bonus: +15 candidate
