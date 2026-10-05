@@ -1,7 +1,7 @@
 # SESSION HANDOFF — 2026-10-05 (two parallel tracks)
 
 이 파일은 두 작업 트랙의 최소 Context Index다. 각 트랙은 자기 섹션만 갱신한다.
-- **Track A — Story/Engine (Claude)**: `ccr-bb39f6f8-g46bbv` (session branch; `feature/story-expansion` merged) · `src/**`, `test/**`, `scripts/simulate.mjs`, `docs/**`(아트 제외)
+- **Track A — Story/Engine (Claude)**: `ccr-bb39f6f8-g46bbv` (session branch). Remote branches: `main`, `gh-pages`, `art/ink-graphic-novel-v1`, `ccr-bb39f6f8-g46bbv` (merged branches deleted by user 2026-10-06) · `src/**`, `test/**`, `scripts/simulate.mjs`, `docs/**`(아트 제외)
 - **Track B — Art (Codex)**: `art/ink-graphic-novel-v1` · `web/style.css`, `web/src/{sprites,portraits,pixel,map,assets}.ts`, `web/assets/**`, `docs/art/**`
 
 ## Shared
@@ -36,7 +36,6 @@ DO_NOT_REPEAT
 NEXT_SAFE_ACTION
 1. Human playtest on the deployed site; tune first-boss walls (E2 화웅, E6 마초) from feedback in campaign module files only
 2. Keep merging Track B art; remove `ART_ALIASES` entries as real art lands
-3. Remote branch cleanup needs the user (sandbox git proxy refuses deletes): `fix/pages-deploy`, `feature/headless-battle-engine`, optionally `feature/story-expansion`
 3. Each stage: validateContent clean, sim 20–35%, tests, report, PR → main, deploy; check Track B branch and merge art
 
 ## Track B — Art (Codex) — as recorded by Codex
