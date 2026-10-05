@@ -29,6 +29,6 @@
 | DEC-023 | 자동 승인 구현 Delta (A-01~) — `DEC-023-AUTO_APPROVED_DELTAS.md` | APPROVED (delegated) |
 
 ## Open Decisions
-- 최종 기술 스택/Architecture
+- 최종 기술 스택/Architecture — MVP는 A-26(무프레임워크 정적 웹)으로 진행, 상용 스택 확정은 OPEN
 - 아트 스타일 및 시각 방향
 - 정량적인 성공지표/플레이테스트 Gate

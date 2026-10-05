@@ -31,3 +31,4 @@
 | A-23 | Run | Starting supplies: herb ×2, bun ×1 | first-floor attrition fix found by simulation |
 | A-24 | Content | Campaign `startLevel` (Hulao preview starts at Lv.5 with Lv.2/4 trait picks) | preview of a later expedition must be playable without meta stat growth (DEC-016 kept) |
 | A-25 | Balance | Tier scales / 조조 kit / Yellow Turban alarm from 6F — simulation-tuned, NOT_VALIDATED for humans | P13 evidence |
+| A-26 | Stack | Web client: no framework, browser-native ES modules from the same TS, Canvas + DOM, localStorage (meta + seed/command-log save), static hosting; deploy remains a Human Gate | zero cost, zero new deps, reuses headless domain directly (resolves OD-001/U-002 for MVP) |

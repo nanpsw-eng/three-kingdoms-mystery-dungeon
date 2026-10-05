@@ -35,6 +35,26 @@
 
 ## Current State
 
-`DESIGN_BASELINE_READY / IMPLEMENTATION_NOT_STARTED`
+`MVP_FEATURE_COMPLETE (headless + web client) / HUMAN_PLAYTEST_NOT_RUN / MAIN_MERGE_PENDING_APPROVAL`
 
-다음 작업은 **Headless Battle Engine**입니다. Seeded RNG → Unit/Stats → SPD Timeline → Damage/Status → Battle State Machine → Smart Auto → Simulation 순으로 진행합니다.
+| Layer | Path | Status |
+|---|---|---|
+| Battle Engine (headless, seeded) | `src/battle/` | PASS (tests) |
+| Dungeon Core | `src/dungeon/` | PASS (tests) |
+| Run layer + meta progression | `src/run/` | PASS (tests) |
+| MVP content (15 characters, YT 15F, Hulao preview) | `src/content/` | sim-tuned, NOT_VALIDATED by humans |
+| Autopilot + simulation | `src/sim/`, `scripts/simulate.mjs` | evidence in `docs/reports/sim/` |
+| Mobile web client | `web/` → `site/` | UI smoke PASS (headless Chromium) |
+
+## Play / Develop
+
+```bash
+npm ci
+npm test                 # strict TypeScript build + all headless tests
+npm run build:web        # static client into site/
+npm run serve            # http://localhost:8080 (local only)
+npm run simulate -- 100 yellow-turban smart   # headless run statistics
+```
+
+진행 저장: 메타(해금/도감)와 진행 중인 원정(seed + 명령 로그)은 브라우저 localStorage에 저장됩니다.
+조작: 방향 패드/숫자패드(1-9)·화살표 이동, `Enter` 자동 탐색, `.` 대기, `f` 주변 탐색, `>` 계단, 지도 탭 = 해당 지점까지 이동.
