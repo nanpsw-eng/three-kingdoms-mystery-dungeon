@@ -182,6 +182,19 @@ function effectScore(
       const targetRatio = target.hp / target.stats.maxHp;
       return actorRatio < 0.4 && targetRatio > actorRatio ? 14 : 2;
     }
+    case "cleanse": {
+      const entry = snapshot.statuses.find((candidate) => candidate.unitId === target.id);
+      const removed = (entry?.statuses ?? []).filter(
+        (status) => effect.statusTypes === undefined || effect.statusTypes.includes(status.type),
+      );
+      const raw = removed.reduce((sum, status) => sum + statusUtility(status.type) * 0.8, 0);
+      return relationScore(actor, target, raw);
+    }
+    case "revive": {
+      if (!target.knockedOut) return 0;
+      const hp = Math.max(1, Math.round(target.stats.maxHp * effect.hpRatio));
+      return relationScore(actor, target, 40 + hp * 0.5);
+    }
   }
 }
 
@@ -204,9 +217,14 @@ function scoreSkill(
   if (active === null) throw new Error("Smart Auto requires an active turn.");
   const actor = unitOf(snapshot, active.actorId);
   let score = 0;
+  const revived = new Set<string>();
   for (const effect of skill.effects) {
     for (const targetId of targetsForEffect(actor.id, targetIds, effect)) {
-      score += effectScore(actor, unitOf(snapshot, targetId), effect, snapshot);
+      const target = unitOf(snapshot, targetId);
+      // Mirror the engine: only revive affects KO units; later effects see the revived unit.
+      if (target.knockedOut && effect.type !== "revive" && !revived.has(targetId)) continue;
+      score += effectScore(actor, target, effect, snapshot);
+      if (effect.type === "revive" && target.knockedOut) revived.add(targetId);
     }
   }
   score -= skill.energyCost * policy.energyCostWeight;
