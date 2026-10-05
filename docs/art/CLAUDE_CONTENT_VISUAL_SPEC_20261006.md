@@ -183,3 +183,15 @@ Current studies:
 Ruler comparison v2 is the cleaner shared line/paper reference: no battle scenery, reduced metal trim, and one bust/full-body/token sequence per ruler. Sima Yi v2 keeps his charcoal/deep-crimson palette, narrow strategist gaze, neat beard, and folding command fan while adopting the same subdued hanji presentation.
 
 Both stay `CONCEPT`. This is a consistency pass, not approval of production art. The next review must use separate deliverables at their intended sizes: bust portrait crop, full-body combat/event illustration, and simplified exploration token. Check silhouette recognition in monochrome and at the actual small UI scale before the ruler set becomes an implementation master.
+
+
+## 17. Individual Ruler Master Concept Sheets
+
+The ruler comparison v2 is now accompanied by individual character sheets:
+- `concepts/liu-bei-master-concept-v1-20261006.jpg`
+- `concepts/cao-cao-master-concept-v1-20261006.jpg`
+- `concepts/sun-quan-master-concept-v1-20261006.jpg`
+
+Each sheet repeats bust portrait, full-body, and simplified exploration token for one ruler, using the same hanji ground and ink contour system. Distinguishing keys remain long tapered beard/open warm posture for Liu Bei; clipped beard/compact charcoal silhouette for Cao Cao; younger nearly clean-shaven face/cool blue-gray and dark green for Sun Quan. These separate sheets are `CONCEPT`, not approved production art.
+
+Before approval, inspect the actual intended 40px portrait size and in-game token size; test silhouette/value recognition without color. Simplify small belt hardware if it competes with the face, beard, sash, or pose. The downscaled repository JPEGs are for design continuity only.
