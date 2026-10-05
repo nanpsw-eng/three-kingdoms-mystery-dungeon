@@ -1,48 +1,46 @@
-# SESSION HANDOFF — 2026-10-05 MVP Feature Complete (Phases 9–14)
+# SESSION HANDOFF — Art Direction v1
 
 ## Current State
-- Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon` (public)
-- Branch: `feature/headless-battle-engine` (mirror: `ccr-bb39f6f8-g46bbv`)
-- Exact HEAD: see `git log -1` (this handoff commit); last code change = web client P14
-- Gate: `MVP_FEATURE_COMPLETE / HUMAN_PLAYTEST_NEXT`
-- Local: `npm test` → strict build PASS, **135 passed / 0 failed**; `npm run build:web` PASS; UI smoke PASS (0 console errors)
-- GitHub CI: `.github/workflows/ci.yml` (test + build:web) — green on prior pushes; check latest run
-- Merge to `main`: `NOT_RUN / HUMAN_GATE` · Deploy: `NOT_RUN / HUMAN_GATE`
-- User delegation (2026-10-05): remaining design choices auto-approved by recommendation → `DEC-023` (A-01..A-26)
+- Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon`
+- Branch: `art/ink-graphic-novel-v1`
+- Base Implementation Commit: `017e0c4130f914dd33d2ab74f2093d4170b0e438`
+- Current Gate: `INK_GRAPHIC_NOVEL_V1_APPROVED / VERTICAL_SLICE_NEXT`
+- Merge: `NOT_RUN / HUMAN_GATE`
+- Deploy: `NOT_RUN / HUMAN_GATE`
 
-## Phase Evidence
-| Phase | Report |
-|---|---|
-| 7 Cleanse/Revive | `docs/reports/HEADLESS_BATTLE_ENGINE_PHASE7.md` |
-| Battle Core review | `docs/reports/BATTLE_CORE_FEATURE_REVIEW.md` |
-| 8 Entry/Surprise/Evasion | `docs/reports/HEADLESS_BATTLE_ENGINE_PHASE8.md` |
-| 9 Battle backlog | `docs/reports/HEADLESS_BATTLE_ENGINE_PHASE9.md` |
-| 10 Dungeon Core | `docs/reports/DUNGEON_CORE_PHASE10.md` |
-| 11–13 Run/Content/Sim | `docs/reports/RUN_SIMULATION_PHASE13.md`, `docs/reports/sim/*.json` |
-| 14 Web client | `docs/reports/WEB_CLIENT_PHASE14.md` |
+## Approved Visual Baseline
+- 현대 수묵 그래픽 노블 × 삼국지 연환화
+- 한지 / 먹 / 주홍 중심의 제한 팔레트
+- 최종 Portrait는 pixelization 금지
+- Dungeon topology와 game logic은 유지하고 visual skin만 교체
+- Visual Source of Truth:
+  - `docs/decisions/DEC-025-ART_DIRECTION.md`
+  - `docs/art/VISUAL_BIBLE_V1.md`
+  - `docs/art/reference/*.jpg`
+  - `docs/ai-dev/CODEX_ART_HANDOFF.md`
 
 ## DO_NOT_REPEAT
-- Battle: RNG/timeline/damage/status/formation/skills/items/retreat/cleanse/revive/entry state/surprise/evasion/extra-action, Smart Auto + All Attack + Repeat, balance constants in `src/battle/balance.ts`
-- Dungeon: generator (rooms/MST/loops/dead ends/secret/gates/sorcery/boss), turn engine, AI states, detection/surprise, traps, food/recovery/starvation, danger/reinforcement, auto explore, travel/frontier pathing; constants `src/dungeon/balance.ts`
-- Run: party/level/traits/recruit/events/items/equipment/shop/safe zone/battle bridge/meta unlocks; constants `src/run/balance.ts`
-- Content: 15 characters + skills + traits, items/equipment, YT 15F + Hulao preview, events, unlock rules
-- Sim: autopilot + `scripts/simulate.mjs` (crossed ruler×pair sampling); balance pass (YT smart 25.9%, all-attack 0%, Hulao 61.7%)
-- Web: `web/` static client, `scripts/{build-web,serve,e2e-smoke}.mjs`
-
-## NOT_RUN / OPEN
-- Human playtest: fun (PRD §3.3), U-001 20–30 min, R-001 trait fatigue (~20 picks/run), R-002 manual vs auto
-- Real mobile device / accessibility / NFR-004 performance
-- Balance validation for humans (BALANCE_SEED "Validation Required")
-- OD-002 art direction; OD-003 success metrics; production hosting choice
-- Battle animation layer; N5 forced enemy movement; Hulao gate keys/levers beyond defender rule
+- Battle/Dungeon/Run/Content engine 구현
+- 기존 MVP content 재설계
+- 아트 방향 A/B/C 비교
+- 수묵 그래픽 노블 방향 재선정
+- 기존 pixel/lacquer theme polish
 
 ## NEXT_SAFE_ACTION
-1. Human: play `npm run build:web && npm run serve` (or a static host after approval) and report feel/time per run.
-2. If approved: open PR `feature/headless-battle-engine` → `main` (Human Gate) and choose static hosting (free tier).
-3. Tune from playtest data in content/balance files only; keep simulation (`npm run simulate`) as regression.
+1. Read `docs/ai-dev/CODEX_ART_HANDOFF.md`.
+2. Inventory current visual code only.
+3. Create ink-paper CSS token layer.
+4. Re-skin one vertical slice: Title + Dungeon + one Battle screen.
+5. Apply 3 ruler masters before expanding full roster.
+6. Run existing test/build/UI smoke after each meaningful phase.
 
-## REQUIRED_CONTEXT
-- `AGENTS.md`, `docs/decisions/DEC-023-AUTO_APPROVED_DELTAS.md`, the phase reports above.
+## Verification
+- Art reference persistence: repository commit required in this session.
+- New visual implementation: `NOT_STARTED`
+- Existing game engine tests/build: inherit base implementation evidence; rerun before/after code changes.
 
 ## Human Gate
-- Merge to `main`: REQUIRED · Production deploy/release: REQUIRED · Paid services: REQUIRED · Product Baseline material change: REQUIRED
+- Merge to `main`: REQUIRED
+- Production deploy/release: REQUIRED
+- Product Baseline material change: REQUIRED
+- Different art direction: REQUIRED
