@@ -16,6 +16,13 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 | Item silhouette set | `MASTER_REQUIRED` | Phase D item language | Create after Phase C |
 | Existing procedural pixel portraits/sprites/map tiles | `SUPERSEDED` | Legacy main visual language; retained as fallback | Keep functional until replacement coverage is verified |
 
+
+| Sima Yi bust/full-body/exploration token concept | `CONCEPT` | `concepts/sima-yi-master-concept-20261006.jpg` | Revise against the Liu Bei/Cao Cao/Sun Quan master set before approval |
+| Codex character-detail screen concept v2 | `CONCEPT` | `concepts/codex-character-detail-mockup-v2-20261006.jpg` | Layout reference only; align final details with current 40px portrait component |
+| Codex Bosses / Achievements / Items views | `IMPLEMENTATION_READY` | `CLAUDE_CONTENT_VISUAL_SPEC_20261006.md` | Design tab-specific states and readable unknown/locked states |
+| Line-by-line story scene UI | `IMPLEMENTATION_READY` | `CLAUDE_CONTENT_VISUAL_SPEC_20261006.md` | Apply speaker portrait, n/m progress, next/tap/skip and choices |
+| Story expansion character + enemy production art queue | `MASTER_REQUIRED` | `STORY_ART_QUEUE.md` on latest main | Work from existing stable ids / aliases; follow queue order |
+
 ## Current Implementation State
 
 The repository's current web client still uses the legacy dark/gold CSS theme and procedural pixel portrait/sprite/map renderers. This does not change the approved art direction; these remain fallback/legacy implementation surfaces until replacement assets and renderers are verified.

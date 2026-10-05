@@ -1,0 +1,90 @@
+# Claude Content Visual Delta — 2026-10-06
+
+Status: `DESIGN_WORK_IN_PROGRESS`
+Content source: `main` at `4792356fa81f39ca053edc0df30278868abe2c22`
+Latest Claude feature: PR #10, Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`, merged to `main`
+Art baseline: DEC-025 + Visual Bible v1 — unchanged and approved.
+
+## 1. Verified Product Delta
+
+Claude Code expanded the playable campaign/content set through E9 and merged these follow-up surfaces:
+- Codex and achievements view with four tabs: characters, bosses, achievements, items.
+- Expandable character entries with class, stats, skills, and short historical note.
+- 44-character / 39-boss / 16-achievement / 22-item collection surfaces in the current Codex view model. Tab labels display earned/unlocked/seen count over total, not total-only counts.
+- Historical notes for the roster and unlock hints.
+- Line-by-line story scenes with speaker portrait, progress `n/m`, next/tap progression, skip behavior, and deferred choice presentation.
+- Save-compatibility guard for removed/locked campaign or character ids.
+- Story art queue records 37 added ruler/general designs and about 90 enemy/boss names; stable ids and aliases are in `docs/art/STORY_ART_QUEUE.md` on current `main`.
+
+The additions are already merged. Do not duplicate engine/content work while designing their visual representation.
+
+## 2. Design Deliverables Created Here
+
+### Sima Yi character concept
+`concepts/sima-yi-master-concept-20261006.jpg` shows bust, full-body, and small exploration token using one identity. It is a **CONCEPT**, not approved production art. Its charcoal/black robe, narrow crimson accents, mature face, and quiet strategist posture follow DEC-025. The final design must be checked against the three original ruler masters before approval.
+
+### Codex character detail concept v2
+`concepts/codex-character-detail-mockup-v2-20261006.jpg` is a visual concept for the current character tab. It uses data-driven count fractions and preserves the paper/ink/vermilion family. It is **CONCEPT** only. The enlarged Sima Yi artwork is mood/composition reference; current code uses a 40px portrait in the expandable row, so do not copy the oversized portrait directly into a final compact layout.
+
+## 3. Codex Tab Visual Rules
+
+Shared shell:
+- Keep the current full-screen Codex entry point and close action.
+- Header and tabs stay fixed while the long record list scrolls.
+- Use warm paper cards, thin ink dividers, one consistent brush label, and vermilion selected-state mark.
+- Each tab displays the existing dynamic fraction: unlocked/total, defeated/total, earned/total, or seen/total.
+- All rows and tab buttons retain >=44px hit areas and visible keyboard focus.
+
+### Characters
+- Stable order follows the content registry.
+- Each row uses one bust portrait thumbnail, name, and class.
+- Locked character: readable name + unlock hint; show a subdued monochrome silhouette or asset variant, never a nearly invisible darkened image.
+- Expanded row: stats as aligned columns, skill names/icons in a compact group, and the historical note in a clearly separated text block.
+- Avoid repeating the full portrait or scenic art behind body text.
+
+### Bosses
+- Group entries under campaign headings in campaign order.
+- Defeated and not-yet-defeated states use distinct silhouette/value treatment plus explicit text; do not rely on color alone.
+- Undiscovered/unbeaten names stay concealed where the current content model returns unknown; preserve its reveal semantics.
+- Boss portraits are phase-F assets, not required before Codex UI styling.
+
+### Achievements
+- Render as a compact list with a small ink seal/check symbol, title, and unlock hint.
+- Earned: dark ink glyph with a limited vermilion stamp.
+- Un-earned: paper-gray silhouette with the title and hint still legible.
+- No gold medals, gacha rarity, or decorative card frame.
+
+### Items
+- Use a responsive silhouette grid for the 22 item records.
+- Seen item: family silhouette from the item visual language (food, medicine, scroll, weapon, armor, treasure).
+- Unseen item: distinct “unknown” wrapped bundle / covered object, not a generic question mark alone.
+- Names and discovery state remain accessible as text; silhouette supplements rather than replaces the label.
+
+## 4. Story Scene UI Visual Rules
+
+The newly implemented reveal interaction stays unchanged:
+- Speaker portrait and speaker name sit beside the current line on a paper panel.
+- Narration uses an inset paper strip with a narrow ink rule.
+- Progress `n/m` is a small but readable marker, aligned away from the primary action.
+- “다음” / tap advances one line; “건너뛰기” remains secondary.
+- Choices appear only when the current implementation exposes them.
+- Use a single brush stroke for emphasis, not full-frame illustration behind text.
+- Reduced-motion preference remains respected.
+
+## 5. Character and Enemy Art Priority
+
+Source order remains `docs/art/STORY_ART_QUEUE.md`; use stable content ids and the existing `ART_ALIASES` mapping. Do not invent replacement ids.
+
+1. Establish the original three ruler master set from Visual Bible v1: Liu Bei, Cao Cao, Sun Quan. This remains the style consistency gate.
+2. Continue Sima Yi as the first new ruler concept because the current story art queue explicitly prioritizes him. Keep today’s sheet at `CONCEPT` until compared with the three-master set.
+3. Design final campaign bosses in the queue order: Dong Zhuo, Lü Bu, Yuan Shao, Cao Cao, Cao Ren, Lu Xun, Meng Huo, Sima Yi.
+4. Design new playable generals, then common enemies.
+5. Every character master must define bust, full-body, and exploration token as the same person. Enemy groups may share uniform language but must remain silhouette-distinct.
+
+## 6. Current Acceptance Boundary
+
+- The generated images are compact repository concept references, not final production assets.
+- The original generated high-resolution images remain the master concept outputs; the repository copies are downscaled JPEG references.
+- UI concept count values are illustrative data states; actual counts must come from the existing Codex view-model.
+- No gameplay logic, save behavior, Codex data, campaign content, or product baseline changes are authorized by this visual document.
+- Next design completion work: create the three original ruler master concepts, refine Sima Yi against them, then produce separate visual studies for the Bosses/Achievements/Items tab states and story scene sheet.
