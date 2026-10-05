@@ -28,8 +28,8 @@
 | DEC-022 | MVP 로스터: 군주 3 + 일반 장수 12 | APPROVED |
 | DEC-023 | 자동 승인 구현 Delta (A-01~) — `DEC-023-AUTO_APPROVED_DELTAS.md` | APPROVED (delegated) |
 | DEC-024 | 스토리 확장(E1~E9) 승인 + 전면 위임, DEC-005 범위 Delta — `DEC-024-STORY_EXPANSION_APPROVAL.md` | APPROVED |
+| DEC-025 | 최종 아트 방향: 현대 수묵 그래픽 노블 × 연환화 — `DEC-025-ART_DIRECTION.md` | APPROVED |
 
 ## Open Decisions
 - 최종 기술 스택/Architecture — MVP는 A-26(무프레임워크 정적 웹)으로 진행, 상용 스택 확정은 OPEN
-- 아트 스타일 및 시각 방향
 - 정량적인 성공지표/플레이테스트 Gate

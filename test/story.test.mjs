@@ -183,3 +183,33 @@ test("S1: E2 autopilot is deterministic and terminates", () => {
   assert.deepEqual(a, runAutopilot(MVP_CONTENT, options));
   assert.notEqual(a.outcome, "stalled");
 });
+
+test("S2: E3 서주 12F (하비 수공 9–12F, 백문루 2페이즈) and E4 관도 15F (5관 6–9F, 오소 야습 11–14F)", () => {
+  const camp = (id) => MVP_CONTENT.campaigns.find((c) => c.id === id);
+  const group = (id) => MVP_CONTENT.enemyGroups.find((g) => g.id === id);
+  const withMechanic = (c, type) => c.floors.filter((f) => (f.mechanics ?? []).some((m) => m.type === type)).map((f) => f.depth);
+  const e3 = camp("xuzhou");
+  assert.equal(e3.floors.length, 12);
+  assert.deepEqual(withMechanic(e3, "flood"), [9, 10, 11, 12]);
+  assert.equal(group("boss-xiapi-lu-bu").nextPhase, "boss-baimen");
+  assert.equal(group("boss-ji-ling").duel.unitIndex, 0);
+  const e4 = camp("guandu");
+  assert.equal(e4.floors.length, 15);
+  assert.deepEqual(e4.floors.filter((f) => f.gateDefenderGroupId).map((f) => f.depth), [6, 7, 8, 9]);
+  assert.deepEqual(withMechanic(e4, "night-raid"), [11, 12, 13, 14]);
+  assert.ok(group("boss-yan-liang").duel && group("boss-wen-chou").duel);
+  assert.equal(group("boss-yuan-shao").nextPhase, "boss-yuan-shao-2");
+  assert.deepEqual(MVP_CONTENT.campaigns.map((c) => c.order), [1, 2, 3, 4]);
+});
+
+test("S2: unlock chain E2 → E3 → E4 and new generals", () => {
+  let meta = { ...initialMeta(MVP_CONTENT), unlockedCampaigns: ["yellow-turban", "anti-dong"] };
+  const base = { cleared: true, defeatedGroups: [], recruited: [], itemsSeen: [], level: 9, turns: 1, battles: 1 };
+  meta = applyRunToMeta(meta, { ...base, campaignId: "anti-dong", depthReached: 12 }, MVP_CONTENT);
+  assert.ok(meta.unlockedCampaigns.includes("xuzhou"));
+  meta = applyRunToMeta(meta, { ...base, campaignId: "xuzhou", depthReached: 12, recruited: ["chen-gong"] }, MVP_CONTENT);
+  assert.ok(meta.unlockedCampaigns.includes("guandu"));
+  assert.ok(meta.unlockedCharacters.includes("mi-zhu") && meta.unlockedCharacters.includes("chen-gong"));
+  meta = applyRunToMeta(meta, { ...base, campaignId: "guandu", depthReached: 15, defeatedGroups: ["boss-yan-liang"] }, MVP_CONTENT);
+  for (const id of ["dian-wei", "xu-chu", "xun-yu"]) assert.ok(meta.unlockedCharacters.includes(id), id);
+});

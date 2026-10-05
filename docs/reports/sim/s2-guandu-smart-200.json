@@ -1,0 +1,95 @@
+{
+  "campaignId": "guandu",
+  "runs": 200,
+  "battleMode": "smart",
+  "clearRate": 0.245,
+  "outcomes": {
+    "failed": 151,
+    "cleared": 49
+  },
+  "failDepth": {
+    "5": 15,
+    "6": 23,
+    "7": 20,
+    "8": 4,
+    "9": 2,
+    "10": 1,
+    "11": 7,
+    "12": 25,
+    "13": 29,
+    "14": 13,
+    "15": 12
+  },
+  "failCause": {
+    "battle": 148,
+    "starvation": 3
+  },
+  "depthReached": {
+    "5": 15,
+    "6": 23,
+    "7": 20,
+    "8": 4,
+    "9": 2,
+    "10": 1,
+    "11": 7,
+    "12": 25,
+    "13": 29,
+    "14": 13,
+    "15": 61
+  },
+  "byRuler": {
+    "liu-bei": {
+      "runs": 67,
+      "cleared": 18
+    },
+    "cao-cao": {
+      "runs": 67,
+      "cleared": 25
+    },
+    "sun-quan": {
+      "runs": 66,
+      "cleared": 6
+    }
+  },
+  "byGeneral": {
+    "guan-yu": {
+      "runs": 75,
+      "cleared": 15
+    },
+    "zhang-fei": {
+      "runs": 68,
+      "cleared": 12
+    },
+    "zhang-liao": {
+      "runs": 66,
+      "cleared": 18
+    },
+    "xiahou-dun": {
+      "runs": 65,
+      "cleared": 13
+    },
+    "taishi-ci": {
+      "runs": 63,
+      "cleared": 23
+    },
+    "gan-ning": {
+      "runs": 63,
+      "cleared": 17
+    }
+  },
+  "perRunAverage": {
+    "level": 8.84,
+    "turns": 1726.71,
+    "battles": 41.79,
+    "recruits": 1.41,
+    "surprisesAlly": 1.8,
+    "surprisesEnemy": 0.02,
+    "gatesOpened": 2.88,
+    "retreats": 0,
+    "traitPicks": 19.91,
+    "itemsUsed": 12.7,
+    "secretsFound": 0,
+    "reinforcements": 5.17
+  },
+  "ms": 101604
+}

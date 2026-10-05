@@ -1,0 +1,90 @@
+{
+  "campaignId": "xuzhou",
+  "runs": 200,
+  "battleMode": "smart",
+  "clearRate": 0.295,
+  "outcomes": {
+    "failed": 141,
+    "cleared": 59
+  },
+  "failDepth": {
+    "4": 18,
+    "5": 22,
+    "6": 10,
+    "7": 13,
+    "8": 10,
+    "9": 26,
+    "10": 16,
+    "11": 12,
+    "12": 14
+  },
+  "failCause": {
+    "battle": 141
+  },
+  "depthReached": {
+    "4": 18,
+    "5": 22,
+    "6": 10,
+    "7": 13,
+    "8": 10,
+    "9": 26,
+    "10": 16,
+    "11": 12,
+    "12": 73
+  },
+  "byRuler": {
+    "liu-bei": {
+      "runs": 67,
+      "cleared": 16
+    },
+    "cao-cao": {
+      "runs": 67,
+      "cleared": 32
+    },
+    "sun-quan": {
+      "runs": 66,
+      "cleared": 11
+    }
+  },
+  "byGeneral": {
+    "guan-yu": {
+      "runs": 75,
+      "cleared": 25
+    },
+    "zhang-fei": {
+      "runs": 68,
+      "cleared": 18
+    },
+    "zhang-liao": {
+      "runs": 66,
+      "cleared": 17
+    },
+    "xiahou-dun": {
+      "runs": 65,
+      "cleared": 21
+    },
+    "taishi-ci": {
+      "runs": 63,
+      "cleared": 13
+    },
+    "gan-ning": {
+      "runs": 63,
+      "cleared": 24
+    }
+  },
+  "perRunAverage": {
+    "level": 8.4,
+    "turns": 1325.88,
+    "battles": 29.23,
+    "recruits": 1.15,
+    "surprisesAlly": 0.32,
+    "surprisesEnemy": 0.01,
+    "gatesOpened": 0,
+    "retreats": 0,
+    "traitPicks": 17.8,
+    "itemsUsed": 11.49,
+    "secretsFound": 0,
+    "reinforcements": 2.29
+  },
+  "ms": 64092
+}
