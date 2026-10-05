@@ -153,3 +153,13 @@ Visual study: `concepts/e2-boss-trio-yuan-shao-cao-cao-cao-ren-20261006.jpg`.
 - This is a generated concept sheet, not production art. Keep all three at `CONCEPT`; reduce residual metal/headpiece detail, verify small-token recognition, and create separate clean masters before approval.
 - This asset set follows the E2 finale priority already listed in `STORY_ART_QUEUE.md`; character ids and story aliases remain unchanged.
 
+
+
+## 14. E7 / E8 Campaign Boss Duo Concept Review
+
+Visual study: `concepts/lu-xun-meng-huo-boss-concept-20261006.jpg`.
+- Lu Xun (E7): composed younger strategist in cool blue-gray, dark teal, and warm beige; folding command fan leads the narrow vertical token silhouette.
+- Meng Huo (E8): broad mature ruler in forest green, earth brown, and beige; shield-first stance with short spear creates a wide silhouette. Treatment stays dignified and grounded rather than monstrous or caricatured.
+- Bust, full-body, and token repeat the same face, clothing blocks, and prop cues. Both characters remain `CONCEPT`; generated armor detail and token clarity need review before separate reusable masters are approved.
+- The concept translates the existing E7/E8 bosses in `STORY_ART_QUEUE.md`; ids, aliases, story text, and encounter behavior remain unchanged.
+
