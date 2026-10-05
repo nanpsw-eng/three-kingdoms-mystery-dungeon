@@ -118,6 +118,11 @@ function cleanseValue(status: { type: StatusType; stacks: number; magnitude: num
   return Math.max(utility, remainingDamage * 1.2);
 }
 
+// Bounded below the lethal bonus (35) so a kill is never scored as worse than guarding.
+function overkillPenalty(overkill: number): number {
+  return Math.min(overkill * 0.35, 15);
+}
+
 function relationScore(actor: UnitSnapshot, target: UnitSnapshot, value: number): number {
   return actor.side === target.side ? value : -value;
 }
@@ -162,7 +167,7 @@ function effectScore(
       const dealt = Math.min(damage, target.hp);
       const lethal = damage >= target.hp;
       const overkill = Math.max(0, damage - target.hp);
-      const raw = dealt + (lethal ? 35 : 0) - overkill * 0.35;
+      const raw = dealt + (lethal ? 35 : 0) - overkillPenalty(overkill);
       return actor.side === target.side ? -raw : raw;
     }
     case "heal": {
@@ -315,7 +320,7 @@ function basicCandidates(battle: BattleEngine): ScoredCommand[] {
       score:
         dealt +
         (damage >= target.hp ? 35 : 0) -
-        overkill * 0.35 +
+        overkillPenalty(overkill) +
         BASIC_ATTACK_ENERGY * 0.1,
       tieKey: "0:" + targetId,
     };

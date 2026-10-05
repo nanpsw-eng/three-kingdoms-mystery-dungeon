@@ -266,6 +266,8 @@ export class DungeonEngine {
   }
   setFood(food: number): void { this.#food = Math.max(0, Math.min(FOOD_MAX, Math.round(food))); }
   removeObject(objectId: string): void { this.#objects.delete(objectId); }
+  /** Item hook: reveal every trap on the floor. */
+  revealAllTraps(): void { for (const trap of this.#traps) trap.revealed = true; }
 
   // ---------- commands ----------
   execute(command: DungeonCommand): DungeonStepResult {
