@@ -113,3 +113,31 @@ A Dong Zhuo / Lü Bu comparison concept now exists at `concepts/dong-zhuo-lu-bu-
 4. Continue the campaign boss and playable-general queue from `STORY_ART_QUEUE.md`.
 
 These are visual-design tasks in this Work. No separate Codex implementation assignment is being issued.
+
+
+## 10. Codex Secondary Tab Concept Review
+
+Visual study: `concepts/codex-secondary-tabs-20261006.jpg`.
+- Bosses: campaign section labels, explicit defeated/not defeated states, and concealed unknown boss silhouettes.
+- Achievements: ink seal mark for earned state; muted but legible symbol and hint for unearned state.
+- Items: six item-family silhouettes and a covered unknown bundle, with text labels.
+- The board is a concept; sample counts/labels are illustrative. Use actual view-model data and group order.
+- Reduce landscape/branch decorations if they lower row contrast. Final renderer should prefer the code's campaign-grouped entries and item grid semantics.
+
+## 11. Story Scene UI Concept Review
+
+Visual study: `concepts/story-scene-ui-20261006.jpg`.
+- Shows a dungeon dimmer behind a paper sheet, a mid-reveal state, and a final choice state.
+- The scene title, portrait beside text, progress marker, next/tap action, skip, and deferred choices match the current behavior.
+- The portrait in the left study is intentionally oversized for concept readability; the production row uses a 48px portrait. Keep the final face near text and never behind copy.
+- Sample dialogue/choices are illustrative; actual content remains owned by story data.
+- Sheet scroll and fixed actions need a 390×844 layout check before visual approval.
+
+## 12. Work-Only Design Queue
+
+1. Refine the ruler master concept into separately usable bust/full-body/token design references, remove excess metallic details, and verify silhouette recognition.
+2. Bring the E2 boss duo and Sima Yi concepts into that shared master language.
+3. Create independent portrait studies in the existing Story Art Queue priority: Sima Yi, campaign bosses, playable generals, then common enemies.
+4. Expand item-family icon silhouettes and enemy faction visual language after the Codex tab concepts are stable.
+
+No separate Codex implementation assignment is being issued; these are design tasks for this Work.
