@@ -163,3 +163,12 @@ Visual study: `concepts/lu-xun-meng-huo-boss-concept-20261006.jpg`.
 - Bust, full-body, and token repeat the same face, clothing blocks, and prop cues. Both characters remain `CONCEPT`; generated armor detail and token clarity need review before separate reusable masters are approved.
 - The concept translates the existing E7/E8 bosses in `STORY_ART_QUEUE.md`; ids, aliases, story text, and encounter behavior remain unchanged.
 
+
+
+## 15. Ruler Master Comparison v2
+
+Visual study: `concepts/ruler-master-comparison-v2-20261006.jpg`.
+- The revised board retains Liu Bei’s long refined beard, warm open silhouette; Cao Cao’s clipped beard, compact dark mass; and Sun Quan’s younger blue-gray/dark-green presence.
+- It removes the earlier battle/background scenery and reduces metallic ornament so the three identities compare directly on hanji.
+- Each character now has bust, full-body, and a simplified token in one column. The repeated face, palette, and outline language support cross-view recognition.
+- Status remains `CONCEPT`: the sheet is not a production export or final approval. Next validation is separate portrait/full-body/token masters at intended sizes, including grayscale/silhouette reading and mobile thumbnail review. Avoid assuming tiny generated token detail will survive raster reduction.

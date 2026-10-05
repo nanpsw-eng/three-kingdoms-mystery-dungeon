@@ -24,7 +24,7 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 | Story expansion character + enemy production art queue | `MASTER_REQUIRED` | `STORY_ART_QUEUE.md` on latest main | Work from existing stable ids / aliases; follow queue order |
 
 
-| Original ruler master comparison concept (Liu Bei / Cao Cao / Sun Quan) | `CONCEPT` | `concepts/ruler-master-comparison-20261006.jpg` | Refine remaining metallic ornament, then produce separate bust/full-body/token masters |
+| Original ruler master comparison v2 (Liu Bei / Cao Cao / Sun Quan) | `CONCEPT` | `concepts/ruler-master-comparison-v2-20261006.jpg` | Review face/silhouette consistency; create separate character masters before approval |
 | E2 boss duo (Dong Zhuo / Lü Bu) concept | `CONCEPT` | `concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg` | Simplify armor ornament and preserve broad-vs-tall silhouette contrast |
 
 
