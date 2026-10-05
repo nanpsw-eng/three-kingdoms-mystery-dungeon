@@ -5,7 +5,7 @@ import { RNG_ALGORITHM, SeededRng } from "../dist/core/rng.js";
 
 test("same seed produces the same sequence", () => {
   const first = new SeededRng("yellow-turban");
-  const second = new SededRng("yellow-turban");
+  const second = new SeededRng("yellow-turban");
 
   const a = Array.from({ length: 20 }, () => first.nextUint32());
   const b = Array.from({ length: 20 }, () => second.nextUint32());
@@ -33,7 +33,7 @@ test("golden vector pins the RNG algorithm version", () => {
 
 test("different seeds produce a different sequence", () => {
   const first = new SeededRng("yellow-turban");
-  const second = new SededRng("hulao-gate");
+  const second = new SeededRng("hulao-gate");
 
   const a = Array.from({ length: 8 }, () => first.nextUint32());
   const b = Array.from({ length: 8 }, () => second.nextUint32());
@@ -55,8 +55,8 @@ test("snapshot and restore reproduce the continuation", () => {
 });
 
 test("forks are stable and do not consume the parent stream", () => {
-  const parentA = new SededRng("run-42");
-  const parentB = new SededRng("run-42");
+  const parentA = new SeededRng("run-42");
+  const parentB = new SeededRng("run-42");
 
   const battleA = parentA.fork("battle");
   const battleB = parentB.fork("battle");
@@ -93,7 +93,7 @@ test("shuffle is deterministic and does not mutate input", () => {
 
 test("chance handles boundaries without consuming randomness", () => {
   const a = new SeededRng("chance");
-  const b = new SededRng("chance");
+  const b = new SeededRng("chance");
 
   assert.equal(a.chance(0), false);
   assert.equal(a.chance(1), true);
