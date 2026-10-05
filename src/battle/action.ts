@@ -3,6 +3,7 @@ import type { StatusType } from "./status.js";
 
 export type AbilityTargetTeam = "self" | "ally" | "enemy";
 export type AbilityTargetAccess = "self" | "front" | "any";
+export type AbilityTargetState = "living" | "ko" | "any";
 export type EffectRecipient = "actor" | "targets";
 export type SkillKind = "active" | "ultimate";
 
@@ -11,6 +12,7 @@ export interface AbilityTargeting {
   readonly access: AbilityTargetAccess;
   readonly minTargets: number;
   readonly maxTargets: number;
+  readonly state?: AbilityTargetState;
 }
 
 export interface DamageEffectDefinition {
@@ -56,13 +58,27 @@ export interface FormationSwapEffectDefinition {
   readonly recipient: "targets";
 }
 
+export interface CleanseEffectDefinition {
+  readonly type: "cleanse";
+  readonly recipient: EffectRecipient;
+  readonly statusTypes?: readonly StatusType[];
+}
+
+export interface ReviveEffectDefinition {
+  readonly type: "revive";
+  readonly recipient: "targets";
+  readonly hpRatio: number;
+}
+
 export type EffectDefinition =
   | DamageEffectDefinition
   | HealEffectDefinition
   | StatusEffectDefinition
   | TimelineShiftEffectDefinition
   | EnergyEffectDefinition
-  | FormationSwapEffectDefinition;
+  | FormationSwapEffectDefinition
+  | CleanseEffectDefinition
+  | ReviveEffectDefinition;
 
 export interface SkillDefinition {
   readonly id: string;
@@ -99,9 +115,13 @@ export function validateTargeting(targeting: AbilityTargeting): void {
   if (targeting.minTargets < 1 || targeting.maxTargets < targeting.minTargets || targeting.maxTargets > 5) {
     throw new RangeError("Target counts must satisfy 1 <= minTargets <= maxTargets <= 5.");
   }
+  const state = targeting.state ?? "living";
   if (targeting.team === "self") {
     if (targeting.access !== "self" || targeting.minTargets !== 1 || targeting.maxTargets !== 1) {
       throw new RangeError("Self targeting requires access=self and exactly one target.");
+    }
+    if (state === "ko") {
+      throw new RangeError("Self targeting cannot require a KO target because the acting unit must be living.");
     }
   } else if (targeting.access === "self") {
     throw new RangeError("Non-self targeting cannot use access=self.");
@@ -137,6 +157,21 @@ export function validateEffect(effect: EffectDefinition): void {
       return;
     case "formation-swap":
       return;
+    case "cleanse":
+      if (effect.statusTypes !== undefined) {
+        if (effect.statusTypes.length === 0) {
+          throw new RangeError("Cleanse statusTypes must be omitted for all statuses or contain at least one status.");
+        }
+        if (new Set(effect.statusTypes).size !== effect.statusTypes.length) {
+          throw new RangeError("Cleanse statusTypes must be unique.");
+        }
+      }
+      return;
+    case "revive":
+      if (!Number.isFinite(effect.hpRatio) || effect.hpRatio <= 0 || effect.hpRatio > 1) {
+        throw new RangeError("Revive hpRatio must be greater than 0 and at most 1.");
+      }
+      return;
   }
 }
 
@@ -156,6 +191,14 @@ export function validateSkillDefinition(skill: SkillDefinition): void {
     throw new RangeError("Active skill baseline energy cost must be below 100.");
   }
   validateTargeting(skill.targeting);
+  if (skill.effects.some((effect) => effect.type === "revive")) {
+    if (skill.targeting.team !== "ally") {
+      throw new RangeError("Revive skills must target allies.");
+    }
+    if ((skill.targeting.state ?? "living") === "living") {
+      throw new RangeError("Revive skills must use targeting state=ko or state=any.");
+    }
+  }
   if (skill.effects.length === 0) throw new RangeError("Skill must contain at least one effect.");
   for (const effect of skill.effects) validateEffect(effect);
   validateActionSpeedModifier(skill.actionSpeedModifier);
@@ -164,6 +207,14 @@ export function validateSkillDefinition(skill: SkillDefinition): void {
 export function validateItemDefinition(item: BattleItemDefinition): void {
   assertNonEmptyId("Item id", item.id);
   validateTargeting(item.targeting);
+  if (item.effects.some((effect) => effect.type === "revive")) {
+    if (item.targeting.team !== "ally") {
+      throw new RangeError("Revive items must target allies.");
+    }
+    if ((item.targeting.state ?? "living") === "living") {
+      throw new RangeError("Revive items must use targeting state=ko or state=any.");
+    }
+  }
   if (item.effects.length === 0) throw new RangeError("Item must contain at least one effect.");
   for (const effect of item.effects) validateEffect(effect);
   validateActionSpeedModifier(item.actionSpeedModifier);
