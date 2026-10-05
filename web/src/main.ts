@@ -4,7 +4,7 @@ import {
 } from "../../src/index.js";
 import { drawMap, tileAt } from "./map.js";
 import { portraitUrl } from "./portraits.js";
-import { iconUrl, spriteImg } from "./sprites.js";
+import { figureUrl, iconUrl, spriteImg } from "./sprites.js";
 import { CLASS_NAMES, DANGER_NAMES, MODIFIER_NAMES, SLOT_NAMES, STATUS_NAMES, contentName, describeRunEvent } from "./text.js";
 
 const content = MVP_CONTENT;
@@ -319,7 +319,7 @@ function renderBattle(): void {
     return side === "enemy" ? [rear, front] : [front, rear];
   };
   const timeline = h("div", { class: "timeline" }, ...[...(active ? [active] : []), ...snap.timeline].slice(0, 8).map((event, index) =>
-    h("span", { class: event.actorId.includes("#") ? "enemy" : "ally" }, (index === 0 && active ? "▶ " : "") + unitName(event.actorId))));
+    h("span", { class: (event.actorId.includes("#") ? "enemy" : "ally") + (index === 0 && active ? " now" : "") }, spriteImg(figureUrl(event.actorId.includes("#") ? unitName(event.actorId) : event.actorId), 16, "", "px"), unitName(event.actorId))));
   const controls: HTMLElement[] = [];
   if (activeAlly && autoMode === "manual") {
     const actor = snap.units.find((u) => u.id === active.actorId)!;

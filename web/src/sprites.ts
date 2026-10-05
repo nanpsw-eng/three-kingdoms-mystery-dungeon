@@ -1,3 +1,5 @@
+import { finish } from "./pixel.js";
+
 // Procedural 16×16 pixel-art sprites (no image assets). Each figure is composed from parts
 // (head gear, hair, beard, robe, armor, weapon) and auto-outlined, so every character reads distinctly.
 
@@ -121,7 +123,7 @@ function paintFigure(spec: FigureSpec): Px {
     case "bells": p.vline(13, 6, 12, wc); p.set(14, 8, GOLD); p.set(14, 10, GOLD); p.set(2, 9, GOLD); break;
     case "none": break;
   }
-  p.outline();
+  finish(p.g);
   return p;
 }
 

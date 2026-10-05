@@ -1,21 +1,14 @@
 // Procedural 32×32 bust portraits that share the FigureSpec parts with the 16×16 field sprites.
+import { finish, shade } from "./pixel.js";
 import { CHARACTER_FIGURES, ENEMY_FIGURES, type FigureSpec } from "./sprites.js";
 
 const N = 32;
-const OUTLINE = "#1a120c";
 const GOLD = "#e8b84a";
 const STEEL = "#c9d2db";
 const WOOD = "#8a5a2b";
 
 type Grid = (string | null)[][];
 
-/** Darkens or lightens a #rrggbb color. */
-function shade(hex: string, amount: number): string {
-  const v = parseInt(hex.slice(1), 16);
-  const f = (c: number): number => Math.max(0, Math.min(255, Math.round(amount < 0 ? c * (1 + amount) : c + (255 - c) * amount)));
-  const r = f((v >> 16) & 255), g = f((v >> 8) & 255), b = f(v & 255);
-  return "#" + ((r << 16) | (g << 8) | b).toString(16).padStart(6, "0");
-}
 
 class P {
   readonly g: Grid = Array.from({ length: N }, () => Array<string | null>(N).fill(null));
@@ -26,15 +19,6 @@ class P {
     for (let y = Math.floor(cy - ry); y <= Math.ceil(cy + ry); y++) for (let x = Math.floor(cx - rx); x <= Math.ceil(cx + rx); x++) {
       if (((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 <= 1) this.set(x, y, c);
     }
-  }
-  outline(): void {
-    const marks: [number, number][] = [];
-    const filled = (x: number, y: number): boolean => { const c = this.g[y]?.[x]; return c != null && c !== OUTLINE; };
-    for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
-      if (this.g[y]![x] != null) continue;
-      if (filled(x + 1, y) || filled(x - 1, y) || filled(x, y + 1) || filled(x, y - 1)) marks.push([x, y]);
-    }
-    for (const [x, y] of marks) this.set(x, y, OUTLINE);
   }
 }
 
@@ -68,6 +52,24 @@ function weaponFront(p: P, spec: FigureSpec): void {
   }
 }
 
+/** Brows, almond eyes with a sclera glint, nose and mouth. */
+function drawFace(p: P, spec: FigureSpec, fierce: boolean): void {
+  const skin = spec.skin;
+  const skinShadow = shade(skin, -0.18);
+  const brow = spec.hair === "#e8e8e8" ? "#bdbdbd" : shade(spec.hair, -0.2);
+  if (fierce) { p.rect(11, 11, 4, 1, brow); p.rect(17, 11, 4, 1, brow); p.set(14, 12, brow); p.set(17, 12, brow); }
+  else { p.rect(11, 11, 3, 1, brow); p.rect(18, 11, 3, 1, brow); }
+  // lash line, then pupil with a white sclera pixel on the outer side
+  p.rect(12, 13, 3, 1, "#2a1a12"); p.rect(17, 13, 3, 1, "#2a1a12");
+  p.set(13, 14, "#0b0806"); p.set(18, 14, "#0b0806");
+  p.set(12, 14, "#f4f1ea"); p.set(19, 14, "#f4f1ea");
+  p.set(14, 14, skinShadow); p.set(17, 14, skinShadow);
+  if (spec.eyepatch) { p.rect(11, 12, 4, 4, "#111111"); for (let x = 9; x <= 22; x++) p.set(x, x < 11 ? 11 : 10, "#111111"); }
+  p.set(16, 15, skinShadow); p.set(16, 16, skinShadow); p.set(15, 17, skinShadow);
+  p.set(11, 17, shade(skin, 0.12));
+  p.rect(14, 19, 4, 1, "#8a3b2a");
+}
+
 function paintPortrait(spec: FigureSpec, fierce: boolean): P {
   const p = new P();
   const skin = spec.skin;
@@ -83,6 +85,11 @@ function paintPortrait(spec: FigureSpec, fierce: boolean): P {
     p.rect(6, 25, 2, 1, shade(spec.armor, 0.3)); p.rect(23, 25, 2, 1, shade(spec.armor, 0.3));
     for (let x = 4; x <= 27; x += 3) p.set(x, 27, shade(spec.armor, -0.3));
   }
+  // robe folds and sash
+  for (const x of [7, 11, 21, 25]) p.rect(x, 28, 1, 4, shade(robe, -0.28));
+  for (const x of [8, 22]) p.rect(x, 27, 1, 3, shade(robe, 0.18));
+  p.rect(9, 30, 14, 1, spec.armor ?? shade(spec.robeTrim, -0.15));
+  p.rect(15, 30, 2, 1, GOLD);
   // collar (V neck with trim)
   for (let i = 0; i < 6; i++) { p.set(12 + i, 23 + i, spec.robeTrim); p.set(19 - i, 23 + i, spec.robeTrim); p.set(13 + i, 23 + i, spec.robeTrim); p.set(18 - i, 23 + i, spec.robeTrim); }
   p.rect(14, 23, 4, 3, skinShadow);
@@ -98,16 +105,8 @@ function paintPortrait(spec: FigureSpec, fierce: boolean): P {
   p.oval(15.5, 8, 7.5, 4, spec.hair);
   p.rect(8, 8, 2, 7, spec.hair); p.rect(22, 8, 2, 7, spec.hair);
   p.rect(10, 9, 12, 1, spec.hair);
-  // brows & eyes
-  const brow = spec.hair === "#e8e8e8" ? "#bdbdbd" : shade(spec.hair, -0.2);
-  if (fierce) { p.rect(11, 11, 4, 1, brow); p.rect(17, 11, 4, 1, brow); p.set(14, 12, brow); p.set(17, 12, brow); }
-  else { p.rect(11, 11, 3, 1, brow); p.rect(18, 11, 3, 1, brow); }
-  p.rect(12, 13, 2, 2, "#f4f1ea"); p.rect(18, 13, 2, 2, "#f4f1ea");
-  p.rect(13, 13, 1, 2, OUTLINE); p.rect(18, 13, 1, 2, OUTLINE);
-  if (spec.eyepatch) { p.rect(11, 12, 4, 4, "#111111"); for (let x = 9; x <= 22; x++) p.set(x, x < 11 ? 11 : 10, "#111111"); }
-  // nose & mouth
-  p.set(16, 15, skinShadow); p.set(16, 16, skinShadow); p.set(15, 17, skinShadow);
-  p.rect(14, 19, 4, 1, "#8a3b2a");
+  for (const [x, y] of [[11, 6], [12, 5], [14, 5], [15, 6], [17, 5]] as const) p.set(x, y, shade(spec.hair, 0.28));
+  drawFace(p, spec, fierce);
   // beard
   const bc = spec.beardColor ?? spec.hair;
   const bcHi = shade(bc, 0.25);
@@ -151,7 +150,7 @@ function paintPortrait(spec: FigureSpec, fierce: boolean): P {
     case "headband": p.rect(8, 9, 16, 2, hc); p.rect(24, 10, 2, 2, hc); p.rect(25, 12, 2, 4, hc); p.rect(24, 16, 1, 2, hc); break;
     case "scholar": p.rect(11, 0, 10, 8, hc); p.rect(9, 7, 14, 2, hc); p.rect(11, 3, 10, 1, trim); p.rect(15, 0, 2, 8, shade(hc, 0.2)); break;
     case "turban": p.oval(15.5, 7, 9, 4.5, hc); p.rect(7, 8, 18, 2, shade(hc, -0.2)); p.rect(13, 3, 6, 2, trim); p.oval(16, 6, 1.5, 1.5, trim); break;
-    case "hood": p.oval(15.5, 9, 9.5, 7, hc); p.rect(6, 12, 3, 13, hc); p.rect(23, 12, 3, 13, hc); p.oval(15.5, 15, 6.5, 6.5, skin); p.rect(9, 10, 14, 1, shade(hc, -0.25)); break;
+    case "hood": p.oval(15.5, 9, 9.5, 7, hc); p.rect(6, 12, 3, 13, hc); p.rect(23, 12, 3, 13, hc); p.oval(15.5, 15, 6.5, 6.5, skin); p.rect(9, 10, 14, 1, shade(hc, -0.25)); drawFace(p, spec, fierce); break;
     case "topknot": p.oval(15.5, 3, 3, 2.5, spec.hair); p.rect(11, 3, 10, 1, trim); break;
     case "bun": p.oval(15.5, 3, 3.5, 3, spec.hair); p.rect(12, 5, 8, 2, hc); break;
     case "fur": p.oval(15.5, 7, 10, 5, hc); p.rect(6, 9, 20, 2, trim); for (const x of [8, 12, 18, 23]) p.set(x, 5, trim); break;
@@ -159,8 +158,32 @@ function paintPortrait(spec: FigureSpec, fierce: boolean): P {
     case "bandana": p.oval(15.5, 7, 8.5, 4, hc); p.rect(7, 8, 18, 2, hc); p.rect(24, 9, 4, 2, hc); p.rect(26, 11, 2, 4, trim); break;
   }
   weaponFront(p, spec);
-  p.outline();
+  finish(p.g);
   return p;
+}
+
+/** Dithered faction backdrop painted behind the bust (after outlining, so it never gets an outline). */
+function backdrop(p: P, faction: readonly [string, string]): void {
+  const [inner, outer] = faction;
+  for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+    if (p.g[y]![x] != null) continue;
+    const d = Math.hypot(x - 15.5, y - 13);
+    const c = d < 10 ? inner : d < 14 ? ((x + y) % 2 === 0 ? inner : outer) : outer;
+    p.set(x, y, c);
+  }
+}
+
+const FACTION_BG: Record<string, readonly [string, string]> = {
+  shu: ["#244a34", "#16301f"], wei: ["#223152", "#141d33"], wu: ["#4a2020", "#2e1414"],
+  neutral: ["#21413f", "#142a28"], yellow: ["#4a3c18", "#2e2510"], dong: ["#3a1d24", "#241116"],
+};
+const FACTION: Record<string, string> = {
+  "liu-bei": "shu", "guan-yu": "shu", "zhang-fei": "shu", "zhao-yun": "shu", "huang-zhong": "shu", "zhuge-liang": "shu",
+  "cao-cao": "wei", "zhang-liao": "wei", "xiahou-dun": "wei", "jia-xu": "wei",
+  "sun-quan": "wu", "taishi-ci": "wu", "zhou-yu": "wu", "gan-ning": "wu", "hua-tuo": "neutral",
+};
+export function factionOf(key: string): string {
+  return FACTION[key] ?? (/동탁|서량|관문|화웅/.test(key) ? "dong" : "yellow");
 }
 
 const cache = new Map<string, string>();
@@ -175,6 +198,7 @@ export function portraitUrl(key: string): string {
   canvas.width = N; canvas.height = N;
   if (spec !== undefined) {
     const p = paintPortrait(spec, FIERCE.has(key) || BOSSES.has(key) || key in ENEMY_FIGURES);
+    backdrop(p, FACTION_BG[factionOf(key)]!);
     const ctx = canvas.getContext("2d")!;
     for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) { const c = p.g[y]![x]; if (c) { ctx.fillStyle = c; ctx.fillRect(x, y, 1, 1); } }
   }

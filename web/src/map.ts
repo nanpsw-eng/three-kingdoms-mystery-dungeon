@@ -160,6 +160,17 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   // fog over remembered-but-not-visible ground
   ctx.fillStyle = "rgba(8, 6, 4, 0.55)";
   for (const p of fog) { const [x, y] = at(p); ctx.fillRect(x, y, cell, cell); }
+  // torchlight: warm glow around the ruler, falling off into darkness at the view edge
+  const [lx, ly] = at(dungeon.position);
+  const cx = lx + cell / 2, cy = ly + cell / 2;
+  const dark = ctx.createRadialGradient(cx, cy, cell * 4, cx, cy, cell * (VIEW_RADIUS + 2));
+  dark.addColorStop(0, "rgba(6, 4, 3, 0)");
+  dark.addColorStop(1, "rgba(6, 4, 3, 0.5)");
+  ctx.fillStyle = dark; ctx.fillRect(0, 0, size, size);
+  const warm = ctx.createRadialGradient(cx, cy, 0, cx, cy, cell * 3.5);
+  warm.addColorStop(0, "rgba(255, 176, 92, 0.14)");
+  warm.addColorStop(1, "rgba(255, 176, 92, 0)");
+  ctx.fillStyle = warm; ctx.fillRect(0, 0, size, size);
   for (const enemy of dungeon.visibleEnemies()) {
     const [x, y] = at(enemy.pos);
     ctx.fillStyle = "rgba(0,0,0,0.35)"; ctx.fillRect(x + cell * 0.2, y + cell * 0.82, cell * 0.6, cell * 0.12);
