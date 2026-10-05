@@ -1,46 +1,71 @@
-# SESSION HANDOFF — Art Direction v1
+# SESSION HANDOFF — Project Control Tower / Art Direction v1
 
 ## Current State
 - Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon`
-- Branch: `art/ink-graphic-novel-v1`
-- Base Implementation Commit: `017e0c4130f914dd33d2ab74f2093d4170b0e438`
-- Current Gate: `INK_GRAPHIC_NOVEL_V1_APPROVED / VERTICAL_SLICE_NEXT`
-- Merge: `NOT_RUN / HUMAN_GATE`
-- Deploy: `NOT_RUN / HUMAN_GATE`
+- Implementation branch: `feature/headless-battle-engine`
+- Implementation HEAD: `017e0c4130f914dd33d2ab74f2093d4170b0e438`
+- Art branch: `art/ink-graphic-novel-v1`
+- Art HEAD before this handoff commit: `8cbca559acf7ea1c706bd9cfb53de5f9e77050c0`
+- Current Gate: `PHASE_A_VISUAL_SPEC_READY / CODEX_IMPLEMENTATION_NEXT`
+- Latest CI: no status checks returned for either baseline commit; `NOT_RUN / UNKNOWN`
+- Open PR: none found
+- Merge to main: `NOT_RUN / HUMAN_GATE`
+- Production deploy: `NOT_RUN / HUMAN_GATE`
 
-## Approved Visual Baseline
-- 현대 수묵 그래픽 노블 × 삼국지 연환화
-- 한지 / 먹 / 주홍 중심의 제한 팔레트
-- 최종 Portrait는 pixelization 금지
-- Dungeon topology와 game logic은 유지하고 visual skin만 교체
-- Visual Source of Truth:
-  - `docs/decisions/DEC-025-ART_DIRECTION.md`
-  - `docs/art/VISUAL_BIBLE_V1.md`
-  - `docs/art/reference/*.jpg`
-  - `docs/ai-dev/CODEX_ART_HANDOFF.md`
+## Approved Baseline
+- Product baseline remains unchanged: Three Kingdoms × Mystery Dungeon × Party Roguelite.
+- Art direction remains `APPROVED`: modern ink graphic novel × Three Kingdoms lienhuanhua.
+- Sources: `docs/decisions/DEC-025-ART_DIRECTION.md`, `docs/art/VISUAL_BIBLE_V1.md`, and `docs/art/reference/*.jpg`.
+- Phase A implementation spec: `docs/art/PHASE_A_VISUAL_SPEC_V1.md`.
+- Asset state registry: `docs/art/ASSET_REGISTRY.md`.
+
+## Completed
+- Confirmed implementation branch HEAD remains `017e0c4130f914dd33d2ab74f2093d4170b0e438`.
+- Confirmed art branch was `bfb023ab8e7e3d55c624c3cc7992ce2876bcf652` at recovery start.
+- Re-read project rules, exact AI-OS binding, decision index, DEC-025, Visual Bible, Codex handoff, and session handoff from the remote branch.
+- Inventoried current web surfaces: legacy dark/gold CSS, procedural pixel portraits/sprites/map, existing Title/Dungeon/Battle DOM/Canvas interaction classes.
+- Added approved Phase A visual specification and initial asset registry.
+- Updated Codex handoff with concrete Phase A scope and verification requirements.
+
+## Current Art Phase
+- Phase A — Visual Token + Title / Yellow Turban Dungeon / Standard Battle vertical slice.
+- Design specification: `APPROVED_FOR_IMPLEMENTATION`.
+- Code implementation: `NOT_STARTED`.
+- Visual QA: `NOT_RUN`.
 
 ## DO_NOT_REPEAT
-- Battle/Dungeon/Run/Content engine 구현
-- 기존 MVP content 재설계
-- 아트 방향 A/B/C 비교
-- 수묵 그래픽 노블 방향 재선정
-- 기존 pixel/lacquer theme polish
+- Do not reopen art direction selection or repeat A/B/C.
+- Do not recreate the Visual Bible or ruler character direction.
+- Do not redo current visual inventory unless code changes materially.
+- Do not rewrite `src/battle/`, `src/dungeon/`, `src/run/`, or `src/content/`.
+- Do not polish the legacy pixel/lacquer theme as the final direction.
+- Keep legacy assets as fallback until replacement coverage is verified.
+
+## Files Changed
+- `docs/art/PHASE_A_VISUAL_SPEC_V1.md` — implementation-ready design and acceptance spec.
+- `docs/art/ASSET_REGISTRY.md` — initial status of surfaces and asset families.
+- `docs/ai-dev/CODEX_ART_HANDOFF.md` — Phase A implementation brief.
+
+## Test / Build / Visual Evidence
+- `npm ci`: `NOT_RUN` — repository checkout is not mounted in this Work runtime.
+- `npm test`: `NOT_RUN` — repository checkout is not mounted in this Work runtime.
+- `npm run build:web`: `NOT_RUN` — repository checkout is not mounted in this Work runtime.
+- UI smoke / screenshots / console errors: `NOT_RUN`.
+- GitHub status checks: empty for the two baseline commits; no CI pass inferred.
+- Reference JPEGs are present in the repository; visual inspection of binary images was unavailable in this Work runtime.
+
+## Known Blocker
+- Work runtime has GitHub API access but no local target repository checkout; direct Git transport was unavailable. Work completed and committed design-source updates through the GitHub connector. Code implementation, tests, browser smoke, and screenshots require the repository checkout in the Codex runtime.
 
 ## NEXT_SAFE_ACTION
-1. Read `docs/ai-dev/CODEX_ART_HANDOFF.md`.
-2. Inventory current visual code only.
-3. Create ink-paper CSS token layer.
-4. Re-skin one vertical slice: Title + Dungeon + one Battle screen.
-5. Apply 3 ruler masters before expanding full roster.
-6. Run existing test/build/UI smoke after each meaningful phase.
+1. Codex checks out the latest `art/ink-graphic-novel-v1` branch tip and reads the updated `CODEX_ART_HANDOFF.md`, `PHASE_A_VISUAL_SPEC_V1.md`, and `ASSET_REGISTRY.md`.
+2. Implement Phase A visual changes only; preserve the product/domain boundaries.
+3. Run `npm ci`, `npm test`, `npm run build:web`, and available UI smoke; capture 390×844 Title, Dungeon, and Battle screens.
+4. Return the commit SHA, test evidence, and screenshots to Work for visual QA.
+5. Mark Phase A accepted only after screenshot review; then proceed to Phase B ruler master set.
 
-## Verification
-- Art reference persistence: repository commit required in this session.
-- New visual implementation: `NOT_STARTED`
-- Existing game engine tests/build: inherit base implementation evidence; rerun before/after code changes.
-
-## Human Gate
-- Merge to `main`: REQUIRED
-- Production deploy/release: REQUIRED
-- Product Baseline material change: REQUIRED
-- Different art direction: REQUIRED
+## HUMAN GATE
+- Main merge: REQUIRED.
+- Production deploy/release: REQUIRED.
+- Material product baseline or art-direction change: REQUIRED.
+- Phase A implementation on art branch: no additional human gate.
