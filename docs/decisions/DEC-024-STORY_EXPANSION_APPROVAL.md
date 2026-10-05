@@ -30,3 +30,8 @@
 | B-08 | Recruited enemy generals and `clearedCampaigns` persist in meta (optional field, old saves compatible) | X6/X2 |
 | B-09 | Autopilot heads for the stairs when any floor mechanic is urgent | sim policy for time-limit floors |
 | B-10 | New characters reuse existing art via `ART_ALIASES` until Codex supplies art | no blank portraits |
+| B-11 | Every campaign tuned to a smart-autopilot clear rate of 20–35% (200 runs) via tier multipliers and boss stats only | plan gate; reports S1–S5 |
+| B-12 | X8 명성: +4% enemy stats (SPD ⅓) and +15% rewards per level, max 3; clearing at r unlocks r+1 | +10% made renown 1 nearly unwinnable (E1 3%) |
+| B-13 | 사마의 is the 4th ruler, unlocked by clearing E9; the E9 outro is the game ending with a variant per ruler | plan §3 |
+| B-14 | 칠종칠금 = three multi-phase boss chains (2+3+2 battles); the 7th capture recruits 맹획 with certainty | plan E8 |
+| B-15 | Title shows only unlocked generals plus a locked count (44 generals made the list unusable on mobile) | UX |

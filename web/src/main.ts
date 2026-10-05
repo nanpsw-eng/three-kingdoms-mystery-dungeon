@@ -6,7 +6,7 @@ import { drawMap, tileAt } from "./map.js";
 import { loadAssets } from "./assets.js";
 import { portraitUrl } from "./portraits.js";
 import { figureUrl, iconUrl, spriteImg } from "./sprites.js";
-import { artKey, isStoryPhase, storySheet, timelinePanel } from "./story.js";
+import { artKey, isStoryPhase, renownPanel, storySheet, timelinePanel } from "./story.js";
 import { CLASS_NAMES, DANGER_NAMES, MODIFIER_NAMES, SLOT_NAMES, STATUS_NAMES, contentName, describeRunEvent } from "./text.js";
 
 const content = MVP_CONTENT;
@@ -34,7 +34,7 @@ let repeat = new RepeatAutoController();
 let selection: null | { kind: "attack" } | { kind: "skill"; skillId: string; targeting: AbilityTargeting; targets: string[] } | { kind: "item"; itemId: string; targeting: AbilityTargeting; targets: string[] } | { kind: "formation" } = null;
 let pickTarget: null | { label: string; options: { id: string; label: string }[]; onPick: (id: string) => void } = null;
 let unlockedBefore: string[] = [];
-const title = { campaignId: "yellow-turban", rulerId: "liu-bei", generals: [] as string[] };
+const title = { campaignId: "yellow-turban", rulerId: "liu-bei", generals: [] as string[], renown: 0 };
 
 // ---------- tiny DOM helper ----------
 type Child = Node | string | null | undefined | false;
@@ -169,9 +169,11 @@ function renderTitle(): void {
   const generals = content.characters.filter((c) => c.kind === "general");
   const saved = load<SaveData>(SAVE_KEY);
   title.generals = title.generals.filter((id) => unlockedChars.has(id));
+  if (!unlockedChars.has(title.rulerId)) title.rulerId = "liu-bei";
+  title.renown = Math.min(title.renown, meta.renown?.[title.campaignId] ?? 0);
   put(
     h("header", { class: "title-banner" },
-      h("div", { class: "title-row" }, ...rulers.map((c) => pic(c.id, 56, c.name))),
+      h("div", { class: "title-row" }, ...rulers.filter((c) => unlockedChars.has(c.id)).map((c) => pic(c.id, 56, c.name))),
       h("h1", {}, "삼국지 미스터리 던전"),
       h("p", { class: "subtitle" }, "군주와 장수를 골라 원정을 떠나라. 원정이 끝나면 레벨·장비는 사라지고, 새 장수와 전역만 남는다.")),
     saved ? h("div", { class: "panel row" }, h("span", { class: "grow" }, "진행 중인 원정이 있다."), button("이어하기", () => startRun(saved.options, saved.log), { class: "primary" }), button("포기", () => { remove(SAVE_KEY); render(); })) : null,
@@ -180,19 +182,23 @@ function renderTitle(): void {
       locked: !meta.unlockedCampaigns.includes(c.id), selected: title.campaignId === c.id,
       best: meta.bestDepth[c.id] ?? 0, cleared: (meta.clearedCampaigns ?? []).includes(c.id),
     })), (id) => { title.campaignId = id; render(); }),
-    h("div", { class: "panel" }, h("h2", {}, "군주"), h("div", { class: "grid3" }, ...rulers.map((c) =>
-      h("button", { class: "pick " + (title.rulerId === c.id ? "selected" : ""), onclick: () => { title.rulerId = c.id; render(); } }, pic(c.id, 64, c.name), h("span", {}, c.name))))),
-    h("div", { class: "panel" }, h("h2", {}, "자유 장수 (2명)"), h("div", { class: "grid3" }, ...generals.map((c) => {
+    renownPanel(meta.renown?.[title.campaignId] ?? 0, title.renown, (level) => { title.renown = level; render(); }),
+    h("div", { class: "panel" }, h("h2", {}, "군주"), h("div", { class: "grid3" }, ...rulers.map((c) => {
       const locked = !unlockedChars.has(c.id);
+      return h("button", { class: "pick " + (title.rulerId === c.id ? "selected" : "") + (locked ? " locked" : ""), disabled: locked, onclick: () => { title.rulerId = c.id; render(); } },
+        pic(c.id, 64, c.name), h("span", {}, locked ? "🔒" : c.name), locked ? h("small", {}, "북벌 평정 시 해금") : null);
+    }))),
+    h("div", { class: "panel" }, h("h2", {}, "자유 장수 (2명)"), h("div", { class: "grid3" }, ...generals.filter((c) => unlockedChars.has(c.id)).map((c) => {
+      const locked = false;
       const chosen = title.generals.includes(c.id);
       return h("button", {
         class: "pick " + (chosen ? "selected" : "") + (locked ? " locked" : ""), disabled: locked, title: CLASS_NAMES[c.characterClass] + " · " + c.roleTags.join("/"),
         onclick: () => { title.generals = chosen ? title.generals.filter((id) => id !== c.id) : [...title.generals, c.id].slice(-2); render(); },
       }, pic(c.id, 48, c.name), h("span", {}, locked ? "🔒" : c.name), h("small", {}, locked ? "미해금" : CLASS_NAMES[c.characterClass] ?? ""));
-    }))),
+    })), h("p", { class: "muted" }, `🔒 미해금 장수 ${generals.filter((c) => !unlockedChars.has(c.id)).length}명 — 전역을 진행하거나 적장을 등용하면 합류한다.`)),
     button("원정 시작", () => {
       if (title.generals.length !== 2) { say("장수를 2명 선택하라."); return; }
-      startRun({ seed: Date.now().toString(36), campaignId: title.campaignId, rulerId: title.rulerId, generalIds: title.generals });
+      startRun({ seed: Date.now().toString(36), campaignId: title.campaignId, rulerId: title.rulerId, generalIds: title.generals, ...(title.renown > 0 ? { renown: title.renown } : {}) });
     }, { class: "primary", disabled: title.generals.length !== 2 }),
     h("div", { class: "panel" }, h("h2", {}, "기록"),
       h("p", {}, `원정 ${meta.runs}회 · 평정 ${meta.clears}회 · 해금 장수 ${meta.unlockedCharacters.length}/${content.characters.length}`),

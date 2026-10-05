@@ -21,6 +21,9 @@ import {
   MAX_RECRUITS_PER_RUN,
   PARTY_LEVEL_CAP,
   REINFORCEMENT_REWARD_RATIO,
+  RENOWN_ENEMY_STEP,
+  RENOWN_MAX,
+  RENOWN_REWARD_STEP,
   SAFE_ZONE_HEAL_RATIO,
   SHOP_EQUIPMENT_OFFERS,
   SHOP_ITEM_OFFERS,
@@ -143,6 +146,8 @@ export interface RunOptions {
   readonly generalIds: readonly string[];
   readonly meta?: MetaState;
   readonly battleMode?: BattleAutoMode;
+  /** X8 명성 level (0 = normal). Must not exceed the level unlocked in meta. */
+  readonly renown?: number;
 }
 
 export interface RunSummary {
@@ -155,6 +160,7 @@ export interface RunSummary {
   readonly level: number;
   readonly turns: number;
   readonly battles: number;
+  readonly renown: number;
 }
 
 interface QueuedBattle {
@@ -193,6 +199,7 @@ export class RunEngine {
   readonly #events: Map<string, EventDefinition>;
   readonly #scenes: Map<string, StorySceneDefinition>;
   readonly #rulerId: string;
+  readonly #renown: number;
   readonly #seed: Seed;
   readonly #rng: { traits: SeededRng; loot: SeededRng; shop: SeededRng; recruit: SeededRng; floors: SeededRng };
   readonly #unlockedCharacters: ReadonlySet<string>;
@@ -234,6 +241,10 @@ export class RunEngine {
     this.#events = byId(content.events);
     this.#scenes = byId(content.scenes ?? []);
     this.#rulerId = options.rulerId;
+    const renown = options.renown ?? 0;
+    const allowed = options.meta === undefined ? RENOWN_MAX : Math.min(RENOWN_MAX, options.meta.renown?.[options.campaignId] ?? 0);
+    if (!Number.isInteger(renown) || renown < 0 || renown > allowed) throw new RangeError("Renown level not unlocked: " + renown);
+    this.#renown = renown;
     const campaign = content.campaigns.find((candidate) => candidate.id === options.campaignId);
     if (campaign === undefined) throw new Error("Unknown campaign: " + options.campaignId);
     this.campaign = campaign;
@@ -286,6 +297,7 @@ export class RunEngine {
   get depth(): number { return this.campaign.floors[this.#floorIndex]!.depth; }
   get floorIndex(): number { return this.#floorIndex; }
   get battleMode(): BattleAutoMode { return this.#battleMode; }
+  get renown(): number { return this.#renown; }
   get dungeon(): DungeonEngine { if (this.#dungeon === null) throw new Error("No active floor."); return this.#dungeon; }
   get battle(): BattleEngine | null { return this.#battle; }
   get encounter(): Encounter | null { return this.#encounter; }
@@ -323,7 +335,7 @@ export class RunEngine {
     return {
       campaignId: this.campaign.id, cleared: this.#ended === "cleared", depthReached: this.depth,
       defeatedGroups: [...this.#defeatedGroups].sort(), recruited: [...this.#recruited], itemsSeen: [...this.#itemsSeen].sort(),
-      level: this.#level, turns: this.#turnsBeforeFloor + (this.#dungeon?.turn ?? 0), battles: this.#battles,
+      level: this.#level, turns: this.#turnsBeforeFloor + (this.#dungeon?.turn ?? 0), battles: this.#battles, renown: this.#renown,
     };
   }
 
@@ -331,7 +343,7 @@ export class RunEngine {
     const json = JSON.stringify({
       floor: this.#floorIndex, level: this.#level, exp: this.#exp, gold: this.#gold, food: this.#food, rerolls: this.#rerolls,
       party: this.#party, bag: this.#bag, pending: this.#pending, safe: this.#safeZone, shop: this.#shop, ended: this.#ended,
-      queued: this.#queued, clearing: this.#clearAfterScenes,
+      queued: this.#queued, clearing: this.#clearAfterScenes, renown: this.#renown,
       dungeon: this.#dungeon?.stateHash() ?? null, battle: this.#battle?.stateHash() ?? null,
       rng: Object.values(this.#rng).map((rng) => rng.snapshot()),
     });
@@ -917,10 +929,10 @@ export class RunEngine {
       });
     }
     group.units.forEach((unit, index) => {
-      const maxHp = unit.stats.maxHp;
+      const maxHp = this.#enemyStats(unit.stats).maxHp;
       const energy = Math.min(MAX_ENERGY, (encounter.empowered ? SORCERY_ENEMY_ENERGY : 0) + queued.enemyEnergy);
       participants.push({
-        unit: { id: encounter.enemyId + "#" + index, side: "enemy", stats: unit.stats }, slot: unit.slot, basicAttackReach: unit.reach,
+        unit: { id: encounter.enemyId + "#" + index, side: "enemy", stats: this.#enemyStats(unit.stats) }, slot: unit.slot, basicAttackReach: unit.reach,
         skillIds: unit.skillIds ?? [],
         entry: { hp: Math.max(1, Math.round(maxHp * encounter.enemyHpRatio * (queued.enemyHp[index] ?? 1))), energy },
       });
@@ -946,6 +958,16 @@ export class RunEngine {
     this.#advanceBattle(events);
   }
 
+  /** X8 명성: enemies grow stronger per renown level (SPD grows at a third of the rate to keep turn order readable). */
+  #enemyStats(stats: CoreStats): CoreStats {
+    if (this.#renown === 0) return stats;
+    const k = 1 + RENOWN_ENEMY_STEP * this.#renown;
+    return {
+      maxHp: Math.round(stats.maxHp * k), atk: Math.round(stats.atk * k), def: Math.round(stats.def * k),
+      spd: Math.round(stats.spd * (1 + (k - 1) / 3)), int: Math.round(stats.int * k),
+    };
+  }
+
   /** X5 일기토: 1v1, both sides on Smart Auto (the player's decision is who answers the challenge). */
   #fightDuel(characterId: string, pending: PendingDuel, events: RunEvent[]): void {
     const queued = this.#queued!;
@@ -959,7 +981,7 @@ export class RunEngine {
       seed: String(this.#seed) + "::duel::" + this.#floorIndex + "::" + group.id + "::" + this.#battles,
       participants: [
         { unit: { id: characterId, side: "ally", stats: this.#stats(member) }, slot: "front-center", basicAttackReach: character.reach, skillIds: this.#skillIds(member), entry: { hp: member.hp, energy: 0 } },
-        { unit: { id: enemyId, side: "enemy", stats: unit.stats }, slot: "front-center", basicAttackReach: unit.reach, skillIds: unit.skillIds ?? [], entry: { hp: Math.max(1, Math.round(unit.stats.maxHp * queued.encounter.enemyHpRatio * DUEL_CHAMPION_HP_RATIO)), energy: 0 } },
+        { unit: { id: enemyId, side: "enemy", stats: this.#enemyStats(unit.stats) }, slot: "front-center", basicAttackReach: unit.reach, skillIds: unit.skillIds ?? [], entry: { hp: Math.max(1, Math.round(this.#enemyStats(unit.stats).maxHp * queued.encounter.enemyHpRatio * DUEL_CHAMPION_HP_RATIO)), energy: 0 } },
       ],
       skills: this.content.skills,
       retreatAllowed: false,
@@ -1025,8 +1047,9 @@ export class RunEngine {
     if (outcome === "victory") {
       const group = this.#groups.get(groupId)!;
       const ratio = encounter.reinforcement ? REINFORCEMENT_REWARD_RATIO : 1;
-      exp = Math.round(group.exp * ratio);
-      gold = Math.round(group.gold * ratio);
+      const renownBonus = 1 + RENOWN_REWARD_STEP * this.#renown;
+      exp = Math.round(group.exp * ratio * renownBonus);
+      gold = Math.round(group.gold * ratio * renownBonus);
       this.#gold += gold;
       this.#defeatedGroups.add(group.id);
       if (group.loot !== undefined && group.loot.length > 0 && this.#rng.loot.chance((group.lootChance ?? 0.3) * ratio)) {

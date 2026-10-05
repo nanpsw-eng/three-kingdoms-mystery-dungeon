@@ -1,12 +1,13 @@
 #!/usr/bin/env node
-// Headless Run simulation (P13). Usage: node scripts/simulate.mjs [runs=100] [campaign=yellow-turban] [mode=smart]
+// Headless Run simulation (P13). Usage: node scripts/simulate.mjs [runs=100] [campaign=yellow-turban] [mode=smart] [renown=0]
 // Output: JSON metrics on stdout. Autopilot results are OBSERVATIONAL — not human balance validation.
 import { MVP_CONTENT, initialMeta, runAutopilot } from "../dist/index.js";
 
 const runs = Number(process.argv[2] ?? 100);
 const campaignId = process.argv[3] ?? "yellow-turban";
 const battleMode = process.argv[4] ?? "smart";
-const meta = { ...initialMeta(MVP_CONTENT), unlockedCampaigns: MVP_CONTENT.campaigns.map((c) => c.id) };
+const renown = Number(process.argv[5] ?? 0);
+const meta = { ...initialMeta(MVP_CONTENT), unlockedCampaigns: MVP_CONTENT.campaigns.map((c) => c.id), renown: Object.fromEntries(MVP_CONTENT.campaigns.map((c) => [c.id, 3])) };
 const rulers = ["liu-bei", "cao-cao", "sun-quan"];
 const generals = MVP_CONTENT.startingUnlocks.characters.filter((id) => !rulers.includes(id));
 const PAIRS = generals.flatMap((a, i) => generals.slice(i + 1).map((b) => [a, b]));
@@ -20,7 +21,7 @@ for (let index = 0; index < runs; index += 1) {
   const pair = PAIRS[Math.floor(index / rulers.length) % PAIRS.length];
   const generalIds = [pair[0], pair[1]];
   const result = runAutopilot(MVP_CONTENT, {
-    seed: "sim-" + index, campaignId, rulerId, generalIds, meta, battleMode,
+    seed: "sim-" + index, campaignId, rulerId, generalIds, meta, battleMode, renown,
     onEvent: (event) => {
       if (event.type === "battle-started") { if (event.encounter.surprise === "ally") sums.surprisesAlly++; if (event.encounter.surprise === "enemy") sums.surprisesEnemy++; }
       if (event.type === "battle-ended" && event.outcome === "retreat") sums.retreats++;
@@ -45,4 +46,4 @@ for (let index = 0; index < runs; index += 1) {
   sums.level += s.level; sums.turns += s.turns; sums.battles += s.battles;
 }
 const avg = Object.fromEntries(Object.entries(sums).map(([key, value]) => [key, Number((value / runs).toFixed(2))]));
-console.log(JSON.stringify({ campaignId, runs, battleMode, clearRate: (totals.outcomes.cleared ?? 0) / runs, ...totals, perRunAverage: avg, ms: Date.now() - started }, null, 2));
+console.log(JSON.stringify({ campaignId, runs, battleMode, renown, clearRate: (totals.outcomes.cleared ?? 0) / runs, ...totals, perRunAverage: avg, ms: Date.now() - started }, null, 2));

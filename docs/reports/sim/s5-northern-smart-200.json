@@ -1,0 +1,95 @@
+{
+  "campaignId": "northern",
+  "runs": 200,
+  "battleMode": "smart",
+  "renown": 0,
+  "clearRate": 0.27,
+  "outcomes": {
+    "failed": 146,
+    "cleared": 54
+  },
+  "failDepth": {
+    "5": 5,
+    "6": 11,
+    "7": 18,
+    "8": 2,
+    "9": 6,
+    "10": 1,
+    "11": 8,
+    "12": 37,
+    "13": 29,
+    "14": 15,
+    "15": 14
+  },
+  "failCause": {
+    "battle": 146
+  },
+  "depthReached": {
+    "5": 5,
+    "6": 11,
+    "7": 18,
+    "8": 2,
+    "9": 6,
+    "10": 1,
+    "11": 8,
+    "12": 37,
+    "13": 29,
+    "14": 15,
+    "15": 68
+  },
+  "byRuler": {
+    "liu-bei": {
+      "runs": 67,
+      "cleared": 13
+    },
+    "cao-cao": {
+      "runs": 67,
+      "cleared": 28
+    },
+    "sun-quan": {
+      "runs": 66,
+      "cleared": 13
+    }
+  },
+  "byGeneral": {
+    "guan-yu": {
+      "runs": 75,
+      "cleared": 17
+    },
+    "zhang-fei": {
+      "runs": 68,
+      "cleared": 13
+    },
+    "zhang-liao": {
+      "runs": 66,
+      "cleared": 15
+    },
+    "xiahou-dun": {
+      "runs": 65,
+      "cleared": 20
+    },
+    "taishi-ci": {
+      "runs": 63,
+      "cleared": 24
+    },
+    "gan-ning": {
+      "runs": 63,
+      "cleared": 19
+    }
+  },
+  "perRunAverage": {
+    "level": 9.32,
+    "turns": 1873.09,
+    "battles": 48.48,
+    "recruits": 1.58,
+    "surprisesAlly": 0.4,
+    "surprisesEnemy": 0.01,
+    "gatesOpened": 0,
+    "retreats": 0,
+    "traitPicks": 21.63,
+    "itemsUsed": 12.02,
+    "secretsFound": 0,
+    "reinforcements": 24.29
+  },
+  "ms": 121164
+}

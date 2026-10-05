@@ -100,6 +100,14 @@ const ART_ALIASES: Readonly<Record<string, string>> = {
   "lu-xun": "zhou-yu", "lu-meng": "zhang-liao", "zhou-tai": "zhang-fei",
   "오군 보병": "황건 창병", "오군 궁병": "동탁군 궁병", "오군 복병": "황건 기병", "강동 수군": "황건 술사", "해번군": "관문 수비대",
   "감녕": "gan-ning", "주연": "taishi-ci", "주태": "zhang-fei", "육손": "zhou-yu",
+  // E8 남만
+  "meng-huo": "zhang-fei", "zhu-rong": "gan-ning", "ma-su": "jia-xu",
+  "남만병": "황건 기병", "독침병": "황건 궁병", "코끼리 부대": "관문 수비대", "등갑병": "관문 수비대", "남만 무녀": "태평도 신도",
+  "맹획": "zhang-fei", "맹우": "화웅", "축융": "gan-ning", "올돌골": "화웅",
+  // E9 북벌
+  "sima-yi": "cao-cao", "jiang-wei": "zhao-yun", "zhang-he": "zhang-liao", "deng-ai": "xiahou-dun",
+  "위군 보병": "동탁군 극병", "위군 노병": "동탁군 궁병", "위군 기병": "서량 기병", "중장 보병": "관문 수비대", "보급로 습격대": "황건 기병",
+  "강유": "zhao-yun", "장합": "zhang-liao", "사마의": "cao-cao",
 };
 export function artKey(key: string): string {
   return ART_ALIASES[key] ?? key;
@@ -132,4 +140,15 @@ export function timelinePanel(entries: readonly TimelineEntry[], onPick: (id: st
     list.append(item);
   }
   return el("div", "panel", el("h2", "", "전역 연표"), list);
+}
+
+/** X8 명성: choose the renown level for the selected campaign (shown once level 1 is unlocked). */
+export function renownPanel(unlocked: number, selected: number, onPick: (level: number) => void): HTMLElement | null {
+  if (unlocked <= 0) return null;
+  const row = el("div", "row");
+  row.style.cssText = "display:flex;gap:6px;flex-wrap:wrap";
+  for (let level = 0; level <= unlocked; level += 1) {
+    row.append(btn(level === 0 ? "일반" : "명성 " + level, () => onPick(level), level === selected ? "selected" : ""));
+  }
+  return el("div", "panel", el("h2", "", "명성"), el("p", "muted", "평정한 전역을 더 높은 명성으로 재도전한다. 명성 1단계마다 적 능력치 +4%, 전투 보상 +15%."), row);
 }

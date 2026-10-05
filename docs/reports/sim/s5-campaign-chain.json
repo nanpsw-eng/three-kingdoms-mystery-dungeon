@@ -1,0 +1,93 @@
+{
+  "campaigns": [
+    {
+      "id": "yellow-turban",
+      "unlocked": true,
+      "attempts": 1,
+      "cleared": true,
+      "unlockedCharactersAfter": 14
+    },
+    {
+      "id": "anti-dong",
+      "unlocked": true,
+      "attempts": 1,
+      "cleared": true,
+      "unlockedCharactersAfter": 17
+    },
+    {
+      "id": "xuzhou",
+      "unlocked": true,
+      "attempts": 3,
+      "cleared": true,
+      "unlockedCharactersAfter": 19
+    },
+    {
+      "id": "guandu",
+      "unlocked": true,
+      "attempts": 2,
+      "cleared": true,
+      "unlockedCharactersAfter": 22
+    },
+    {
+      "id": "red-cliffs",
+      "unlocked": true,
+      "attempts": 4,
+      "cleared": true,
+      "unlockedCharactersAfter": 26
+    },
+    {
+      "id": "jing-yi",
+      "unlocked": true,
+      "attempts": 4,
+      "cleared": true,
+      "unlockedCharactersAfter": 30
+    },
+    {
+      "id": "yiling",
+      "unlocked": true,
+      "attempts": 2,
+      "cleared": true,
+      "unlockedCharactersAfter": 31
+    },
+    {
+      "id": "nanman",
+      "unlocked": true,
+      "attempts": 1,
+      "cleared": true,
+      "unlockedCharactersAfter": 32
+    },
+    {
+      "id": "northern",
+      "unlocked": true,
+      "attempts": 4,
+      "cleared": true,
+      "unlockedCharactersAfter": 35
+    }
+  ],
+  "totalRuns": 22,
+  "endingReached": true,
+  "finalMeta": {
+    "unlockedCharacters": 35,
+    "totalCharacters": 48,
+    "achievements": [
+      "관도대전 승리",
+      "반간계",
+      "반동탁연합 승리",
+      "백문루",
+      "사수관 돌파",
+      "수엄칠군",
+      "오장원 — 삼국지 완주",
+      "이릉대전 생환",
+      "장량 격파",
+      "장보 격파",
+      "적벽대전 승리",
+      "정군산",
+      "천리행",
+      "칠종칠금",
+      "호로관 삼영전",
+      "황건적의 난 평정"
+    ],
+    "siMaYiUnlocked": true
+  },
+  "ms": 9636
+}
