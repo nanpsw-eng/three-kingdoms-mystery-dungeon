@@ -1,3 +1,4 @@
+import { RENOWN_MAX } from "./balance.js";
 import type { RunSummary } from "./engine.js";
 import type { ContentPack, MetaState } from "./types.js";
 
@@ -13,6 +14,7 @@ export function initialMeta(content: ContentPack): MetaState {
     clears: 0,
     bestDepth: {},
     clearedCampaigns: [],
+    renown: {},
   };
 }
 
@@ -55,5 +57,8 @@ export function applyRunToMeta(meta: MetaState, summary: RunSummary, content: Co
     clears: meta.clears + (summary.cleared ? 1 : 0),
     bestDepth,
     clearedCampaigns: union(meta.clearedCampaigns ?? [], [...cleared]),
+    renown: summary.cleared
+      ? { ...(meta.renown ?? {}), [summary.campaignId]: Math.max(meta.renown?.[summary.campaignId] ?? 0, Math.min(RENOWN_MAX, (summary.renown ?? 0) + 1)) }
+      : { ...(meta.renown ?? {}) },
   };
 }

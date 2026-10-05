@@ -211,4 +211,6 @@ export interface MetaState {
   readonly bestDepth: Readonly<Record<string, number>>;
   /** Campaign ids cleared at least once (optional for saves made before the story expansion). */
   readonly clearedCampaigns?: readonly string[];
+  /** X8 명성: highest renown level unlocked per campaign (absent = 0). */
+  readonly renown?: Readonly<Record<string, number>>;
 }

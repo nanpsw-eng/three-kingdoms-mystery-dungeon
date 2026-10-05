@@ -41,3 +41,9 @@ export const DUEL_DEFAULT_PENALTY = 0.5 as const;
 export const DUEL_LOSS_ENEMY_ENERGY = 30 as const;
 /** X5 일기토: the champion's duel HP as a share of its max HP (a boss has ~3× a general's HP). */
 export const DUEL_CHAMPION_HP_RATIO = 0.6 as const;
+/** X8 명성: clearing a campaign at renown r unlocks r+1, up to this level. */
+export const RENOWN_MAX = 3 as const;
+/** X8 명성: enemy core stats +4% per renown level (sim: +10% dropped E1 from 35% to 3%). */
+export const RENOWN_ENEMY_STEP = 0.04 as const;
+/** X8 명성: battle EXP/gold +15% per renown level. */
+export const RENOWN_REWARD_STEP = 0.15 as const;

@@ -1,0 +1,90 @@
+{
+  "campaignId": "nanman",
+  "runs": 200,
+  "battleMode": "smart",
+  "renown": 0,
+  "clearRate": 0.27,
+  "outcomes": {
+    "failed": 146,
+    "cleared": 54
+  },
+  "failDepth": {
+    "4": 5,
+    "5": 44,
+    "6": 27,
+    "7": 15,
+    "8": 10,
+    "9": 14,
+    "10": 16,
+    "11": 15
+  },
+  "failCause": {
+    "battle": 146
+  },
+  "depthReached": {
+    "4": 5,
+    "5": 44,
+    "6": 27,
+    "7": 15,
+    "8": 10,
+    "9": 14,
+    "10": 16,
+    "11": 15,
+    "12": 54
+  },
+  "byRuler": {
+    "liu-bei": {
+      "runs": 67,
+      "cleared": 13
+    },
+    "cao-cao": {
+      "runs": 67,
+      "cleared": 29
+    },
+    "sun-quan": {
+      "runs": 66,
+      "cleared": 12
+    }
+  },
+  "byGeneral": {
+    "guan-yu": {
+      "runs": 75,
+      "cleared": 21
+    },
+    "zhang-fei": {
+      "runs": 68,
+      "cleared": 18
+    },
+    "zhang-liao": {
+      "runs": 66,
+      "cleared": 15
+    },
+    "xiahou-dun": {
+      "runs": 65,
+      "cleared": 17
+    },
+    "taishi-ci": {
+      "runs": 63,
+      "cleared": 22
+    },
+    "gan-ning": {
+      "runs": 63,
+      "cleared": 15
+    }
+  },
+  "perRunAverage": {
+    "level": 8.02,
+    "turns": 1260.85,
+    "battles": 29.02,
+    "recruits": 1.05,
+    "surprisesAlly": 0.27,
+    "surprisesEnemy": 0.01,
+    "gatesOpened": 0,
+    "retreats": 0,
+    "traitPicks": 16.45,
+    "itemsUsed": 12.46,
+    "secretsFound": 0,
+    "reinforcements": 2.5
+  },
+  "ms": 75680
+}

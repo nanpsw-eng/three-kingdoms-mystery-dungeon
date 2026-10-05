@@ -257,3 +257,69 @@ test("S4: E6 형주·익주 15F (매복·번성 수공, 우금·방덕→조인)
   assert.ok(meta.unlockedCampaigns.includes("jing-yi") && meta.unlockedCampaigns.includes("yiling"));
   for (const id of ["wei-yan", "fa-zheng", "xu-huang"]) assert.ok(meta.unlockedCharacters.includes(id), id);
 });
+
+test("S5: E8 칠종칠금 — 맹획 is fought seven times across three boss chains and joins at the end", () => {
+  const groups = new Map(MVP_CONTENT.enemyGroups.map((g) => [g.id, g]));
+  const chain = (id) => { const out = []; for (let g = groups.get(id); g; g = g.nextPhase ? groups.get(g.nextPhase) : undefined) out.push(g.id); return out; };
+  const e8 = MVP_CONTENT.campaigns.find((c) => c.id === "nanman");
+  const chains = e8.floors.filter((f) => f.bossGroupId).map((f) => chain(f.bossGroupId));
+  assert.deepEqual(chains.map((c) => c.length), [2, 3, 2]);
+  assert.equal(chains.flat().length, 7);
+  assert.deepEqual(groups.get("boss-mh-7").recruit, { characterId: "meng-huo", chance: 1 });
+  assert.equal(e8.floors.filter((f) => (f.mechanics ?? []).some((m) => m.type === "miasma")).length, 7);
+});
+
+test("S5: E9 북벌 ending — clearing unlocks 사마의 as a playable ruler; outro has a variant per ruler", () => {
+  const e9 = MVP_CONTENT.campaigns.find((c) => c.id === "northern");
+  assert.equal(e9.floors.length, 15);
+  assert.equal(MVP_CONTENT.characters.find((c) => c.id === "sima-yi").kind, "ruler");
+  const outro = MVP_CONTENT.scenes.find((s) => s.id === e9.scenes.outro);
+  assert.deepEqual(Object.keys(outro.variants).sort(), ["cao-cao", "liu-bei", "sima-yi", "sun-quan"]);
+  const meta = applyRunToMeta({ ...initialMeta(MVP_CONTENT), unlockedCampaigns: ["yellow-turban", "northern"] },
+    { campaignId: "northern", cleared: true, depthReached: 15, defeatedGroups: [], recruited: [], itemsSeen: [], level: 10, turns: 1, battles: 1, renown: 0 }, MVP_CONTENT);
+  assert.ok(meta.unlockedCharacters.includes("sima-yi"));
+  assert.throws(() => new RunEngine(MVP_CONTENT, { seed: "x", campaignId: "yellow-turban", rulerId: "sima-yi", generalIds: ["guan-yu", "zhang-fei"], meta: initialMeta(MVP_CONTENT) }), /locked/);
+  const run = new RunEngine(MVP_CONTENT, { seed: "x", campaignId: "yellow-turban", rulerId: "sima-yi", generalIds: ["guan-yu", "zhang-fei"], meta });
+  assert.equal(run.party()[0].characterId, "sima-yi");
+});
+
+test("S5: the whole timeline unlocks in order E1 → E9 through campaign clears", () => {
+  let meta = initialMeta(MVP_CONTENT);
+  const ordered = [...MVP_CONTENT.campaigns].sort((a, b) => a.order - b.order);
+  assert.equal(ordered.length, 9);
+  for (const campaign of ordered) {
+    assert.ok(meta.unlockedCampaigns.includes(campaign.id), campaign.id + " should be unlocked");
+    meta = applyRunToMeta(meta, { campaignId: campaign.id, cleared: true, depthReached: campaign.floors.length, defeatedGroups: [], recruited: [], itemsSeen: [], level: 10, turns: 1, battles: 1, renown: 0 }, MVP_CONTENT);
+  }
+  assert.equal(meta.clearedCampaigns.length, 9);
+  assert.equal(ordered.reduce((sum, c) => sum + c.floors.length, 0), 123);
+});
+
+test("X8 명성: renown is gated by meta, raises enemy stats and rewards, and clearing unlocks the next level", () => {
+  const base = { seed: "renown", campaignId: "test-campaign", rulerId: "liu-bei", generalIds: ["guan-yu", "zhang-fei"] };
+  const meta = { ...initialMeta(TEST_CONTENT), unlockedCampaigns: ["test-campaign"] };
+  assert.throws(() => new RunEngine(TEST_CONTENT, { ...base, meta, renown: 1 }), /Renown level not unlocked/);
+  const unlocked = { ...meta, renown: { "test-campaign": 2 } };
+  assert.throws(() => new RunEngine(TEST_CONTENT, { ...base, meta: unlocked, renown: 3 }), /Renown level not unlocked/);
+  const r2 = new RunEngine(TEST_CONTENT, { ...base, meta: unlocked, renown: 2 });
+  assert.equal(r2.summary().renown, 2);
+  const next = applyRunToMeta(unlocked, { ...r2.summary(), cleared: true }, TEST_CONTENT);
+  assert.equal(next.renown["test-campaign"], 3);
+  const capped = applyRunToMeta(next, { ...r2.summary(), renown: 3, cleared: true }, TEST_CONTENT);
+  assert.equal(capped.renown["test-campaign"], 3);
+  // Stronger enemies at renown: the same seed's first battle lasts at least as many turns with more enemy HP.
+  const firstBattleHp = (renown) => {
+    const run = new RunEngine(TEST_CONTENT, { ...base, meta: { ...meta, renown: { "test-campaign": 3 } }, renown, battleMode: "manual" });
+    walkTo(run, run.dungeon.floor.stairs);
+    if (run.phase === "dungeon") run.act({ type: "dungeon", command: { type: "descend" } });
+    for (let i = 0; i < 400 && run.phase === "dungeon"; i++) {
+      const e = run.dungeon.enemies()[0];
+      const dir = e ? run.dungeon.travelDirection(e.pos) ?? run.dungeon.frontierDirection(true) : run.dungeon.frontierDirection(true);
+      run.act({ type: "dungeon", command: dir ? { type: "move", direction: dir } : { type: "wait" } });
+    }
+    return run.battle?.snapshot().units.filter((u) => u.id.includes("#")).reduce((s, u) => s + u.hp, 0);
+  };
+  const hp0 = firstBattleHp(0);
+  const hp3 = firstBattleHp(3);
+  assert.ok(hp0 > 0 && hp3 > hp0, `renown 3 enemy HP ${hp3} should exceed ${hp0}`);
+});
