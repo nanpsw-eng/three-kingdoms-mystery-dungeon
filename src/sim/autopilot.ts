@@ -53,6 +53,17 @@ export function runAutopilot(content: ContentPack, options: AutopilotOptions): A
         act({ type: "event-choice", index: affordable >= 0 ? affordable : event.choices.length - 1 });
         break;
       }
+      case "scene": {
+        const pending = run.pending()[0] as { sceneId: string };
+        act({ type: "scene", ...(run.scene(pending.sceneId)!.choices.length > 0 ? { choice: 0 } : {}) });
+        break;
+      }
+      case "duel": {
+        // Answer the challenge with the healthiest strong general when fit; otherwise decline.
+        const fit = run.party().filter((member) => member.hp / member.maxHp >= 0.8).sort((a, b) => b.stats.atk - a.stats.atk)[0];
+        act({ type: "duel", characterId: fit?.characterId ?? null });
+        break;
+      }
       case "safe-zone": {
         const wants = ["treatment-kit", "medicine", "rice-sack", "herb", "bun", "elixir"];
         const index = run.shop().findIndex((offer) => !offer.sold && offer.price <= run.gold && wants.includes(offer.contentId) && run.inventory().length < 10);

@@ -3,6 +3,7 @@ import { EVENTS_DATA, HULAO_PREVIEW, UNLOCK_RULES, YELLOW_TURBAN } from "./campa
 import { CHARACTER_SKILL_NAMES, CHARACTER_SKILLS, CHARACTERS } from "./characters.js";
 import { ENEMY_GROUPS, ENEMY_SKILL_NAMES, ENEMY_SKILLS } from "./enemies.js";
 import { EQUIPMENT, ITEMS } from "./items.js";
+import { YT_SCENES } from "./scenes.js";
 import { TRAIT_SKILL_NAMES, TRAIT_SKILLS, TRAITS } from "./traits.js";
 
 /** MVP content (DEC-005/DEC-021/DEC-022): 3 rulers + 12 generals, Yellow Turban 15F, Hulao preview. */
@@ -15,6 +16,7 @@ export const MVP_CONTENT: ContentPack = {
   items: ITEMS,
   enemyGroups: ENEMY_GROUPS,
   events: EVENTS_DATA,
+  scenes: [...YT_SCENES],
   campaigns: [YELLOW_TURBAN, HULAO_PREVIEW],
   unlocks: UNLOCK_RULES,
   startingUnlocks: {
@@ -24,3 +26,4 @@ export const MVP_CONTENT: ContentPack = {
 };
 
 export { CHARACTERS, ENEMY_GROUPS, EQUIPMENT, ITEMS, TRAITS, YELLOW_TURBAN, HULAO_PREVIEW };
+export { validateContent } from "./validate.js";

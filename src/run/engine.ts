@@ -7,6 +7,8 @@ import { SeededRng, type Seed } from "../core/rng.js";
 import { DungeonEngine, type DungeonCommand, type DungeonEvent, type Encounter, type ExpeditionMember } from "../dungeon/engine.js";
 import { generateFloor, pickWeighted, type FloorSpec } from "../dungeon/floor.js";
 import {
+  DUEL_DEFAULT_PENALTY,
+  DUEL_LOSS_ENEMY_ENERGY,
   ENHANCE_CAP,
   ENHANCE_COST_BASE,
   ENHANCE_STEP,
@@ -43,11 +45,13 @@ import type {
   MetaState,
   RunEffect,
   StatKey,
+  StoryLine,
+  StorySceneDefinition,
   TraitDefinition,
 } from "./types.js";
 
 export type BattleAutoMode = "manual" | "smart" | "all-attack" | "repeat";
-export type RunPhase = "dungeon" | "battle" | "trait-choice" | "recruit" | "event" | "safe-zone" | "cleared" | "failed";
+export type RunPhase = "dungeon" | "battle" | "trait-choice" | "recruit" | "event" | "scene" | "duel" | "safe-zone" | "cleared" | "failed";
 
 export interface EquipmentInstance {
   readonly uid: string;
@@ -72,9 +76,20 @@ export interface MemberView {
 }
 
 export interface PendingTraitChoice { readonly kind: "trait"; readonly characterId: string; readonly options: readonly string[]; readonly level: number; }
+/** objectId is "" for a defeated enemy general offering to join (X6). */
 export interface PendingRecruit { readonly kind: "recruit"; readonly characterId: string; readonly objectId: string; }
 export interface PendingEvent { readonly kind: "event"; readonly eventId: string; readonly objectId: string; }
-export type PendingDecision = PendingTraitChoice | PendingRecruit | PendingEvent;
+export interface PendingScene { readonly kind: "scene"; readonly sceneId: string; }
+/** X5: the enemy champion challenges one of your generals before the battle. */
+export interface PendingDuel { readonly kind: "duel"; readonly groupId: string; readonly champion: string; }
+export type PendingDecision = PendingTraitChoice | PendingRecruit | PendingEvent | PendingScene | PendingDuel;
+
+export interface SceneView {
+  readonly id: string;
+  readonly title?: string;
+  readonly lines: readonly StoryLine[];
+  readonly choices: readonly string[];
+}
 
 export interface ShopOffer { readonly kind: "item" | "equipment"; readonly contentId: string; readonly price: number; readonly sold: boolean; }
 
@@ -92,6 +107,8 @@ export type RunCommand =
   | Readonly<{ type: "reroll-traits" }>
   | Readonly<{ type: "recruit"; accept: boolean }>
   | Readonly<{ type: "event-choice"; index: number }>
+  | Readonly<{ type: "scene"; choice?: number }>
+  | Readonly<{ type: "duel"; characterId: string | null }>
   | Readonly<{ type: "shop-buy"; offerIndex: number }>
   | Readonly<{ type: "identify"; uid: string }>
   | Readonly<{ type: "enhance"; characterId: string; slot: EquipmentSlot }>
@@ -110,6 +127,9 @@ export type RunEvent =
   | Readonly<{ type: "item-used"; itemId: string }>
   | Readonly<{ type: "equipped"; characterId: string; equipmentId: string }>
   | Readonly<{ type: "event-resolved"; eventId: string; choice: number }>
+  | Readonly<{ type: "scene-ended"; sceneId: string; choice: number | null }>
+  | Readonly<{ type: "duel-ended"; characterId: string; champion: string; won: boolean }>
+  | Readonly<{ type: "boss-phase"; groupId: string; groupName: string }>
   | Readonly<{ type: "safe-zone" }>
   | Readonly<{ type: "purchased"; contentId: string }>
   | Readonly<{ type: "run-cleared" }>
@@ -134,6 +154,14 @@ export interface RunSummary {
   readonly level: number;
   readonly turns: number;
   readonly battles: number;
+}
+
+interface QueuedBattle {
+  readonly encounter: Encounter;
+  readonly groupId: string;
+  /** enemy unit index → HP ratio multiplier (duel aftermath) */
+  enemyHp: Record<number, number>;
+  enemyEnergy: number;
 }
 
 interface Member {
@@ -162,6 +190,8 @@ export class RunEngine {
   readonly #items: Map<string, ItemDefinition>;
   readonly #groups: Map<string, EnemyGroupDefinition>;
   readonly #events: Map<string, EventDefinition>;
+  readonly #scenes: Map<string, StorySceneDefinition>;
+  readonly #rulerId: string;
   readonly #seed: Seed;
   readonly #rng: { traits: SeededRng; loot: SeededRng; shop: SeededRng; recruit: SeededRng; floors: SeededRng };
   readonly #unlockedCharacters: ReadonlySet<string>;
@@ -177,6 +207,9 @@ export class RunEngine {
   #battle: BattleEngine | null = null;
   #encounter: Encounter | null = null;
   #battleItemsAtStart: string[] = [];
+  #battleGroupId: string | null = null;
+  #queued: QueuedBattle | null = null;
+  #clearAfterScenes = false;
   #repeat = new RepeatAutoController();
   #battleMode: BattleAutoMode;
   #exp = 0;
@@ -198,6 +231,8 @@ export class RunEngine {
     this.#items = byId(content.items);
     this.#groups = byId(content.enemyGroups);
     this.#events = byId(content.events);
+    this.#scenes = byId(content.scenes ?? []);
+    this.#rulerId = options.rulerId;
     const campaign = content.campaigns.find((candidate) => candidate.id === options.campaignId);
     if (campaign === undefined) throw new Error("Unknown campaign: " + options.campaignId);
     this.campaign = campaign;
@@ -219,6 +254,7 @@ export class RunEngine {
     const root = new SeededRng(options.seed).fork("run");
     this.#rng = { traits: root.fork("traits"), loot: root.fork("loot"), shop: root.fork("shop"), recruit: root.fork("recruit"), floors: root.fork("floors") };
     this.#battleMode = options.battleMode ?? "manual";
+    this.#queueScene(campaign.scenes?.intro);
     for (const itemId of STARTING_ITEMS) if (this.#items.has(itemId)) this.#addToBag(itemId);
     const startLevel = Math.min(PARTY_LEVEL_CAP, Math.max(1, campaign.startLevel ?? 1));
     if (startLevel > 1) {
@@ -261,6 +297,15 @@ export class RunEngine {
   equipmentDef(id: string): EquipmentDefinition | undefined { return this.#equipment.get(id); }
   group(id: string): EnemyGroupDefinition | undefined { return this.#groups.get(id); }
   event(id: string): EventDefinition | undefined { return this.#events.get(id); }
+  /** Scene with the ruler-specific lines resolved (common historical view, flavored per ruler). */
+  scene(id: string): SceneView | undefined {
+    const scene = this.#scenes.get(id);
+    if (scene === undefined) return undefined;
+    return {
+      id: scene.id, ...(scene.title === undefined ? {} : { title: scene.title }),
+      lines: scene.variants?.[this.#rulerId] ?? scene.lines, choices: (scene.choices ?? []).map((choice) => choice.label),
+    };
+  }
 
   party(): readonly MemberView[] {
     return this.#party.map((member) => {
@@ -285,6 +330,7 @@ export class RunEngine {
     const json = JSON.stringify({
       floor: this.#floorIndex, level: this.#level, exp: this.#exp, gold: this.#gold, food: this.#food, rerolls: this.#rerolls,
       party: this.#party, bag: this.#bag, pending: this.#pending, safe: this.#safeZone, shop: this.#shop, ended: this.#ended,
+      queued: this.#queued, clearing: this.#clearAfterScenes,
       dungeon: this.#dungeon?.stateHash() ?? null, battle: this.#battle?.stateHash() ?? null,
       rng: Object.values(this.#rng).map((rng) => rng.snapshot()),
     });
@@ -304,7 +350,7 @@ export class RunEngine {
         if (phase === "battle") this.#advanceBattle(events);
         return events;
       case "set-formation":
-        this.#requirePhase(phase, ["dungeon", "safe-zone", "trait-choice", "recruit", "event"]);
+        this.#requirePhase(phase, ["dungeon", "safe-zone", "trait-choice", "recruit", "event", "scene", "duel"]);
         this.#setFormation(command.characterId, command.slot);
         return events;
       case "discard":
@@ -350,6 +396,7 @@ export class RunEngine {
         this.#pending.shift();
         events.push({ type: "trait-chosen", characterId: choice.characterId, traitId: command.traitId });
         this.#clampHp();
+        this.#afterDecision(events);
         return events;
       }
       case "reroll-traits": {
@@ -363,8 +410,9 @@ export class RunEngine {
       case "recruit": {
         this.#requirePhase(phase, ["recruit"]);
         const offer = this.#pending.shift() as PendingRecruit;
-        this.dungeon.removeObject(offer.objectId);
+        if (offer.objectId !== "") this.dungeon.removeObject(offer.objectId);
         if (command.accept) this.#recruit(offer.characterId, events);
+        this.#afterDecision(events);
         return events;
       }
       case "event-choice": {
@@ -378,6 +426,38 @@ export class RunEngine {
         for (const effect of choice.effects) this.#applyEffect(effect, events);
         events.push({ type: "event-resolved", eventId: pending.eventId, choice: command.index });
         this.#pushToDungeon();
+        this.#afterDecision(events);
+        return events;
+      }
+      case "scene": {
+        this.#requirePhase(phase, ["scene"]);
+        const pending = this.#pending[0] as PendingScene;
+        const definition = this.#scenes.get(pending.sceneId)!;
+        let index: number | null = null;
+        if (definition.choices !== undefined && definition.choices.length > 0) {
+          index = command.choice ?? -1;
+          const choice = definition.choices[index];
+          if (choice === undefined) throw new RangeError("Scene needs a valid choice.");
+          this.#pending.shift();
+          for (const effect of choice.effects) this.#applyEffect(effect, events);
+        } else {
+          this.#pending.shift();
+        }
+        events.push({ type: "scene-ended", sceneId: pending.sceneId, choice: index });
+        this.#pushToDungeon();
+        this.#afterDecision(events);
+        return events;
+      }
+      case "duel": {
+        this.#requirePhase(phase, ["duel"]);
+        const pending = this.#pending[0] as PendingDuel;
+        if (command.characterId !== null) {
+          const member = this.#member(command.characterId);
+          if (member.hp <= 0) throw new Error("A KO member cannot duel.");
+        }
+        this.#pending.shift();
+        if (command.characterId !== null) this.#fightDuel(command.characterId, pending, events);
+        this.#afterDecision(events);
         return events;
       }
       case "shop-buy": {
@@ -634,6 +714,7 @@ export class RunEngine {
         ...(plan.gateDefenderGroupId === undefined ? {} : { gates: { defenderGroupId: plan.gateDefenderGroupId } }),
         ...(plan.sorceryFormations === undefined ? {} : { sorceryFormations: plan.sorceryFormations }),
         ...(plan.alarmNetwork === undefined ? {} : { alarmNetwork: plan.alarmNetwork }),
+        ...(plan.mechanics === undefined ? {} : { list: plan.mechanics }),
       },
     };
     const floor = generateFloor(spec);
@@ -643,6 +724,7 @@ export class RunEngine {
       passiveTrapDetection: passive, reinforcementGroups: plan.enemyGroups,
     });
     events.push({ type: "floor-entered", depth: plan.depth, modifier: floor.modifier });
+    this.#queueScene(this.campaign.scenes?.floorEnter?.[plan.depth]);
   }
 
   #dungeonStep(dungeonEvents: readonly DungeonEvent[], events: RunEvent[]): void {
@@ -669,7 +751,7 @@ export class RunEngine {
   }
 
   #onObject(objectId: string, kind: string, contentId: string, events: RunEvent[]): void {
-    if (this.#pending.some((decision) => decision.kind !== "trait" && decision.objectId === objectId)) return;
+    if (this.#pending.some((decision) => "objectId" in decision && decision.objectId === objectId)) return;
     if (kind === "item") {
       if (this.#addToBag(contentId)) { this.dungeon.removeObject(objectId); events.push({ type: "picked-up", contentId }); }
       else events.push({ type: "bag-full", contentId });
@@ -693,14 +775,14 @@ export class RunEngine {
     this.#recruited.push(characterId);
     const member = this.#member(characterId);
     // A-16: late joiners get the trait picks they missed (AC-005-02 level sync is implicit: level is shared).
-    for (const level of TRAIT_LEVELS) if (level <= this.#level) this.#pending.push({ kind: "trait", characterId, options: this.#traitOptions(member), level });
+    if (!this.#clearAfterScenes) for (const level of TRAIT_LEVELS) if (level <= this.#level) this.#pending.push({ kind: "trait", characterId, options: this.#traitOptions(member), level });
     events.push({ type: "recruited", characterId });
     this.#pushToDungeon();
   }
 
   #onDescended(events: RunEvent[]): void {
     const plan = this.campaign.floors[this.#floorIndex]!;
-    if (this.#floorIndex >= this.campaign.floors.length - 1) { this.#clear(events); return; }
+    if (this.#floorIndex >= this.campaign.floors.length - 1) { this.#finishRun(events); return; }
     if (plan.safeZoneAfter) {
       this.#safeZone = true;
       for (const member of this.#party) member.hp = Math.max(member.hp, Math.round(this.#stats(member).maxHp * SAFE_ZONE_HEAL_RATIO));
@@ -781,10 +863,48 @@ export class RunEngine {
     }
   }
 
+  // ---------- scenes / pending flow ----------
+  #queueScene(sceneId: string | undefined): void {
+    if (sceneId !== undefined && this.#scenes.has(sceneId)) this.#pending.push({ kind: "scene", sceneId });
+  }
+
+  /** Called after a pending decision resolves: start a queued battle or finish the run once nothing is pending. */
+  #afterDecision(events: RunEvent[]): void {
+    if (this.#pending.length > 0 || this.#ended !== null) return;
+    if (this.#clearAfterScenes) { this.#clear(events); return; }
+    const queued = this.#queued;
+    if (queued !== null) { this.#queued = null; this.#launchBattle(queued, events); }
+  }
+
+  /** Campaign complete: drop leftover picks, play the outro (if any), then clear. */
+  #finishRun(events: RunEvent[]): void {
+    for (let index = this.#pending.length - 1; index >= 0; index -= 1) {
+      const kind = this.#pending[index]!.kind;
+      if (kind !== "scene" && kind !== "recruit") this.#pending.splice(index, 1);
+    }
+    this.#queueScene(this.campaign.scenes?.outro);
+    if (this.#pending.length === 0) { this.#clear(events); return; }
+    this.#clearAfterScenes = true;
+  }
+
   // ---------- battle ----------
   #startBattle(encounter: Encounter, events: RunEvent[]): void {
     const group = this.#groups.get(encounter.groupId);
     if (group === undefined) throw new Error("Unknown enemy group: " + encounter.groupId);
+    const queued: QueuedBattle = { encounter, groupId: group.id, enemyHp: {}, enemyEnergy: 0 };
+    const champion = group.duel === undefined ? undefined : group.units[group.duel.unitIndex];
+    if (champion !== undefined && this.#party.some((member) => member.hp > 0)) {
+      this.#encounter = encounter;
+      this.#queued = queued;
+      this.#pending.unshift({ kind: "duel", groupId: group.id, champion: champion.name });
+      return;
+    }
+    this.#launchBattle(queued, events);
+  }
+
+  #launchBattle(queued: QueuedBattle, events: RunEvent[]): void {
+    const encounter = queued.encounter;
+    const group = this.#groups.get(queued.groupId)!;
     const participants: BattleParticipantDefinition[] = [];
     const foodPenalty = this.#food <= 0;
     for (const member of this.#party) {
@@ -797,29 +917,62 @@ export class RunEngine {
     }
     group.units.forEach((unit, index) => {
       const maxHp = unit.stats.maxHp;
+      const energy = Math.min(MAX_ENERGY, (encounter.empowered ? SORCERY_ENEMY_ENERGY : 0) + queued.enemyEnergy);
       participants.push({
         unit: { id: encounter.enemyId + "#" + index, side: "enemy", stats: unit.stats }, slot: unit.slot, basicAttackReach: unit.reach,
         skillIds: unit.skillIds ?? [],
-        entry: { hp: Math.max(1, Math.round(maxHp * encounter.enemyHpRatio)), energy: encounter.empowered ? SORCERY_ENEMY_ENERGY : 0 },
+        entry: { hp: Math.max(1, Math.round(maxHp * encounter.enemyHpRatio * (queued.enemyHp[index] ?? 1))), energy },
       });
     });
     const battleItems = this.#bag.filter((entry): entry is Extract<InventoryEntry, { kind: "item" }> => entry.kind === "item" && this.#items.get(entry.itemId)?.battle !== undefined).map((entry) => entry.itemId);
+    const phaseKey = group.id === encounter.groupId ? "" : "::" + group.id;
     const definition: BattleDefinition = {
-      seed: String(this.#seed) + "::battle::" + this.#floorIndex + "::" + encounter.enemyId + "::" + this.#battles,
+      seed: String(this.#seed) + "::battle::" + this.#floorIndex + "::" + encounter.enemyId + "::" + this.#battles + phaseKey,
       participants,
       skills: this.content.skills,
       items: this.content.items.filter((item) => item.battle !== undefined).map((item) => item.battle!),
       inventories: { ally: battleItems },
-      retreatAllowed: encounter.retreatAllowed,
-      ...(encounter.surprise === null ? {} : { surprise: encounter.surprise }),
+      retreatAllowed: encounter.retreatAllowed && group.id === encounter.groupId,
+      ...(encounter.surprise === null || group.id !== encounter.groupId ? {} : { surprise: encounter.surprise }),
     };
     this.#battle = new BattleEngine(definition);
     this.#battleItemsAtStart = battleItems;
+    this.#battleGroupId = group.id;
     this.#encounter = encounter;
     this.#repeat = new RepeatAutoController();
     this.#battles += 1;
     events.push({ type: "battle-started", encounter, groupName: group.name });
     this.#advanceBattle(events);
+  }
+
+  /** X5 일기토: 1v1, both sides on Smart Auto (the player's decision is who answers the challenge). */
+  #fightDuel(characterId: string, pending: PendingDuel, events: RunEvent[]): void {
+    const queued = this.#queued!;
+    const group = this.#groups.get(pending.groupId)!;
+    const index = group.duel!.unitIndex;
+    const unit = group.units[index]!;
+    const member = this.#member(characterId);
+    const character = this.#character(characterId);
+    const enemyId = queued.encounter.enemyId + "#" + index;
+    const duel = new BattleEngine({
+      seed: String(this.#seed) + "::duel::" + this.#floorIndex + "::" + group.id + "::" + this.#battles,
+      participants: [
+        { unit: { id: characterId, side: "ally", stats: this.#stats(member) }, slot: "front-center", basicAttackReach: character.reach, skillIds: this.#skillIds(member), entry: { hp: member.hp, energy: 0 } },
+        { unit: { id: enemyId, side: "enemy", stats: unit.stats }, slot: "front-center", basicAttackReach: unit.reach, skillIds: unit.skillIds ?? [], entry: { hp: Math.max(1, Math.round(unit.stats.maxHp * queued.encounter.enemyHpRatio)), energy: 0 } },
+      ],
+      skills: this.content.skills,
+      retreatAllowed: false,
+    });
+    for (let guard = 0; guard < 2000 && duel.outcome === "ongoing"; guard += 1) {
+      if (duel.snapshot().activeTurn === null && duel.nextTurn() === null) break;
+      duel.execute(chooseSmartCommand(duel));
+    }
+    const won = duel.outcome === "ally-victory";
+    const after = duel.snapshot().units.find((candidate) => candidate.id === characterId);
+    member.hp = won ? Math.max(1, after?.hp ?? 1) : 1;
+    if (won) queued.enemyHp[index] = 1 - (group.duel!.penalty ?? DUEL_DEFAULT_PENALTY);
+    else queued.enemyEnergy = DUEL_LOSS_ENEMY_ENERGY;
+    events.push({ type: "duel-ended", characterId, champion: pending.champion, won });
   }
 
   #advanceBattle(events: RunEvent[]): void {
@@ -862,13 +1015,14 @@ export class RunEngine {
       const entry = this.#bag.find((candidate) => candidate.kind === "item" && candidate.itemId === itemId);
       if (entry !== undefined) this.#takeFromBag(entry.uid);
     }
+    const groupId = this.#battleGroupId ?? encounter.groupId;
     this.#battle = null;
-    this.#encounter = null;
+    this.#battleGroupId = null;
     let exp = 0;
     let gold = 0;
     const loot: string[] = [];
     if (outcome === "victory") {
-      const group = this.#groups.get(encounter.groupId)!;
+      const group = this.#groups.get(groupId)!;
       const ratio = encounter.reinforcement ? REINFORCEMENT_REWARD_RATIO : 1;
       exp = Math.round(group.exp * ratio);
       gold = Math.round(group.gold * ratio);
@@ -881,11 +1035,34 @@ export class RunEngine {
     }
     events.push({ type: "battle-ended", outcome, exp, gold, loot });
     for (const id of loot) events.push(this.#addToBag(id) ? { type: "picked-up", contentId: id } : { type: "bag-full", contentId: id });
+    const group = this.#groups.get(groupId)!;
+    const next = outcome === "victory" && group.nextPhase !== undefined ? this.#groups.get(group.nextPhase) : undefined;
+    if (next !== undefined) {
+      // X7: the boss rallies — the next phase starts after pending picks/scene, on the same encounter.
+      if (exp > 0) this.#gainExp(exp, events);
+      events.push({ type: "boss-phase", groupId: next.id, groupName: next.name });
+      this.#queueScene(next.phaseScene);
+      this.#queued = { encounter, groupId: next.id, enemyHp: {}, enemyEnergy: 0 };
+      this.#afterDecision(events);
+      return;
+    }
+    this.#encounter = null;
     const dungeonEvents = this.dungeon.resolveEncounter(outcome, this.#expedition());
     for (const event of dungeonEvents) events.push({ type: "dungeon", event });
     if (outcome === "defeat") { this.#fail("battle", events); return; }
     if (exp > 0) this.#gainExp(exp, events);
-    if (encounter.boss && this.#floorIndex >= this.campaign.floors.length - 1) this.#clear(events);
+    if (outcome !== "victory") return;
+    this.#queueScene(this.campaign.scenes?.bossDefeated?.[group.id]);
+    this.#offerEnemyRecruit(group.recruit);
+    if (encounter.boss && this.#floorIndex >= this.campaign.floors.length - 1) this.#finishRun(events);
+  }
+
+  /** X6 적장 등용: a defeated named general may offer to join (and is unlocked permanently via meta). */
+  #offerEnemyRecruit(recruit: EnemyGroupDefinition["recruit"]): void {
+    if (recruit === undefined || !this.#characters.has(recruit.characterId)) return;
+    if (this.#party.some((member) => member.characterId === recruit.characterId) || this.#party.length >= MAX_PARTY_SIZE) return;
+    if (!this.#rng.recruit.chance(recruit.chance)) return;
+    this.#pending.push({ kind: "recruit", characterId: recruit.characterId, objectId: "" });
   }
 
   #clear(events: RunEvent[]): void {

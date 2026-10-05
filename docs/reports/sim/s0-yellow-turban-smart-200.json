@@ -1,0 +1,92 @@
+{
+  "campaignId": "yellow-turban",
+  "runs": 200,
+  "battleMode": "smart",
+  "clearRate": 0.35,
+  "outcomes": {
+    "failed": 130,
+    "cleared": 70
+  },
+  "failDepth": {
+    "6": 18,
+    "7": 18,
+    "8": 4,
+    "9": 1,
+    "10": 7,
+    "11": 17,
+    "12": 24,
+    "13": 15,
+    "14": 10,
+    "15": 16
+  },
+  "failCause": {
+    "battle": 130
+  },
+  "depthReached": {
+    "6": 18,
+    "7": 18,
+    "8": 4,
+    "9": 1,
+    "10": 7,
+    "11": 17,
+    "12": 24,
+    "13": 15,
+    "14": 10,
+    "15": 86
+  },
+  "byRuler": {
+    "liu-bei": {
+      "runs": 67,
+      "cleared": 22
+    },
+    "cao-cao": {
+      "runs": 67,
+      "cleared": 30
+    },
+    "sun-quan": {
+      "runs": 66,
+      "cleared": 18
+    }
+  },
+  "byGeneral": {
+    "guan-yu": {
+      "runs": 75,
+      "cleared": 24
+    },
+    "zhang-fei": {
+      "runs": 68,
+      "cleared": 23
+    },
+    "zhang-liao": {
+      "runs": 66,
+      "cleared": 22
+    },
+    "xiahou-dun": {
+      "runs": 65,
+      "cleared": 18
+    },
+    "taishi-ci": {
+      "runs": 63,
+      "cleared": 26
+    },
+    "gan-ning": {
+      "runs": 63,
+      "cleared": 27
+    }
+  },
+  "perRunAverage": {
+    "level": 9.25,
+    "turns": 1850.53,
+    "battles": 42.16,
+    "recruits": 1.45,
+    "surprisesAlly": 0.38,
+    "surprisesEnemy": 0.01,
+    "gatesOpened": 0,
+    "retreats": 0,
+    "traitPicks": 20.81,
+    "itemsUsed": 14.14,
+    "secretsFound": 0,
+    "reinforcements": 8.07
+  },
+  "ms": 90909
+}

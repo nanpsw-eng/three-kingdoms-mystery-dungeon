@@ -1,5 +1,6 @@
 import type { FloorModifier, FloorObjectSpec, TrapType, Weighted } from "../dungeon/floor.js";
 import type { CampaignDefinition, EventDefinition, FloorPlan, UnlockRule } from "../run/types.js";
+import { YT_CAMPAIGN_SCENES } from "./scenes.js";
 
 const MODIFIERS: readonly Weighted<FloorModifier>[] = [
   { id: "fog", weight: 2 }, { id: "night", weight: 2 }, { id: "strong-wind", weight: 1 }, { id: "dry", weight: 1 }, { id: "rain", weight: 1 }, { id: "smoke", weight: 1 },
@@ -56,6 +57,10 @@ function ytFloor(depth: number): FloorPlan {
 export const YELLOW_TURBAN: CampaignDefinition = {
   id: "yellow-turban",
   name: "황건적의 난",
+  order: 1,
+  era: "184",
+  summary: "거록에서 일어난 태평도의 난. 장보·장량을 꺾고 장각의 제단으로.",
+  scenes: YT_CAMPAIGN_SCENES,
   floors: Array.from({ length: 15 }, (_, index) => ytFloor(index + 1)),
   shopItems: [{ id: "bun", weight: 3 }, { id: "rice-sack", weight: 2 }, { id: "herb", weight: 3 }, { id: "medicine", weight: 2 }, { id: "treatment-kit", weight: 2 }, { id: "fire-pot", weight: 1 }, { id: "elixir", weight: 1 }, { id: "scout-map", weight: 1 }],
   shopEquipment: [{ id: "long-spear", weight: 1 }, { id: "horn-bow", weight: 1 }, { id: "war-fan", weight: 1 }, { id: "scale-armor", weight: 1 }, { id: "silk-robe", weight: 1 }, { id: "swift-boots", weight: 1 }],
@@ -67,6 +72,9 @@ export const HULAO_PREVIEW: CampaignDefinition = {
   id: "hulao-gate",
   name: "호로관 (Preview)",
   preview: true,
+  order: 2,
+  era: "190",
+  summary: "반동탁연합의 선봉. 관문을 돌파해 화웅을 꺾어라.",
   startLevel: 5,
   floors: [
     { depth: 1, enemyGroups: HULAO_GROUPS, enemyCount: [3, 4], traps: BASIC_TRAPS, trapCount: [2, 3], objects: objects(ITEM_POOL_MID, [2, 3], 0.4, 0.3), gateDefenderGroupId: "dong-gate-guard" },

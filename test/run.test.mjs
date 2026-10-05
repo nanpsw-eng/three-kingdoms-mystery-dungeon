@@ -13,6 +13,8 @@ test("run start validates ruler + 2 unlocked generals and campaign unlocks", () 
   assert.throws(() => new RunEngine(MVP_CONTENT, { ...START, campaignId: "yellow-turban", rulerId: "guan-yu" }), /Not a ruler/);
   assert.throws(() => new RunEngine(MVP_CONTENT, { ...START, campaignId: "hulao-gate" }), /locked/);
   const run = new RunEngine(MVP_CONTENT, { ...START, campaignId: "yellow-turban" });
+  assert.equal(run.phase, "scene");
+  run.act({ type: "scene" });
   assert.deepEqual([run.phase, run.level, run.gold, run.food, run.party().length, run.depth], ["dungeon", 1, 30, 100, 3, 1]);
   const slots = run.party().map((m) => m.slot);
   assert.equal(new Set(slots).size, 3);
