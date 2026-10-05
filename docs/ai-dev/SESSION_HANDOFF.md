@@ -1,73 +1,65 @@
-# SESSION HANDOFF — 2026-10-05 Headless Battle Engine Phase 5
+# SESSION HANDOFF — 2026-10-05 Headless Battle Engine Phase 6
 
 ## Current State
 - Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon`
 - Branch: `feature/headless-battle-engine`
-- Recovery Base: `6b550422faeb3a13bcd0267c788e940219875581`
-- Phase 5 code/test HEAD before evidence update: `0aa1b34511303c84f11908e9c0b32d2fc5f5725a`
-- Current Gate: `SKILL_AWARE_SMART_AUTO_PASS / STATUS_RUNTIME_NEXT`
+- Current Gate: `STATUS_RUNTIME_PASS / CLEANSE_REVIVE_NEXT`
+- Merge: `NOT_RUN / HUMAN_GATE`
+- Deploy: `NOT_RUN / HUMAN_GATE`
 
-## Recovery Reconciliation
-- DO_NOT_REPEAT: Seeded RNG, Unit/Stats, SPD Timeline, damage formulas, StatusStore storage/merge rules, formation/basic targeting, Battle State Machine, Basic Smart Auto, Skill/Effect/Item/Retreat command execution, Smart Auto scoring completed through Phase 5.
-- Historical stale claim from Phase 3 was corrected in Phase 4: remote RNG test typo caused 36/40 at exact old state; typo has been fixed.
-- No merge/deploy has been performed.
+## DO_NOT_REPEAT
+- Seeded RNG + replay primitives
+- HP/ATK/DEF/SPD/INT Unit model
+- SPD Timeline
+- damage/crit seed formulas
+- StatusStore merge rules
+- basic Battle State Machine
+- Skill/Ultimate/Item/Retreat command execution
+- Smart Auto basic/skill/ultimate scoring
+- DOT/Stun/Confusion/Timeline Delay runtime lifecycle
 
-## Completed Through Phase 5
-- Data-driven Skill/Item/Effect contracts.
-- Skill/Ultimate/Item/Retreat manual command paths.
-- Damage/heal/status/timeline/energy/formation effects.
-- Taunt and Defense Down integration.
-- Conditional retreat.
-- Deterministic mixed replay.
-- Skill-aware Smart Auto:
-  - basic / guard / active / ultimate
-  - healing, control, timeline and energy utility
-  - Ultimate overkill protection
-  - deterministic tie-break
-  - no automatic item or retreat
-- Skill-aware headless simulation.
-- Local reconstructed full regression: `59/59 PASS`.
-- Remote Phase 5 code/tests persisted.
-- Evidence: `docs/reports/HEADLESS_BATTLE_ENGINE_PHASE5.md`.
+## Completed Through Phase 6
+- Phase 4 data-driven Skill/Effect core.
+- Phase 5 skill-aware Smart Auto.
+- Phase 6 deterministic status runtime.
+- Local reconstructed full regression: `64/64 PASS`.
+- Phase 6 remote source/test persistence complete.
 
-## Verification
+## Verification Boundary
 ### PASS
-- Local strict TypeScript build.
-- Local headless regression: `59 passed / 0 failed`.
-- Smart Auto dedicated tests: 7 PASS.
-- 100 seeded skill-aware auto battles terminate under cap.
-- Remote persistence marker checks.
+- local strict TypeScript build
+- local headless tests 64/64
+- status runtime dedicated tests
+- remote persistence checks
 
-### NOT_RUN
-- GitHub CI/check for exact remote HEAD.
-- Status duration lifecycle in Battle Engine.
-- Poison/Burn/Bleed periodic damage.
-- Stun/Confusion runtime control behavior.
-- Full roster/5v5 balance.
-- Dungeon generation.
-- Mobile UX.
+### NOT_RUN / NOT_IMPLEMENTED
+- GitHub CI exact HEAD: NOT_RUN
+- Cleanse effect: NOT_IMPLEMENTED
+- Revive/KO targeting: NOT_IMPLEMENTED
+- full 15-character content: NOT_STARTED
+- Dungeon Core: NOT_STARTED
+- mobile UI: NOT_STARTED
 
 ## Next Safe Action
-1. Define deterministic status lifecycle timing relative to SPD Timeline.
-2. Apply DOT at a consistent phase without introducing a second hidden time system.
-3. Implement Stun as skipped action and Confusion with deterministic target/action rule.
-4. Tick/expire statuses deterministically.
-5. Add status-runtime replay and no-soft-lock tests.
-6. Update Phase 6 evidence.
+1. Add targeting state contract: living / KO / any, default living.
+2. Add Cleanse effect.
+3. Add Revive effect with HP ratio.
+4. Preserve KO unit slot and deterministically restore into an available formation slot.
+5. Re-register revived unit in SPD Timeline.
+6. Add tests for ordinary heal not reviving, Cleanse, Revive and deterministic replay.
+7. Persist Phase 7 evidence.
 
 ## REQUIRED_CONTEXT
 - `AGENTS.md`
 - `docs/product/GAME_DESIGN_PRD.md`
 - `docs/specs/BATTLE_SPEC.md`
-- `docs/specs/BALANCE_SEED.md`
-- `docs/reports/HEADLESS_BATTLE_ENGINE_PHASE4.md`
-- `docs/reports/HEADLESS_BATTLE_ENGINE_PHASE5.md`
+- `docs/reports/HEADLESS_BATTLE_ENGINE_PHASE6.md`
 
 ## DO_NOT_REREAD_BY_DEFAULT
-- Full original chat decision sequence.
-- Phase 1–3 reports unless investigating regression.
-- Dungeon spec until battle core is complete.
+- Full original chat sequence.
+- Phase 1–5 reports unless regression investigation requires them.
+- Dungeon spec until Battle Engine core reaches feature-complete baseline.
 
 ## Human Gate
-- Merge to `main`: `REQUIRED`
-- Production deploy/release: `REQUIRED`
+- Merge to `main`: REQUIRED
+- Production deploy/release: REQUIRED
