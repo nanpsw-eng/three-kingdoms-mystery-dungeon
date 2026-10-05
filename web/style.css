@@ -2,12 +2,13 @@
   --bg: #1b1712; --panel: #2a241c; --panel-2: #352d22; --line: #4a3f30; --ink: #efe6d2; --muted: #b3a68b;
   --accent: #d9a441; --ally: #6fa8dc; --enemy: #d9534f; --good: #7bbf6a; --warn: #e0a030; --bad: #d9534f;
   --wall: #120f0b; --room: #5a4d3a; --corridor: #463b2c; --fog: #2b241b;
+  color-scheme: dark;
   font-family: system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); }
 body { overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
-#app { max-width: 520px; margin: 0 auto; min-height: 100dvh; display: flex; flex-direction: column; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); gap: 8px; }
+#app { max-width: 520px; margin: 0 auto; min-height: 100dvh; display: flex; flex-direction: column; padding: 8px 16px calc(8px + env(safe-area-inset-bottom)); gap: 8px; }
 h1 { font-size: 1.4rem; margin: 8px 0 0; color: var(--accent); letter-spacing: 0.05em; }
 h2 { font-size: 1.05rem; margin: 4px 0; color: var(--accent); }
 p { margin: 4px 0; color: var(--muted); line-height: 1.45; }
