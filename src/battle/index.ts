@@ -1,3 +1,4 @@
+export * from "./action.js";
 export * from "./auto.js";
 export * from "./battle.js";
 export * from "./damage.js";
