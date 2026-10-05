@@ -11,7 +11,7 @@ const base={maxHp:100,atk:100,def:100,spd:100,int:100};
 const one=(team,state)=>state===undefined?{team,access:"any",minTargets:1,maxTargets:1}:{team,access:"any",minTargets:1,maxTargets:1,state};
 
 const SKILLS={
-  nuke:{id:"nuke",kind:"active",energyCost:0,targeting:one("enemy"),effects:[{type:"damage",recipient:"targets",kind:"physical",power:5000,critChance:0}]},
+  nuke:{id:"nuke",kind:"active",energyCost:0,targeting:one("enemy"),effects:[{type:"damage",recipient:"targets",kind:"physical",power:5000,critChance:0,evasionChance:0}]},
   hex:{id:"hex",kind:"active",energyCost:0,targeting:one("enemy"),effects:[
     {type:"status",recipient:"targets",statusType:"poison",durationRounds:3,stacks:1,magnitude:1},
     {type:"status",recipient:"targets",statusType:"defense-down",durationRounds:3,magnitude:0.2},
@@ -203,7 +203,7 @@ test("Smart Auto cleanses a heavily debuffed ally over idle options",()=>{
 
 // ---------- Mixed replay determinism ----------
 
-const MIXED_REPLAY_GOLDEN_HASH="6503461c";
+const MIXED_REPLAY_GOLDEN_HASH="40a9763c";
 function mixedReplay(){
   const b=setup("phase7-mixed-replay"); const log=[];
   log.push(act(b,"healer",{type:"attack",targetId:"boss"}));                       // basic attack

@@ -16,6 +16,12 @@ export interface BattleUnitDefinition {
   readonly stats: CoreStats;
 }
 
+/** Battle-entry state carried in from the Dungeon/Run layer. Defaults: full HP, 0 energy. */
+export interface BattleUnitEntryState {
+  readonly hp?: number;
+  readonly energy?: number;
+}
+
 export interface BattleUnitSnapshot {
   readonly id: string;
   readonly side: BattleSide;
@@ -58,13 +64,21 @@ export class BattleUnit {
   #hp: number;
   #energy: number;
 
-  constructor(definition: BattleUnitDefinition) {
+  constructor(definition: BattleUnitDefinition, entry: BattleUnitEntryState = {}) {
     validateDefinition(definition);
     this.id = definition.id;
     this.side = definition.side;
     this.stats = Object.freeze({ ...definition.stats });
-    this.#hp = this.stats.maxHp;
-    this.#energy = 0;
+    const hp = entry.hp ?? this.stats.maxHp;
+    if (!Number.isSafeInteger(hp) || hp < 0 || hp > this.stats.maxHp) {
+      throw new RangeError("Entry HP must be a safe integer between 0 and maxHp.");
+    }
+    const energy = entry.energy ?? 0;
+    if (!Number.isSafeInteger(energy) || energy < 0 || energy > MAX_ENERGY) {
+      throw new RangeError(`Entry energy must be a safe integer between 0 and ${MAX_ENERGY}.`);
+    }
+    this.#hp = hp;
+    this.#energy = energy;
   }
 
   get hp(): number {

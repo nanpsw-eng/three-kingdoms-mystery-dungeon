@@ -12,7 +12,9 @@ import {
   type BattleEngine,
   type BattleSnapshot,
 } from "./battle.js";
+import { BASE_EVASION_CHANCE } from "./balance.js";
 import { computeBaseDamage, computeStrategyDefense } from "./damage.js";
+import { MAX_ENERGY } from "./unit.js";
 import type { StatusType } from "./status.js";
 
 type UnitSnapshot = BattleSnapshot["units"][number];
@@ -120,6 +122,7 @@ function expectedDamage(
   const critChance = effect.critChance ?? 0.05;
   const critMultiplier = effect.critMultiplier ?? 1.5;
   const expectedCritFactor = 1 + critChance * (critMultiplier - 1);
+  const hitChance = 1 - (effect.evasionChance ?? BASE_EVASION_CHANCE);
   const guardMultiplier = snapshot.guarding.includes(target.id)
     ? GUARD_DAMAGE_MULTIPLIER
     : 1;
@@ -129,7 +132,7 @@ function expectedDamage(
     defense,
     1,
     (effect.modifier ?? 1) * guardMultiplier,
-  ) * expectedCritFactor;
+  ) * expectedCritFactor * hitChance;
 }
 
 function effectScore(
@@ -297,6 +300,12 @@ function basicCandidates(battle: BattleEngine): ScoredCommand[] {
   });
 }
 
+// Guard's energy gain is wasted at full energy; refusing low-HP guard there bounds
+// consecutive guards (<= 5) and prevents mutual-guard soft locks.
+function canGuardForValue(actor: UnitSnapshot): boolean {
+  return actor.energy < MAX_ENERGY;
+}
+
 function sortCandidates(candidates: ScoredCommand[]): void {
   candidates.sort(
     (left, right) =>
@@ -317,6 +326,7 @@ export function chooseBasicSmartCommand(
   sortCandidates(basic);
   const hpRatio = actor.hp / actor.stats.maxHp;
   if (
+    canGuardForValue(actor) &&
     hpRatio <= policy.lowHpGuardThreshold &&
     !basic.some((candidate) => candidate.score >= 35)
   ) return { type: "guard", actorId: actor.id };
@@ -337,7 +347,7 @@ export function chooseSmartCommand(
     ...skillCandidates(battle, policy),
   ];
   const hpRatio = actor.hp / actor.stats.maxHp;
-  const guardScore = hpRatio <= policy.lowHpGuardThreshold
+  const guardScore = canGuardForValue(actor) && hpRatio <= policy.lowHpGuardThreshold
     ? 28 + (1 - hpRatio) * 30
     : 1;
   candidates.push({

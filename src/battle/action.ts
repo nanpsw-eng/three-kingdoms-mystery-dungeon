@@ -23,6 +23,8 @@ export interface DamageEffectDefinition {
   readonly modifier?: number;
   readonly critChance?: number;
   readonly critMultiplier?: number;
+  /** Target evasion chance for this damage instance; defaults to BASE_EVASION_CHANCE. */
+  readonly evasionChance?: number;
 }
 
 export interface HealEffectDefinition {
@@ -135,6 +137,7 @@ export function validateEffect(effect: EffectDefinition): void {
       if (effect.modifier !== undefined) assertPositiveFinite("Damage effect modifier", effect.modifier);
       if (effect.critChance !== undefined) assertProbability("Damage critical chance", effect.critChance);
       if (effect.critMultiplier !== undefined) assertPositiveFinite("Damage critical multiplier", effect.critMultiplier);
+      if (effect.evasionChance !== undefined) assertProbability("Damage evasion chance", effect.evasionChance);
       return;
     case "heal":
       assertPositiveFinite("Heal base", effect.baseHeal);
