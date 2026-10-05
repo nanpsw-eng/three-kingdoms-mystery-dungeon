@@ -249,7 +249,11 @@ function renderDungeon(): void {
       )),
     h("div", { class: "panel log" }, ...log.slice(0, 12).map((line) => h("div", {}, line))),
   );
-  requestAnimationFrame(() => drawMap(canvas, r.dungeon));
+  const enemyKey = (groupId: string): string => {
+    const units = r.group(groupId)?.units ?? [];
+    return (units.find((u) => !u.name.includes(" ")) ?? units[0])?.name ?? "";
+  };
+  requestAnimationFrame(() => drawMap(canvas, r.dungeon, { playerKey: r.party()[0]?.characterId ?? "liu-bei", enemyKey }));
 }
 
 // ---------- battle ----------
