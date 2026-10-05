@@ -13,8 +13,8 @@
 ---
 
 ## Track A — Story/Engine (Claude)
-- Gate: `S2_COMPLETE / S3_NEXT`
-- Local: `npm test` 147/0 PASS · `build:web` PASS · sim smart 200: E1 35.0% · E2 28.0% · E3 29.5% · E4 24.5%
+- Gate: `S3_COMPLETE / S4_NEXT`
+- Local: `npm test` 149/0 PASS · `build:web` PASS · sim smart 200: E1 35.0% · E2 28.0% · E3 29.5% · E4 24.5% · E5 28.0%
 
 | Stage | Report |
 |---|---|
@@ -22,15 +22,15 @@
 | S0 foundation | `docs/reports/STORY_S0_FOUNDATION.md` |
 | S1 E2 반동탁연합 | `docs/reports/STORY_S1_ANTI_DONG.md` |
 | S2 E3 서주 · E4 관도 | `docs/reports/STORY_S2_XUZHOU_GUANDU.md` |
+| S3 E5 적벽 | `docs/reports/STORY_S3_RED_CLIFFS.md` |
 
 DO_NOT_REPEAT
 - MVP battle/dungeon/run/content/sim/web
 - S0: scenes/variants/choices, duel, multi-phase boss, enemy recruit + meta unlock, mechanic registry (7 types), validateContent, story.ts UI
-- S1/S2: `CampaignModule` per campaign (`src/content/campaigns/e2..e4`), timeline UI, `ART_ALIASES`, duel HP ratio 0.6
+- S1/S2: `CampaignModule` per campaign (`src/content/campaigns/e2..e5`), `pursuit` mechanic, timeline UI, `ART_ALIASES`, duel HP ratio 0.6
 
 NEXT_SAFE_ACTION
-1. S3: E5 적벽 15F — 장판파 추격(조운 호위) → 수상 지형·연환선 → 화공 확산(spreading-fire); 노숙·황개·방통·정보
-2. S4: E6 형주·익주 15F + E7 이릉 12F; S5: E8 남만 + E9 북벌 + 엔딩 + 명성(X8)
+1. S4: E6 형주·익주 15F + E7 이릉 12F; S5: E8 남만 + E9 북벌 + 엔딩 + 명성(X8)
 3. Each stage: validateContent clean, sim 20–35%, tests, report, PR → main, deploy; check Track B branch and merge art
 
 ## Track B — Art (Codex) — as recorded by Codex

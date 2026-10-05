@@ -1,0 +1,97 @@
+{
+  "campaignId": "red-cliffs",
+  "runs": 200,
+  "battleMode": "smart",
+  "clearRate": 0.28,
+  "outcomes": {
+    "cleared": 56,
+    "failed": 144
+  },
+  "failDepth": {
+    "3": 1,
+    "5": 14,
+    "6": 19,
+    "7": 16,
+    "8": 3,
+    "9": 1,
+    "10": 2,
+    "11": 11,
+    "12": 22,
+    "13": 19,
+    "14": 13,
+    "15": 23
+  },
+  "failCause": {
+    "battle": 143,
+    "starvation": 1
+  },
+  "depthReached": {
+    "3": 1,
+    "5": 14,
+    "6": 19,
+    "7": 16,
+    "8": 3,
+    "9": 1,
+    "10": 2,
+    "11": 11,
+    "12": 22,
+    "13": 19,
+    "14": 13,
+    "15": 79
+  },
+  "byRuler": {
+    "liu-bei": {
+      "runs": 67,
+      "cleared": 20
+    },
+    "cao-cao": {
+      "runs": 67,
+      "cleared": 27
+    },
+    "sun-quan": {
+      "runs": 66,
+      "cleared": 9
+    }
+  },
+  "byGeneral": {
+    "guan-yu": {
+      "runs": 75,
+      "cleared": 29
+    },
+    "zhang-fei": {
+      "runs": 68,
+      "cleared": 11
+    },
+    "zhang-liao": {
+      "runs": 66,
+      "cleared": 14
+    },
+    "xiahou-dun": {
+      "runs": 65,
+      "cleared": 21
+    },
+    "taishi-ci": {
+      "runs": 63,
+      "cleared": 20
+    },
+    "gan-ning": {
+      "runs": 63,
+      "cleared": 17
+    }
+  },
+  "perRunAverage": {
+    "level": 8.99,
+    "turns": 1713.07,
+    "battles": 42.13,
+    "recruits": 1.33,
+    "surprisesAlly": 0.29,
+    "surprisesEnemy": 0.03,
+    "gatesOpened": 0,
+    "retreats": 0,
+    "traitPicks": 19.82,
+    "itemsUsed": 13.06,
+    "secretsFound": 0,
+    "reinforcements": 13.88
+  },
+  "ms": 89198
+}

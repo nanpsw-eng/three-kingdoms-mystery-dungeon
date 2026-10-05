@@ -2,6 +2,7 @@ import type { ContentPack } from "../run/types.js";
 import { E2_ANTI_DONG } from "./campaigns/e2-anti-dong.js";
 import { E3_XUZHOU } from "./campaigns/e3-xuzhou.js";
 import { E4_GUANDU } from "./campaigns/e4-guandu.js";
+import { E5_RED_CLIFFS } from "./campaigns/e5-red-cliffs.js";
 import { EVENTS_DATA, UNLOCK_RULES, YELLOW_TURBAN } from "./campaigns.js";
 import { CHARACTER_SKILL_NAMES, CHARACTER_SKILLS, CHARACTERS } from "./characters.js";
 import { ENEMY_GROUPS, ENEMY_SKILL_NAMES, ENEMY_SKILLS } from "./enemies.js";
@@ -11,7 +12,7 @@ import { YT_SCENES } from "./scenes.js";
 import { TRAIT_SKILL_NAMES, TRAIT_SKILLS, TRAITS } from "./traits.js";
 
 /** Story campaigns after E1, in timeline order (STORY_EXPANSION_PLAN §2). */
-export const CAMPAIGN_MODULES: readonly CampaignModule[] = [E2_ANTI_DONG, E3_XUZHOU, E4_GUANDU];
+export const CAMPAIGN_MODULES: readonly CampaignModule[] = [E2_ANTI_DONG, E3_XUZHOU, E4_GUANDU, E5_RED_CLIFFS];
 const M = CAMPAIGN_MODULES;
 
 /**
