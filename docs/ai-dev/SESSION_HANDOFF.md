@@ -52,7 +52,7 @@
 - `npm run build:web`: `NOT_RUN` — repository checkout is not mounted in this Work runtime.
 - UI smoke / screenshots / console errors: `NOT_RUN`.
 - GitHub status checks: empty for the two baseline commits; no CI pass inferred.
-- Reference JPEGs are present in the repository; visual inspection of binary images was unavailable in this Work runtime.
+- Reference boards visually inspected from repository thumbnails: gameplay-target (200×355), visual-bible (200×250), ruler-comparison (200×250). They align with the hanji/ink/vermilion specification. Production-screen screenshot QA remains `NOT_RUN` until Codex implementation.
 
 ## Known Blocker
 - Work runtime has GitHub API access but no local target repository checkout; direct Git transport was unavailable. Work completed and committed design-source updates through the GitHub connector. Code implementation, tests, browser smoke, and screenshots require the repository checkout in the Codex runtime.
