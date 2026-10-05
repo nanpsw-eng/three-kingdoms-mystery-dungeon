@@ -23,6 +23,10 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 | Line-by-line story scene UI | `IMPLEMENTATION_READY` | `CLAUDE_CONTENT_VISUAL_SPEC_20261006.md` | Apply speaker portrait, n/m progress, next/tap/skip and choices |
 | Story expansion character + enemy production art queue | `MASTER_REQUIRED` | `STORY_ART_QUEUE.md` on latest main | Work from existing stable ids / aliases; follow queue order |
 
+
+| Original ruler master comparison concept (Liu Bei / Cao Cao / Sun Quan) | `CONCEPT` | `concepts/ruler-master-comparison-20261006.jpg` | Refine remaining metallic ornament, then produce separate bust/full-body/token masters |
+| E2 boss duo (Dong Zhuo / Lü Bu) concept | `CONCEPT` | `concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg` | Simplify armor ornament and preserve broad-vs-tall silhouette contrast |
+
 ## Current Implementation State
 
 The repository's current web client still uses the legacy dark/gold CSS theme and procedural pixel portrait/sprite/map renderers. This does not change the approved art direction; these remain fallback/legacy implementation surfaces until replacement assets and renderers are verified.

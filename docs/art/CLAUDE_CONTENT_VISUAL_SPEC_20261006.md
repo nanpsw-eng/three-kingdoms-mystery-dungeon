@@ -88,3 +88,28 @@ Source order remains `docs/art/STORY_ART_QUEUE.md`; use stable content ids and t
 - UI concept count values are illustrative data states; actual counts must come from the existing Codex view-model.
 - No gameplay logic, save behavior, Codex data, campaign content, or product baseline changes are authorized by this visual document.
 - Next design completion work: create the three original ruler master concepts, refine Sima Yi against them, then produce separate visual studies for the Bosses/Achievements/Items tab states and story scene sheet.
+
+
+## 7. Ruler Master Concept Review
+
+A comparison concept now exists at `concepts/ruler-master-comparison-20261006.jpg`.
+- Liu Bei reads through the long tapered beard, warm ivory layers, and open gesture.
+- Cao Cao reads through a shorter clipped beard, more compact posture, and charcoal/deep-crimson layers.
+- Sun Quan reads through a younger near-clean-shaven face and cool blue-gray/dark-green layers.
+- This is still `CONCEPT`: reduce the residual metallic ornament, verify each identity at thumbnail size, and create separate reusable bust/full-body/token masters before marking the set approved.
+
+## 8. E2 Boss Concepts
+
+A Dong Zhuo / Lü Bu comparison concept now exists at `concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg`.
+- Dong Zhuo: broad, low visual mass; older face; oxblood/charcoal robe and court armor.
+- Lü Bu: tall, vertical silhouette; restrained plume/headwrap; halberd as the principal identifier.
+- Keep both at `CONCEPT`: current armor has more surface ornament than the final UI language should use. Simplify for production art and test the token silhouettes at small sizes.
+
+## 9. Work-Only Next Design Steps
+
+1. Design the Bosses, Achievements, and Items Codex tab states as a cohesive screen sheet.
+2. Design the line-by-line story scene panel with speaker portrait, `n/m`, next/tap, skip, and choice states.
+3. Refine and approve the three original ruler master assets; align Sima Yi to that approved identity system.
+4. Continue the campaign boss and playable-general queue from `STORY_ART_QUEUE.md`.
+
+These are visual-design tasks in this Work. No separate Codex implementation assignment is being issued.
