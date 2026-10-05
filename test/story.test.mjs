@@ -199,7 +199,8 @@ test("S2: E3 서주 12F (하비 수공 9–12F, 백문루 2페이즈) and E4 관
   assert.deepEqual(withMechanic(e4, "night-raid"), [11, 12, 13, 14]);
   assert.ok(group("boss-yan-liang").duel && group("boss-wen-chou").duel);
   assert.equal(group("boss-yuan-shao").nextPhase, "boss-yuan-shao-2");
-  assert.deepEqual(MVP_CONTENT.campaigns.map((c) => c.order), [1, 2, 3, 4]);
+  const orders = MVP_CONTENT.campaigns.map((c) => c.order);
+  assert.deepEqual(orders, orders.map((_, i) => i + 1));
 });
 
 test("S2: unlock chain E2 → E3 → E4 and new generals", () => {
@@ -212,4 +213,25 @@ test("S2: unlock chain E2 → E3 → E4 and new generals", () => {
   assert.ok(meta.unlockedCharacters.includes("mi-zhu") && meta.unlockedCharacters.includes("chen-gong"));
   meta = applyRunToMeta(meta, { ...base, campaignId: "guandu", depthReached: 15, defeatedGroups: ["boss-yan-liang"] }, MVP_CONTENT);
   for (const id of ["dian-wei", "xu-chu", "xun-yu"]) assert.ok(meta.unlockedCharacters.includes(id), id);
+});
+
+test("S3: E5 적벽 15F — 장판파 추격 1–4F, 화공 확산 11–15F, 화용도 2페이즈 + 의리 선택", () => {
+  const e5 = MVP_CONTENT.campaigns.find((c) => c.id === "red-cliffs");
+  const withMechanic = (type) => e5.floors.filter((f) => (f.mechanics ?? []).some((m) => m.type === type)).map((f) => f.depth);
+  assert.equal(e5.floors.length, 15);
+  assert.deepEqual(withMechanic("pursuit"), [1, 2, 3, 4]);
+  assert.deepEqual(withMechanic("spreading-fire"), [11, 12, 13, 14, 15]);
+  const fleet = MVP_CONTENT.enemyGroups.find((g) => g.id === "boss-cao-fleet");
+  assert.equal(fleet.nextPhase, "boss-huarong");
+  assert.equal(MVP_CONTENT.scenes.find((s) => s.id === "rc-cao-down").choices.length, 2);
+  let meta = { ...initialMeta(MVP_CONTENT), unlockedCampaigns: ["guandu"] };
+  meta = applyRunToMeta(meta, { campaignId: "guandu", cleared: true, depthReached: 15, defeatedGroups: [], recruited: [], itemsSeen: [], level: 9, turns: 1, battles: 1 }, MVP_CONTENT);
+  assert.ok(meta.unlockedCampaigns.includes("red-cliffs"));
+});
+
+test("X3 pursuit: reinforcements arrive on schedule and the status turns urgent", () => {
+  const d = new DungeonEngine(twoRoomFloor({ mechanics: [{ type: "pursuit", params: { interval: 5, grace: 3 } }] }), { seed: "chase", party: [{ id: "a", maxHp: 9999, hp: 9999 }], reinforcementGroups: [{ id: "yt", weight: 1 }] });
+  const all = [];
+  for (let i = 0; i < 12 && d.status === "exploring"; i++) all.push(...d.execute({ type: "wait" }).events);
+  assert.ok(all.filter((e) => e.type === "mechanic" && e.mechanic === "pursuit").length >= 2);
 });
