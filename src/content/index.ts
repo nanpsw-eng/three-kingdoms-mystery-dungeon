@@ -43,3 +43,5 @@ export const MVP_CONTENT: ContentPack = {
 
 export { CHARACTERS, ENEMY_GROUPS, EQUIPMENT, ITEMS, TRAITS, YELLOW_TURBAN };
 export { validateContent } from "./validate.js";
+export { buildCodex, type CodexView, type CodexCharacter, type CodexBoss, type CodexAchievement } from "./codex.js";
+export { CHARACTER_NOTES } from "./notes.js";

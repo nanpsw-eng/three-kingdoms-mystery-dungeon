@@ -1,11 +1,12 @@
 import {
-  MVP_CONTENT, RunEngine, RepeatAutoController, applyRunToMeta, chooseAllAttackCommand, chooseSmartCommand, initialMeta, FORMATION_SLOTS,
+  MVP_CONTENT, RunEngine, buildCodex, RepeatAutoController, applyRunToMeta, chooseAllAttackCommand, chooseSmartCommand, initialMeta, FORMATION_SLOTS,
   type AbilityTargeting, type BattleCommand, type Direction, type FormationSlot, type MetaState, type RunCommand, type RunEvent, type RunOptions,
 } from "../../src/index.js";
 import { drawMap, tileAt } from "./map.js";
 import { loadAssets } from "./assets.js";
 import { portraitUrl } from "./portraits.js";
 import { figureUrl, iconUrl, spriteImg } from "./sprites.js";
+import { codexScreen } from "./codex.js";
 import { artKey, isStoryPhase, renownPanel, storySheet, timelinePanel } from "./story.js";
 import { CLASS_NAMES, DANGER_NAMES, MODIFIER_NAMES, SLOT_NAMES, STATUS_NAMES, contentName, describeRunEvent } from "./text.js";
 
@@ -34,6 +35,8 @@ let repeat = new RepeatAutoController();
 let selection: null | { kind: "attack" } | { kind: "skill"; skillId: string; targeting: AbilityTargeting; targets: string[] } | { kind: "item"; itemId: string; targeting: AbilityTargeting; targets: string[] } | { kind: "formation" } = null;
 let pickTarget: null | { label: string; options: { id: string; label: string }[]; onPick: (id: string) => void } = null;
 let unlockedBefore: string[] = [];
+let notice: string | null = null;
+let showCodex = false;
 const title = { campaignId: "yellow-turban", rulerId: "liu-bei", generals: [] as string[], renown: 0 };
 
 // ---------- tiny DOM helper ----------
@@ -65,8 +68,24 @@ let hitIds = new Set<string>();
 function say(message: string): void { log = [message, ...log].slice(0, 60); }
 
 // ---------- run control ----------
+/** A save is resumable only if its campaign/characters still exist and are unlocked (old Hulao preview saves are not). */
+function resumable(saved: SaveData | null): saved is SaveData {
+  if (saved === null || saved.version !== 1 || !Array.isArray(saved.log)) return false;
+  const o = saved.options;
+  if (!content.campaigns.some((c) => c.id === o.campaignId) || !meta.unlockedCampaigns.includes(o.campaignId)) return false;
+  return [o.rulerId, ...o.generalIds].every((id) => content.characters.some((c) => c.id === id) && meta.unlockedCharacters.includes(id));
+}
+
 function startRun(options: RunOptions, replay: RunCommand[] = []): void {
-  run = new RunEngine(content, { ...options, meta, battleMode: "manual" });
+  try {
+    run = new RunEngine(content, { ...options, meta, battleMode: "manual" });
+  } catch {
+    run = null;
+    remove(SAVE_KEY);
+    notice = "이전 버전의 원정 기록은 이어할 수 없어 정리했다. 새 원정을 시작하라.";
+    render();
+    return;
+  }
   save = { version: 1, options, log: [] };
   log = [];
   repeat = new RepeatAutoController();
@@ -150,7 +169,8 @@ function narrateBattle(command: BattleCommand): void {
 // ---------- screens ----------
 function render(): void {
   app.replaceChildren();
-  if (run === null) renderTitle();
+  if (run === null && showCodex) put(codexScreen({ view: buildCodex(content, meta), render, close: () => { showCodex = false; render(); }, portrait: (key, size, alt) => pic(key, size, alt) }));
+  else if (run === null) renderTitle();
   else if (run.phase === "cleared" || run.phase === "failed") renderEnd();
   else if (run.phase === "battle") { renderBattle(); hitIds = new Set(); }
   else if (run.phase === "safe-zone") renderSafeZone();
@@ -167,7 +187,11 @@ function renderTitle(): void {
   const unlockedChars = new Set(meta.unlockedCharacters);
   const rulers = content.characters.filter((c) => c.kind === "ruler");
   const generals = content.characters.filter((c) => c.kind === "general");
-  const saved = load<SaveData>(SAVE_KEY);
+  const stored = load<SaveData>(SAVE_KEY);
+  const saved = resumable(stored) ? stored : null;
+  if (stored !== null && saved === null) { remove(SAVE_KEY); notice ??= "이전 버전의 원정 기록은 이어할 수 없어 정리했다."; }
+  const shownNotice = notice;
+  notice = null;
   title.generals = title.generals.filter((id) => unlockedChars.has(id));
   if (!unlockedChars.has(title.rulerId)) title.rulerId = "liu-bei";
   title.renown = Math.min(title.renown, meta.renown?.[title.campaignId] ?? 0);
@@ -176,6 +200,7 @@ function renderTitle(): void {
       h("div", { class: "title-row" }, ...rulers.filter((c) => unlockedChars.has(c.id)).map((c) => pic(c.id, 56, c.name))),
       h("h1", {}, "삼국지 미스터리 던전"),
       h("p", { class: "subtitle" }, "군주와 장수를 골라 원정을 떠나라. 원정이 끝나면 레벨·장비는 사라지고, 새 장수와 전역만 남는다.")),
+    shownNotice ? h("div", { class: "panel" }, h("p", {}, shownNotice)) : null,
     saved ? h("div", { class: "panel row" }, h("span", { class: "grow" }, "진행 중인 원정이 있다."), button("이어하기", () => startRun(saved.options, saved.log), { class: "primary" }), button("포기", () => { remove(SAVE_KEY); render(); })) : null,
     timelinePanel([...content.campaigns].sort((a, b) => (a.order ?? 99) - (b.order ?? 99)).map((c) => ({
       id: c.id, name: c.name, era: c.era ?? "", summary: c.summary ?? "", floors: c.floors.length,
@@ -203,6 +228,7 @@ function renderTitle(): void {
     h("div", { class: "panel" }, h("h2", {}, "기록"),
       h("p", {}, `원정 ${meta.runs}회 · 평정 ${meta.clears}회 · 해금 장수 ${meta.unlockedCharacters.length}/${content.characters.length}`),
       h("p", {}, "도감: 적 " + meta.codex.enemies.length + " · 물품 " + meta.codex.items.length),
+      button("도감 · 업적 보기", () => { showCodex = true; render(); }),
       meta.achievements.length ? h("p", {}, "업적: " + meta.achievements.join(", ")) : null),
   );
 }

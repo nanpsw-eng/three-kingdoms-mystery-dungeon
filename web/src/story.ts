@@ -40,16 +40,37 @@ export function storySheet(ui: StoryUi, pending: PendingDecision): HTMLElement[]
   return [];
 }
 
+/** Line-by-line reveal state for the scene on screen (reset when a new scene id appears). */
+let reveal = { key: "", shown: 1 };
+
 function sceneSheet(ui: StoryUi, sceneId: string): HTMLElement[] {
   const scene = ui.run.scene(sceneId);
   if (scene === undefined) return [btn("계속", () => { ui.act({ type: "scene" }); ui.render(); }, "primary")];
-  const lines = scene.lines.map((line) => row("story-line" + (line.speaker ? "" : " narration"),
+  // A scene can repeat across runs, so key the reveal state by the run's state as well.
+  const key = sceneId + "@" + ui.run.stateHash();
+  if (reveal.key !== key) reveal = { key, shown: 1 };
+  const total = scene.lines.length;
+  const done = reveal.shown >= total;
+  const lines = scene.lines.slice(0, reveal.shown).map((line) => row("story-line" + (line.speaker ? "" : " narration"),
     line.speaker ? ui.portrait(line.speaker, 48, line.name) : null,
     el("div", "story-text", line.speaker ? el("b", "", line.name) : null, el("p", "", line.text))));
-  const actions = scene.choices.length > 0
-    ? scene.choices.map((label, index) => btn(label, () => { ui.act({ type: "scene", choice: index }); ui.render(); }, "choice"))
-    : [btn("계속", () => { ui.act({ type: "scene" }); ui.render(); }, "primary")];
-  return [el("div", "story-scene", scene.title ? el("h2", "", scene.title) : null, ...lines), ...actions];
+  const next = (): void => { reveal.shown = Math.min(total, reveal.shown + 1); ui.render(); };
+  const finish = (): void => { ui.act({ type: "scene" }); ui.render(); };
+  const box = el("div", "story-scene", scene.title ? el("h2", "", scene.title) : null, ...lines);
+  if (!done) { box.style.cursor = "pointer"; box.addEventListener("click", next); }
+  const progress = el("small", "muted", `${Math.min(reveal.shown, total)} / ${total}`);
+  let actions: HTMLElement[];
+  if (!done) {
+    const skip = btn("건너뛰기", () => { if (scene.choices.length > 0) { reveal.shown = total; ui.render(); } else finish(); });
+    const bar = el("div", "row", btn("다음 ▶", next, "primary"), skip);
+    bar.style.cssText = "display:grid;grid-template-columns:2fr 1fr;gap:6px";
+    actions = [progress, bar];
+  } else {
+    actions = scene.choices.length > 0
+      ? scene.choices.map((label, index) => btn(label, () => { ui.act({ type: "scene", choice: index }); ui.render(); }, "choice"))
+      : [btn("계속", finish, "primary")];
+  }
+  return [box, ...actions];
 }
 
 function duelSheet(ui: StoryUi, groupId: string, champion: string): HTMLElement[] {
