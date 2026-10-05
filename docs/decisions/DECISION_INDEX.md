@@ -27,6 +27,7 @@
 | DEC-021 | MVP: 황건적 15F 완성 + 호로관 3~5F Preview | APPROVED |
 | DEC-022 | MVP 로스터: 군주 3 + 일반 장수 12 | APPROVED |
 | DEC-023 | 자동 승인 구현 Delta (A-01~) — `DEC-023-AUTO_APPROVED_DELTAS.md` | APPROVED (delegated) |
+| DEC-024 | 스토리 확장(E1~E9) 승인 + 전면 위임, DEC-005 범위 Delta — `DEC-024-STORY_EXPANSION_APPROVAL.md` | APPROVED |
 
 ## Open Decisions
 - 최종 기술 스택/Architecture — MVP는 A-26(무프레임워크 정적 웹)으로 진행, 상용 스택 확정은 OPEN

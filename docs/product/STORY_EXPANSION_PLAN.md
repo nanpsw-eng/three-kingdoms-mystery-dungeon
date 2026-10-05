@@ -1,6 +1,6 @@
 # 삼국지 스토리 볼륨 확장 계획
 
-- 상태: `PROPOSED` (사용자 승인 전, Product Baseline 변경 포함)
+- 상태: `APPROVED` (DEC-024, 2026-10-05 — 모든 권장안 채택)
 - 작성일: 2026-10-05
 - 기준: `GAME_DESIGN_PRD.md`, `DEC-005`(MVP 범위), `DUNGEON_SPEC.md` §16(전역 고유 기믹)
 
