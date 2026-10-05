@@ -1,54 +1,59 @@
-# SESSION HANDOFF — 2026-10-05 Headless Battle Engine Phase 4
+# SESSION HANDOFF — 2026-10-05 Headless Battle Engine Phase 5
 
 ## Current State
 - Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon`
 - Branch: `feature/headless-battle-engine`
 - Recovery Base: `6b550422faeb3a13bcd0267c788e940219875581`
-- Phase 4 persisted HEAD before this handoff update: `219d5d054b713ea6e6edcf7b07bd66e384e4d55a`
-- Current Gate: `SKILL_EFFECT_CORE_PASS / SMART_AUTO_SKILL_NEXT`
+- Phase 5 code/test HEAD before evidence update: `0aa1b34511303c84f11908e9c0b32d2fc5f5725a`
+- Current Gate: `SKILL_AWARE_SMART_AUTO_PASS / STATUS_RUNTIME_NEXT`
 
 ## Recovery Reconciliation
-- CONFIRMED_DONE / DO_NOT_REPEAT: Seeded RNG, Unit/Stats, SPD Timeline, damage formulas, StatusStore, formation/basic targeting, basic Battle State Machine, Basic Smart Auto, tie-bias remediation.
-- SUPERSEDED STALE CLAIM: prior handoff said remote 40/40 tests were persisted; actual remote `test/rng.test.mjs` contained four `SededRng` typos. Reconstructed remote state: 36/40 pass.
-- REMEDIATED: typo corrected; local reconstructed suite after Phase 4: 52/52 pass.
-- INTERRUPTIONS from prior resume attempts did not attach the uncommitted Skill/Effect blobs to the branch and therefore required no rollback.
+- DO_NOT_REPEAT: Seeded RNG, Unit/Stats, SPD Timeline, damage formulas, StatusStore storage/merge rules, formation/basic targeting, Battle State Machine, Basic Smart Auto, Skill/Effect/Item/Retreat command execution, Smart Auto scoring completed through Phase 5.
+- Historical stale claim from Phase 3 was corrected in Phase 4: remote RNG test typo caused 36/40 at exact old state; typo has been fixed.
+- No merge/deploy has been performed.
 
-## Completed in Phase 4
-- `src/battle/action.ts`: data-driven Skill/Item/Effect contracts and validation.
-- Battle commands extended with `skill`, `ultimate`, `item`, `retreat`.
-- Skill ownership, item inventories, ability target validation.
-- Effect execution: damage/heal/status/timeline shift/energy/formation swap.
-- Taunt and Defense Down connected to battle behavior.
-- Ultimate 100-energy baseline.
-- Conditional retreat and energy reset.
-- Mixed skill/basic deterministic replay.
-- Remote definition and skill/effect regression tests persisted.
-- Evidence: `docs/reports/HEADLESS_BATTLE_ENGINE_PHASE4.md`.
+## Completed Through Phase 5
+- Data-driven Skill/Item/Effect contracts.
+- Skill/Ultimate/Item/Retreat manual command paths.
+- Damage/heal/status/timeline/energy/formation effects.
+- Taunt and Defense Down integration.
+- Conditional retreat.
+- Deterministic mixed replay.
+- Skill-aware Smart Auto:
+  - basic / guard / active / ultimate
+  - healing, control, timeline and energy utility
+  - Ultimate overkill protection
+  - deterministic tie-break
+  - no automatic item or retreat
+- Skill-aware headless simulation.
+- Local reconstructed full regression: `59/59 PASS`.
+- Remote Phase 5 code/tests persisted.
+- Evidence: `docs/reports/HEADLESS_BATTLE_ENGINE_PHASE5.md`.
 
 ## Verification
 ### PASS
-- Local TypeScript strict build.
-- Local reconstructed regression: `52 passed / 0 failed`.
-- Remote file persistence/marker checks.
-- RNG typo remediation.
+- Local strict TypeScript build.
+- Local headless regression: `59 passed / 0 failed`.
+- Smart Auto dedicated tests: 7 PASS.
+- 100 seeded skill-aware auto battles terminate under cap.
+- Remote persistence marker checks.
 
 ### NOT_RUN
-- GitHub CI on exact remote HEAD.
-- Full skill-aware Smart Auto.
-- Auto item use (intentionally OFF by baseline).
-- Auto retreat (intentionally OFF by baseline).
-- Status duration lifecycle / DOT turn processing.
-- Confusion/Stun runtime behavior.
-- 15-character balance.
+- GitHub CI/check for exact remote HEAD.
+- Status duration lifecycle in Battle Engine.
+- Poison/Burn/Bleed periodic damage.
+- Stun/Confusion runtime control behavior.
+- Full roster/5v5 balance.
 - Dungeon generation.
 - Mobile UX.
 
 ## Next Safe Action
-1. Implement `chooseSmartCommand` using the existing command contract.
-2. Evaluate basic attack, guard, active skills and ultimate; do not auto-use items or retreat.
-3. Protect against Ultimate overkill and value healing/status/timeline control.
-4. Add deterministic Smart Auto tests and bounded multi-seed simulation.
-5. Update Phase 5 evidence and this handoff.
+1. Define deterministic status lifecycle timing relative to SPD Timeline.
+2. Apply DOT at a consistent phase without introducing a second hidden time system.
+3. Implement Stun as skipped action and Confusion with deterministic target/action rule.
+4. Tick/expire statuses deterministically.
+5. Add status-runtime replay and no-soft-lock tests.
+6. Update Phase 6 evidence.
 
 ## REQUIRED_CONTEXT
 - `AGENTS.md`
@@ -56,11 +61,12 @@
 - `docs/specs/BATTLE_SPEC.md`
 - `docs/specs/BALANCE_SEED.md`
 - `docs/reports/HEADLESS_BATTLE_ENGINE_PHASE4.md`
+- `docs/reports/HEADLESS_BATTLE_ENGINE_PHASE5.md`
 
 ## DO_NOT_REREAD_BY_DEFAULT
 - Full original chat decision sequence.
-- Dungeon spec unless battle↔dungeon transition becomes relevant.
-- Phase 1–3 reports unless investigating regressions.
+- Phase 1–3 reports unless investigating regression.
+- Dungeon spec until battle core is complete.
 
 ## Human Gate
 - Merge to `main`: `REQUIRED`
