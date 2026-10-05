@@ -80,6 +80,14 @@ const ART_ALIASES: Readonly<Record<string, string>> = {
   "lu-bu": "zhang-liao", "sun-jian": "sun-quan", "yuan-shao": "cao-cao", "cao-ren": "xiahou-dun", "hua-xiong": "화웅",
   // E2 enemies
   "여포": "zhang-liao", "동탁": "장각", "이유": "장량", "방화병": "황건 술사", "서량 친위대": "서량 기병",
+  // E3 서주
+  "chen-gong": "jia-xu", "zang-ba": "zhang-fei", "gao-shun": "xiahou-dun", "mi-zhu": "hua-tuo",
+  "원술군 보병": "동탁군 극병", "원술군 궁병": "동탁군 궁병", "산적": "황건 기병", "병주 기병": "서량 기병", "함진영": "관문 수비대",
+  "수군": "황건 술사", "기령": "화웅", "원술": "장량", "고순": "xiahou-dun", "진궁": "jia-xu",
+  // E4 관도
+  "xu-chu": "zhang-fei", "dian-wei": "xiahou-dun", "xun-yu": "zhuge-liang", "yan-liang": "zhang-liao", "wen-chou": "taishi-ci",
+  "하북 보병": "동탁군 극병", "하북 강노병": "동탁군 궁병", "하북 기병": "서량 기병", "조조군 관문병": "관문 수비대", "오소 수비병": "황건 창병",
+  "하북 대극사": "관문 수비대", "공수": "화웅", "맹탄": "화웅", "변희": "화웅", "왕식": "화웅", "안량": "zhang-liao", "문추": "taishi-ci", "원소": "cao-cao",
 };
 export function artKey(key: string): string {
   return ART_ALIASES[key] ?? key;
