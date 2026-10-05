@@ -1,7 +1,7 @@
 # Claude Content Visual Delta — 2026-10-06
 
 Status: `DESIGN_WORK_IN_PROGRESS`
-Content source: `main` at `4792356fa81f39ca053edc0df30278868abe2c22`
+Content source: `main` at `82b38b4bf877a015e99f53ae551bfedb45bbc790`
 Latest Claude feature: PR #10, Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`, merged to `main`
 Art baseline: DEC-025 + Visual Bible v1 — unchanged and approved.
 

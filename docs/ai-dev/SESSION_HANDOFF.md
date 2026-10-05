@@ -2,12 +2,12 @@
 
 ## Project Control
 - Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon`
-- Current product source: `main` at `4792356fa81f39ca053edc0df30278868abe2c22`
+- Current product source: `main` at `82b38b4bf877a015e99f53ae551bfedb45bbc790`
 - Latest Claude work: PR #10 merged; Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`
 - Art/design branch: `art/ink-graphic-novel-v1`
-- Art HEAD before this handoff commit: `87f2f68f038371ce89656a972ad2e309817d28da`
+- Art HEAD before this handoff commit: `4824590db73cbd5f695df4753c7ae877d1a94e1a`
 - Open PR: none
-- Art commit checks: no GitHub status checks were reported for the documentation/concept-only commits through `9fce2758e86eb5967ba4ab1b9c3001ca0540146f`; no code workflow run was returned.
+- Art commit checks: no GitHub status checks were reported for the documentation/concept-only commits through `4824590db73cbd5f695df4753c7ae877d1a94e1a`; no code workflow run was returned.
 - Art direction and Product Baseline remain unchanged.
 
 ## Work Responsibility
@@ -19,6 +19,7 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - Character detail uses a 40px portrait row with class, stats, skills, and historical note.
 - Story scene progression includes a 48px speaker portrait, line progress, next/tap, skip, and choices after the final line.
 - `docs/art/STORY_ART_QUEUE.md` on main lists 37 added ruler/general designs and about 90 enemy/boss names. Follow stable ids and existing aliases.
+- Main advanced to `82b38b4` via PR #11, which only records user-performed remote branch cleanup; comparison with `4792356` found no game-code, content, or art-queue delta.
 
 ## Completed This Session
 - Verified main HEAD, art HEAD, Claude branch/PR, Codex screen/scene markup, story art queue, and CI.
