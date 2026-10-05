@@ -5,7 +5,7 @@
 - Implementation branch: `feature/headless-battle-engine`
 - Implementation HEAD: `017e0c4130f914dd33d2ab74f2093d4170b0e438`
 - Art branch: `art/ink-graphic-novel-v1`
-- Art HEAD before this handoff commit: `8cbca559acf7ea1c706bd9cfb53de5f9e77050c0`
+- Art HEAD before this handoff commit: `de1990d0dad4f7ccf6d9b24865d3c25e51c081b9`
 - Current Gate: `PHASE_A_VISUAL_SPEC_READY / CODEX_IMPLEMENTATION_NEXT`
 - Latest CI: no status checks returned for either baseline commit; `NOT_RUN / UNKNOWN`
 - Open PR: none found
