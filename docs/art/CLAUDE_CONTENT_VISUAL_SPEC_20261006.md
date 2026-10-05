@@ -172,3 +172,14 @@ Visual study: `concepts/ruler-master-comparison-v2-20261006.jpg`.
 - It removes the earlier battle/background scenery and reduces metallic ornament so the three identities compare directly on hanji.
 - Each character now has bust, full-body, and a simplified token in one column. The repeated face, palette, and outline language support cross-view recognition.
 - Status remains `CONCEPT`: the sheet is not a production export or final approval. Next validation is separate portrait/full-body/token masters at intended sizes, including grayscale/silhouette reading and mobile thumbnail review. Avoid assuming tiny generated token detail will survive raster reduction.
+
+
+## 16. Ruler Master and Sima Yi Refinement
+
+Current studies:
+- `concepts/ruler-master-comparison-v2-20261006.jpg`
+- `concepts/sima-yi-master-concept-v2-20261006.jpg`
+
+Ruler comparison v2 is the cleaner shared line/paper reference: no battle scenery, reduced metal trim, and one bust/full-body/token sequence per ruler. Sima Yi v2 keeps his charcoal/deep-crimson palette, narrow strategist gaze, neat beard, and folding command fan while adopting the same subdued hanji presentation.
+
+Both stay `CONCEPT`. This is a consistency pass, not approval of production art. The next review must use separate deliverables at their intended sizes: bust portrait crop, full-body combat/event illustration, and simplified exploration token. Check silhouette recognition in monochrome and at the actual small UI scale before the ruler set becomes an implementation master.

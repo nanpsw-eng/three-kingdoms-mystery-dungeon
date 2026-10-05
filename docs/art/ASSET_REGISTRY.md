@@ -17,14 +17,15 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 | Existing procedural pixel portraits/sprites/map tiles | `SUPERSEDED` | Legacy main visual language; retained as fallback | Keep functional until replacement coverage is verified |
 
 
-| Sima Yi bust/full-body/exploration token concept | `CONCEPT` | `concepts/sima-yi-master-concept-20261006.jpg` | Revise against the Liu Bei/Cao Cao/Sun Quan master set before approval |
+| Sima Yi first master concept | `SUPERSEDED` | `concepts/sima-yi-master-concept-20261006.jpg` | Keep as history; use v2 for current review |
+| Sima Yi master concept v2 | `CONCEPT` | `concepts/sima-yi-master-concept-v2-20261006.jpg` | Check token and face consistency at target sizes; keep separate from production asset approval |
 | Codex character-detail screen concept v2 | `CONCEPT` | `concepts/codex-character-detail-mockup-v2-20261006.jpg` | Layout reference only; align final details with current 40px portrait component |
 | Codex Bosses / Achievements / Items views | `IMPLEMENTATION_READY` | `CLAUDE_CONTENT_VISUAL_SPEC_20261006.md` | Design tab-specific states and readable unknown/locked states |
 | Line-by-line story scene UI | `IMPLEMENTATION_READY` | `CLAUDE_CONTENT_VISUAL_SPEC_20261006.md` | Apply speaker portrait, n/m progress, next/tap/skip and choices |
 | Story expansion character + enemy production art queue | `MASTER_REQUIRED` | `STORY_ART_QUEUE.md` on latest main | Work from existing stable ids / aliases; follow queue order |
 
 
-| Original ruler master comparison v2 (Liu Bei / Cao Cao / Sun Quan) | `CONCEPT` | `concepts/ruler-master-comparison-v2-20261006.jpg` | Review face/silhouette consistency; create separate character masters before approval |
+| Original ruler master comparison v2 (Liu Bei / Cao Cao / Sun Quan) | `CONCEPT` | `concepts/ruler-master-comparison-v2-20261006.jpg` | Review separate assets at target sizes; no production approval yet |
 | E2 boss duo (Dong Zhuo / Lü Bu) concept | `CONCEPT` | `concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg` | Simplify armor ornament and preserve broad-vs-tall silhouette contrast |
 
 
