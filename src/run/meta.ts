@@ -23,7 +23,8 @@ function union(left: readonly string[], right: readonly string[]): string[] {
 export function applyRunToMeta(meta: MetaState, summary: RunSummary, content: ContentPack): MetaState {
   const runs = meta.runs + 1;
   const bestDepth = { ...meta.bestDepth, [summary.campaignId]: Math.max(meta.bestDepth[summary.campaignId] ?? 0, summary.depthReached) };
-  let characters = union(meta.unlockedCharacters, []);
+  // X6: enemy generals recruited during a run stay unlocked.
+  let characters = union(meta.unlockedCharacters, summary.recruited);
   let campaigns = union(meta.unlockedCampaigns, []);
   let achievements = union(meta.achievements, []);
   const cleared = new Set<string>(summary.cleared ? [summary.campaignId] : []);

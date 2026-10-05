@@ -6,6 +6,7 @@ import { drawMap, tileAt } from "./map.js";
 import { loadAssets } from "./assets.js";
 import { portraitUrl } from "./portraits.js";
 import { figureUrl, iconUrl, spriteImg } from "./sprites.js";
+import { isStoryPhase, storySheet } from "./story.js";
 import { CLASS_NAMES, DANGER_NAMES, MODIFIER_NAMES, SLOT_NAMES, STATUS_NAMES, contentName, describeRunEvent } from "./text.js";
 
 const content = MVP_CONTENT;
@@ -154,7 +155,8 @@ function render(): void {
   else if (run.phase === "battle") { renderBattle(); hitIds = new Set(); }
   else if (run.phase === "safe-zone") renderSafeZone();
   else renderDungeon();
-  if (run !== null && (run.phase === "trait-choice" || run.phase === "recruit" || run.phase === "event")) renderDecision();
+  if (run !== null && isStoryPhase(run.phase)) sheet(...storySheet({ run, act: (command) => { act(command); }, render, portrait: (key, size, alt) => pic(key, size, alt) }, run.pending()[0]!));
+  else if (run !== null && (run.phase === "trait-choice" || run.phase === "recruit" || run.phase === "event")) renderDecision();
   else if (modal === "bag") renderBag();
   else if (modal === "party") renderParty();
   if (pickTarget !== null) renderPicker();
@@ -210,6 +212,7 @@ function hud(): HTMLElement {
     h("span", {}, "Lv ", h("b", {}, String(r.level))),
     h("span", {}, "금 ", h("b", {}, String(r.gold))),
     modifier ? h("span", {}, "[" + (MODIFIER_NAMES[modifier] ?? modifier) + "]") : null,
+    ...dungeon.mechanicStatus().map((status) => h("span", { class: status.urgent ? "mechanic urgent" : "mechanic" }, status.label + " ", h("b", {}, status.value))),
   );
 }
 
@@ -387,7 +390,7 @@ function renderDecision(): void {
     const c = r.character(pending.characterId);
     sheet(h("div", { class: "center" }, pic(c.id, 128, c.name)), h("h2", { class: "center" }, "장수 조우: " + c.name), h("p", {}, `${CLASS_NAMES[c.characterClass]} · ${c.roleTags.join(" / ")} — HP ${c.stats.maxHp} ATK ${c.stats.atk} DEF ${c.stats.def} SPD ${c.stats.spd} INT ${c.stats.int}`),
       h("div", { class: "grid2" }, button("영입한다", () => { act({ type: "recruit", accept: true }); render(); }, { class: "primary" }), button("보낸다", () => { act({ type: "recruit", accept: false }); render(); })));
-  } else {
+  } else if (pending.kind === "event") {
     const event = r.event(pending.eventId)!;
     sheet(h("h2", {}, event.title), h("p", {}, event.text), ...event.choices.map((choice, index) => button(choice.label, () => { act({ type: "event-choice", index }); render(); }, { class: "choice" })));
   }

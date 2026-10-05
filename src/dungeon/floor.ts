@@ -63,7 +63,15 @@ export interface FloorSpec {
     readonly sorceryFormations?: number;
     /** Yellow Turban: alarm bells also summon a reinforcement. */
     readonly alarmNetwork?: boolean;
+    /** Pluggable per-floor rules (see dungeon/mechanics.ts). */
+    readonly list?: readonly MechanicSpec[];
   };
+}
+
+/** A pluggable floor rule, resolved by type in dungeon/mechanics.ts. */
+export interface MechanicSpec {
+  readonly type: string;
+  readonly params?: Readonly<Record<string, number>>;
 }
 
 export interface FloorTrap { readonly id: string; readonly type: TrapType; readonly pos: Point; }
@@ -97,6 +105,7 @@ export interface FloorData {
   readonly modifier: FloorModifier | null;
   readonly boss: boolean;
   readonly alarmNetwork: boolean;
+  readonly mechanics: readonly MechanicSpec[];
   /** Generation attempt that produced this floor (diagnostic). */
   readonly attempt: number;
 }
@@ -452,6 +461,7 @@ function tryGenerate(spec: FloorSpec, attempt: number): FloorData | null {
     modifier: spec.modifier ?? null,
     boss: spec.boss !== undefined,
     alarmNetwork: spec.mechanics?.alarmNetwork ?? false,
+    mechanics: spec.mechanics?.list ?? [],
     attempt,
   };
 }

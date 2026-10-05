@@ -2,7 +2,7 @@ import type { BattleItemDefinition, SkillDefinition } from "../battle/action.js"
 import type { BasicAttackReach } from "../battle/battle.js";
 import type { FormationSlot } from "../battle/formation.js";
 import type { CoreStats } from "../battle/unit.js";
-import type { FloorModifier, FloorObjectSpec, TrapType, Weighted } from "../dungeon/floor.js";
+import type { FloorModifier, FloorObjectSpec, MechanicSpec, TrapType, Weighted } from "../dungeon/floor.js";
 
 export type CharacterClass = "infantry" | "cavalry" | "archer" | "strategist" | "support";
 export type StatKey = keyof CoreStats;
@@ -89,6 +89,35 @@ export interface EnemyGroupDefinition {
   readonly loot?: readonly Weighted[];
   readonly lootChance?: number;
   readonly boss?: boolean;
+  /** Named general who may offer to join after defeat (X6 적장 등용); joining unlocks permanently. */
+  readonly recruit?: { readonly characterId: string; readonly chance: number };
+  /** Before the battle the champion (units[unitIndex]) challenges one of your generals (X5 일기토). */
+  readonly duel?: { readonly unitIndex: number; readonly penalty?: number };
+  /** Multi-phase boss (X7): after this group falls the next phase starts immediately. */
+  readonly nextPhase?: string;
+  /** Scene shown when this phase begins (for phase ≥ 2). */
+  readonly phaseScene?: string;
+}
+
+/** One line of dialogue; `speaker` is a portrait key (character id or enemy unit name). */
+export interface StoryLine { readonly speaker?: string; readonly name: string; readonly text: string }
+
+export interface StorySceneDefinition {
+  readonly id: string;
+  readonly title?: string;
+  readonly lines: readonly StoryLine[];
+  /** Ruler-specific replacement lines (shared historical view, flavored per ruler). */
+  readonly variants?: Readonly<Record<string, readonly StoryLine[]>>;
+  readonly choices?: readonly { readonly label: string; readonly effects: readonly RunEffect[] }[];
+}
+
+export interface CampaignScenes {
+  readonly intro?: string;
+  readonly outro?: string;
+  /** depth → scene shown on entering that floor */
+  readonly floorEnter?: Readonly<Record<number, string>>;
+  /** enemy group id → scene shown after it is defeated */
+  readonly bossDefeated?: Readonly<Record<string, string>>;
 }
 
 export type RunEffect =
@@ -123,12 +152,19 @@ export interface FloorPlan {
   /** A safe zone (rest + shop) follows this floor. */
   readonly safeZoneAfter?: boolean;
   readonly secretRoomChance?: number;
+  /** Pluggable floor rules (X3), e.g. { type: "burning-capital", params: { limit: 120 } }. */
+  readonly mechanics?: readonly MechanicSpec[];
 }
 
 export interface CampaignDefinition {
   readonly id: string;
   readonly name: string;
   readonly preview?: boolean;
+  /** Timeline order (E1 = 1 …) and era label for the campaign map. */
+  readonly order?: number;
+  readonly era?: string;
+  readonly summary?: string;
+  readonly scenes?: CampaignScenes;
   /** Party level at run start (preview expeditions start mid-run; trait picks for passed levels are granted). */
   readonly startLevel?: number;
   readonly floors: readonly FloorPlan[];
@@ -158,6 +194,7 @@ export interface ContentPack {
   readonly items: readonly ItemDefinition[];
   readonly enemyGroups: readonly EnemyGroupDefinition[];
   readonly events: readonly EventDefinition[];
+  readonly scenes?: readonly StorySceneDefinition[];
   readonly campaigns: readonly CampaignDefinition[];
   readonly unlocks: readonly UnlockRule[];
   readonly startingUnlocks: { readonly characters: readonly string[]; readonly campaigns: readonly string[] };

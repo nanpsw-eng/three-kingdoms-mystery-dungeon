@@ -24,6 +24,7 @@ import {
   STARVATION_DAMAGE_RATIO,
   TRAP_DAMAGE_RATIO,
 } from "./balance.js";
+import { createMechanics, type FloorMechanic, type MechanicContext, type MechanicStatus } from "./mechanics.js";
 import {
   isPassableTile,
   pickWeighted,
@@ -128,6 +129,7 @@ export type DungeonEvent =
   | Readonly<{ type: "teleported"; to: Point }>
   | Readonly<{ type: "gate-opened"; gateId: string }>
   | Readonly<{ type: "party-defeated" }>
+  | Readonly<{ type: "mechanic"; mechanic: string; message: string }>
   | Readonly<{ type: "descended" }>;
 
 export interface DungeonStepResult {
@@ -170,6 +172,8 @@ export class DungeonEngine {
   readonly #trapRng: SeededRng;
   readonly #spawnRng: SeededRng;
   readonly #playerRng: SeededRng;
+  readonly #mechanicRng: SeededRng;
+  readonly #mechanics: FloorMechanic[];
   readonly #passiveTrapDetection: number;
   readonly #reinforcementGroups: readonly Weighted[];
   readonly #initialEnemyCount: number;
@@ -226,6 +230,8 @@ export class DungeonEngine {
     this.#trapRng = rng.fork("traps");
     this.#spawnRng = rng.fork("spawn");
     this.#playerRng = rng.fork("player");
+    this.#mechanicRng = rng.fork("mechanics");
+    this.#mechanics = createMechanics(floor.mechanics ?? []);
     this.#pos = floor.start;
     this.#updateVision();
     this.#stairsSeen = false;
@@ -251,6 +257,10 @@ export class DungeonEngine {
   }
   visibleEnemies(): readonly DungeonEnemy[] { return this.enemies().filter((enemy) => this.isVisible(enemy.pos)); }
   defeatedEnemies(): readonly string[] { return [...this.#defeated]; }
+  /** HUD lines for active floor mechanics (fire countdown, water level…). */
+  mechanicStatus(): readonly MechanicStatus[] {
+    return this.#mechanics.map((mechanic) => mechanic.status?.(this.#turn) ?? null).filter((status): status is MechanicStatus => status !== null);
+  }
 
   // ---------- party hooks for the Run layer ----------
   setParty(members: readonly ExpeditionMember[]): void {
@@ -731,7 +741,28 @@ export class DungeonEngine {
       const chance = danger === "danger" ? REINFORCEMENT_CHANCE_HIGH : REINFORCEMENT_CHANCE_CAUTION;
       if (this.#spawnRng.chance(chance)) this.#spawnReinforcement(events, false);
     }
+    if (this.#mechanics.length > 0 && this.#status !== "defeated") this.#runMechanics(events);
     this.#updateVision();
+  }
+
+  #runMechanics(events: DungeonEvent[]): void {
+    for (const mechanic of this.#mechanics) {
+      const ctx: MechanicContext = {
+        turn: this.#turn,
+        rng: this.#mechanicRng,
+        position: this.#pos,
+        damageParty: (ratio, canKo) => this.#damageParty(ratio, canKo).reduce((sum, d) => sum + d.amount, 0),
+        addFood: (amount) => { this.#food = Math.max(0, Math.min(FOOD_MAX, this.#food + amount)); },
+        alertAll: () => this.#alarm(events),
+        reinforce: () => this.#spawnReinforcement(events, false),
+        emit: (message) => events.push({ type: "mechanic", mechanic: mechanic.type, message }),
+      };
+      mechanic.onTurnEnd?.(ctx);
+    }
+    if (this.#status === "exploring" && this.#party.every((member) => member.hp <= 0)) {
+      this.#status = "defeated";
+      events.push({ type: "party-defeated" });
+    }
   }
 
   #randomFreeRoomTile(rng: SeededRng, allowRoom: (room: number) => boolean): Point | null {

@@ -35,3 +35,7 @@ export const SORCERY_ENEMY_ENERGY = 30 as const;
 export const REINFORCEMENT_REWARD_RATIO = 0.5 as const;
 /** A-17: safe zone heals all members and treats KO members to this HP ratio. */
 export const SAFE_ZONE_HEAL_RATIO = 1 as const;
+/** X5 일기토: a defeated champion enters the main battle at (1 - penalty) of its HP. */
+export const DUEL_DEFAULT_PENALTY = 0.5 as const;
+/** X5 일기토: losing the duel leaves your general at 1 HP and fires up the enemy (initial energy). */
+export const DUEL_LOSS_ENEMY_ENERGY = 30 as const;

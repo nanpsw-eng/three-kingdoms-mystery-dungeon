@@ -39,6 +39,7 @@ export function describeDungeonEvent(run: RunEngine, event: DungeonEvent): strin
     case "gate-opened": return "관문이 열렸다!";
     case "sorcery-destroyed": return "술법진을 파괴했다.";
     case "party-defeated": return "부대가 전멸했다…";
+    case "mechanic": return event.message;
     case "descended": return "계단을 내려갔다.";
     case "food": return null;
     default: return null;
@@ -61,6 +62,9 @@ export function describeRunEvent(run: RunEngine, event: RunEvent): string | null
     case "item-used": return contentName(run, event.itemId) + " 사용.";
     case "equipped": return memberName(run, event.characterId) + " 장착: " + contentName(run, event.equipmentId);
     case "event-resolved": return null;
+    case "scene-ended": return null;
+    case "duel-ended": return "일기토 — " + memberName(run, event.characterId) + (event.won ? "이(가) " + event.champion + "을(를) 꺾었다!" : "이(가) " + event.champion + "에게 밀렸다…");
+    case "boss-phase": return event.groupName + " — 적이 전열을 가다듬는다!";
     case "safe-zone": return "안전 정비구역에 도착했다. 부대가 회복되었다.";
     case "purchased": return contentName(run, event.contentId) + " 구매.";
     case "run-cleared": return "전역을 평정했다!";
