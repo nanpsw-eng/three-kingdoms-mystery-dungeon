@@ -5,9 +5,9 @@
 - Current product source: `main` at `4792356fa81f39ca053edc0df30278868abe2c22`
 - Latest Claude work: PR #10 merged; Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`
 - Art/design branch: `art/ink-graphic-novel-v1`
-- Art HEAD before this handoff commit: `34ea4aacd7f68f75b15464bcf40c6878758dca4d`
+- Art HEAD before this handoff commit: `9fce2758e86eb5967ba4ab1b9c3001ca0540146f`
 - Open PR: none
-- Art CI before this commit: pending check for `34ea4aacd7f68f75b15464bcf40c6878758dca4d`; prior art CI `f10b206cfe45c2e8ccc4e507d754e65a9f4bb50a` succeeded.
+- Art commit checks: no GitHub status checks were reported for the documentation/concept-only commits through `9fce2758e86eb5967ba4ab1b9c3001ca0540146f`; no code workflow run was returned.
 - Art direction and Product Baseline remain unchanged.
 
 ## Work Responsibility
@@ -31,6 +31,7 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
   - Codex Bosses/Achievements/Items tab-state board.
   - Mid-scene and final-choice story sheet states.
 - Saved downscaled concept references and updated the asset registry and Claude visual delta spec in the art branch.
+- Created an E2 finale trio sheet for Yuan Shao, Cao Cao’s campaign-boss variant, and Cao Ren; added its concept reference, review notes, and registry entry.
 
 ## Asset State
 - Global art direction: `APPROVED`.
@@ -40,6 +41,7 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - Codex character-detail UI: `CONCEPT`; dynamic progress fractions correct, but enlarged art is mood reference and actual code uses a 40px row portrait.
 - Codex secondary tab board: `CONCEPT`; visual state language established for campaign-grouped bosses, earned achievements, and identified/unidentified items.
 - Story scene UI: `CONCEPT`; reveal and choice states represented; actual portrait must remain 48px and the sheet needs scroll QA.
+- E2 Yuan Shao / Cao Cao battle variant / Cao Ren trio: `CONCEPT`; staff, short-sword, and shield-first token silhouettes are distinct, but residual metal/headpiece detail needs simplification.
 - Individual production portraits, icon sets, and implementation: not created.
 - Repository copies are downscaled JPEG references, not production exports.
 
@@ -59,18 +61,19 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg`
 - `docs/art/concepts/codex-secondary-tabs-20261006.jpg`
 - `docs/art/concepts/story-scene-ui-20261006.jpg`
+- `docs/art/concepts/e2-boss-trio-yuan-shao-cao-cao-cao-ren-20261006.jpg`
 
 ## Verification
 - PR #10 report states: `npm test` 156/156 PASS, `build:web` PASS, Chromium 390×844 smoke PASS, page errors 0.
-- Prior art docs commit CI succeeded; no code was changed in these design commits.
+- No code was changed in these design commits; repository checks are empty for the latest commit, so tests/build/smoke are `NOT_RUN`.
 - Local build/test and production-screen visual QA: `NOT_RUN`.
 - Concept images were visually inspected; remaining design gaps are recorded above.
 
 ## NEXT_SAFE_ACTION
-1. Refine the three original ruler concepts into reusable bust/full-body/token references and reduce metallic ornament.
-2. Align Sima Yi to that established ruler master system.
-3. Produce standalone art for top-priority campaign bosses and playable generals per `STORY_ART_QUEUE.md`.
-4. Continue item-family silhouettes and enemy faction studies.
+1. Refine the Liu Bei / Cao Cao / Sun Quan ruler concepts into reusable bust/full-body/token references and reduce metallic ornament.
+2. Align Sima Yi and the E2 boss concepts to that shared identity system.
+3. Continue the remaining campaign bosses in `STORY_ART_QUEUE.md` (Lu Xun, Meng Huo, Sima Yi), then playable generals.
+4. Design the item-family silhouettes and enemy faction studies after the character master review.
 
 ## HUMAN GATE
 - Reversible design exploration and reference/spec updates on the art branch: no additional gate.
