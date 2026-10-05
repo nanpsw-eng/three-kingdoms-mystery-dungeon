@@ -1,0 +1,12 @@
+import { BASIC_ATTACK_POWER, GUARD_DAMAGE_MULTIPLIER, type BattleCommand, type BattleEngine } from "./battle.js";
+import { computeBaseDamage } from "./damage.js";
+export interface BasicSmartAutoPolicy { readonly lowHpGuardThreshold: number; }
+export const DEFAULT_BASIC_SMART_AUTO_POLICY: BasicSmartAutoPolicy = Object.freeze({ lowHpGuardThreshold: 0.25 });
+interface AttackCandidate { readonly targetId:string; readonly lethal:boolean; readonly expectedDamage:number; readonly hpRatio:number; readonly overkill:number; }
+export function chooseBasicSmartCommand(battle:BattleEngine,policy:BasicSmartAutoPolicy=DEFAULT_BASIC_SMART_AUTO_POLICY):BattleCommand{
+ if(!Number.isFinite(policy.lowHpGuardThreshold)||policy.lowHpGuardThreshold<0||policy.lowHpGuardThreshold>1)throw new RangeError("lowHpGuardThreshold must be between 0 and 1 inclusive.");
+ const snapshot=battle.snapshot();const active=snapshot.activeTurn;if(active===null)throw new Error("Smart Auto requires an active turn.");const actor=snapshot.units.find((unit)=>unit.id===active.actorId);if(actor===undefined||actor.knockedOut)throw new Error(`Invalid Smart Auto actor: ${active.actorId}`);
+ const candidates:AttackCandidate[]=battle.legalBasicTargets(actor.id).map((targetId)=>{const target=snapshot.units.find((unit)=>unit.id===targetId);if(target===undefined||target.knockedOut)throw new Error(`Invalid Smart Auto target: ${targetId}`);const guardedModifier=snapshot.guarding.includes(target.id)?GUARD_DAMAGE_MULTIPLIER:1;const expectedDamage=computeBaseDamage(BASIC_ATTACK_POWER,actor.stats.atk,target.stats.def,1,guardedModifier);return{targetId,lethal:expectedDamage>=target.hp,expectedDamage,hpRatio:target.hp/target.stats.maxHp,overkill:Math.max(0,expectedDamage-target.hp)};});
+ candidates.sort((left,right)=>{if(left.lethal!==right.lethal)return left.lethal?-1:1;if(left.lethal&&right.lethal&&left.overkill!==right.overkill)return left.overkill-right.overkill;if(left.hpRatio!==right.hpRatio)return left.hpRatio-right.hpRatio;if(left.expectedDamage!==right.expectedDamage)return right.expectedDamage-left.expectedDamage;return left.targetId.localeCompare(right.targetId);});
+ const best=candidates[0];if(best===undefined)return{type:"guard",actorId:actor.id};if(best.lethal)return{type:"attack",actorId:actor.id,targetId:best.targetId};if(actor.hp/actor.stats.maxHp<=policy.lowHpGuardThreshold)return{type:"guard",actorId:actor.id};return{type:"attack",actorId:actor.id,targetId:best.targetId};
+}
