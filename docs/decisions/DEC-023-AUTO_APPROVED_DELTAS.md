@@ -15,3 +15,8 @@
 | A-07 | Battle | Extra-action / interrupt as Effect type; skills with it must cost ≥1 energy | enables 조운 연속행동, prevents unbounded chains |
 | A-08 | Smart Auto | No low-HP guard at full energy; ultimate reserve weight 0.3; DOT-aware cleanse | soft-lock fix + R-002 findings |
 | A-09 | Repo | GitHub Actions CI on every push (public repo → free) | prevents silent broken builds (Phase 5–7 incident) |
+| A-10 | Dungeon | Trap damage cannot KO (min 1 HP) | avoids unfair instant run loss from hidden traps |
+| A-11 | Dungeon | Starvation −2% max HP per 3 turns, can KO | keeps food pressure meaningful (spec "지속 피해 가능") |
+| A-12 | Dungeon | Corridor detection: front cone at range 3, sides when adjacent, rear never | makes rear contact (spec surprise) possible |
+| A-13 | Dungeon | Auto explore never steps on revealed traps; explicit travel uses them only as last resort | predictable automation |
+| A-14 | Dungeon | Low HP / low food auto-stops fire once per entry into the risk state | prevents permanently blocked auto explore |
