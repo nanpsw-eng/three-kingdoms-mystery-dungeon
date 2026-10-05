@@ -88,6 +88,10 @@ const ART_ALIASES: Readonly<Record<string, string>> = {
   "xu-chu": "zhang-fei", "dian-wei": "xiahou-dun", "xun-yu": "zhuge-liang", "yan-liang": "zhang-liao", "wen-chou": "taishi-ci",
   "하북 보병": "동탁군 극병", "하북 강노병": "동탁군 궁병", "하북 기병": "서량 기병", "조조군 관문병": "관문 수비대", "오소 수비병": "황건 창병",
   "하북 대극사": "관문 수비대", "공수": "화웅", "맹탄": "화웅", "변희": "화웅", "왕식": "화웅", "안량": "zhang-liao", "문추": "taishi-ci", "원소": "cao-cao",
+  // E5 적벽
+  "lu-su": "hua-tuo", "huang-gai": "huang-zhong", "pang-tong": "jia-xu", "cheng-pu": "xiahou-dun",
+  "조조군 보병": "동탁군 극병", "청주병": "황건 창병", "호표기": "서량 기병", "형주 수군": "황건 술사", "몽충": "관문 수비대",
+  "조조군 궁병": "동탁군 궁병", "하후은": "화웅", "채모": "장량", "장윤": "화웅", "조조": "cao-cao", "허저": "zhang-fei",
 };
 export function artKey(key: string): string {
   return ART_ALIASES[key] ?? key;

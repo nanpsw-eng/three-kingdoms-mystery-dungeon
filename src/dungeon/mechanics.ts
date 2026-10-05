@@ -152,3 +152,21 @@ registerMechanic("siege-waves", (params) => {
     status(turn) { return { label: "공세", value: String(Math.floor(turn / interval) + 1) + "파", urgent: false }; },
   };
 });
+
+/** E5 장판파 추격: the pursuing army closes in — reinforcements arrive every `interval` turns and the floor is alerted. */
+registerMechanic("pursuit", (params) => {
+  const interval = params.interval ?? 35;
+  const grace = params.grace ?? 20;
+  return {
+    type: "pursuit",
+    onTurnEnd(ctx) {
+      if (ctx.turn === grace) ctx.emit("뒤에서 추격대의 말발굽 소리가 들린다!");
+      if (ctx.turn > grace && (ctx.turn - grace) % interval === 0) { ctx.reinforce(); ctx.alertAll(); ctx.emit("추격대가 따라붙었다!"); }
+    },
+    status(turn) {
+      if (turn < grace) return { label: "추격", value: (grace - turn) + "턴", urgent: false };
+      const next = interval - ((turn - grace) % interval);
+      return { label: "추격", value: next + "턴", urgent: next <= 8 };
+    },
+  };
+});
