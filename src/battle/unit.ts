@@ -1,4 +1,5 @@
-export const MAX_ENERGY = 100 as const;
+import { MAX_ENERGY } from "./balance.js";
+export { MAX_ENERGY };
 
 export type BattleSide = "ally" | "enemy";
 

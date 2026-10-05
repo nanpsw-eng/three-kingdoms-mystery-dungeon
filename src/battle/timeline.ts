@@ -1,4 +1,5 @@
-export const ACTION_DELAY_BASE = 10_000 as const;
+import { ACTION_DELAY_BASE } from "./balance.js";
+export { ACTION_DELAY_BASE };
 const EPSILON = 1e-9;
 
 export type TimelineEventKind = "normal" | "extra" | "interrupt";

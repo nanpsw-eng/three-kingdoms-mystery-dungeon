@@ -1,4 +1,5 @@
-export const STACKABLE_STATUS_MAX = 3 as const;
+import { STACKABLE_STATUS_MAX } from "./balance.js";
+export { STACKABLE_STATUS_MAX };
 export type StatusType = "poison" | "burn" | "bleed" | "confusion" | "stun" | "taunt" | "defense-down" | "timeline-delay";
 export interface StatusApplication { readonly type: StatusType; readonly durationRounds: number; readonly stacks?: number; readonly magnitude?: number; readonly sourceId?: string; }
 export interface StatusInstance { readonly type: StatusType; readonly remainingRounds: number; readonly stacks: number; readonly magnitude: number; readonly sourceId?: string; }

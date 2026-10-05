@@ -24,12 +24,12 @@ const SKILLS={
   mendAny:{id:"mendAny",kind:"active",energyCost:0,targeting:one("ally","any"),effects:[{type:"heal",recipient:"targets",baseHeal:40}]},
 };
 const ALL_SKILLS=Object.values(SKILLS);
-const SUPPORT=["purify","cleanseAll","raise","raiseAny","mend","mendAny"];
+const SUPPORT=["purify","raise","mend"];
 
 // healer acts first (spd 200), boss second (spd 150); tank/buddy are slow.
-function setup(seed="phase7",extra={}){
+function setup(seed="phase7",extra={},healerSkills=SUPPORT){
   return new BattleEngine({seed,skills:ALL_SKILLS,...extra,participants:[
-    p("healer","ally","rear-left",{...base,spd:200},"ranged",SUPPORT),
+    p("healer","ally","rear-left",{...base,spd:200},"ranged",healerSkills),
     p("tank","ally","front-left",{...base,maxHp:81,spd:50}),
     p("buddy","ally","front-center",{...base,spd:60}),
     p("boss","enemy","front-center",{...base,maxHp:5000,atk:150,spd:150},"melee",["nuke","hex"]),
@@ -92,7 +92,7 @@ test("cleanse removes only the listed status and keeps snapshot ordering",()=>{
 });
 
 test("cleanse without statusTypes removes every status",()=>{
-  const b=setup(); act(b,"boss",{type:"skill",skillId:"hex",targetIds:["buddy"]});
+  const b=setup("phase7",{},["cleanseAll"]); act(b,"boss",{type:"skill",skillId:"hex",targetIds:["buddy"]});
   const r=act(b,"healer",{type:"skill",skillId:"cleanseAll",targetIds:["buddy"]});
   assert.equal(r.effects[0]?.amount,3); assert.deepEqual(statusesOf(b,"buddy"),[]);
 });
@@ -158,7 +158,7 @@ test("revive falls back to the first free FORMATION_SLOTS slot when the original
 });
 
 test("plain heal never revives a KO unit even when the targeting allows KO",()=>{
-  const b=setup(); killTank(b);
+  const b=setup("phase7",{},["mendAny"]); killTank(b);
   const r=act(b,"healer",{type:"skill",skillId:"mendAny",targetIds:["tank"]});
   assert.deepEqual(r.effects,[{effectType:"heal",targetId:"tank",applied:false}]);
   const snap=b.snapshot();
@@ -168,7 +168,7 @@ test("plain heal never revives a KO unit even when the targeting allows KO",()=>
 });
 
 test("revive on a living target selected through state=any is a deterministic no-op",()=>{
-  const b=setup(); turnOf(b,"healer"); const hp=unitOf(b,"buddy").hp;
+  const b=setup("phase7",{},["raiseAny"]); turnOf(b,"healer"); const hp=unitOf(b,"buddy").hp;
   const r=b.execute({type:"skill",actorId:"healer",skillId:"raiseAny",targetIds:["buddy"]});
   assert.deepEqual(r.effects,[{effectType:"revive",targetId:"buddy",applied:false}]);
   assert.equal(unitOf(b,"buddy").hp,hp);
@@ -187,7 +187,7 @@ test("revive item consumes inventory and restores the KO unit",()=>{
 test("Smart Auto picks revive for a KO ally and never heals a KO target",()=>{
   const b=setup(); killTank(b); turnOf(b,"healer");
   const cmd=chooseSmartCommand(b);
-  assert.equal(cmd.type,"skill"); assert.ok(["raise","raiseAny"].includes(cmd.skillId)); assert.deepEqual(cmd.targetIds,["tank"]);
+  assert.equal(cmd.type,"skill"); assert.equal(cmd.skillId,"raise"); assert.deepEqual(cmd.targetIds,["tank"]);
 });
 
 test("Smart Auto cleanses a heavily debuffed ally over idle options",()=>{

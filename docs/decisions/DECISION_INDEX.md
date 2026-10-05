@@ -26,6 +26,7 @@
 | DEC-020 | 전역별 고유 기믹 1~2개 | APPROVED |
 | DEC-021 | MVP: 황건적 15F 완성 + 호로관 3~5F Preview | APPROVED |
 | DEC-022 | MVP 로스터: 군주 3 + 일반 장수 12 | APPROVED |
+| DEC-023 | 자동 승인 구현 Delta (A-01~) — `DEC-023-AUTO_APPROVED_DELTAS.md` | APPROVED (delegated) |
 
 ## Open Decisions
 - 최종 기술 스택/Architecture

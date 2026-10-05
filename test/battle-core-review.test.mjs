@@ -26,7 +26,7 @@ test("representative 5v5 fixture covers every implemented effect type and 5 unit
   assert.equal(snap.allyFormation.length, 5); assert.equal(snap.enemyFormation.length, 5);
 });
 
-const GOLDEN_5V5 = { seed: "rep-5v5-golden", outcome: "ally-victory", actions: 88, hash: "adacb8ac" };
+const GOLDEN_5V5 = { seed: "rep-5v5-golden", outcome: "ally-victory", actions: 82, hash: "24100ca4" };
 
 test("representative 5v5 Smart Auto battle is deterministic and matches golden result", () => {
   const first = runSmart(GOLDEN_5V5.seed); const second = runSmart(GOLDEN_5V5.seed);

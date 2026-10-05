@@ -1,9 +1,7 @@
 import type { SeededRng } from "../core/rng.js";
 
-export const BASE_CRIT_CHANCE = 0.05 as const;
-export const BASE_CRIT_MULTIPLIER = 1.5 as const;
-export const MIN_DAMAGE_VARIANCE = 0.95 as const;
-export const MAX_DAMAGE_VARIANCE = 1.05 as const;
+import { BASE_CRIT_CHANCE, BASE_CRIT_MULTIPLIER, MAX_DAMAGE_VARIANCE, MIN_DAMAGE_VARIANCE } from "./balance.js";
+export { BASE_CRIT_CHANCE, BASE_CRIT_MULTIPLIER, MAX_DAMAGE_VARIANCE, MIN_DAMAGE_VARIANCE };
 export type DamageKind = "physical" | "strategy";
 export interface DamageRollInput { readonly kind: DamageKind; readonly skillPower: number; readonly attackerAtk: number; readonly attackerInt: number; readonly targetDef: number; readonly targetInt: number; readonly modifier?: number; readonly critChance?: number; readonly critMultiplier?: number; }
 export interface DamageRollResult { readonly kind: DamageKind; readonly damage: number; readonly critical: boolean; readonly variance: number; readonly effectiveDefense: number; readonly rawDamage: number; }

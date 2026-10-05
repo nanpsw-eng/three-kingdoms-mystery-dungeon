@@ -17,7 +17,7 @@ export interface AutoBattleSimulationResult {
   readonly finalStateHash: string;
 }
 
-type AutoCommandChooser = (battle: BattleEngine) => BattleCommand;
+export type AutoCommandChooser = (battle: BattleEngine) => BattleCommand;
 
 function simulate(
   definition: BattleDefinition,
@@ -45,6 +45,15 @@ function simulate(
 
   const outcome: Exclude<BattleOutcome, "ongoing"> = battle.outcome;
   return { outcome, actions, finalStateHash: battle.stateHash() };
+}
+
+/** Runs a battle to completion with any command chooser (Manual scripts, All Attack, Repeat, Smart Auto). */
+export function simulateAutoBattle(
+  definition: BattleDefinition,
+  chooser: AutoCommandChooser,
+  options: Readonly<{ maxActions?: number }> = {},
+): AutoBattleSimulationResult {
+  return simulate(definition, chooser, options.maxActions ?? 1_000);
 }
 
 export function simulateBasicAutoBattle(

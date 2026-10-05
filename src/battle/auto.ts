@@ -26,6 +26,8 @@ export interface BasicSmartAutoPolicy {
 export interface SmartAutoPolicy extends BasicSmartAutoPolicy {
   readonly ultimateOverkillPenalty: number;
   readonly energyCostWeight: number;
+  /** Extra per-energy penalty on active skills while the actor still has an ultimate to charge. */
+  readonly ultimateReserveWeight: number;
 }
 
 export const DEFAULT_BASIC_SMART_AUTO_POLICY: BasicSmartAutoPolicy = Object.freeze({
@@ -36,6 +38,7 @@ export const DEFAULT_SMART_AUTO_POLICY: SmartAutoPolicy = Object.freeze({
   lowHpGuardThreshold: 0.25,
   ultimateOverkillPenalty: 1.5,
   energyCostWeight: 0.12,
+  ultimateReserveWeight: 0.3,
 });
 
 interface ScoredCommand {
@@ -58,6 +61,8 @@ function assertSmartPolicy(policy: SmartAutoPolicy): void {
     throw new RangeError("ultimateOverkillPenalty must be a non-negative finite number.");
   if (!Number.isFinite(policy.energyCostWeight) || policy.energyCostWeight < 0)
     throw new RangeError("energyCostWeight must be a non-negative finite number.");
+  if (!Number.isFinite(policy.ultimateReserveWeight) || policy.ultimateReserveWeight < 0)
+    throw new RangeError("ultimateReserveWeight must be a non-negative finite number.");
 }
 
 function statusOf(snapshot: BattleSnapshot, unitId: string, type: StatusType) {
@@ -101,6 +106,16 @@ function statusUtility(type: StatusType): number {
     case "poison":
     case "bleed": return 12;
   }
+}
+
+const DOT_STATUSES: ReadonlySet<StatusType> = new Set(["poison", "burn", "bleed"]);
+
+// Removing a DOT is worth at least the damage it would still deal.
+function cleanseValue(status: { type: StatusType; stacks: number; magnitude: number; remainingRounds: number }): number {
+  const utility = statusUtility(status.type) * 0.8;
+  if (!DOT_STATUSES.has(status.type)) return utility;
+  const remainingDamage = Math.max(1, Math.round(status.magnitude * status.stacks)) * status.remainingRounds;
+  return Math.max(utility, remainingDamage * 1.2);
 }
 
 function relationScore(actor: UnitSnapshot, target: UnitSnapshot, value: number): number {
@@ -190,9 +205,11 @@ function effectScore(
       const removed = (entry?.statuses ?? []).filter(
         (status) => effect.statusTypes === undefined || effect.statusTypes.includes(status.type),
       );
-      const raw = removed.reduce((sum, status) => sum + statusUtility(status.type) * 0.8, 0);
+      const raw = removed.reduce((sum, status) => sum + cleanseValue(status), 0);
       return relationScore(actor, target, raw);
     }
+    case "extra-action":
+      return relationScore(actor, target, effect.mode === "interrupt" ? 30 : 26);
     case "revive": {
       if (!target.knockedOut) return 0;
       const hp = Math.max(1, Math.round(target.stats.maxHp * effect.hpRatio));
@@ -231,6 +248,7 @@ function scoreSkill(
     }
   }
   score -= skill.energyCost * policy.energyCostWeight;
+  if (skill.kind === "active" && ownsUltimate(battle, actor.id)) score -= skill.energyCost * policy.ultimateReserveWeight;
   if (skill.kind === "ultimate" && targetIds.length === 1) {
     const targetId = targetIds[0];
     if (targetId !== undefined) {
@@ -242,6 +260,10 @@ function scoreSkill(
     }
   }
   return score;
+}
+
+function ownsUltimate(battle: BattleEngine, actorId: string): boolean {
+  return battle.ownedSkills(actorId).some((skill) => skill.kind === "ultimate");
 }
 
 function skillCandidates(battle: BattleEngine, policy: SmartAutoPolicy): ScoredCommand[] {
@@ -357,4 +379,67 @@ export function chooseSmartCommand(
   });
   sortCandidates(candidates);
   return candidates[0]?.command ?? { type: "guard", actorId: actor.id };
+}
+
+/** "All Attack" mode: always the best-scored legal basic attack (guard only when none exists). */
+export function chooseAllAttackCommand(battle: BattleEngine): BattleCommand {
+  const snapshot = battle.snapshot();
+  const active = snapshot.activeTurn;
+  if (active === null) throw new Error("Auto requires an active turn.");
+  const basic = basicCandidates(battle);
+  sortCandidates(basic);
+  return basic[0]?.command ?? { type: "guard", actorId: active.actorId };
+}
+
+/**
+ * "Repeat" mode: replays each actor's last recorded command, re-targeting when the old
+ * targets became illegal and falling back to All Attack when the command cannot repeat.
+ * Items, retreat and formation moves are never repeated.
+ */
+export class RepeatAutoController {
+  readonly #last = new Map<string, BattleCommand>();
+  readonly #policy: SmartAutoPolicy;
+
+  constructor(policy: SmartAutoPolicy = DEFAULT_SMART_AUTO_POLICY) {
+    assertSmartPolicy(policy);
+    this.#policy = policy;
+  }
+
+  record(command: BattleCommand): void {
+    this.#last.set(command.actorId, command);
+  }
+
+  choose(battle: BattleEngine): BattleCommand {
+    const snapshot = battle.snapshot();
+    const active = snapshot.activeTurn;
+    if (active === null) throw new Error("Auto requires an active turn.");
+    const last = this.#last.get(active.actorId);
+    const command = last === undefined ? chooseAllAttackCommand(battle) : this.#repeat(battle, last);
+    this.record(command);
+    return command;
+  }
+
+  #repeat(battle: BattleEngine, last: BattleCommand): BattleCommand {
+    switch (last.type) {
+      case "guard":
+        return { type: "guard", actorId: last.actorId };
+      case "skill":
+      case "ultimate": {
+        const actor = unitOf(battle.snapshot(), last.actorId);
+        const skill = battle.ownedSkills(actor.id).find((candidate) => candidate.id === last.skillId);
+        if (skill !== undefined && actor.energy >= skill.energyCost) {
+          const legal = battle.legalAbilityTargets(actor.id, skill.targeting);
+          if (last.targetIds.every((id) => legal.includes(id))) return last;
+          const options = skillCandidates(battle, this.#policy).filter(
+            (candidate) => (candidate.command.type === "skill" || candidate.command.type === "ultimate") && candidate.command.skillId === skill.id,
+          );
+          sortCandidates(options);
+          if (options[0] !== undefined) return options[0].command;
+        }
+        return chooseAllAttackCommand(battle);
+      }
+      default:
+        return chooseAllAttackCommand(battle);
+    }
+  }
 }

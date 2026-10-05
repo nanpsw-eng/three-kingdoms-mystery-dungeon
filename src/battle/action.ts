@@ -60,6 +60,13 @@ export interface FormationSwapEffectDefinition {
   readonly recipient: "targets";
 }
 
+/** Grants the recipient an immediate extra action ("extra") or a priority interrupt action ("interrupt"). */
+export interface ExtraActionEffectDefinition {
+  readonly type: "extra-action";
+  readonly recipient: EffectRecipient;
+  readonly mode?: "extra" | "interrupt";
+}
+
 export interface CleanseEffectDefinition {
   readonly type: "cleanse";
   readonly recipient: EffectRecipient;
@@ -80,7 +87,8 @@ export type EffectDefinition =
   | EnergyEffectDefinition
   | FormationSwapEffectDefinition
   | CleanseEffectDefinition
-  | ReviveEffectDefinition;
+  | ReviveEffectDefinition
+  | ExtraActionEffectDefinition;
 
 export interface SkillDefinition {
   readonly id: string;
@@ -170,6 +178,11 @@ export function validateEffect(effect: EffectDefinition): void {
         }
       }
       return;
+    case "extra-action":
+      if (effect.mode !== undefined && effect.mode !== "extra" && effect.mode !== "interrupt") {
+        throw new RangeError("Extra-action mode must be extra or interrupt.");
+      }
+      return;
     case "revive":
       if (!Number.isFinite(effect.hpRatio) || effect.hpRatio <= 0 || effect.hpRatio > 1) {
         throw new RangeError("Revive hpRatio must be greater than 0 and at most 1.");
@@ -203,6 +216,9 @@ export function validateSkillDefinition(skill: SkillDefinition): void {
     }
   }
   if (skill.effects.length === 0) throw new RangeError("Skill must contain at least one effect.");
+  if (skill.effects.some((effect) => effect.type === "extra-action") && skill.energyCost < 1) {
+    throw new RangeError("Extra-action skills must cost energy to prevent unbounded action chains.");
+  }
   for (const effect of skill.effects) validateEffect(effect);
   validateActionSpeedModifier(skill.actionSpeedModifier);
 }
