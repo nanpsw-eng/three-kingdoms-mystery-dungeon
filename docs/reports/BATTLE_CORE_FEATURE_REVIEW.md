@@ -1,6 +1,6 @@
 # Battle Core Feature-Complete Review
 
-Status: `REVIEW_DONE / DUNGEON_HANDOFF_BLOCKED / CI_NOT_RUN`
+Status: `REVIEW_DONE / CI_NOT_RUN` — B1–B3 and N7 closed in Phase 8 (`HEADLESS_BATTLE_ENGINE_PHASE8.md`); golden values in §6 re-pinned there
 Date: `2026-10-05`
 Branch: `feature/headless-battle-engine`
 Reviewed source: `34b7d4c` (Phase 7 PASS) + review tests in this change
