@@ -4,7 +4,7 @@
 
 | # | 항목 | 결과 |
 |---|---|---|
-| 1 | 병합 완료 브랜치 정리 | **NOT_DONE — 권한 제약**: 세션 git 프록시가 지정 브랜치 외 원격 쓰기(삭제 포함)를 거부(`unexpected disconnect`), GitHub 도구에 삭제 기능 없음. 대상 `fix/pages-deploy`, `feature/headless-battle-engine`(모두 main에 병합 확인). `ccr-bb39f6f8-g46bbv`는 세션 지정 작업 브랜치라 삭제 대상에서 제외하고 main 최신으로 맞춤 |
+| 1 | 병합 완료 브랜치 정리 | **DONE (사용자 수동 삭제, 2026-10-06)** — 세션에서는 권한 제약: 세션 git 프록시가 지정 브랜치 외 원격 쓰기(삭제 포함)를 거부(`unexpected disconnect`), GitHub 도구에 삭제 기능 없음. 대상 `fix/pages-deploy`, `feature/headless-battle-engine`(모두 main에 병합 확인). `ccr-bb39f6f8-g46bbv`는 세션 지정 작업 브랜치라 삭제 대상에서 제외하고 main 최신으로 맞춤 |
 | 2 | 세이브 호환 | 이어하기 전 검증(`resumable`): 전역·캐릭터가 존재하고 해금 상태인지 확인. 엔진 생성 실패 시에도 세이브 폐기 + 타이틀 안내. 예전 Hulao Preview 세이브 → 안내 표시, 이어하기 버튼 없음, 세이브 삭제(브라우저 확인) |
 | 3 | 도감·업적 | `src/content/notes.ts`(48명 정사 주석, 불확실 사항은 '전해진다/논란' 표기), `src/content/codex.ts`(해금 조건 안내·전역별 보스 39·업적 16·물품 22 view-model), `web/src/codex.ts` 화면(장수/보스/업적/물품 탭, 장수 탭하여 능력치·스킬·주석 펼침). 타이틀 '도감 · 업적 보기' |
 | 4 | 장면 연출 | 대사 한 줄씩 표시(다음 버튼·대사 영역 탭), 진행 표시 n/m, 건너뛰기(선택지 없는 장면은 즉시 넘김, 선택지 장면은 전체 공개 후 선택지 표시) |
