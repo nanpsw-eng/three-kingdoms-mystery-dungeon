@@ -1,82 +1,66 @@
-# SESSION HANDOFF — 2026-10-05 Headless Battle Engine Phase 3
+# SESSION HANDOFF — 2026-10-05 Headless Battle Engine Phase 4
 
 ## Current State
 - Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon`
 - Branch: `feature/headless-battle-engine`
-- Base main commit at branch creation: `508ef5e27201f023b66de3f2f77cd573bd661d6d`
-- Current Gate: `BASIC_BATTLE_STATE_PASS / SKILL_EFFECT_MODEL_NEXT`
+- Recovery Base: `6b550422faeb3a13bcd0267c788e940219875581`
+- Phase 4 persisted HEAD before this handoff update: `219d5d054b713ea6e6edcf7b07bd66e384e4d55a`
+- Current Gate: `SKILL_EFFECT_CORE_PASS / SMART_AUTO_SKILL_NEXT`
 
-## AI-OS Execution Snapshot
-- AI-OS Version/Commit: `v0.4.4@64b5115a698cc6a94cd8df80abb2ee7109010764`
-- Risk Tier: `RISK_MEDIUM`
-- Context Budget: `FOCUSED`
-- Agent Budget: `1 writer/executor`
-- Test Budget: `T1 deterministic headless core + bounded simulation`
-- Actual Surface: `CHAT + GitHub connector + local container`
-- Execution Mode: `SEQUENTIAL`
+## Recovery Reconciliation
+- CONFIRMED_DONE / DO_NOT_REPEAT: Seeded RNG, Unit/Stats, SPD Timeline, damage formulas, StatusStore, formation/basic targeting, basic Battle State Machine, Basic Smart Auto, tie-bias remediation.
+- SUPERSEDED STALE CLAIM: prior handoff said remote 40/40 tests were persisted; actual remote `test/rng.test.mjs` contained four `SededRng` typos. Reconstructed remote state: 36/40 pass.
+- REMEDIATED: typo corrected; local reconstructed suite after Phase 4: 52/52 pass.
+- INTERRUPTIONS from prior resume attempts did not attach the uncommitted Skill/Effect blobs to the branch and therefore required no rollback.
 
-## Completed
-- Private repository bootstrap and canonical design baseline persisted.
-- Deterministic Seeded RNG with snapshot/restore, named streams, and golden vector.
-- Unit/Stats contract: HP/ATK/DEF/SPD/INT, KO, heal/revive primitive, energy 0..100.
-- SPD Timeline with approved delay formula, advance/delay, extra and interrupt actions.
-- Approved physical/strategy damage seed formulas and critical defaults.
-- MVP 8-status store with stacking/refresh/tick rules.
-- Formation model and executable basic Battle State Machine.
-- Melee front-row protection / ranged rear targeting / front-collapse exposure.
-- Guard, formation swap, KO removal, victory/defeat, deterministic battle state hash.
-- Basic Smart Auto command chooser for attack/guard only.
-- 100 seeded Basic Auto battles terminated without soft lock.
-- Equal-SPD input-order bias discovered and remediated with isolated seeded initial Timeline tie-break.
-- Symmetric 500-seed regression after remediation: ally 220 / enemy 280; former result was ally 491 / enemy 9.
-- Local TypeScript build and test suite: `40 passed / 0 failed`.
-- Phase 2/3 evidence and all current tests persisted to the feature branch.
+## Completed in Phase 4
+- `src/battle/action.ts`: data-driven Skill/Item/Effect contracts and validation.
+- Battle commands extended with `skill`, `ultimate`, `item`, `retreat`.
+- Skill ownership, item inventories, ability target validation.
+- Effect execution: damage/heal/status/timeline shift/energy/formation swap.
+- Taunt and Defense Down connected to battle behavior.
+- Ultimate 100-energy baseline.
+- Conditional retreat and energy reset.
+- Mixed skill/basic deterministic replay.
+- Remote definition and skill/effect regression tests persisted.
+- Evidence: `docs/reports/HEADLESS_BATTLE_ENGINE_PHASE4.md`.
 
-## Next Task
-1. Define data-driven Skill/Effect schema without hardcoding individual generals.
-2. Add typed command schemas for `skill`, `ultimate`, `item`, and `retreat` while preserving the same Battle Engine contract.
-3. Integrate status applications, timeline delay/advance, healing, taunt, and formation effects through the effect executor.
-4. Add replay fixture with a mixed skill/basic command sequence and pinned final state hash.
-5. Expand Smart Auto only after skill/effect execution is stable.
+## Verification
+### PASS
+- Local TypeScript strict build.
+- Local reconstructed regression: `52 passed / 0 failed`.
+- Remote file persistence/marker checks.
+- RNG typo remediation.
+
+### NOT_RUN
+- GitHub CI on exact remote HEAD.
+- Full skill-aware Smart Auto.
+- Auto item use (intentionally OFF by baseline).
+- Auto retreat (intentionally OFF by baseline).
+- Status duration lifecycle / DOT turn processing.
+- Confusion/Stun runtime behavior.
+- 15-character balance.
+- Dungeon generation.
+- Mobile UX.
+
+## Next Safe Action
+1. Implement `chooseSmartCommand` using the existing command contract.
+2. Evaluate basic attack, guard, active skills and ultimate; do not auto-use items or retreat.
+3. Protect against Ultimate overkill and value healing/status/timeline control.
+4. Add deterministic Smart Auto tests and bounded multi-seed simulation.
+5. Update Phase 5 evidence and this handoff.
 
 ## REQUIRED_CONTEXT
 - `AGENTS.md`
 - `docs/product/GAME_DESIGN_PRD.md`
 - `docs/specs/BATTLE_SPEC.md`
 - `docs/specs/BALANCE_SEED.md`
-- `docs/reports/HEADLESS_BATTLE_ENGINE_PHASE1.md`
-- `docs/reports/HEADLESS_BATTLE_ENGINE_PHASE2.md`
-- `docs/reports/HEADLESS_BATTLE_ENGINE_PHASE3.md`
-
-## ON_DEMAND_CONTEXT
-- `docs/specs/CHARACTER_ROSTER_MVP.md`
-- `docs/specs/DUNGEON_SPEC.md`
+- `docs/reports/HEADLESS_BATTLE_ENGINE_PHASE4.md`
 
 ## DO_NOT_REREAD_BY_DEFAULT
-- Full original chat decision sequence; canonical decisions are persisted.
+- Full original chat decision sequence.
 - Dungeon spec unless battle↔dungeon transition becomes relevant.
-
-## Verification
-### Passed
-- RNG deterministic/golden tests.
-- Unit/Stats tests.
-- SPD Timeline tests.
-- Damage formula tests.
-- Status merge/tick tests.
-- Formation and basic targeting tests.
-- Battle state hash replay test.
-- Basic Smart Auto tests.
-- 100-seed no-soft-lock simulation.
-- 200-seed automated tie-bias regression test plus 500-seed manual evidence run.
-- TypeScript strict build.
-
-### NOT_RUN
-- GitHub CI.
-- Skill/effect execution tests.
-- Full Smart Auto with skills/ultimate/items.
-- 15-character balance.
-- Dungeon generation.
-- Mobile UX.
+- Phase 1–3 reports unless investigating regressions.
 
 ## Human Gate
 - Merge to `main`: `REQUIRED`
