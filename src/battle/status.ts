@@ -25,6 +25,17 @@ export class StatusStore {
     this.#statuses.set(merged.type,Object.freeze(merged)); return {...merged};
   }
   remove(type: StatusType): boolean { return this.#statuses.delete(type); }
+  clear(statusTypes?: readonly StatusType[]): readonly StatusInstance[] {
+    const targets = statusTypes ?? [...this.#statuses.keys()];
+    const removed: StatusInstance[] = [];
+    for (const type of targets) {
+      const status = this.#statuses.get(type);
+      if (status === undefined) continue;
+      removed.push({ ...status });
+      this.#statuses.delete(type);
+    }
+    return removed.sort((left, right) => left.type.localeCompare(right.type));
+  }
   tickRound(): readonly StatusInstance[] { const expired:StatusInstance[]=[]; for(const [type,status] of this.#statuses){const remainingRounds=status.remainingRounds-1;if(remainingRounds<=0){expired.push({...status,remainingRounds:0});this.#statuses.delete(type);}else this.#statuses.set(type,Object.freeze({...status,remainingRounds}));}return expired; }
   snapshot(): readonly StatusInstance[] { return [...this.#statuses.values()].map((status)=>({...status})).sort((left,right)=>left.type.localeCompare(right.type)); }
 }
