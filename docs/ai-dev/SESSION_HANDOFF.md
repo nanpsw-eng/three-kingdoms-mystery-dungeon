@@ -41,18 +41,18 @@ NEXT_SAFE_ACTION
 ---
 
 ## Track B — Current Visual Control (2026-10-06)
-- Art branch was reconciled with current implementation baseline at main `a035a5ed` by merge commit `7030eff`; Phase A Title/Dungeon/Battle ink skin was already implemented.
-- Atlas and content item routing are implemented with procedural fallback. CI for atlas coverage passed at `d11834c94d28d977040354e5f5ad313fbd6b135f`.
-- Three ruler bust masters are now in `web/assets/portraits/{liu-bei,cao-cao,sun-quan}.webp`. `manifest.nativePortraits` uses a non-pixelized route and only activates after successful image load; `main.ts` keeps the legacy pixel/procedural path on missing assets.
-- CURRENT HEAD (code before this handoff update): `75b65166ccf9cb30293d3e255cf4875263518e59`. Handoff and regression guard are being committed immediately after this implementation commit.
-- CURRENT ART PHASE: Phase B — Ruler Master Set, in progress. Busts implemented; identity-matched full-body illustrations and exploration tokens remain.
-- COMPLETED: Phase A vertical slice; Phase C/D map and item atlas; Liu Bei/Cao Cao/Sun Quan bust source assets and native portrait loader.
-- DO_NOT_REPEAT: art direction selection, Phase A implementation, battle/dungeon/run/content engines, item/map atlas implementation.
-- FILES CHANGED: `web/assets/manifest.json`, `web/assets/portraits/*.webp`, `web/src/assets.ts`, `web/src/main.ts`, `test/art-assets.test.mjs`, `docs/art/ASSET_REGISTRY.md`.
-- TEST RESULT: CI #103 for code commit `75b65166` was in progress at handoff preparation; local `npm test`, `npm run build:web`, and browser smoke are NOT_RUN in this workspace. Earlier atlas coverage CI #102 passed.
-- VISUAL EVIDENCE: generated transparent bust masters saved in repository as the three WebP portrait assets; inspect against ruler palette rules in `VISUAL_BIBLE_V1.md`.
-- KNOWN GAP: no browser screenshot/390×844 check yet; alpha-edge artifact review pending; no full-body or token art yet.
-- NEXT_SAFE_ACTION: wait for CI #103, then produce identity-matched full-body and exploration token masters for the same three rulers and wire them through the existing renderer with fallback.
+- Art branch includes the main implementation sync `7030eff`; Phase A Title/Dungeon/Battle ink skin was already implemented and preserved.
+- Fallback-safe dungeon/object/item atlas is integrated; CI #102 passed.
+- Phase B ruler masters are implemented for Liu Bei, Cao Cao, and Sun Quan: native bust and full-body WebP art, distinct SVG exploration tokens, manifest loading that activates only after successful decode, and legacy pixel/procedural fallback. Map draws the native token when present. Large character illustrations use the full-body asset with aspect-ratio preservation.
+- CURRENT HEAD (code before this handoff update): `1435bcea10d5ab0419e984db73084e6651622595`.
+- CURRENT ART PHASE: Phase B implementation complete; cross-screen runtime QA pending.
+- COMPLETED: Phase A vertical slice; Phase C/D atlas integration; Phase B ruler bust/full-body/token art and renderer routes.
+- DO_NOT_REPEAT: approved art-direction selection; Phase A rebuild; battle/dungeon/run/content engines; existing map/item atlas work; ruler bust/full-body/token creation.
+- FILES CHANGED: `web/assets/manifest.json`, `web/assets/portraits/*.webp`, `web/assets/tokens/*.svg`, `web/src/assets.ts`, `web/src/main.ts`, `web/src/map.ts`, `web/style.css`, `test/art-assets.test.mjs`, `docs/art/ASSET_REGISTRY.md`.
+- TEST RESULT: GitHub CI #105 for `1435bcea` PASS (includes npm test and web build). Local npm test/build are NOT_RUN. Browser smoke, console/page error check, and 390×844 clipping/touch-target QA are NOT_RUN.
+- VISUAL EVIDENCE: three native bust and full-body masters are committed; inspect against `docs/art/VISUAL_BIBLE_V1.md`. Repository CI validates stable manifest IDs, WEBP assets, and token SVGs.
+- KNOWN GAP: no browser runtime screenshot; map/UI integration and missing-asset fallback still need live visual QA. Only ruler tokens are native; remaining characters/enemies retain fallback art.
+- NEXT_SAFE_ACTION: run the art branch in browser at 390×844, verify title, dungeon, battle, ruler selection/event art, map tokens, and missing-asset fallback. Fix visual regressions, then begin Phase E roster masters.
 - HUMAN GATE: no main merge or production deploy performed.
 
 ## Track B — Art (Codex) — latest Codex handoff below, nested verbatim (historical snapshot; current state above)

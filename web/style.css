@@ -178,3 +178,12 @@ img.icon { image-rendering: auto; }
 .codex-note { color: var(--ink-soft); border-left: 2px solid var(--vermilion); padding-left: 8px; }
 
 @media (prefers-reduced-motion: reduce) { *, .unit.hit { transition: none !important; animation: none !important; } }
+
+/* Native full-body art stays proportionate inside the existing square portrait slots. */
+img.native-portrait { image-rendering: auto; }
+img.fullbody-illustration {
+  object-fit: contain;
+  image-rendering: auto;
+  border: 0 !important;
+  background: transparent !important;
+}
