@@ -5,19 +5,19 @@
 - Current product source: `main` at `82b38b4bf877a015e99f53ae551bfedb45bbc790`
 - Latest Claude work: PR #10 merged; Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`
 - Art/design branch: `art/ink-graphic-novel-v1`
-- Current art HEAD before this handoff update: `8af3ebca32a1d7f0f5256d2599480d1938bf7129`
+- Current art HEAD before this handoff update: `7efbaf10b28a5ce934658168d1d62804473c186b`
 - Open PR: none
-- Latest confirmed art CI: commit `8af3ebca32a1d7f0f5256d2599480d1938bf7129` passed CI run #91. This session adds design references only; local npm test/build/browser smoke are `NOT_RUN`.
+- Latest confirmed art CI: commit `7efbaf10b28a5ce934658168d1d62804473c186b` passed CI run #96. This session adds design references only; local npm test/build/browser smoke are `NOT_RUN`.
 - Art direction and Product Baseline remain unchanged.
 
 ## Current Art Phase
 - `PHASE C — Dungeon Graphic Set` is active.
 - Phase B ruler identity language is `APPROVED` as a design reference; individual character images remain `CONCEPT`.
-- Last confirmed done: surface/object vignette atlases, revised trap/sorcery marks including v3, modular surface grammar v3, localized 28% fog-opacity concept study, and a warm floor plus authored 26×26 exact-cell SVG study with four corner rotations.
-- First incomplete task: add an explicit corridor and doorway module to the exact-cell SVG, then place the 28% fog wash over the composed room layout and inspect marker contrast.
-- Visual QA: atlas-crop audit remains `NEEDS_REVISION` because its source panels are vignettes. The generated v4 floor study is warmer and quieter; 26px crops retain paving seams in color/grayscale, while standalone generated panels remain unsuitable for seam claims. The authored exact-cell SVG uses canonical #E8DDC4, sparse seams, four oriented corner joins, H/V walls, end cap, T-junction, and 28% fog study. Its composed wall edges align in the authored map; actual renderer integration and Canvas scaling remain unverified. All are `CONCEPT`.
+- Last confirmed done: surface/object vignette atlases, revised trap/sorcery marks including v3, modular surface grammar v3, localized 28% fog-opacity concept study, warm floor v4, and an authored 26×26 exact-cell SVG study with four corner rotations.
+- First incomplete task: extend the 26px dungeon marker study with stair, trap, sorcery, enemy, and pot silhouettes, then check each on explored hanji and under localized fog in color and grayscale.
+- Visual QA: atlas-crop audit remains `NEEDS_REVISION` because its source panels are vignettes. The authored exact-cell SVG now includes a one-cell doorway, three-cell horizontal corridor, vermilion player marker, chest marker, and feathered 28% fog over explored floor and corridor boundary. Color and grayscale scale simulations at 26px retain the wall pattern and marker silhouettes. The doorway reads, though it is intentionally understated. Source-authored joins and the composed layout only; actual renderer integration, Canvas scaling, and mobile/gameplay behavior remain unverified. All are `CONCEPT`.
 - Blocker: map renderer remains procedural/pixelated; browser/canvas, mobile, and gameplay checks are unverified.
-- Latest confirmed CI before this handoff: commit `38da2473089a227ef8882c83f0429144a36246af` passed run #89. For this design-only change, local `npm test`, `npm run build:web`, and browser/runtime smoke are `NOT_RUN`.
+- Latest confirmed CI before this handoff: commit `7efbaf10b28a5ce934658168d1d62804473c186b` passed run #96. For this design-only change, local `npm test`, `npm run build:web`, and browser/runtime smoke are `NOT_RUN`.
 
 ## Work Responsibility
 This Work owns visual design, concept art, asset registry, and visual QA. The user instructed that all design work continue here without a separate Codex work assignment. Keep the actual game visuals and functional behavior intact while creating design assets and specifications.
@@ -68,6 +68,16 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - Local `npm test`, `npm run build:web`, browser/runtime smoke: `NOT_RUN`. Crop, grayscale, and adjacency visual review: `PASS` for the listed concept checks.
 - Fog over mixed floor/wall, actual renderer, gameplay, and mobile behavior remain unverified.
 - Next safe action: add the missing wall-transition pieces and floor variants, rerun the same 26px crop review, then assess fog strength.
+
+## This Session — Exact-Cell Corridor / Fog / Marker Study
+- Added a one-cell doorway module with clearer stone lintel and posts, a horizontal corridor, player token, and chest symbol to the authored 26×26 SVG study.
+- Composed a seven-cell room through the one-cell doorway into a three-cell corridor. Applied feathered 28% charcoal fog locally to the far corridor floor and boundary walls.
+- Inspected the full composition and a 26px logical-cell simulation in color and grayscale. Wall/floor distinction persists; vermilion player and chest silhouettes remain separable; doorway posts read at the small scale.
+- Added paired color/grayscale scale-review evidence. This is a design-scale simulation from an authored SVG, not runtime renderer or Canvas QA.
+- All new dungeon modules and review sheets remain `CONCEPT`; no game code or logical topology changed.
+- Local `npm test`, `npm run build:web`, and browser/runtime smoke: `NOT_RUN`. Visual composition and scale inspection: `PASS` for the described design checks.
+- Known gap: map renderer compatibility, 390×844 mobile clipping, touch targets, gameplay regression, and real fog compositing remain unverified.
+- Next safe action: extend the 26px object marker board with stair, trap, sorcery, enemy, and pot silhouettes; check their grayscale separation and localized-fog contrast.
 
 ## Asset State
 - Global art direction: `APPROVED`.
@@ -138,7 +148,9 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/dungeon-floor-surface-concept-v4-20261006.jpg`
 - `docs/art/concepts/dungeon-modular-exact-cell-study-v1-20261006.svg`
 - `docs/art/concepts/dungeon-modular-exact-cell-study-v1-20261006.jpg`
-- `docs/art/concepts/dungeon-exact-cell-scale-review-v1-20261006.jpg`
+- `docs/art/concepts/dungeon-modular-exact-cell-study-v1-grayscale-20261006.jpg`
+- `docs/art/concepts/dungeon-exact-cell-scale-review-v1-20261006.jpg` (superseded for current scale review)
+- `docs/art/concepts/dungeon-exact-cell-scale-review-v2-20261006.jpg`
 - `docs/art/concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`
 - `docs/art/concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg`
 - `docs/art/concepts/codex-secondary-tabs-20261006.jpg`
@@ -147,14 +159,13 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/lu-xun-meng-huo-boss-concept-20261006.jpg`
 
 ## Verification
-- Latest confirmed branch CI before this design commit: run #91 on parent `8af3ebca32a1d7f0f5256d2599480d1938bf7129`, `success`.
-- V3 crop and grayscale scale review: `PASS` for distinguishing endpoint, L-corner, and T-junction silhouettes at the study scale; seamless edge joins and overlay alpha are `NOT_VERIFIED`.
+- Latest confirmed branch CI before this design commit: run #96 on parent `7efbaf10b28a5ce934658168d1d62804473c186b`, `success`.
+- Exact-cell color/grayscale scale review v2: `PASS` for floor/wall separation, doorway readability, player/chest silhouette distinction, and localized fog composition at the simulated scale; runtime mapping and actual overlay alpha are `NOT_VERIFIED`.
 - No gameplay code changed. `npm test`, `npm run build:web`, browser/runtime smoke, and production-screen/mobile QA: `NOT_RUN`.
 
 ## NEXT_SAFE_ACTION
-1. Add a distinct corridor / doorway module to the exact-cell SVG and verify one-cell width at 26px.
-2. Apply the 28% feathered fog sample over the composed room/corridor and check player/object marker contrast.
-3. Keep all study files at `CONCEPT` until actual renderer contract and map screenshots can be checked.
+1. Add stair, trap, sorcery, enemy, and pot marker silhouettes to the exact-cell object study; review at 26px in color/grayscale and over localized fog.
+2. Keep all study files at `CONCEPT` until actual renderer contract and map screenshots can be checked.
 
 ## HUMAN GATE
 - Reversible design exploration and reference/spec updates on the art branch: no additional gate.

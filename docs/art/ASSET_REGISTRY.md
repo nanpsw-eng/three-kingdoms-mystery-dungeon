@@ -44,8 +44,9 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 
 
 | Dungeon floor surface concept v4 | `CONCEPT` | `concepts/dungeon-floor-surface-concept-v4-20261006.jpg`; warmer low-contrast floor A/B and H/V corridor references | Keep warmth and sparse seam rhythm; use only as style reference because generated panels have gutters and are not seamless tiles |
-| Dungeon authored exact-cell study v1 | `CONCEPT` | `concepts/dungeon-modular-exact-cell-study-v1-20261006.svg` and rendered JPG; explicit 26×26 logical cells, four oriented L-corners, H/V wall, end cap, T-junction, fog sample, and composed room edge study | Add corridor/doorway variant and verify in the actual map renderer before moving toward implementation |
-| Dungeon exact-cell scale review v1 | `CONCEPT` | `concepts/dungeon-exact-cell-scale-review-v1-20261006.jpg`; authored cells at 26px enlarged 5×, color and grayscale | Design-scale review only; actual Canvas scaling, topology, and gameplay remain unverified |
+| Dungeon authored exact-cell study v1 | `CONCEPT` | `concepts/dungeon-modular-exact-cell-study-v1-20261006.svg` plus color/grayscale renders; explicit 26×26 floor, wall transitions, one-cell doorway, corridor, player/chest markers, and localized 28% fog composition | Expand remaining object markers; verify with actual renderer before moving toward implementation |
+| Dungeon exact-cell scale review v1 | `SUPERSEDED` | `concepts/dungeon-exact-cell-scale-review-v1-20261006.jpg`; earlier cell study before explicit doorway/corridor and marker contrast review | Retain for history; v2 is current design-scale review |
+| Dungeon exact-cell scale review v2 | `CONCEPT` | `concepts/dungeon-exact-cell-scale-review-v2-20261006.jpg`; 26px color/grayscale logical-cell simulation with room-to-corridor composition | Extend to remaining object silhouettes; actual Canvas scaling, topology, fog compositing, and gameplay remain unverified |
 
 ## Current Implementation State
 
