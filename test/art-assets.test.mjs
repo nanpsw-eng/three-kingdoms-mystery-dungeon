@@ -32,3 +32,14 @@ test("ink atlas covers current item/equipment IDs and required map marks", () =>
     }
   }
 });
+
+
+test("ruler masters load as native portraits and retain stable ids", async () => {
+  assert.deepEqual(manifest.nativePortraits, ["liu-bei", "cao-cao", "sun-quan"]);
+  for (const id of manifest.nativePortraits) {
+    const image = await readFile(new URL("../web/assets/portraits/" + id + ".webp", import.meta.url));
+    assert.ok(image.byteLength > 10_000, id + " portrait master is present");
+    assert.equal(image.subarray(0, 4).toString("ascii"), "RIFF");
+    assert.equal(image.subarray(8, 12).toString("ascii"), "WEBP");
+  }
+});

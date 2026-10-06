@@ -9,9 +9,10 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 | Title screen visual slice | `IMPLEMENTED` | Phase A spec; DOM unchanged; 390×844 smoke screenshot (Claude) | Codex visual QA |
 | Yellow Turban Dungeon visual slice | `IMPLEMENTED` | `web/src/map.ts` palette: hanji floor/corridor, ink wall, soft ink-wash fog, vermilion facing/alert (procedural tiles retained) | Codex visual QA; production tiles remain Phase C |
 | Standard Battle visual slice | `IMPLEMENTED` | Paper cards, blue-gray/vermilion side stripes, vermilion active keyline + ▶, timeline underline, ink hit pulse | Codex visual QA |
-| Liu Bei portrait / full-body / exploration token | `MASTER_REQUIRED` | Visual Bible v1 ruler master | Create and approve one consistent master set |
-| Cao Cao portrait / full-body / exploration token | `MASTER_REQUIRED` | Visual Bible v1 ruler master | Create and approve one consistent master set |
-| Sun Quan portrait / full-body / exploration token | `MASTER_REQUIRED` | Visual Bible v1 ruler master | Create and approve one consistent master set |
+| Liu Bei bust portrait | `IMPLEMENTED` | `web/assets/portraits/liu-bei.webp`; native-resolution ink illustration, no pixelization | Create identity-matched full-body and exploration token |
+| Cao Cao bust portrait | `IMPLEMENTED` | `web/assets/portraits/cao-cao.webp`; native-resolution ink illustration, no pixelization | Create identity-matched full-body and exploration token |
+| Sun Quan bust portrait | `IMPLEMENTED` | `web/assets/portraits/sun-quan.webp`; native-resolution ink illustration, no pixelization | Create identity-matched full-body and exploration token |
+| Ruler Master Set (full-body + exploration token) | `MASTER_REQUIRED` | Bust masters are integrated; procedural fallback still covers map figures | Extend each ruler identity to combat/event art and map token |
 | Dungeon floor/wall/corridor/fog/object set v1 | `IMPLEMENTED` | `web/assets/tiles/ink-dungeon-v1.svg` + manifest maps floor/walls, doorway, stairs, trap, sorcery, recruit/event, player/enemy/chest/pot; feathered 28% fog; procedural fallback retained | Browser-check live map at 390×844 and verify no-manifest fallback |
 | Item silhouette set v1 | `IMPLEMENTED` | Same SVG atlas maps food, medicine, scroll, weapon, armor, jade seal, boots, tally, fire pot, smoke bomb, and unidentified item IDs; `sprites.ts` uses non-pixelized asset route; `main.ts` uses dedicated unknown icon | Browser-check Bag/Shop, gear variants, and missing-asset fallback |
 | Item silhouette set v1 | `CONCEPT` | `concepts/item-silhouettes-v1.svg` and color/grayscale renders; 26px food, medicine, scroll, weapon, armor, jade-seal treasure, and wrapped unidentified state | Map the latest `src/content/items.ts` IDs to specific variants, then integrate via the asset manifest with procedural fallback |
@@ -29,7 +30,7 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 | Liu Bei square bust concept v1 | `CONCEPT` | `concepts/liu-bei-bust-concept-v1-20261006.jpg` | Design reference only; current portrait loader pixelizes images |
 | Cao Cao square bust concept v1 | `CONCEPT` | `concepts/cao-cao-bust-concept-v1-20261006.jpg` | Design reference only; current portrait loader pixelizes images |
 | Sun Quan square bust concept v2 | `CONCEPT` | `concepts/sun-quan-bust-concept-v2-20261006.jpg` | Update full-body/token identity; design reference only |
-| Non-pixelized portrait asset compatibility | `MASTER_REQUIRED` | `web/src/assets.ts` pixelizes external portraits at default 48px/28 colors; Codex asks for 40px | Define a non-pixelized route before implementation; do not feed concept boards to current loader |
+| Non-pixelized portrait asset compatibility | `IMPLEMENTED` | Manifest `nativePortraits` route checks image load before use; legacy pixelized/procedural fallback remains | Keep route fallback-safe while extending character coverage |
 | Original ruler master comparison v2 (Liu Bei / Cao Cao / Sun Quan) | `CONCEPT` | `concepts/ruler-master-comparison-v2-20261006.jpg` | Review separate assets at target sizes; no production approval yet |
 | E2 boss duo (Dong Zhuo / Lü Bu) concept | `CONCEPT` | `concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg` | Simplify armor ornament and preserve broad-vs-tall silhouette contrast |
 
@@ -42,7 +43,7 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 
 ## Current Implementation State
 
-Phase A's hanji/ink skin is implemented on `main` and synced into the art branch. The art branch adds a fallback-safe, non-pixelized SVG atlas for Canvas dungeon/object marks and inventory icons. Character portraits and full-body map sprites remain procedural fallbacks until the Ruler Master production set and portrait route are completed. Runtime QA for the new atlas is pending.
+Phase A's hanji/ink skin is implemented on `main` and synced into the art branch. The art branch adds a fallback-safe, non-pixelized SVG atlas for Canvas dungeon/object marks and inventory icons, plus three native-resolution ruler bust masters. The manifest loads portraits only after successful image decode; existing pixel/procedural portraits and map figures remain fallback. Full-body art, exploration tokens, and 390×844 runtime QA remain open.
 
 | Liu Bei individual master concept v1 | `CONCEPT` | `concepts/liu-bei-master-concept-v1-20261006.jpg` | Review portrait at 40px and token in grayscale; create final production exports later |
 | Cao Cao individual master concept v1 | `CONCEPT` | `concepts/cao-cao-master-concept-v1-20261006.jpg` | Review portrait at 40px and token in grayscale; create final production exports later |
