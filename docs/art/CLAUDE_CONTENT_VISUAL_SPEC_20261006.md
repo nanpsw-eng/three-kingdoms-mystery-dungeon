@@ -289,3 +289,12 @@ The next safe visual check is an exact cell-grid board. Use individual crops at 
 - fog transitions soften the edge while leaving explored floor readable.
 
 Keep the environmental-wash symbol transparent and low-opacity. Do not write new modifier semantics before matching existing content ids. All Phase C images remain `CONCEPT`; live map renderer and touch QA remain `NOT_RUN`.
+
+
+## 25. Exact-Cell Review Board v1
+
+`concepts/dungeon-cell-grid-review-v1.svg` places atlas crops on an exact 26-unit grid and displays the board at 2× for inspection. It uses a 7×7 explored room, a three-cell horizontal corridor with a one-cell passage, and a smaller room with a fog overlay on its east edge. This layout is a visual test fixture only; it does not define or replace procedural topology.
+
+Object placement in the SVG uses one 26×26 logical cell each for gate, stairs, chest, pot, player, scout, trap, and sorcery. A light environment-wash crop is layered at reduced opacity. Wall boundaries are opened at the corridor joins by construction.
+
+Structural check: SVG XML parses; tile, crop, overlay and grid coordinates are explicit. The deterministic layout preserves the one-cell corridor join and single-cell marker bounds. Visual rendering of this SVG, tile interpolation in browser, actual map-canvas integration, and mobile behavior are `NOT_RUN`. Initial visual review notes the sorcery mark still has dense internal detail at 26px; simplify before a production asset pass. The SVG and its linked atlas files remain `CONCEPT`.

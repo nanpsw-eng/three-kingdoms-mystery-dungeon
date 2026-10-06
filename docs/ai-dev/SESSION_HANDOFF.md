@@ -5,19 +5,19 @@
 - Current product source: `main` at `82b38b4bf877a015e99f53ae551bfedb45bbc790`
 - Latest Claude work: PR #10 merged; Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`
 - Art/design branch: `art/ink-graphic-novel-v1`
-- Current art HEAD before this handoff update: `1f62514141d48fb1b101626395a30391583ce344`
+- Current art HEAD before this handoff update: `eefce32dfb74f9ab5764a91ef1f69ca01fda0664`
 - Open PR: none
-- Latest art CI: current commit `1f62514141d48fb1b101626395a30391583ce344` passed CI run #84; previous concept/doc commits through #83 passed. This next change is documentation/concept-only; local npm test/build/smoke are `NOT_RUN`.
+- Latest art CI: current commit `eefce32dfb74f9ab5764a91ef1f69ca01fda0664` passed CI run #85; previous concept/doc commits through #84 passed. This next change is documentation/concept-only; local npm test/build/smoke are `NOT_RUN`.
 - Art direction and Product Baseline remain unchanged.
 
 ## Current Art Phase
 - `PHASE C — Dungeon Graphic Set` is active.
-- Phase B ruler identity language is `APPROVED` as a design reference; character image files remain `CONCEPT`.
-- Last confirmed done: Phase C surface/object atlases, tile reduction board, revised angular trap and open-ring sorcery icons, paired 24/28px proof, and an illustrative room/corridor composition.
-- First incomplete task: create an exact 26px cell-grid board to verify seams, corridor width, logical-cell footprints, and explored/fog transitions.
-- Visual QA finding: trap and sorcery now read as separate shapes. The generated room composition is helpful for style, but its corridor/object size is not an approved map specification.
-- Blocker: current renderer remains procedural/pixelated; live map canvas, mobile viewport, and interaction QA are unverified.
-- Latest CI: commit `2dd05daa2c9aa7a736f3444eac0c759316211d04` passed run #83. Local `npm test`, `npm run build:web`, browser smoke are `NOT_RUN` for this design-only change.
+- Phase B ruler identity language is `APPROVED` as a design reference; individual character images remain `CONCEPT`.
+- Last confirmed done: surface/object atlases, revised trap/sorcery marks, room composition study, and an exact 26-unit SVG layout proof linked to atlas crops.
+- First incomplete task: simplify sorcery detail at cell scale and verify the SVG/layout in a real visual renderer; then adjust fog overlay strength against mixed tiles.
+- Structural QA: SVG XML parses and geometry encodes a one-cell corridor join plus one-cell object boxes. This is not a screenshot or runtime pass.
+- Blocker: map renderer remains procedural/pixelated; browser/canvas, mobile, and gameplay checks are unverified.
+- Latest prior CI: commit `eefce32dfb74f9ab5764a91ef1f69ca01fda0664` passed run #85. For this design-only change, local `npm test`, `npm run build:web`, browser smoke, and actual SVG rendering are `NOT_RUN`.
 
 ## Work Responsibility
 This Work owns visual design, concept art, asset registry, and visual QA. The user instructed that all design work continue here without a separate Codex work assignment. Keep the actual game visuals and functional behavior intact while creating design assets and specifications.
@@ -84,7 +84,7 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/sun-quan-master-concept-v1-20261006.jpg`
 - `docs/art/concepts/liu-bei-bust-concept-v1-20261006.jpg`
 - `docs/art/concepts/cao-cao-bust-concept-v1-20261006.jpg`
-- `docs/art/concepts/sun-quan-bust-concept-v2-20261006.jpg`\n- `docs/art/concepts/liu-bei-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/cao-cao-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/sun-quan-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/liu-bei-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/cao-cao-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/sun-quan-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/cao-cao-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/sun-quan-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/ruler-scale-review-revised-20261006.jpg`\n- `docs/art/concepts/dungeon-surfaces-concept-v1-20261006.jpg`\n- `docs/art/concepts/dungeon-objects-concept-v1-20261006.jpg`\n- `docs/art/concepts/dungeon-set-scale-review-20261006.jpg`\n- `docs/art/concepts/dungeon-trap-mark-concept-v2-20261006.png`\n- `docs/art/concepts/dungeon-sorcery-mark-concept-v2-20261006.png`\n- `docs/art/concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`\n- `docs/art/concepts/dungeon-room-corridor-composition-v1-20261006.jpg`\n- `docs/art/concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`
+- `docs/art/concepts/sun-quan-bust-concept-v2-20261006.jpg`\n- `docs/art/concepts/liu-bei-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/cao-cao-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/sun-quan-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/liu-bei-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/cao-cao-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/sun-quan-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/cao-cao-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/sun-quan-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/ruler-scale-review-revised-20261006.jpg`\n- `docs/art/concepts/dungeon-surfaces-concept-v1-20261006.jpg`\n- `docs/art/concepts/dungeon-objects-concept-v1-20261006.jpg`\n- `docs/art/concepts/dungeon-set-scale-review-20261006.jpg`\n- `docs/art/concepts/dungeon-trap-mark-concept-v2-20261006.png`\n- `docs/art/concepts/dungeon-sorcery-mark-concept-v2-20261006.png`\n- `docs/art/concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`\n- `docs/art/concepts/dungeon-room-corridor-composition-v1-20261006.jpg`\n- `docs/art/concepts/dungeon-cell-grid-review-v1.svg`\n- `docs/art/concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`
 - `docs/art/concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg`
 - `docs/art/concepts/codex-secondary-tabs-20261006.jpg`
 - `docs/art/concepts/story-scene-ui-20261006.jpg`
@@ -98,10 +98,10 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - Concept images were visually inspected; remaining design gaps are recorded above.
 
 ## NEXT_SAFE_ACTION
-1. Compose a deterministic exact 26px cell-grid review board from the individual tile/object studies; verify one-cell footprints and clear wall/corridor joints.
-2. Check explored-to-fog transitions, stair/gate visibility, and overlay opacity without redefining map topology.
-3. Adjust any icon or crop that covers adjacent cells; keep all visuals `CONCEPT` until renderer compatibility review.
-4. Continue with tile master exports after the grid board passes design review; keep procedural fallback and gameplay logic unchanged.
+1. Render and visually inspect the exact-cell SVG using its committed atlas references; check image loading, wall/corridor joins, object fit, and fog edge.
+2. Simplify the sorcery mark if its 26px reduction remains too busy; tune the environment/fog overlay to preserve floor seams.
+3. Keep the SVG as a layout QA fixture, not a map layout specification; leave all generated assets at `CONCEPT`.
+4. After visual review, prepare separate tile/object masters and retain the procedural fallback.
 
 ## HUMAN GATE
 - Reversible design exploration and reference/spec updates on the art branch: no additional gate.

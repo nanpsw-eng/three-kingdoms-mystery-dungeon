@@ -76,3 +76,5 @@ The repository's current web client still uses the legacy dark/gold CSS theme an
 
 | Dungeon trap v2 26px scale proof | `CONCEPT` | `concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`; angular broken plate reads separately from circular sorcery in monochrome | Keep this pair as the silhouette baseline |
 | Dungeon room/corridor composition v1 | `CONCEPT` | `concepts/dungeon-room-corridor-composition-v1-20261006.jpg`; shows explored room, corridor, second room/fog and current marker set | Reference only; wall seams, marker footprints and exact corridor width remain unapproved |
+
+| Dungeon exact-cell layout proof v1 | `CONCEPT` | `concepts/dungeon-cell-grid-review-v1.svg`; deterministic 26px logical cells composed from atlas crops | SVG geometry is authored; actual browser/runtime rendering and map topology are not approved |
