@@ -273,3 +273,19 @@ Revision references:
 The revised trap reads as a square plate; sorcery reads as an open circular brush seal. This resolves the first atlas's strongest small-scale silhouette collision. The composition supports the shared surface language, but its corridor width/object footprints are illustrative and must not be treated as the procedural map's topology or as a production layout.
 
 Next design check is an exact cell-grid mockup at the current approximately 26px rendered cell size. Keep each marker inside its logical cell; make sure ring edges do not cover adjacent floor or corridor seams. The generated environment wash must remain a transparent overlay whose opacity preserves floor texture and tile boundaries. Runtime map behavior, canvas hit testing, mobile cropping, and generated asset loading remain `NOT_RUN`; keep the existing procedural renderer fallback.
+
+
+## 24. Current Phase C Read and Remaining Grid Check
+
+The revised trap and sorcery references now remain distinct at 24–28px: the trap is angular and broken-square; sorcery is an open circular brush ring with a seal. The paired scale proof shows their monochrome silhouettes separately. The first object atlas is retained as history; use the revised icons for current design review.
+
+A room/corridor composition concept now shows the shared material language in context: explored hanji rooms, ink walls, a connecting corridor, stairs, gate, chest, pot, player/enemy, sorcery and a soft fog boundary. It is an art composition, not a procedural map specification. Its object sizes and corridor width are approximate and must not override current generated topology.
+
+The next safe visual check is an exact cell-grid board. Use individual crops at a 26px cell basis to verify:
+- room floor/wall seams and an opening into a one-cell corridor;
+- corridor termination at the adjacent room without a gap;
+- gate and stairs fit within their logical cells;
+- chest, pot, trap, sorcery, player, and enemy each occupy their cell without hiding neighbor boundaries;
+- fog transitions soften the edge while leaving explored floor readable.
+
+Keep the environmental-wash symbol transparent and low-opacity. Do not write new modifier semantics before matching existing content ids. All Phase C images remain `CONCEPT`; live map renderer and touch QA remain `NOT_RUN`.

@@ -73,3 +73,6 @@ The repository's current web client still uses the legacy dark/gold CSS theme an
 | Dungeon sorcery formation marker v2 | `CONCEPT` | `concepts/dungeon-sorcery-mark-concept-v2-20261006.png`; open ink ring and upright seal separate from square trap | Confirm it stays inside one object cell and does not obscure walkable floor |
 | Trap / sorcery 24–28px review v2 | `CONCEPT` | `concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`; form difference survives monochrome reduction | Preserve the angular vs open-circular silhouette distinction |
 | Dungeon room/corridor composition v1 | `CONCEPT` | `concepts/dungeon-room-corridor-composition-v1-20261006.jpg`; rooms, one-cell-style corridor, explored boundary, fog, gate/stairs and markers | Composition only; create an exact 26px grid mockup before visual approval |
+
+| Dungeon trap v2 26px scale proof | `CONCEPT` | `concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`; angular broken plate reads separately from circular sorcery in monochrome | Keep this pair as the silhouette baseline |
+| Dungeon room/corridor composition v1 | `CONCEPT` | `concepts/dungeon-room-corridor-composition-v1-20261006.jpg`; shows explored room, corridor, second room/fog and current marker set | Reference only; wall seams, marker footprints and exact corridor width remain unapproved |
