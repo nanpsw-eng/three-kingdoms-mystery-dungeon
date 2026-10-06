@@ -107,3 +107,12 @@ Phase A's hanji/ink skin is implemented on `main` and synced into the art branch
 | Phase F enemy rendering adapter | `IMPLEMENTED` | `web/src/map.ts` uses `assetToken(enemyKey)` before `figureCanvas`; enemy-name aliases stay in `web/src/assets.ts` | Extend coverage by stable enemy ids without changing dungeon behavior |
 
 | Yellow Turban leaders — Zhang Bao, Zhang Liang, Zhang Jiao exploration tokens | `IMPLEMENTED` | `web/assets/tokens/boss-zhang-{bao,liang,jiao}.svg`; mapped through the existing stable enemy aliases and token manifest | Create portrait and full-body masters; verify at runtime |
+
+
+## Mobile integration QA — 2026-10-06
+
+| Surface | Status | Evidence | Next action |
+|---|---|---|---|
+| Title / Dungeon / Battle / Bag visual integration | `IMPLEMENTED` | `evidence/mobile-20261006/QA.md`: 390×844 smoke PASS, zero console/page errors, 54 image assets decoded, fallback verified | Continue enemy portrait/full-body coverage; whole-game acceptance remains open |
+| Native exploration tokens in battle timeline | `IMPLEMENTED` | `web/src/main.ts` token adapter; screenshot `03-battle.png`; procedural fallback retained | Extend stable asset ids |
+| Local Gowun font assets + ink seal favicon | `IMPLEMENTED` | `web/assets/fonts/*.woff2` and OFL licenses; `web/assets/ui/ink-seal.svg` | Keep offline-compatible typography |

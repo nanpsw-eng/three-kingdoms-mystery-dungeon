@@ -5,7 +5,7 @@
 - Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon`
 - Working Branch: `art/ink-graphic-novel-v1`
 - Base Implementation Commit: `017e0c4130f914dd33d2ab74f2093d4170b0e438`
-- Art Gate: `INK_GRAPHIC_NOVEL_V1_APPROVED / VERTICAL_SLICE_NEXT`
+- Art Gate: `INK_GRAPHIC_NOVEL_V1_APPROVED / PHASE_F_IN_PROGRESS / MOBILE_SLICE_QA_PASS`
 - Merge to `main`: HUMAN GATE
 - Production deploy: HUMAN GATE
 
@@ -111,7 +111,7 @@ Food / medicine / scroll / weapon / armor / treasure icon set를 Visual Bible �
 완료된 visual phase를 반복하지 말고, 실제 repository state 다음의 최초 미완료 task부터 이어간다.
 
 
-## Phase A Current Implementation Brief
+## Phase A Implementation Brief (historical; implemented)
 
 Implementation-ready visual spec: `docs/art/PHASE_A_VISUAL_SPEC_V1.md`
 Asset states: `docs/art/ASSET_REGISTRY.md`
@@ -124,3 +124,12 @@ First implementation scope:
 5. Keep `src/battle/`, `src/dungeon/`, `src/run/`, and `src/content/` unchanged. `main.ts` is adapter-only if a screen class/data attribute is necessary.
 
 Required evidence: `npm test`, `npm run build:web`, UI smoke result, and 390×844 screenshots for all three screens. Record any unavailable check as `NOT_RUN`; do not infer PASS. After implementation, return screenshots to Work for Visual QA before marking Phase A accepted.
+
+
+## Current continuation point — 2026-10-06
+
+Source of truth: current Track B section in SESSION_HANDOFF.md + actual remote HEAD.
+- Phase A–E assets are implemented; eight Phase F enemy/boss exploration tokens are implemented.
+- Mobile Title/Dungeon/Battle/Bag smoke and 54-asset decode/fallback checks PASS; see `docs/art/evidence/mobile-20261006/QA.md`.
+- Continue with named boss bust/full-body art and further enemy coverage. Do not recreate Phase A or the 15 playable character sets.
+- Runtime enemy busts remain legacy fallback until matching native masters are registered.

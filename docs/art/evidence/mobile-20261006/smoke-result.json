@@ -1,0 +1,261 @@
+{
+  "reachedBattle": true,
+  "steps": 3,
+  "final": {
+    "phase": "dungeon",
+    "depth": 1,
+    "turn": 12,
+    "enemies": []
+  },
+  "errors": [],
+  "layouts": [
+    {
+      "screen": "title",
+      "width": 390,
+      "scrollWidth": 390,
+      "smallTargets": [],
+      "brokenImages": []
+    },
+    {
+      "screen": "dungeon",
+      "width": 390,
+      "scrollWidth": 390,
+      "smallTargets": [],
+      "brokenImages": []
+    },
+    {
+      "screen": "battle",
+      "width": 390,
+      "scrollWidth": 390,
+      "smallTargets": [],
+      "brokenImages": []
+    },
+    {
+      "screen": "bag",
+      "width": 390,
+      "scrollWidth": 390,
+      "smallTargets": [],
+      "brokenImages": []
+    }
+  ],
+  "manifestAssets": [
+    {
+      "path": "portraits/liu-bei.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/cao-cao.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/sun-quan.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/guan-yu.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhang-fei.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhao-yun.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/huang-zhong.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhuge-liang.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhang-liao.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/xiahou-dun.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/jia-xu.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/taishi-ci.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhou-yu.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/gan-ning.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/hua-tuo.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/liu-bei-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/cao-cao-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/sun-quan-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/guan-yu-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhang-fei-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhao-yun-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/huang-zhong-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhuge-liang-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhang-liao-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/xiahou-dun-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/jia-xu-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/taishi-ci-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhou-yu-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/gan-ning-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/hua-tuo-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/liu-bei.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/cao-cao.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/sun-quan.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/guan-yu.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/zhang-fei.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/zhao-yun.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/huang-zhong.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/zhuge-liang.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/zhang-liao.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/xiahou-dun.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/jia-xu.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/taishi-ci.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/zhou-yu.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/gan-ning.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/hua-tuo.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/yt-spear.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/yt-archer.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/yt-raider.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/yt-sorcerer.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/yt-chanter.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-zhang-bao.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-zhang-liang.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-zhang-jiao.svg",
+      "decoded": true
+    },
+    {
+      "path": "tiles/ink-dungeon-v1.svg",
+      "decoded": true
+    }
+  ],
+  "fallbackPassed": true,
+  "fallbackErrors": []
+}

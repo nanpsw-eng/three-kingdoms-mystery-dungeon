@@ -40,19 +40,21 @@ NEXT_SAFE_ACTION
 
 ---
 
-## Track B — Current Visual Control (2026-10-06)
-- Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon`; active branch: `art/ink-graphic-novel-v1`.
-- CURRENT HEAD before this Phase F commit: `7ef9cd9fb91d76870329571c71d16c1dff9e47d8`.
-- CURRENT ART PHASE: Phase F — enemy and boss set, in progress.
-- LAST CONFIRMED DONE: Phase A Title/Dungeon/Battle vertical slice; Phase C dungeon atlas; Phase D item silhouettes; Phase B ruler masters; Phase E all 12 general bust/full-body/token sets.
-- THIS CHANGE: eight Phase F enemy/boss map tokens are implemented: five Yellow Turban types (`yt-spear`, `yt-archer`, `yt-raider`, `yt-sorcerer`, `yt-chanter`) and boss silhouettes for Zhang Bao, Zhang Liang, and Zhang Jiao. Visible dungeon enemies use a native token when available and retain procedural figure fallback. Enemy-name aliases use `ENEMY_ASSET_IDS`.
-- DO_NOT_REPEAT: approved art direction, completed Phases A–E, and battle/dungeon/run/content logic.
-- FILES CHANGED: `web/src/map.ts`, `web/assets/manifest.json`, `web/assets/tokens/yt-*.svg`, `web/assets/tokens/boss-zhang-*.svg`, `test/art-assets.test.mjs`, `docs/art/ASSET_REGISTRY.md`, `docs/ai-dev/SESSION_HANDOFF.md`.
-- TEST RESULT: GitHub CI #120 on parent `7ef9cd9fb91d76870329571c71d16c1dff9e47d8` PASS. GitHub CI #121 PASS for Yellow Turban token integration; boss-token follow-up CI is pending at handoff time. Local `npm test` and `npm run build:web`: NOT_RUN in this workspace. Browser smoke, console/page errors, 390×844 clipping/touch-target checks: NOT_RUN.
-- VISUAL EVIDENCE: eight authored 64×64 vector silhouettes use distinct weapon/garment profiles and the approved ink/hanji palette; runtime screenshot not captured.
-- KNOWN GAP: no in-browser evidence yet. Phase F boss trio and other enemy factions remain.
-- NEXT_SAFE_ACTION: create Zhang Bao, Zhang Liang, and Zhang Jiao portrait and full-body masters; register them while retaining procedural fallback.
-- HUMAN GATE: no PR, main merge, or production deploy performed.
+## Track B — Current Visual Control (2026-10-06, recovery + mobile QA)
+- CURRENT CODE HEAD before this QA commit: `ba3e7320396b573303d641fbda91092e245eb409`; art branch `art/ink-graphic-novel-v1`.
+- RECOVERY: interrupted documentation update had not reached the branch. Eight Yellow Turban/boss tokens were already committed; CI #122 PASS. Those assets were not recreated.
+- IMPLEMENTATION HEAD: `main` at `a035a5ed619273c1c28412cbb900754db56734bf`; no new domain-code delta beyond the already synced Claude Phase A. Recent production assets remain art-branch-only.
+- CURRENT ART PHASE: Phase F in progress. Phases A/B/C/D/E implemented; mobile vertical-slice integration QA now PASS for tested screens.
+- COMPLETED: 15 playable bust/full-body/token sets; map/item atlas; five Yellow Turban + three leader exploration tokens. New tokens now appear in the battle timeline with fallback preserved.
+- THIS CHANGE: local server serves SVG/WebP/font MIME types correctly; map smooths native tokens; battle timeline uses native token assets; compact controls have >=44px dimensions; existing OFL Gowun fonts are bundled locally; favicon added; small muted text uses a contrast-safe semantic token while preserving the canonical palette swatch.
+- DO_NOT_REPEAT: approved art direction, implemented Phase A–E assets, eight Phase F tokens, domain logic, and the validated mobile paths below.
+- FILES CHANGED: `web/index.html`, `web/style.css`, `web/src/{main,map}.ts`, `web/assets/{fonts,ui}/`, `scripts/{serve,e2e-smoke}.mjs`, QA evidence, asset registry, both handoff documents.
+- TEST RESULT (retained prior-run evidence): local `npm ci`, `npm test`, `npm run build:web` PASS. Existing UI smoke extended and PASS: battle reached and auto combat returned to dungeon; console/page errors 0; Title/Dungeon/Battle/Bag have document width 390px, no horizontal page overflow, no enabled target below 44x44, no broken images; 54/54 manifest images decode; intentionally undecodable Liu Bei portrait/token falls back and dungeon renders with page errors 0. Previous GitHub CI #121/#122 PASS; new commit CI pending at writing.
+- VISUAL EVIDENCE: `docs/art/evidence/mobile-20261006/` contains six runtime screenshots, JSON metrics, and QA report. Intentional timeline scrolling and vertical document scrolling remain; this is not a full campaign playtest.
+- KNOWN GAP: Phase F unit/boss bust/full-body art, other enemy factions, Phase G/H and expanded story roster remain incomplete. Tested slice does not establish whole-game visual acceptance. Main merge/deploy not performed here.
+- RECOVERY FINALIZATION: recovered the original dirty tree, retained six screenshots/JSON, and completed the current web build plus diff check. Fresh browser rerun is BLOCKED by Chrome Unix-socket restrictions; the retained smoke predates the last CSS timestamp by 31 seconds, so exact-current-tree browser acceptance is pending. See `docs/art/evidence/mobile-20261006/QA.md`.
+- NEXT_SAFE_ACTION: confirm current-tree browser acceptance in a Chrome-capable environment; then produce Zhang Bao/Zhang Liang/Zhang Jiao bust/full-body masters matched to their existing tokens, then expand enemy factions through stable manifest ids. Continue current art branch; do not replay completed phases.
+- HUMAN GATE: main merge/deploy remains outside this session; paid services, repository visibility, art direction and product baseline changes require explicit approval.
 
 ## Track B — Art (Codex) — latest Codex handoff below, nested verbatim (historical snapshot; current state above)
 

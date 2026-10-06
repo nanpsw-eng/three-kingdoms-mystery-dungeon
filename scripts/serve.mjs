@@ -6,7 +6,7 @@ import { extname, join, normalize } from "node:path";
 
 const root = join(process.cwd(), "site");
 const port = Number(process.env.PORT ?? 8080);
-const types = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".map": "application/json" };
+const types = { ".html": "text/html; charset=utf-8", ".js": "text/javascript", ".css": "text/css", ".map": "application/json", ".json": "application/json", ".svg": "image/svg+xml", ".webp": "image/webp", ".png": "image/png", ".woff2": "font/woff2" };
 createServer(async (req, res) => {
   const path = normalize(decodeURIComponent((req.url ?? "/").split("?")[0])).replace(/^(\.\.[/\\])+/, "");
   const file = join(root, path === "/" ? "index.html" : path);

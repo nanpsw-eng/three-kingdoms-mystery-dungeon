@@ -135,7 +135,9 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   const blit = (image: CanvasImageSource, p: Point, scale = 1, lift = 0): void => {
     const [x, y] = at(p);
     const s = cell * scale;
+    ctx.imageSmoothingEnabled = image instanceof HTMLImageElement;
     ctx.drawImage(image, x + (cell - s) / 2, y + (cell - s) / 2 - lift, s, s);
+    ctx.imageSmoothingEnabled = false;
   };
   /** Draws a named tileset tile when one is loaded, else the procedural fallback. */
   const terrain = (name: string, fallback: CanvasImageSource, p: Point, variant = 0): void => {

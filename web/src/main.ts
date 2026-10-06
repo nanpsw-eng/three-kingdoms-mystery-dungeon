@@ -3,7 +3,7 @@ import {
   type AbilityTargeting, type BattleCommand, type Direction, type FormationSlot, type MetaState, type RunCommand, type RunEvent, type RunOptions,
 } from "../../src/index.js";
 import { drawMap, tileAt } from "./map.js";
-import { fullBodyIllustration, loadAssets, nativeAssetPortrait } from "./assets.js";
+import { assetToken, fullBodyIllustration, loadAssets, nativeAssetPortrait } from "./assets.js";
 import { portraitUrl } from "./portraits.js";
 import { figureUrl, iconUrl, spriteImg } from "./sprites.js";
 import { codexScreen } from "./codex.js";
@@ -68,6 +68,11 @@ const pic = (key: string, size: number, alt = ""): HTMLImageElement => {
   return spriteImg(native ?? portraitUrl(id), size, alt, native === undefined ? "px portrait" : "portrait native-portrait" + (full === undefined ? "" : " fullbody-illustration"));
 };
 const icon = (id: string, size = 28): HTMLImageElement => spriteImg(iconUrl(id), size, "", "icon");
+const tokenPic = (key: string): HTMLImageElement => {
+  const id = artKey(key);
+  const token = assetToken(id);
+  return spriteImg(token?.src ?? figureUrl(id), 20, "", token === undefined ? "px" : "native-token");
+};
 let hitIds = new Set<string>();
 
 function say(message: string): void { log = [message, ...log].slice(0, 60); }
@@ -361,7 +366,7 @@ function renderBattle(): void {
     return side === "enemy" ? [rear, front] : [front, rear];
   };
   const timeline = h("div", { class: "timeline" }, ...[...(active ? [active] : []), ...snap.timeline].slice(0, 8).map((event, index) =>
-    h("span", { class: (event.actorId.includes("#") ? "enemy" : "ally") + (index === 0 && active ? " now" : "") }, spriteImg(figureUrl(artKey(event.actorId.includes("#") ? unitName(event.actorId) : event.actorId)), 16, "", "px"), unitName(event.actorId))));
+    h("span", { class: (event.actorId.includes("#") ? "enemy" : "ally") + (index === 0 && active ? " now" : "") }, tokenPic(event.actorId.includes("#") ? unitName(event.actorId) : event.actorId), unitName(event.actorId))));
   const controls: HTMLElement[] = [];
   if (activeAlly && autoMode === "manual") {
     const actor = snap.units.find((u) => u.id === active.actorId)!;
