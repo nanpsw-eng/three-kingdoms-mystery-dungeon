@@ -5,19 +5,19 @@
 - Current product source: `main` at `82b38b4bf877a015e99f53ae551bfedb45bbc790`
 - Latest Claude work: PR #10 merged; Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`
 - Art/design branch: `art/ink-graphic-novel-v1`
-- Current art HEAD before this handoff update: `ce12be9c2350733823abd031b101cb8916ce5b3b`
+- Current art HEAD before this handoff update: `38da2473089a227ef8882c83f0429144a36246af`
 - Open PR: none
-- Latest art CI: commit `ce12be9c2350733823abd031b101cb8916ce5b3b` passed CI run #88. This update adds concept references only; local npm test/build/browser smoke are `NOT_RUN`.
+- Latest confirmed art CI: commit `38da2473089a227ef8882c83f0429144a36246af` passed CI run #89. This session adds concept references only; local npm test/build/browser smoke are `NOT_RUN`.
 - Art direction and Product Baseline remain unchanged.
 
 ## Current Art Phase
 - `PHASE C — Dungeon Graphic Set` is active.
 - Phase B ruler identity language is `APPROVED` as a design reference; individual character images remain `CONCEPT`.
-- Last confirmed done: surface/object vignette atlases, revised trap/sorcery marks including v3, exact-cell crop audit, and modular surface grammar v2 with a 26px color/grayscale and join review.
-- First incomplete task: complete the modular transition set with wall endpoints, exterior corners, and T-junctions; then tune fog over both floor and wall.
-- Visual QA: atlas-crop audit remains `NEEDS_REVISION` because its source panels are vignettes. Grammar v2 was cropped from square cells to 26px; all six silhouettes remain readable in color/grayscale and H/V floor joins read. Repeated wall texture is conspicuous; missing endpoints/T-junction/exterior-corner pieces keep the grammar at `CONCEPT`.
+- Last confirmed done: surface/object vignette atlases, revised trap/sorcery marks including v3, exact-cell crop audit, and modular surface grammar v3 with expanded transition studies plus a 26px color/grayscale scale review.
+- First incomplete task: warm and simplify the explored floor pair, specify fog as a translucent overlay on both floor and wall, then compose mixed-cell adjacency studies.
+- Visual QA: atlas-crop audit remains `NEEDS_REVISION` because its source panels are vignettes. Grammar v3 adds floor A/B, H/V corridors, a wall end-cap, exterior L-corner, T-junction, and a split fog comparison. At 26px the wall transition silhouettes read in color/grayscale; floor texture still feels cool/muddy and generated cells are not seamless runtime tiles, so the family remains `CONCEPT`.
 - Blocker: map renderer remains procedural/pixelated; browser/canvas, mobile, and gameplay checks are unverified.
-- Latest confirmed CI: commit `18ab7ab7c1541ca6a470d057105f4af5a83fc055` passed run #87. For this design-only change, `npm test`, `npm run build:web`, and browser/runtime smoke are `NOT_RUN`; Inkscape SVG rendering passed.
+- Latest confirmed CI before this handoff: commit `38da2473089a227ef8882c83f0429144a36246af` passed run #89. For this design-only change, local `npm test`, `npm run build:web`, and browser/runtime smoke are `NOT_RUN`.
 
 ## Work Responsibility
 This Work owns visual design, concept art, asset registry, and visual QA. The user instructed that all design work continue here without a separate Codex work assignment. Keep the actual game visuals and functional behavior intact while creating design assets and specifications.
@@ -55,6 +55,9 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - Rendered the exact-cell dungeon SVG through Inkscape at 2×; confirmed and recorded that atlas vignettes fail as logical tile masters.
 - Created sorcery marker v3: open brush ring plus one violet flame; kept it as a concept and superseded v2 for current review.
 - Created a six-surface modular tile grammar concept for floor, horizontal/vertical corridor, solid/straight wall, and inside corner.
+- Created modular grammar v3 with floor A/B, H/V corridors, wall endpoint, exterior corner, T-junction, and floor/wall fog comparison; the concept sheet was reduced and checked at 26px in color and grayscale.
+- Confirmed transition silhouettes are readable at 26px; kept v3 at `CONCEPT` because floor wash remains cool/muddy and the generated sheet does not prove seamless cell-edge joins.
+- Added a paired color/grayscale scale-review board; did not alter any game code or claim runtime/mobile QA.
 
 ## This Session — Modular Surface Cell Review
 - Cropped the six square studies from modular grammar v2 to 26×26 logical cells, enlarged 4× for visual review, and checked color plus grayscale.
@@ -128,6 +131,8 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/dungeon-modular-surface-grammar-concept-v1-20261006.jpg`
 - `docs/art/concepts/dungeon-modular-surface-grammar-concept-v2-20261006.jpg`
 - `docs/art/concepts/dungeon-modular-surface-scale-review-v2-20261006.jpg`
+- `docs/art/concepts/dungeon-modular-surface-grammar-concept-v3-20261006.jpg`
+- `docs/art/concepts/dungeon-modular-surface-scale-review-v3-20261006.jpg`
 - `docs/art/concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`
 - `docs/art/concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg`
 - `docs/art/concepts/codex-secondary-tabs-20261006.jpg`
@@ -136,15 +141,14 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/lu-xun-meng-huo-boss-concept-20261006.jpg`
 
 ## Verification
-- Latest confirmed branch CI: run #88 on parent `ce12be9c2350733823abd031b101cb8916ce5b3b`, `success`.
-- Crop, grayscale, floor/corridor join, and repeated-wall review for the v2 concept: `PASS` at the visual-study level; wall rhythm still needs variants.
+- Latest confirmed branch CI before this design commit: run #89 on parent `38da2473089a227ef8882c83f0429144a36246af`, `success`.
+- V3 crop and grayscale scale review: `PASS` for distinguishing endpoint, L-corner, and T-junction silhouettes at the study scale; seamless edge joins and overlay alpha are `NOT_VERIFIED`.
 - No gameplay code changed. `npm test`, `npm run build:web`, browser/runtime smoke, and production-screen/mobile QA: `NOT_RUN`.
 
 ## NEXT_SAFE_ACTION
-1. Add wall endpoints, exterior corners, and T-junction pieces to the modular grammar; keep floor A/B values consistent.
-2. Crop the expanded set to 26px and recheck grayscale legibility and repeated joins.
-3. Review fog alpha over both light floor and dark wall samples.
-4. Keep concept assets separate from production exports; runtime/canvas integration remains outside this design review.
+1. Revise floor A/B toward warmer hanji with lower texture contrast.
+2. Define fog as a translucent overlay treatment over both light floor and dark wall, then make a mixed-cell adjacency study.
+3. Keep all concept crops separate from production exports; renderer/runtime integration remains outside this design review.
 
 ## HUMAN GATE
 - Reversible design exploration and reference/spec updates on the art branch: no additional gate.

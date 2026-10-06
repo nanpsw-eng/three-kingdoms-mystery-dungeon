@@ -36,8 +36,10 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 | Codex Bosses / Achievements / Items three-tab concept sheet | `CONCEPT` | `concepts/codex-secondary-tabs-20261006.jpg` | Keep data-driven counters, refine defeated/earned/unknown icons at mobile size |
 | Line-by-line story scene UI two-state concept | `CONCEPT` | `concepts/story-scene-ui-20261006.jpg` | Align speaker portrait to actual 48px row, validate sheet scroll and fixed actions |
 | Dungeon modular surface grammar v1 | `SUPERSEDED` | `concepts/dungeon-modular-surface-grammar-concept-v1-20261006.jpg`; first six-surface study without a second floor variant | Retain as history; v2 is the current crop/repeat review source |
-| Dungeon modular surface grammar v2 | `CONCEPT` | `concepts/dungeon-modular-surface-grammar-concept-v2-20261006.jpg`; Floor A/B, H/V corridor, horizontal wall segment, and inner corner studies in square cells | Review tile adjacency; add wall endpoints, T-junctions, exterior corners, and fog variants before production |
-| Dungeon modular surface scale review v2 | `CONCEPT` | `concepts/dungeon-modular-surface-scale-review-v2-20261006.jpg`; 26px color/grayscale crops plus H/V floor joins, repeated wall, and alternating floor samples | Current design QA evidence only; tile variants and actual Canvas/runtime integration remain open |
+| Dungeon modular surface grammar v2 | `SUPERSEDED` | `concepts/dungeon-modular-surface-grammar-concept-v2-20261006.jpg`; first square-cell grammar with less varied floor and incomplete transition set | Retain for history; v3 is the current concept reference |
+| Dungeon modular surface grammar v3 | `CONCEPT` | `concepts/dungeon-modular-surface-grammar-concept-v3-20261006.jpg`; floor A/B, H/V corridors, wall endpoint, exterior L-corner, T-junction, and split fog study | Warm/simplify floor, define translucent fog overlay, and verify mixed-cell joins before any production export |
+| Dungeon modular surface scale review v2 | `SUPERSEDED` | `concepts/dungeon-modular-surface-scale-review-v2-20261006.jpg`; 26px color/grayscale crops for the initial six-piece grammar | Retain for history; v3 is current |
+| Dungeon modular surface scale review v3 | `CONCEPT` | `concepts/dungeon-modular-surface-scale-review-v3-20261006.jpg`; eight exact-study crops reduced to 26px then enlarged 5× in color and grayscale | Design-scale silhouette review only; seamless adjacency, renderer alpha, and runtime use remain unverified |
 
 ## Current Implementation State
 
