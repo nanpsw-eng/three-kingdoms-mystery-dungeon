@@ -290,5 +290,10 @@
         ]
       ]
     }
-  }
+  },
+  "nativePortraits": [
+    "liu-bei",
+    "cao-cao",
+    "sun-quan"
+  ]
 }

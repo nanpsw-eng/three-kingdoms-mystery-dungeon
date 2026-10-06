@@ -17,10 +17,15 @@ export const ENEMY_ASSET_IDS: Readonly<Record<string, string>> = {
 };
 
 interface TilesetSpec { readonly image: string; readonly tile: number; readonly gap?: number; readonly map: Readonly<Record<string, readonly (readonly [number, number])[]>> }
-interface Manifest { readonly portraits?: readonly string[]; readonly portraitPixels?: number; readonly portraitColors?: number; readonly tileset?: TilesetSpec }
+interface Manifest { readonly portraits?: readonly string[]; readonly nativePortraits?: readonly string[]; readonly portraitPixels?: number; readonly portraitColors?: number; readonly tileset?: TilesetSpec }
 
 const portraits = new Map<string, string>();
+const nativePortraits = new Map<string, string>();
 let tileset: { image: HTMLImageElement; spec: TilesetSpec } | null = null;
+
+export function nativeAssetPortrait(key: string): string | undefined {
+  return nativePortraits.get(ENEMY_ASSET_IDS[key] ?? key);
+}
 
 export function assetPortrait(key: string): string | undefined {
   return portraits.get(ENEMY_ASSET_IDS[key] ?? key);
@@ -117,10 +122,14 @@ export async function loadAssets(onReady: () => void): Promise<void> {
   const jobs: Promise<void>[] = (manifest.portraits ?? []).map(async (id) => {
     try { portraits.set(id, pixelize(await loadImage("assets/portraits/" + id + ".png"), size, colors)); } catch { /* keep procedural */ }
   });
+  for (const id of manifest.nativePortraits ?? []) {
+    const src = "assets/portraits/" + id + ".webp";
+    jobs.push(loadImage(src).then(() => { nativePortraits.set(id, src); }).catch(() => undefined));
+  }
   if (manifest.tileset !== undefined) {
     const spec = manifest.tileset;
     jobs.push(loadImage("assets/" + spec.image).then((image) => { tileset = { image, spec }; }).catch(() => undefined));
   }
   await Promise.all(jobs);
-  if (portraits.size > 0 || tileset !== null) onReady();
+  if (portraits.size > 0 || nativePortraits.size > 0 || tileset !== null) onReady();
 }

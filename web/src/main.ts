@@ -3,7 +3,7 @@ import {
   type AbilityTargeting, type BattleCommand, type Direction, type FormationSlot, type MetaState, type RunCommand, type RunEvent, type RunOptions,
 } from "../../src/index.js";
 import { drawMap, tileAt } from "./map.js";
-import { loadAssets } from "./assets.js";
+import { loadAssets, nativeAssetPortrait } from "./assets.js";
 import { portraitUrl } from "./portraits.js";
 import { figureUrl, iconUrl, spriteImg } from "./sprites.js";
 import { codexScreen } from "./codex.js";
@@ -61,7 +61,11 @@ function put(...children: Child[]): void {
   for (const child of children) if (child !== null && child !== undefined && child !== false) app.append(child);
 }
 
-const pic = (key: string, size: number, alt = ""): HTMLImageElement => spriteImg(portraitUrl(artKey(key)), size, alt, "px portrait");
+const pic = (key: string, size: number, alt = ""): HTMLImageElement => {
+  const id = artKey(key);
+  const native = nativeAssetPortrait(id);
+  return spriteImg(native ?? portraitUrl(id), size, alt, native === undefined ? "px portrait" : "portrait native-portrait");
+};
 const icon = (id: string, size = 28): HTMLImageElement => spriteImg(iconUrl(id), size, "", "icon");
 let hitIds = new Set<string>();
 
