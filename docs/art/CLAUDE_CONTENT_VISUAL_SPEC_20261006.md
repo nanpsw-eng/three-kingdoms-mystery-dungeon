@@ -233,3 +233,14 @@ Separate full-body reference images now pair with the ruler bust and exploration
 - `concepts/sun-quan-full-body-concept-v1-20261006.jpg`: mature-young, clean-shaven face with balanced upright blue-gray/dark-green clothing and a narrow command tablet.
 
 These three images are `CONCEPT` references, reduced to 256×384 on canonical hanji for repository continuity. Keep the high-resolution generated masters separate from these downscaled comparison references. The ruler set is not approved yet: compare each face, broad palette blocks, garment silhouette, and identifying prop across bust / full-body / token; test monochrome reading and actual mobile render sizes before moving to `APPROVED` or `IMPLEMENTATION_READY`.
+
+
+## 21. Ruler Scale Review and Token Revision
+
+Review board: `concepts/ruler-scale-review-revised-20261006.jpg`.
+- Bust crops were reduced to 40px and 48px for review. The shared face/style treatment remains coherent, with Liu Bei's long beard, Cao Cao's clipped beard, and Sun Quan's mature-young clean-shaven face surviving the small crop.
+- Tokens were reduced to 24px and 28px, then shown on warm hanji and muted ink fog. Broad palette blocks and whole-body silhouettes remain distinguishable.
+- The first 24px grayscale pass showed Cao Cao's sword and Sun Quan's command tablet merged into their clothing. Both were revised: Cao Cao v2 projects a short straight sword beyond the cloak; Sun Quan v2 places the command tablet outside his robe contour. Their v1 token concepts are superseded for current review.
+- Revised monochrome silhouettes now separate Liu Bei's long-beard/open-sleeve mass, Cao Cao's compact sword-led shape, and Sun Quan's upright tablet-led pose. These are design-board simulations, not live map-canvas captures.
+- The Ruler Master visual identity system is `APPROVED` as a design reference. Individual bust/full-body/token images remain `CONCEPT`; downscaled references are not production exports.
+- Runtime portrait review, actual map-cell and fog behavior, locked-state QA, and browser/mobile clipping checks remain `NOT_RUN`. The current portrait loader pixelizes art and the current map renderer uses procedural 16×16 figures; no generated concept is approved for those paths yet.
