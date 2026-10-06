@@ -35,7 +35,7 @@ test("ink atlas covers current item/equipment IDs and required map marks", () =>
 
 
 test("native portraits load with stable character ids", async () => {
-  assert.deepEqual(manifest.nativePortraits, ["liu-bei", "cao-cao", "sun-quan", "guan-yu", "zhang-fei", "zhao-yun", "huang-zhong", "zhuge-liang", "zhang-liao", "xiahou-dun", "jia-xu"]);
+  assert.deepEqual(manifest.nativePortraits, ["liu-bei", "cao-cao", "sun-quan", "guan-yu", "zhang-fei", "zhao-yun", "huang-zhong", "zhuge-liang", "zhang-liao", "xiahou-dun", "jia-xu", "taishi-ci"]);
   for (const id of manifest.nativePortraits) {
     const image = await readFile(new URL("../web/assets/portraits/" + id + ".webp", import.meta.url));
     assert.ok(image.byteLength > 10_000, id + " portrait master is present");
@@ -46,8 +46,8 @@ test("native portraits load with stable character ids", async () => {
 
 
 test("ruler full-body illustrations and exploration tokens have fallback-safe manifest assets", async () => {
-  assert.deepEqual(manifest.fullBodyIllustrations, ["liu-bei", "cao-cao", "sun-quan", "guan-yu", "zhang-fei", "zhao-yun", "huang-zhong", "zhuge-liang", "zhang-liao", "xiahou-dun", "jia-xu"]);
-  assert.deepEqual(manifest.tokens, ["liu-bei", "cao-cao", "sun-quan", "guan-yu", "zhang-fei", "zhao-yun", "huang-zhong", "zhuge-liang", "zhang-liao", "xiahou-dun", "jia-xu"]);
+  assert.deepEqual(manifest.fullBodyIllustrations, ["liu-bei", "cao-cao", "sun-quan", "guan-yu", "zhang-fei", "zhao-yun", "huang-zhong", "zhuge-liang", "zhang-liao", "xiahou-dun", "jia-xu", "taishi-ci"]);
+  assert.deepEqual(manifest.tokens, ["liu-bei", "cao-cao", "sun-quan", "guan-yu", "zhang-fei", "zhao-yun", "huang-zhong", "zhuge-liang", "zhang-liao", "xiahou-dun", "jia-xu", "taishi-ci"]);
   for (const id of manifest.fullBodyIllustrations) {
     const image = await readFile(new URL("../web/assets/portraits/" + id + "-full.webp", import.meta.url));
     assert.ok(image.byteLength > 10_000, id + " full-body illustration is present");

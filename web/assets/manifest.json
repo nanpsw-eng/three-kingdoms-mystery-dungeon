@@ -302,7 +302,8 @@
     "zhuge-liang",
     "zhang-liao",
     "xiahou-dun",
-    "jia-xu"
+    "jia-xu",
+    "taishi-ci"
   ],
   "fullBodyIllustrations": [
     "liu-bei",
@@ -315,7 +316,8 @@
     "zhuge-liang",
     "zhang-liao",
     "xiahou-dun",
-    "jia-xu"
+    "jia-xu",
+    "taishi-ci"
   ],
   "tokens": [
     "liu-bei",
@@ -328,6 +330,7 @@
     "zhuge-liang",
     "zhang-liao",
     "xiahou-dun",
-    "jia-xu"
+    "jia-xu",
+    "taishi-ci"
   ]
 }
