@@ -47,7 +47,7 @@ test("native portraits load with stable character ids", async () => {
 
 test("ruler full-body illustrations and exploration tokens have fallback-safe manifest assets", async () => {
   assert.deepEqual(manifest.fullBodyIllustrations, ["liu-bei", "cao-cao", "sun-quan", "guan-yu", "zhang-fei", "zhao-yun", "huang-zhong", "zhuge-liang", "zhang-liao", "xiahou-dun", "jia-xu", "taishi-ci", "zhou-yu", "gan-ning", "hua-tuo"]);
-  assert.deepEqual(manifest.tokens, ["liu-bei", "cao-cao", "sun-quan", "guan-yu", "zhang-fei", "zhao-yun", "huang-zhong", "zhuge-liang", "zhang-liao", "xiahou-dun", "jia-xu", "taishi-ci", "zhou-yu", "gan-ning", "hua-tuo"]);
+  assert.deepEqual(manifest.tokens, ["liu-bei", "cao-cao", "sun-quan", "guan-yu", "zhang-fei", "zhao-yun", "huang-zhong", "zhuge-liang", "zhang-liao", "xiahou-dun", "jia-xu", "taishi-ci", "zhou-yu", "gan-ning", "hua-tuo", "yt-spear", "yt-archer", "yt-raider", "yt-sorcerer", "yt-chanter"]);
   for (const id of manifest.fullBodyIllustrations) {
     const image = await readFile(new URL("../web/assets/portraits/" + id + "-full.webp", import.meta.url));
     assert.ok(image.byteLength > 10_000, id + " full-body illustration is present");
@@ -57,5 +57,14 @@ test("ruler full-body illustrations and exploration tokens have fallback-safe ma
     const svgToken = await readFile(new URL("../web/assets/tokens/" + id + ".svg", import.meta.url), "utf8");
     assert.match(svgToken, /<svg\b/);
     assert.match(svgToken, /viewBox="0 0 64 64"/);
+  }
+});
+
+
+test("Yellow Turban map tokens are connected to stable enemy aliases", async () => {
+  const assetsSource = await readFile(new URL("../web/src/assets.ts", import.meta.url), "utf8");
+  for (const [name, id] of [["황건 창병", "yt-spear"], ["황건 궁병", "yt-archer"], ["황건 기병", "yt-raider"], ["황건 술사", "yt-sorcerer"], ["태평도 신도", "yt-chanter"]]) {
+    assert.match(assetsSource, new RegExp('"' + name + '"\\s*:\\s*"' + id + '"'));
+    assert.ok(manifest.tokens.includes(id), id + " is available to map rendering");
   }
 });

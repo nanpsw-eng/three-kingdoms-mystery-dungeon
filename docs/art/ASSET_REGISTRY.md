@@ -97,3 +97,12 @@ Phase A's hanji/ink skin is implemented on `main` and synced into the art branch
 
 | Dungeon core object markers v1 | `IMPLEMENTED` | `web/assets/tiles/ink-dungeon-v1.svg` loaded through `web/assets/manifest.json`; stair/trap/sorcery/enemy/pot modules have editable concept source in `concepts/dungeon-object-markers-v1.svg` | Browser QA at mobile size and missing-asset fallback |
 | Item silhouette language v1 | `IMPLEMENTED` | `web/assets/tiles/ink-dungeon-v1.svg`; 26×26 category/catalog aliases and unknown parcel state; editable concept in `concepts/item-silhouettes-v1.svg` | QA current content IDs in Bag/Shop, including unidentified equipment |
+
+
+## Current implementation status — Phase F (2026-10-06)
+
+| Asset / surface | Status | Source / note | Next action |
+|---|---|---|---|
+| Yellow Turban exploration tokens — spear, archer, raider, sorcerer, chanter | `IMPLEMENTED` | `web/assets/tokens/yt-{spear,archer,raider,sorcerer,chanter}.svg`; stable ids in `web/assets/manifest.json`; visible map enemies prefer native tokens and retain procedural fallback | Browser QA at 390×844, then design Zhang Bao / Zhang Liang / Zhang Jiao masters |
+| Phase F enemy rendering adapter | `IMPLEMENTED` | `web/src/map.ts` uses `assetToken(enemyKey)` before `figureCanvas`; enemy-name aliases stay in `web/src/assets.ts` | Extend coverage by stable enemy ids without changing dungeon behavior |
+

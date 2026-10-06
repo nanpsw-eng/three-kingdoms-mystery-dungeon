@@ -41,18 +41,17 @@ NEXT_SAFE_ACTION
 ---
 
 ## Track B — Current Visual Control (2026-10-06)
-- Art branch remains aligned with implementation sync `7030eff`; Phase A Title/Dungeon/Battle ink skin and Phase C/D map/item atlas are implemented.
-- Phase B ruler masters are implemented: Liu Bei, Cao Cao, Sun Quan each have bust, full-body art, and matching exploration token.
-- Phase E general roster is implemented for all 12: Guan Yu, Zhang Fei, Zhao Yun, Huang Zhong, Zhuge Liang, Zhang Liao, Xiahou Dun, Jia Xu, Taishi Ci, Zhou Yu, Gan Ning, Hua Tuo.
-- CURRENT HEAD (code before this handoff update): `d4a77a40bd2373476d17032aa63489037a4b38c4`.
-- CURRENT ART PHASE: Phase E complete; Phase F is next.
-- COMPLETED: Phase A vertical slice; map/item atlas; Phase B ruler masters; Phase E 12 general masters. All assets connect through manifest routes; procedural fallback remains for missing/uncovered content.
-- DO_NOT_REPEAT: approved art direction, Phase A, map/item atlas, 3 ruler sets, and 12 general sets; battle/dungeon/run/content logic.
-- FILES CHANGED ACROSS RECENT ASSET COMMITS: `web/assets/manifest.json`, `web/assets/portraits/*.webp`, `web/assets/tokens/*.svg`, `web/src/assets.ts`, `web/src/main.ts`, `web/src/map.ts`, `web/style.css`, `test/art-assets.test.mjs`, `docs/art/ASSET_REGISTRY.md`.
-- TEST RESULT: GitHub CI #119 PASS (`npm ci`, `npm test`, `npm run build:web`). Local checks NOT_RUN. Browser smoke, console/page error check, and 390×844 clipping/touch-target QA NOT_RUN.
-- VISUAL EVIDENCE: transparent bust/full-body assets and distinctive 64px SVG exploration tokens exist for all 15 characters; generated figures were reviewed on hanji background in this session. Runtime screenshot remains unavailable.
-- KNOWN GAP: CI workflow does not include browser smoke or screenshot; live runtime and missing-asset fallback have not been visually exercised. Remaining Phase F/G/H art work is open.
-- NEXT_SAFE_ACTION: run the art branch in a browser at 390×844 and check Title, Dungeon, Battle, portraits/full-body event cards, map tokens, and missing-asset fallback; then implement Phase F Yellow Turban units and Zhang Bao/Zhang Liang/Zhang Jiao bosses.
+- Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon`; active branch: `art/ink-graphic-novel-v1`.
+- CURRENT HEAD before this Phase F commit: `7ef9cd9fb91d76870329571c71d16c1dff9e47d8`.
+- CURRENT ART PHASE: Phase F — enemy and boss set, in progress.
+- LAST CONFIRMED DONE: Phase A Title/Dungeon/Battle vertical slice; Phase C dungeon atlas; Phase D item silhouettes; Phase B ruler masters; Phase E all 12 general bust/full-body/token sets.
+- THIS CHANGE: five Yellow Turban map tokens (`yt-spear`, `yt-archer`, `yt-raider`, `yt-sorcerer`, `yt-chanter`) now have stable SVG assets and manifest entries. Visible dungeon enemies use an available native token, with procedural figure fallback retained. Enemy-name aliases continue to use `ENEMY_ASSET_IDS`.
+- DO_NOT_REPEAT: approved art direction, completed Phases A–E, and battle/dungeon/run/content logic.
+- FILES CHANGED: `web/src/map.ts`, `web/assets/manifest.json`, `web/assets/tokens/yt-*.svg`, `test/art-assets.test.mjs`, `docs/art/ASSET_REGISTRY.md`, `docs/ai-dev/SESSION_HANDOFF.md`.
+- TEST RESULT: GitHub CI #120 on parent `7ef9cd9fb91d76870329571c71d16c1dff9e47d8` PASS. New commit CI: pending at handoff time. Local `npm test` and `npm run build:web`: NOT_RUN in this workspace. Browser smoke, console/page errors, 390×844 clipping/touch-target checks: NOT_RUN.
+- VISUAL EVIDENCE: five authored 64×64 vector silhouettes use distinct weapon/garment profiles and the approved ink/hanji palette; runtime screenshot not captured.
+- KNOWN GAP: no in-browser evidence yet. Phase F boss trio and other enemy factions remain.
+- NEXT_SAFE_ACTION: add and integrate Zhang Bao, Zhang Liang, and Zhang Jiao boss portrait/token masters; retain procedural fallback and update stable manifest coverage.
 - HUMAN GATE: no PR, main merge, or production deploy performed.
 
 ## Track B — Art (Codex) — latest Codex handoff below, nested verbatim (historical snapshot; current state above)

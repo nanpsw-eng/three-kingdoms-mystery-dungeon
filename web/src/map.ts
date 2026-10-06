@@ -223,7 +223,9 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   for (const enemy of dungeon.visibleEnemies()) {
     const [x, y] = at(enemy.pos);
     ctx.fillStyle = "rgba(0,0,0,0.35)"; ctx.fillRect(x + cell * 0.2, y + cell * 0.82, cell * 0.6, cell * 0.12);
-    blit(figureCanvas(options.enemyKey(enemy.groupId)), enemy.pos, enemy.boss ? 1.35 : 1, cell * 0.08);
+    const enemyKey = options.enemyKey(enemy.groupId);
+    const enemyToken = assetToken(enemyKey);
+    blit(enemyToken ?? figureCanvas(enemyKey), enemy.pos, enemy.boss ? 1.35 : enemyToken === undefined ? 1 : 1.2, cell * 0.08);
     if (enemy.state === "ALERT" || enemy.state === "CHASE") {
       const s = Math.max(2, Math.floor(cell / 8));
       ctx.fillStyle = "#f2ebdd"; ctx.fillRect(x + cell * 0.72, y - s * 3, s * 3, s * 4);
