@@ -13,7 +13,7 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 | Cao Cao portrait / full-body / exploration token | `MASTER_REQUIRED` | Visual Bible v1 ruler master | Create and approve one consistent master set |
 | Sun Quan portrait / full-body / exploration token | `MASTER_REQUIRED` | Visual Bible v1 ruler master | Create and approve one consistent master set |
 | Dungeon floor/wall/corridor/fog/object illustrations | `MASTER_REQUIRED` | Phase C concept atlases now exist; individual production tiles/crops and runtime checks do not | Refine trap/sorcery distinction and environmental overlay, then create production masters after renderer contract |
-| Item silhouette set | `MASTER_REQUIRED` | Phase D item language | Create after Phase C |
+| Item silhouette set v1 | `CONCEPT` | `concepts/item-silhouettes-v1.svg` and color/grayscale renders; 26px food, medicine, scroll, weapon, armor, jade-seal treasure, and wrapped unidentified state | Map the latest `src/content/items.ts` IDs to specific variants, then integrate via the asset manifest with procedural fallback |
 | Existing procedural pixel portraits/sprites/map tiles | `SUPERSEDED` | Legacy main visual language; retained as fallback | Keep functional until replacement coverage is verified |
 
 
@@ -41,7 +41,7 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 
 ## Current Implementation State
 
-The repository's current web client still uses the legacy dark/gold CSS theme and procedural pixel portrait/sprite/map renderers. This does not change the approved art direction; these remain fallback/legacy implementation surfaces until replacement assets and renderers are verified.
+Phase A's hanji/ink skin is implemented on `main` and synced into the art branch. The current Canvas map, character portraits/sprites, and item icons remain procedural fallback renderers; replacement concepts stay separate until a fallback-safe non-pixelized route is verified.
 
 | Liu Bei individual master concept v1 | `CONCEPT` | `concepts/liu-bei-master-concept-v1-20261006.jpg` | Review portrait at 40px and token in grayscale; create final production exports later |
 | Cao Cao individual master concept v1 | `CONCEPT` | `concepts/cao-cao-master-concept-v1-20261006.jpg` | Review portrait at 40px and token in grayscale; create final production exports later |
@@ -82,3 +82,7 @@ The repository's current web client still uses the legacy dark/gold CSS theme an
 | Dungeon room/corridor composition v1 | `CONCEPT` | `concepts/dungeon-room-corridor-composition-v1-20261006.jpg`; shows explored room, corridor, second room/fog and current marker set | Reference only; wall seams, marker footprints and exact corridor width remain unapproved |
 
 | Dungeon exact-cell atlas-crop audit v1 | `NEEDS_REVISION` | `concepts/dungeon-cell-grid-review-v1.svg`; Inkscape render shows vignette atlas panels reduced into logical cells | Replace the vignette crops with modular tile masters; review wall/floor seams and fog strength |
+
+| Dungeon exact-cell room / corridor v1 | `CONCEPT` | `concepts/dungeon-modular-exact-cell-study-v1-20261006.svg`; one-cell doorway, one-cell corridor, player/chest marks, localized fog | Keep reference-only pending Canvas/renderer compatibility check |
+| Dungeon core object markers v1 | `CONCEPT` | `concepts/dungeon-object-markers-v1.svg` with color/grayscale boards; stair, trap, sorcery, enemy, pot at 26px and under fog | Integrate through a new atlas path with procedural fallback; validate actual map screenshots |
+| Item silhouette language v1 | `CONCEPT` | `concepts/item-silhouettes-v1.svg` with color/grayscale boards; category silhouettes including unknown state | Map current item IDs to specific variants and integrate into bag/map UI |
