@@ -294,16 +294,19 @@
   "nativePortraits": [
     "liu-bei",
     "cao-cao",
-    "sun-quan"
+    "sun-quan",
+    "guan-yu"
   ],
   "fullBodyIllustrations": [
     "liu-bei",
     "cao-cao",
-    "sun-quan"
+    "sun-quan",
+    "guan-yu"
   ],
   "tokens": [
     "liu-bei",
     "cao-cao",
-    "sun-quan"
+    "sun-quan",
+    "guan-yu"
   ]
 }

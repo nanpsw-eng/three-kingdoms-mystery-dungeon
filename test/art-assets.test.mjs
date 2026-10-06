@@ -34,8 +34,8 @@ test("ink atlas covers current item/equipment IDs and required map marks", () =>
 });
 
 
-test("ruler masters load as native portraits and retain stable ids", async () => {
-  assert.deepEqual(manifest.nativePortraits, ["liu-bei", "cao-cao", "sun-quan"]);
+test("native portraits load with stable character ids", async () => {
+  assert.deepEqual(manifest.nativePortraits, ["liu-bei", "cao-cao", "sun-quan", "guan-yu"]);
   for (const id of manifest.nativePortraits) {
     const image = await readFile(new URL("../web/assets/portraits/" + id + ".webp", import.meta.url));
     assert.ok(image.byteLength > 10_000, id + " portrait master is present");
@@ -46,8 +46,8 @@ test("ruler masters load as native portraits and retain stable ids", async () =>
 
 
 test("ruler full-body illustrations and exploration tokens have fallback-safe manifest assets", async () => {
-  assert.deepEqual(manifest.fullBodyIllustrations, ["liu-bei", "cao-cao", "sun-quan"]);
-  assert.deepEqual(manifest.tokens, ["liu-bei", "cao-cao", "sun-quan"]);
+  assert.deepEqual(manifest.fullBodyIllustrations, ["liu-bei", "cao-cao", "sun-quan", "guan-yu"]);
+  assert.deepEqual(manifest.tokens, ["liu-bei", "cao-cao", "sun-quan", "guan-yu"]);
   for (const id of manifest.fullBodyIllustrations) {
     const image = await readFile(new URL("../web/assets/portraits/" + id + "-full.webp", import.meta.url));
     assert.ok(image.byteLength > 10_000, id + " full-body illustration is present");
