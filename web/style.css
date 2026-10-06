@@ -154,6 +154,7 @@ canvas#map { display: block; width: 100%; max-width: 100%; aspect-ratio: 1 / 1; 
 .item-row { padding: 4px 0; border-bottom: 1px solid var(--line-soft); }
 .item-row:last-of-type { border-bottom: 0; }
 .icon { flex: none; background: var(--paper-shadow); border: 1px solid var(--line-soft); padding: 2px; box-sizing: content-box; }
+img.icon { image-rendering: auto; }
 .icon.unknown { width: 28px; height: 28px; display: inline-grid; place-items: center; color: var(--ink-soft); font-family: var(--font-display); }
 
 /* sheets */

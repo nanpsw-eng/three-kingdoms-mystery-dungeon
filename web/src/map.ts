@@ -178,12 +178,37 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   }
   for (const object of dungeon.objects()) {
     if (!dungeon.isExplored(object.pos)) continue;
-    const image = object.kind === "item" ? iconCanvas(object.contentId) : object.kind === "recruit" ? BANNER : object.kind === "event" ? EVENT : SORCERY;
-    blit(image, object.pos, object.kind === "item" ? 0.75 : 1);
+    const name = object.kind === "item" ? "item-" + object.contentId : object.kind === "recruit" ? "recruit" : object.kind === "event" ? "event" : "sorcery";
+    const fallback = object.kind === "item" ? iconCanvas(object.contentId) : object.kind === "recruit" ? BANNER : object.kind === "event" ? EVENT : SORCERY;
+    const tile = assetTile(name);
+    if (tile === null) {
+      blit(fallback, object.pos, object.kind === "item" ? 0.75 : 1);
+      continue;
+    }
+    const [x, y] = at(object.pos);
+    const scale = object.kind === "item" ? 0.78 : 1;
+    const s = cell * scale;
+    ctx.imageSmoothingEnabled = true;
+    ctx.drawImage(tile.image, tile.sx, tile.sy, tile.size, tile.size, x + (cell - s) / 2, y + (cell - s) / 2, s, s);
+    ctx.imageSmoothingEnabled = false;
   }
-  // fog over remembered-but-not-visible ground
-  ctx.fillStyle = "rgba(31, 28, 25, 0.5)";
-  for (const p of fog) { const [x, y] = at(p); ctx.fillRect(x, y, cell, cell); }
+  // localized 28% ink wash over remembered-but-not-visible ground; never a flat black cell.
+  for (const p of fog) {
+    const [x, y] = at(p);
+    const tile = assetTile("fog", hash(p.x, p.y, 19));
+    if (tile !== null) {
+      ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(tile.image, tile.sx, tile.sy, tile.size, tile.size, x, y, cell, cell);
+      ctx.imageSmoothingEnabled = false;
+    } else {
+      const wash = ctx.createRadialGradient(x + cell * 0.5, y + cell * 0.5, cell * 0.08, x + cell * 0.5, y + cell * 0.5, cell * 0.76);
+      wash.addColorStop(0, "rgba(23, 21, 19, 0.28)");
+      wash.addColorStop(0.68, "rgba(23, 21, 19, 0.14)");
+      wash.addColorStop(1, "rgba(23, 21, 19, 0)");
+      ctx.fillStyle = wash;
+      ctx.fillRect(x, y, cell, cell);
+    }
+  }
   // torchlight: warm glow around the ruler, falling off into darkness at the view edge
   const [lx, ly] = at(dungeon.position);
   const cx = lx + cell / 2, cy = ly + cell / 2;

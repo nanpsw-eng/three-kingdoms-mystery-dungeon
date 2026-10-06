@@ -37,6 +37,5 @@
  <use xlink:href="#wall-corner-ru" x="0" y="104"/><use xlink:href="#wall-h" x="26" y="104"/><use xlink:href="#wall-h" x="52" y="104"/><use xlink:href="#wall-h" x="78" y="104"/><use xlink:href="#wall-h" x="104" y="104"/><use xlink:href="#wall-h" x="130" y="104"/><use xlink:href="#wall-corner-lu" x="156" y="104"/>
 </g>
 </g>
-</g>
 <g font-family="sans-serif" font-size="15" fill="#756C63"><text x="44" y="820">Doorway and corridor are each one 26px cell wide. Vermilion player token and chest retain distinct silhouettes on explored hanji.</text><text x="44" y="846">Localized 28% fog spans both corridor floor and boundary walls; edge feathers keep wall structure partly visible. SVG composition review only; current map renderer and Canvas scaling remain unverified.</text></g>
 </svg>

@@ -62,7 +62,7 @@ function put(...children: Child[]): void {
 }
 
 const pic = (key: string, size: number, alt = ""): HTMLImageElement => spriteImg(portraitUrl(artKey(key)), size, alt, "px portrait");
-const icon = (id: string, size = 28): HTMLImageElement => spriteImg(iconUrl(id), size, "", "px icon");
+const icon = (id: string, size = 28): HTMLImageElement => spriteImg(iconUrl(id), size, "", "icon");
 let hitIds = new Set<string>();
 
 function say(message: string): void { log = [message, ...log].slice(0, 60); }
@@ -457,7 +457,7 @@ function renderBag(): void {
     const definition = r.equipmentDef(entry.equipment.equipmentId)!;
     const name = entry.equipment.identified ? definition.name + (entry.equipment.enhance ? " +" + entry.equipment.enhance : "") : "미식별 장비 (" + definition.slot + ")";
     const stats = entry.equipment.identified ? Object.entries(definition.stats).map(([k, v]) => k.toUpperCase() + (v! > 0 ? "+" : "") + v).join(" ") : "?";
-    return h("div", { class: "row item-row" }, entry.equipment.identified ? icon(definition.id) : h("span", { class: "icon unknown" }, "?"), h("span", { class: "grow" }, name, h("small", { class: "muted" }, " " + stats)),
+    return h("div", { class: "row item-row" }, entry.equipment.identified ? icon(definition.id) : icon("unknown-item"), h("span", { class: "grow" }, name, h("small", { class: "muted" }, " " + stats)),
       button("장착", () => { pickTarget = { label: name + " — 장착할 장수", options: members.map((m) => ({ id: m.characterId, label: m.name })), onPick: (id) => { act({ type: "equip", characterId: id, uid: entry.uid }); render(); } }; render(); }, { class: "small", disabled: !usable }),
       button("버림", () => { act({ type: "discard", uid: entry.uid }); render(); }, { class: "small" }));
   });

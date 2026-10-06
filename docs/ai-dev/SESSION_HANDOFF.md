@@ -43,11 +43,11 @@ NEXT_SAFE_ACTION
 ## Track B — Current Visual Control (2026-10-06)
 - Product source `main` and the art branch were reconciled at main `a035a5ed` with merge commit `7030eff` on `art/ink-graphic-novel-v1`. This sync carries Claude's PR #12 visual implementation and latest content without redoing it.
 - Phase A is already implemented on main: hanji/ink CSS system and palette adaptation for Title, Dungeon, and Battle. Claude reports `npm test` PASS (156/0), `build:web` PASS, and 390×844 smoke PASS with zero page errors. Runtime screenshots have not yet been reviewed here.
-- Active art work remains Phase C concepts plus Phase D item assets. New dungeon exact-cell and object-marker boards are visual references only; this session adds item silhouettes for the latest item catalog. None are marked production-ready yet.
-- First incomplete implementation task: create a fallback-safe vector asset route and apply the dungeon and item marks to the current Canvas map and inventory/bag surfaces; preserve procedural rendering when any file is missing.
-- CI run #99 on merge commit `7030eff767d5146f3c3fce84be95ba828292dde7` passed. No PR is open. No local test/build/browser result is claimed for this session.
+- This update implements a fallback-safe SVG atlas for dungeon/object marks and item icons, backed by 26px authored concepts and the current content IDs.
+- First incomplete task: verify the map atlas and inventory art in a browser at 390×844, exercise the missing-manifest fallback, and correct any visible clipping or contrast gap before closing QA.
+- CI run #100 on pre-change commit `4c2a2a01fa04be831f388361b63de26453d56aff` passed. This implementation commit triggers the next CI run. Local npm test/build and browser smoke are NOT_RUN in this workspace. No PR is open.
 
-## Track B — Art (Codex) — latest Codex handoff below, nested verbatim
+## Track B — Art (Codex) — latest Codex handoff below, nested verbatim (historical snapshot; current state above)
 
 > **Integration note (Claude, 2026-10-06, user instruction "코덱스 그래픽 작업을 파악해서 게임에 반영·배포")**
 > - `PHASE_A_VISUAL_SPEC_V1.md` (status `IMPLEMENTATION_READY`) was implemented by Claude: `web/style.css` rewritten to the spec tokens/components; `web/src/map.ts` palette moved to hanji floor / ink wall / soft ink-wash fog / vermilion markers; `web/index.html` theme-color. Domain code unchanged; 156 tests PASS; 390×844 smoke PASS (title/dungeon/battle screenshots).
@@ -67,7 +67,7 @@ NEXT_SAFE_ACTION
 - Art direction and Product Baseline remain unchanged.
 
 ### Current Art Phase
-- `PHASE C — Dungeon Graphic Set` is active; Phase A implementation was already completed by PR #12 and is not repeated.
+- `PHASE C — Dungeon Graphic Set` is active; Phase A implementation was already completed by PR #12 and is not repeated. Phase C/D atlas integration is in the art branch, pending browser QA.
 - Phase B ruler identity language is `APPROVED` as a design reference; individual character images remain `CONCEPT`.
 - Last confirmed done: surface/object vignette atlases, revised trap/sorcery marks including v3, exact-cell crop audit, and modular surface grammar v2 with a 26px color/grayscale and join review.
 - First incomplete task: complete the modular transition set with wall endpoints, exterior corners, and T-junctions; then tune fog over both floor and wall.

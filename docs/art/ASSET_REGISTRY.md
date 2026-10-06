@@ -12,7 +12,8 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 | Liu Bei portrait / full-body / exploration token | `MASTER_REQUIRED` | Visual Bible v1 ruler master | Create and approve one consistent master set |
 | Cao Cao portrait / full-body / exploration token | `MASTER_REQUIRED` | Visual Bible v1 ruler master | Create and approve one consistent master set |
 | Sun Quan portrait / full-body / exploration token | `MASTER_REQUIRED` | Visual Bible v1 ruler master | Create and approve one consistent master set |
-| Dungeon floor/wall/corridor/fog/object illustrations | `MASTER_REQUIRED` | Phase C concept atlases now exist; individual production tiles/crops and runtime checks do not | Refine trap/sorcery distinction and environmental overlay, then create production masters after renderer contract |
+| Dungeon floor/wall/corridor/fog/object set v1 | `IMPLEMENTED` | `web/assets/tiles/ink-dungeon-v1.svg` + manifest maps floor/walls, doorway, stairs, trap, sorcery, recruit/event, player/enemy/chest/pot; feathered 28% fog; procedural fallback retained | Browser-check live map at 390×844 and verify no-manifest fallback |
+| Item silhouette set v1 | `IMPLEMENTED` | Same SVG atlas maps food, medicine, scroll, weapon, armor, jade seal, boots, tally, fire pot, smoke bomb, and unidentified item IDs; `sprites.ts` uses non-pixelized asset route; `main.ts` uses dedicated unknown icon | Browser-check Bag/Shop, gear variants, and missing-asset fallback |
 | Item silhouette set v1 | `CONCEPT` | `concepts/item-silhouettes-v1.svg` and color/grayscale renders; 26px food, medicine, scroll, weapon, armor, jade-seal treasure, and wrapped unidentified state | Map the latest `src/content/items.ts` IDs to specific variants, then integrate via the asset manifest with procedural fallback |
 | Existing procedural pixel portraits/sprites/map tiles | `SUPERSEDED` | Legacy main visual language; retained as fallback | Keep functional until replacement coverage is verified |
 
@@ -41,7 +42,7 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 
 ## Current Implementation State
 
-Phase A's hanji/ink skin is implemented on `main` and synced into the art branch. The current Canvas map, character portraits/sprites, and item icons remain procedural fallback renderers; replacement concepts stay separate until a fallback-safe non-pixelized route is verified.
+Phase A's hanji/ink skin is implemented on `main` and synced into the art branch. The art branch adds a fallback-safe, non-pixelized SVG atlas for Canvas dungeon/object marks and inventory icons. Character portraits and full-body map sprites remain procedural fallbacks until the Ruler Master production set and portrait route are completed. Runtime QA for the new atlas is pending.
 
 | Liu Bei individual master concept v1 | `CONCEPT` | `concepts/liu-bei-master-concept-v1-20261006.jpg` | Review portrait at 40px and token in grayscale; create final production exports later |
 | Cao Cao individual master concept v1 | `CONCEPT` | `concepts/cao-cao-master-concept-v1-20261006.jpg` | Review portrait at 40px and token in grayscale; create final production exports later |
@@ -86,3 +87,6 @@ Phase A's hanji/ink skin is implemented on `main` and synced into the art branch
 | Dungeon exact-cell room / corridor v1 | `CONCEPT` | `concepts/dungeon-modular-exact-cell-study-v1-20261006.svg`; one-cell doorway, one-cell corridor, player/chest marks, localized fog | Keep reference-only pending Canvas/renderer compatibility check |
 | Dungeon core object markers v1 | `CONCEPT` | `concepts/dungeon-object-markers-v1.svg` with color/grayscale boards; stair, trap, sorcery, enemy, pot at 26px and under fog | Integrate through a new atlas path with procedural fallback; validate actual map screenshots |
 | Item silhouette language v1 | `CONCEPT` | `concepts/item-silhouettes-v1.svg` with color/grayscale boards; category silhouettes including unknown state | Map current item IDs to specific variants and integrate into bag/map UI |
+
+| Dungeon core object markers v1 | `IMPLEMENTED` | `web/assets/tiles/ink-dungeon-v1.svg` loaded through `web/assets/manifest.json`; stair/trap/sorcery/enemy/pot modules have editable concept source in `concepts/dungeon-object-markers-v1.svg` | Browser QA at mobile size and missing-asset fallback |
+| Item silhouette language v1 | `IMPLEMENTED` | `web/assets/tiles/ink-dungeon-v1.svg`; 26×26 category/catalog aliases and unknown parcel state; editable concept in `concepts/item-silhouettes-v1.svg` | QA current content IDs in Bag/Shop, including unidentified equipment |

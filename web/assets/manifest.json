@@ -1,5 +1,294 @@
 {
-  "portraits": [],
-  "portraitPixels": 48,
-  "portraitColors": 28
+  "tileset": {
+    "image": "tiles/ink-dungeon-v1.svg",
+    "tile": 26,
+    "map": {
+      "floor": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "corridor": [
+        [
+          2,
+          0
+        ]
+      ],
+      "wall-cap": [
+        [
+          3,
+          0
+        ]
+      ],
+      "wall-face": [
+        [
+          4,
+          0
+        ]
+      ],
+      "stairs": [
+        [
+          5,
+          0
+        ]
+      ],
+      "gate": [
+        [
+          6,
+          0
+        ]
+      ],
+      "trap": [
+        [
+          7,
+          0
+        ]
+      ],
+      "sorcery": [
+        [
+          8,
+          0
+        ]
+      ],
+      "recruit": [
+        [
+          9,
+          0
+        ]
+      ],
+      "event": [
+        [
+          10,
+          0
+        ]
+      ],
+      "player": [
+        [
+          11,
+          0
+        ]
+      ],
+      "enemy": [
+        [
+          12,
+          0
+        ]
+      ],
+      "chest": [
+        [
+          13,
+          0
+        ]
+      ],
+      "pot": [
+        [
+          14,
+          0
+        ]
+      ],
+      "item-bun": [
+        [
+          15,
+          0
+        ]
+      ],
+      "item-rice-sack": [
+        [
+          16,
+          0
+        ]
+      ],
+      "item-herb": [
+        [
+          17,
+          0
+        ]
+      ],
+      "item-medicine": [
+        [
+          18,
+          0
+        ]
+      ],
+      "item-treatment-kit": [
+        [
+          19,
+          0
+        ]
+      ],
+      "item-identify-scroll": [
+        [
+          20,
+          0
+        ]
+      ],
+      "item-scout-map": [
+        [
+          21,
+          0
+        ]
+      ],
+      "item-fire-pot": [
+        [
+          22,
+          0
+        ]
+      ],
+      "item-smoke-bomb": [
+        [
+          23,
+          0
+        ]
+      ],
+      "item-elixir": [
+        [
+          24,
+          0
+        ]
+      ],
+      "item-iron-sword": [
+        [
+          25,
+          0
+        ]
+      ],
+      "item-long-spear": [
+        [
+          26,
+          0
+        ]
+      ],
+      "item-horn-bow": [
+        [
+          27,
+          0
+        ]
+      ],
+      "item-war-fan": [
+        [
+          28,
+          0
+        ]
+      ],
+      "item-ancient-blade": [
+        [
+          29,
+          0
+        ]
+      ],
+      "item-leather-armor": [
+        [
+          30,
+          0
+        ]
+      ],
+      "item-scale-armor": [
+        [
+          31,
+          0
+        ]
+      ],
+      "item-silk-robe": [
+        [
+          32,
+          0
+        ]
+      ],
+      "item-dragon-armor": [
+        [
+          33,
+          0
+        ]
+      ],
+      "item-jade-seal": [
+        [
+          34,
+          0
+        ]
+      ],
+      "item-swift-boots": [
+        [
+          35,
+          0
+        ]
+      ],
+      "item-tiger-tally": [
+        [
+          36,
+          0
+        ]
+      ],
+      "item-unknown-item": [
+        [
+          37,
+          0
+        ]
+      ],
+      "fog": [
+        [
+          38,
+          0
+        ]
+      ],
+      "doorway": [
+        [
+          39,
+          0
+        ]
+      ],
+      "trap-rockfall": [
+        [
+          7,
+          0
+        ]
+      ],
+      "trap-poison-needle": [
+        [
+          7,
+          0
+        ]
+      ],
+      "trap-fire-circle": [
+        [
+          7,
+          0
+        ]
+      ],
+      "trap-pit": [
+        [
+          7,
+          0
+        ]
+      ],
+      "trap-alarm-bell": [
+        [
+          7,
+          0
+        ]
+      ],
+      "trap-food-loss": [
+        [
+          7,
+          0
+        ]
+      ],
+      "trap-confusion-circle": [
+        [
+          7,
+          0
+        ]
+      ],
+      "trap-teleport-circle": [
+        [
+          7,
+          0
+        ]
+      ]
+    }
+  }
 }
