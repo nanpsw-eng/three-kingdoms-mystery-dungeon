@@ -298,7 +298,8 @@
     "guan-yu",
     "zhang-fei",
     "zhao-yun",
-    "huang-zhong"
+    "huang-zhong",
+    "zhuge-liang"
   ],
   "fullBodyIllustrations": [
     "liu-bei",
@@ -307,7 +308,8 @@
     "guan-yu",
     "zhang-fei",
     "zhao-yun",
-    "huang-zhong"
+    "huang-zhong",
+    "zhuge-liang"
   ],
   "tokens": [
     "liu-bei",
@@ -316,6 +318,7 @@
     "guan-yu",
     "zhang-fei",
     "zhao-yun",
-    "huang-zhong"
+    "huang-zhong",
+    "zhuge-liang"
   ]
 }
