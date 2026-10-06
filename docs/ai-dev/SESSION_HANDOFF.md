@@ -5,9 +5,9 @@
 - Current product source: `main` at `82b38b4bf877a015e99f53ae551bfedb45bbc790`
 - Latest Claude work: PR #10 merged; Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`
 - Art/design branch: `art/ink-graphic-novel-v1`
-- Current art HEAD before this handoff update: `40039ec072a979a13ed9711027d1c681b3813b28`
+- Current art HEAD before this handoff update: `18ab7ab7c1541ca6a470d057105f4af5a83fc055`
 - Open PR: none
-- Latest art CI: current commit `40039ec072a979a13ed9711027d1c681b3813b28` passed CI run #86; previous concept/doc commits through #84 passed. This next change is documentation/concept-only; local npm test/build/smoke are `NOT_RUN`.
+- Latest art CI: commit `18ab7ab7c1541ca6a470d057105f4af5a83fc055` passed CI run #87. This handoff-only sync is documentation-only; local npm test/build/browser smoke are `NOT_RUN`.
 - Art direction and Product Baseline remain unchanged.
 
 ## Current Art Phase
@@ -17,7 +17,7 @@
 - First incomplete task: review and refine the new modular floor/wall/corridor grammar at true 26px cells; check repeated joins and tune fog opacity over both floor and wall.
 - Visual QA: SVG XML parses and Inkscape rendered the atlas-crop audit at 2× display (26px logical cells); it FAILS as a tile proof because atlas panels are illustrative vignettes, not modular cell art. Sorcery v3 and the six-surface modular grammar sheet remain `CONCEPT`.
 - Blocker: map renderer remains procedural/pixelated; browser/canvas, mobile, and gameplay checks are unverified.
-- Latest confirmed CI: commit `40039ec072a979a13ed9711027d1c681b3813b28` passed run #86. For this design-only change, `npm test`, `npm run build:web`, and browser/runtime smoke are `NOT_RUN`; Inkscape SVG rendering passed.
+- Latest confirmed CI: commit `18ab7ab7c1541ca6a470d057105f4af5a83fc055` passed run #87. For this design-only change, `npm test`, `npm run build:web`, and browser/runtime smoke are `NOT_RUN`; Inkscape SVG rendering passed.
 
 ## Work Responsibility
 This Work owns visual design, concept art, asset registry, and visual QA. The user instructed that all design work continue here without a separate Codex work assignment. Keep the actual game visuals and functional behavior intact while creating design assets and specifications.
