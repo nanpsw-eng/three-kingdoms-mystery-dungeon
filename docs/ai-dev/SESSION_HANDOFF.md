@@ -45,13 +45,13 @@ NEXT_SAFE_ACTION
 - CURRENT HEAD before this Phase F commit: `7ef9cd9fb91d76870329571c71d16c1dff9e47d8`.
 - CURRENT ART PHASE: Phase F — enemy and boss set, in progress.
 - LAST CONFIRMED DONE: Phase A Title/Dungeon/Battle vertical slice; Phase C dungeon atlas; Phase D item silhouettes; Phase B ruler masters; Phase E all 12 general bust/full-body/token sets.
-- THIS CHANGE: five Yellow Turban map tokens (`yt-spear`, `yt-archer`, `yt-raider`, `yt-sorcerer`, `yt-chanter`) now have stable SVG assets and manifest entries. Visible dungeon enemies use an available native token, with procedural figure fallback retained. Enemy-name aliases continue to use `ENEMY_ASSET_IDS`.
+- THIS CHANGE: eight Phase F enemy/boss map tokens are implemented: five Yellow Turban types (`yt-spear`, `yt-archer`, `yt-raider`, `yt-sorcerer`, `yt-chanter`) and boss silhouettes for Zhang Bao, Zhang Liang, and Zhang Jiao. Visible dungeon enemies use a native token when available and retain procedural figure fallback. Enemy-name aliases use `ENEMY_ASSET_IDS`.
 - DO_NOT_REPEAT: approved art direction, completed Phases A–E, and battle/dungeon/run/content logic.
-- FILES CHANGED: `web/src/map.ts`, `web/assets/manifest.json`, `web/assets/tokens/yt-*.svg`, `test/art-assets.test.mjs`, `docs/art/ASSET_REGISTRY.md`, `docs/ai-dev/SESSION_HANDOFF.md`.
-- TEST RESULT: GitHub CI #120 on parent `7ef9cd9fb91d76870329571c71d16c1dff9e47d8` PASS. New commit CI: pending at handoff time. Local `npm test` and `npm run build:web`: NOT_RUN in this workspace. Browser smoke, console/page errors, 390×844 clipping/touch-target checks: NOT_RUN.
-- VISUAL EVIDENCE: five authored 64×64 vector silhouettes use distinct weapon/garment profiles and the approved ink/hanji palette; runtime screenshot not captured.
+- FILES CHANGED: `web/src/map.ts`, `web/assets/manifest.json`, `web/assets/tokens/yt-*.svg`, `web/assets/tokens/boss-zhang-*.svg`, `test/art-assets.test.mjs`, `docs/art/ASSET_REGISTRY.md`, `docs/ai-dev/SESSION_HANDOFF.md`.
+- TEST RESULT: GitHub CI #120 on parent `7ef9cd9fb91d76870329571c71d16c1dff9e47d8` PASS. GitHub CI #121 PASS for Yellow Turban token integration; boss-token follow-up CI is pending at handoff time. Local `npm test` and `npm run build:web`: NOT_RUN in this workspace. Browser smoke, console/page errors, 390×844 clipping/touch-target checks: NOT_RUN.
+- VISUAL EVIDENCE: eight authored 64×64 vector silhouettes use distinct weapon/garment profiles and the approved ink/hanji palette; runtime screenshot not captured.
 - KNOWN GAP: no in-browser evidence yet. Phase F boss trio and other enemy factions remain.
-- NEXT_SAFE_ACTION: add and integrate Zhang Bao, Zhang Liang, and Zhang Jiao boss portrait/token masters; retain procedural fallback and update stable manifest coverage.
+- NEXT_SAFE_ACTION: create Zhang Bao, Zhang Liang, and Zhang Jiao portrait and full-body masters; register them while retaining procedural fallback.
 - HUMAN GATE: no PR, main merge, or production deploy performed.
 
 ## Track B — Art (Codex) — latest Codex handoff below, nested verbatim (historical snapshot; current state above)

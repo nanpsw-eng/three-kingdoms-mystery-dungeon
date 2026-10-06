@@ -106,3 +106,4 @@ Phase A's hanji/ink skin is implemented on `main` and synced into the art branch
 | Yellow Turban exploration tokens — spear, archer, raider, sorcerer, chanter | `IMPLEMENTED` | `web/assets/tokens/yt-{spear,archer,raider,sorcerer,chanter}.svg`; stable ids in `web/assets/manifest.json`; visible map enemies prefer native tokens and retain procedural fallback | Browser QA at 390×844, then design Zhang Bao / Zhang Liang / Zhang Jiao masters |
 | Phase F enemy rendering adapter | `IMPLEMENTED` | `web/src/map.ts` uses `assetToken(enemyKey)` before `figureCanvas`; enemy-name aliases stay in `web/src/assets.ts` | Extend coverage by stable enemy ids without changing dungeon behavior |
 
+| Yellow Turban leaders — Zhang Bao, Zhang Liang, Zhang Jiao exploration tokens | `IMPLEMENTED` | `web/assets/tokens/boss-zhang-{bao,liang,jiao}.svg`; mapped through the existing stable enemy aliases and token manifest | Create portrait and full-body masters; verify at runtime |
