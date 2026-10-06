@@ -109,3 +109,18 @@ Food / medicine / scroll / weapon / armor / treasure icon set를 Visual Bible �
 를 `docs/ai-dev/SESSION_HANDOFF.md`에 기록한다.
 
 완료된 visual phase를 반복하지 말고, 실제 repository state 다음의 최초 미완료 task부터 이어간다.
+
+
+## Phase A Current Implementation Brief
+
+Implementation-ready visual spec: `docs/art/PHASE_A_VISUAL_SPEC_V1.md`
+Asset states: `docs/art/ASSET_REGISTRY.md`
+
+First implementation scope:
+1. Replace the main dark/gold CSS theme with the approved ink/hanji semantic token system.
+2. Apply the shared paper panel, brush section label, bars, buttons, selected/focus states, and >=44px touch targets.
+3. Retheme the existing Title, Yellow Turban Dungeon, and standard Battle surfaces while preserving DOM behavior and Canvas interaction.
+4. Preserve existing procedural pixel assets as fallback. Do not start the full Ruler Master asset set in this phase.
+5. Keep `src/battle/`, `src/dungeon/`, `src/run/`, and `src/content/` unchanged. `main.ts` is adapter-only if a screen class/data attribute is necessary.
+
+Required evidence: `npm test`, `npm run build:web`, UI smoke result, and 390×844 screenshots for all three screens. Record any unavailable check as `NOT_RUN`; do not infer PASS. After implementation, return screenshots to Work for Visual QA before marking Phase A accepted.
