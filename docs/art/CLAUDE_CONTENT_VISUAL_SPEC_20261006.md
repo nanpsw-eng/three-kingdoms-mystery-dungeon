@@ -260,3 +260,16 @@ Initial design review:
 - The environment wash is intentionally abstract and does not name or create a gameplay modifier. Keep overlays light enough to preserve the explored tile underneath until mapped to existing content ids.
 - All three references remain `CONCEPT`. The reduction board is a cropped atlas simulation, not a live map or canvas capture. Tile collisions, room/corridor seams, fog adjacency, hit areas, mobile behavior, and gameplay are `NOT_RUN`.
 - Do not change dungeon topology, turn rules, content data, or Canvas interaction. Keep the procedural renderer as fallback; current implementation compatibility remains unverified.
+
+
+## 23. Phase C Marker and Composition Revision
+
+Revision references:
+- `concepts/dungeon-trap-mark-concept-v2-20261006.png`: angular fractured pressure-plate glyph with dark seam and tiny vermilion notch; no spikes, wire, or implied trap behavior.
+- `concepts/dungeon-sorcery-mark-concept-v2-20261006.png`: open brush ring and upright non-text seal on transparent ground; no solid stone base.
+- `concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`: 24/28px reduction against hanji and a monochrome silhouette check.
+- `concepts/dungeon-room-corridor-composition-v1-20261006.jpg`: illustrative composition using the shared floor/wall/fog and object vocabulary.
+
+The revised trap reads as a square plate; sorcery reads as an open circular brush seal. This resolves the first atlas's strongest small-scale silhouette collision. The composition supports the shared surface language, but its corridor width/object footprints are illustrative and must not be treated as the procedural map's topology or as a production layout.
+
+Next design check is an exact cell-grid mockup at the current approximately 26px rendered cell size. Keep each marker inside its logical cell; make sure ring edges do not cover adjacent floor or corridor seams. The generated environment wash must remain a transparent overlay whose opacity preserves floor texture and tile boundaries. Runtime map behavior, canvas hit testing, mobile cropping, and generated asset loading remain `NOT_RUN`; keep the existing procedural renderer fallback.

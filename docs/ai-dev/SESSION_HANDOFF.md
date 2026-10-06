@@ -5,18 +5,19 @@
 - Current product source: `main` at `82b38b4bf877a015e99f53ae551bfedb45bbc790`
 - Latest Claude work: PR #10 merged; Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`
 - Art/design branch: `art/ink-graphic-novel-v1`
-- Art HEAD before this handoff commit: `6c5940add1f350b4129e93c34a56a5b3e656312b`
+- Art HEAD before this handoff commit: `e80a9112161e135469867e7a730c3c14e166918b`
 - Open PR: none
-- Latest art CI: commit `6c5940add1f350b4129e93c34a56a5b3e656312b` passed CI run #81; prior design-only commits through #80 passed. This next change is documentation/concept-only; local npm test/build/smoke are `NOT_RUN`.
+- Latest art CI: commit `e80a9112161e135469867e7a730c3c14e166918b` passed CI run #82; prior design-only commits through #81 passed. This next change is documentation/concept-only; local npm test/build/smoke are `NOT_RUN`.
 - Art direction and Product Baseline remain unchanged.
 
 ## Current Art Phase
 - `PHASE C — Dungeon Graphic Set` is active.
-- Phase B ruler visual identity system is `APPROVED` as a design reference; individual generated images remain `CONCEPT`.
-- Last confirmed done: separate ruler bust/full-body/token references and a scale-review board; Cao Cao/Sun Quan token v2 respond to readability findings. Phase C surface and object atlases plus 26px reduction preview are recorded as concepts.
-- First incomplete task: revise the trap/sorcery silhouette difference and environmental wash strength, then produce a composed room/corridor/fog concept using the same tile language.
-- Blocker: renderer still uses procedural/pixelated graphics; actual tile seams, map canvas, mobile layout, and logic regression QA have not run.
-- Latest CI: commit `6c5940add1f350b4129e93c34a56a5b3e656312b` passed run #81. Current concept/doc changes have no code tests; local `npm test`, `npm run build:web`, browser smoke are `NOT_RUN`.
+- Phase B ruler identity system is `APPROVED` as a design reference; generated character files remain `CONCEPT`.
+- Last confirmed done: surface and object atlases, 26px reduction board, angular trap v2, open-ring sorcery v2, and a room/corridor composition study.
+- First incomplete task: make an exact cell-grid mockup from individual crops to verify one-cell object footprints, wall/corridor seams, and explored-to-fog edges.
+- Visual QA finding: trap/sorcery distinction is improved; the composition image is illustrative, not an exact map topology. Environmental overlay opacity and object occupancy still need tile-grid review.
+- Blocker: renderer still uses procedural/pixelated graphics; actual canvas, mobile viewport, hit testing, and game logic QA have not run.
+- Latest CI: commit `e80a9112161e135469867e7a730c3c14e166918b` passed run #82. Local `npm test`, `npm run build:web`, and browser smoke remain `NOT_RUN` (design-only changes).
 
 ## Work Responsibility
 This Work owns visual design, concept art, asset registry, and visual QA. The user instructed that all design work continue here without a separate Codex work assignment. Keep the actual game visuals and functional behavior intact while creating design assets and specifications.
@@ -44,7 +45,7 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - Created an E7/E8 boss duo concept for Lu Xun and Meng Huo, emphasizing fan-led vertical vs shield-led broad silhouettes; added its reference, review notes, and registry entry.
 - Refined the ruler comparison into a cleaner v2 master-reference concept and aligned Sima Yi concept v2 to its hanji/ink treatment.
 - Created separate Liu Bei, Cao Cao, and Sun Quan concept sheets, each with bust, full-body, and exploration-token views.
-- Added dedicated square bust references for all three rulers; revised Sun Quan’s bust to read as a mature young ruler.\n- Created separate ruler exploration-token studies; revised Liu Bei v2 to keep both boots within the silhouette.\n- Created individual full-body concept references for Liu Bei, Cao Cao, and Sun Quan; all include complete feet and broad silhouette/palette cues.\n- Built the ruler scale-review board with 40/48px bust and 24/28px token simulations on hanji/fog and grayscale silhouettes.\n- Created Phase C surface and object atlases, then reduced 14 crops to 26px for initial tile/object readability review.\n- Revised Cao Cao and Sun Quan token concepts to clarify sword and command-tablet silhouettes; v1 studies are superseded for current review.
+- Added dedicated square bust references for all three rulers; revised Sun Quan’s bust to read as a mature young ruler.\n- Created separate ruler exploration-token studies; revised Liu Bei v2 to keep both boots within the silhouette.\n- Created individual full-body concept references for Liu Bei, Cao Cao, and Sun Quan; all include complete feet and broad silhouette/palette cues.\n- Built the ruler scale-review board with 40/48px bust and 24/28px token simulations on hanji/fog and grayscale silhouettes.\n- Created Phase C surface and object atlases, then reduced 14 crops to 26px for initial tile/object readability review.\n- Revised trap and sorcery markers into distinct angular/open-ring silhouettes; added a 24/28px monochrome review and a room/corridor composition study.\n- Revised Cao Cao and Sun Quan token concepts to clarify sword and command-tablet silhouettes; v1 studies are superseded for current review.
 
 ## Asset State
 - Global art direction: `APPROVED`.
@@ -83,7 +84,7 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/sun-quan-master-concept-v1-20261006.jpg`
 - `docs/art/concepts/liu-bei-bust-concept-v1-20261006.jpg`
 - `docs/art/concepts/cao-cao-bust-concept-v1-20261006.jpg`
-- `docs/art/concepts/sun-quan-bust-concept-v2-20261006.jpg`\n- `docs/art/concepts/liu-bei-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/cao-cao-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/sun-quan-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/liu-bei-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/cao-cao-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/sun-quan-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/cao-cao-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/sun-quan-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/ruler-scale-review-revised-20261006.jpg`\n- `docs/art/concepts/dungeon-surfaces-concept-v1-20261006.jpg`\n- `docs/art/concepts/dungeon-objects-concept-v1-20261006.jpg`\n- `docs/art/concepts/dungeon-set-scale-review-20261006.jpg`
+- `docs/art/concepts/sun-quan-bust-concept-v2-20261006.jpg`\n- `docs/art/concepts/liu-bei-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/cao-cao-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/sun-quan-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/liu-bei-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/cao-cao-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/sun-quan-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/cao-cao-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/sun-quan-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/ruler-scale-review-revised-20261006.jpg`\n- `docs/art/concepts/dungeon-surfaces-concept-v1-20261006.jpg`\n- `docs/art/concepts/dungeon-objects-concept-v1-20261006.jpg`\n- `docs/art/concepts/dungeon-set-scale-review-20261006.jpg`\n- `docs/art/concepts/dungeon-trap-mark-concept-v2-20261006.png`\n- `docs/art/concepts/dungeon-sorcery-mark-concept-v2-20261006.png`\n- `docs/art/concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`\n- `docs/art/concepts/dungeon-room-corridor-composition-v1-20261006.jpg`
 - `docs/art/concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg`
 - `docs/art/concepts/codex-secondary-tabs-20261006.jpg`
 - `docs/art/concepts/story-scene-ui-20261006.jpg`
@@ -97,10 +98,10 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - Concept images were visually inspected; remaining design gaps are recorded above.
 
 ## NEXT_SAFE_ACTION
-1. Revise trap vs sorcery shape at 26px and reduce the environmental-wash opacity so it cannot obscure the explored base tile.
-2. Compose the revised assets into a room/corridor sample with explored/unexplored edges and one stair/gate transition; keep topology illustrative only.
-3. Confirm mobile-scale distinctions on hanji and ink fog; leave all atlases at `CONCEPT` until live implementation compatibility is reviewed.
-4. Create individual tile/object production masters after this design review; retain the procedural renderer fallback.
+1. Build an exact 26px-cell composition from the atlas crops; check floor/wall seams, one-cell corridor width, stair/gate edges, fog transition, and one-cell object footprints.
+2. Reduce the environment wash until floor seams and object silhouettes remain visible; ensure the sorcery brush ring stays within its intended cell.
+3. Revise any shape that loses distinction in monochrome or on fog; keep all dungeon assets `CONCEPT`.
+4. After scale review, design faction-specific enemy markers and item silhouettes as separate phases; preserve procedural fallback and map logic.
 
 ## HUMAN GATE
 - Reversible design exploration and reference/spec updates on the art branch: no additional gate.
