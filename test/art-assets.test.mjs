@@ -43,3 +43,19 @@ test("ruler masters load as native portraits and retain stable ids", async () =>
     assert.equal(image.subarray(8, 12).toString("ascii"), "WEBP");
   }
 });
+
+
+test("ruler full-body illustrations and exploration tokens have fallback-safe manifest assets", async () => {
+  assert.deepEqual(manifest.fullBodyIllustrations, ["liu-bei", "cao-cao", "sun-quan"]);
+  assert.deepEqual(manifest.tokens, ["liu-bei", "cao-cao", "sun-quan"]);
+  for (const id of manifest.fullBodyIllustrations) {
+    const image = await readFile(new URL("../web/assets/portraits/" + id + "-full.webp", import.meta.url));
+    assert.ok(image.byteLength > 10_000, id + " full-body illustration is present");
+    assert.equal(image.subarray(8, 12).toString("ascii"), "WEBP");
+  }
+  for (const id of manifest.tokens) {
+    const svgToken = await readFile(new URL("../web/assets/tokens/" + id + ".svg", import.meta.url), "utf8");
+    assert.match(svgToken, /<svg\b/);
+    assert.match(svgToken, /viewBox="0 0 64 64"/);
+  }
+});

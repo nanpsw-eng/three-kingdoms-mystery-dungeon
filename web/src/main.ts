@@ -3,7 +3,7 @@ import {
   type AbilityTargeting, type BattleCommand, type Direction, type FormationSlot, type MetaState, type RunCommand, type RunEvent, type RunOptions,
 } from "../../src/index.js";
 import { drawMap, tileAt } from "./map.js";
-import { loadAssets, nativeAssetPortrait } from "./assets.js";
+import { fullBodyIllustration, loadAssets, nativeAssetPortrait } from "./assets.js";
 import { portraitUrl } from "./portraits.js";
 import { figureUrl, iconUrl, spriteImg } from "./sprites.js";
 import { codexScreen } from "./codex.js";
@@ -63,8 +63,9 @@ function put(...children: Child[]): void {
 
 const pic = (key: string, size: number, alt = ""): HTMLImageElement => {
   const id = artKey(key);
-  const native = nativeAssetPortrait(id);
-  return spriteImg(native ?? portraitUrl(id), size, alt, native === undefined ? "px portrait" : "portrait native-portrait");
+  const full = size >= 120 ? fullBodyIllustration(id) : undefined;
+  const native = full ?? nativeAssetPortrait(id);
+  return spriteImg(native ?? portraitUrl(id), size, alt, native === undefined ? "px portrait" : "portrait native-portrait" + (full === undefined ? "" : " fullbody-illustration"));
 };
 const icon = (id: string, size = 28): HTMLImageElement => spriteImg(iconUrl(id), size, "", "icon");
 let hitIds = new Set<string>();

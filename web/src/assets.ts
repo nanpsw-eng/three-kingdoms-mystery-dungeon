@@ -17,11 +17,21 @@ export const ENEMY_ASSET_IDS: Readonly<Record<string, string>> = {
 };
 
 interface TilesetSpec { readonly image: string; readonly tile: number; readonly gap?: number; readonly map: Readonly<Record<string, readonly (readonly [number, number])[]>> }
-interface Manifest { readonly portraits?: readonly string[]; readonly nativePortraits?: readonly string[]; readonly portraitPixels?: number; readonly portraitColors?: number; readonly tileset?: TilesetSpec }
+interface Manifest { readonly portraits?: readonly string[]; readonly nativePortraits?: readonly string[]; readonly fullBodyIllustrations?: readonly string[]; readonly tokens?: readonly string[]; readonly portraitPixels?: number; readonly portraitColors?: number; readonly tileset?: TilesetSpec }
 
 const portraits = new Map<string, string>();
 const nativePortraits = new Map<string, string>();
+const fullBodies = new Map<string, string>();
+const tokens = new Map<string, HTMLImageElement>();
 let tileset: { image: HTMLImageElement; spec: TilesetSpec } | null = null;
+
+export function fullBodyIllustration(key: string): string | undefined {
+  return fullBodies.get(ENEMY_ASSET_IDS[key] ?? key);
+}
+
+export function assetToken(key: string): HTMLImageElement | undefined {
+  return tokens.get(ENEMY_ASSET_IDS[key] ?? key);
+}
 
 export function nativeAssetPortrait(key: string): string | undefined {
   return nativePortraits.get(ENEMY_ASSET_IDS[key] ?? key);
@@ -122,6 +132,14 @@ export async function loadAssets(onReady: () => void): Promise<void> {
   const jobs: Promise<void>[] = (manifest.portraits ?? []).map(async (id) => {
     try { portraits.set(id, pixelize(await loadImage("assets/portraits/" + id + ".png"), size, colors)); } catch { /* keep procedural */ }
   });
+  for (const id of manifest.fullBodyIllustrations ?? []) {
+    const src = "assets/portraits/" + id + "-full.webp";
+    jobs.push(loadImage(src).then(() => { fullBodies.set(id, src); }).catch(() => undefined));
+  }
+  for (const id of manifest.tokens ?? []) {
+    const src = "assets/tokens/" + id + ".svg";
+    jobs.push(loadImage(src).then((image) => { tokens.set(id, image); }).catch(() => undefined));
+  }
   for (const id of manifest.nativePortraits ?? []) {
     const src = "assets/portraits/" + id + ".webp";
     jobs.push(loadImage(src).then(() => { nativePortraits.set(id, src); }).catch(() => undefined));
@@ -131,5 +149,5 @@ export async function loadAssets(onReady: () => void): Promise<void> {
     jobs.push(loadImage("assets/" + spec.image).then((image) => { tileset = { image, spec }; }).catch(() => undefined));
   }
   await Promise.all(jobs);
-  if (portraits.size > 0 || nativePortraits.size > 0 || tileset !== null) onReady();
+  if (portraits.size > 0 || nativePortraits.size > 0 || fullBodies.size > 0 || tokens.size > 0 || tileset !== null) onReady();
 }

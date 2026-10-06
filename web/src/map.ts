@@ -1,5 +1,5 @@
 import type { DungeonEngine, Point } from "../../src/index.js";
-import { assetTile } from "./assets.js";
+import { assetTile, assetToken } from "./assets.js";
 import { figureCanvas, iconCanvas } from "./sprites.js";
 
 export const VIEW_RADIUS = 7;
@@ -232,7 +232,8 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   }
   const [px, py] = at(dungeon.position);
   ctx.fillStyle = "rgba(0,0,0,0.35)"; ctx.fillRect(px + cell * 0.2, py + cell * 0.82, cell * 0.6, cell * 0.12);
-  blit(figureCanvas(options.playerKey), dungeon.position, 1, cell * 0.08);
+  const playerToken = assetToken(options.playerKey);
+  blit(playerToken ?? figureCanvas(options.playerKey), dungeon.position, playerToken === undefined ? 1 : 1.2, cell * 0.08);
   // facing marker: a vermilion mark on the tile edge
   const facing: Record<string, [number, number]> = { n: [0, -1], ne: [1, -1], e: [1, 0], se: [1, 1], s: [0, 1], sw: [-1, 1], w: [-1, 0], nw: [-1, -1] };
   const [fx, fy] = facing[dungeon.facing] ?? [0, 1];
