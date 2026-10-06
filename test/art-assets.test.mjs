@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { MVP_CONTENT } from "../dist/content/index.js";
 
 const manifest = JSON.parse(await readFile(new URL("../web/assets/manifest.json", import.meta.url), "utf8"));
 const tiles = manifest.tileset;
@@ -35,7 +36,7 @@ test("ink atlas covers current item/equipment IDs and required map marks", () =>
 
 
 test("native portraits load with stable character ids", async () => {
-  assert.deepEqual(manifest.nativePortraits, ["liu-bei", "cao-cao", "sun-quan", "guan-yu", "zhang-fei", "zhao-yun", "huang-zhong", "zhuge-liang", "zhang-liao", "xiahou-dun", "jia-xu", "taishi-ci", "zhou-yu", "gan-ning", "hua-tuo"]);
+  for (const character of MVP_CONTENT.characters) assert.ok(manifest.nativePortraits.includes(character.id), character.id + " has its own native portrait");
   for (const id of manifest.nativePortraits) {
     const image = await readFile(new URL("../web/assets/portraits/" + id + ".webp", import.meta.url));
     assert.ok(image.byteLength > 10_000, id + " portrait master is present");
@@ -46,8 +47,8 @@ test("native portraits load with stable character ids", async () => {
 
 
 test("ruler full-body illustrations and exploration tokens have fallback-safe manifest assets", async () => {
-  assert.deepEqual(manifest.fullBodyIllustrations, ["liu-bei", "cao-cao", "sun-quan", "guan-yu", "zhang-fei", "zhao-yun", "huang-zhong", "zhuge-liang", "zhang-liao", "xiahou-dun", "jia-xu", "taishi-ci", "zhou-yu", "gan-ning", "hua-tuo"]);
-  assert.deepEqual(manifest.tokens, ["liu-bei", "cao-cao", "sun-quan", "guan-yu", "zhang-fei", "zhao-yun", "huang-zhong", "zhuge-liang", "zhang-liao", "xiahou-dun", "jia-xu", "taishi-ci", "zhou-yu", "gan-ning", "hua-tuo", "yt-spear", "yt-archer", "yt-raider", "yt-sorcerer", "yt-chanter", "boss-zhang-bao", "boss-zhang-liang", "boss-zhang-jiao"]);
+  for (const character of MVP_CONTENT.characters) assert.ok(manifest.fullBodyIllustrations.includes(character.id), character.id + " has its own full-body master");
+  for (const character of MVP_CONTENT.characters) assert.ok(manifest.tokens.includes(character.id), character.id + " has its own exploration token");
   for (const id of manifest.fullBodyIllustrations) {
     const image = await readFile(new URL("../web/assets/portraits/" + id + "-full.webp", import.meta.url));
     assert.ok(image.byteLength > 10_000, id + " full-body illustration is present");
@@ -67,4 +68,18 @@ test("Yellow Turban map tokens are connected to stable enemy aliases", async () 
     assert.match(assetsSource, new RegExp('"' + name + '"\\s*:\\s*"' + id + '"'));
     assert.ok(manifest.tokens.includes(id), id + " is available to map rendering");
   }
+});
+
+test("all shipped enemy display names resolve to native art without historical identity substitution", async () => {
+  const plan = JSON.parse(await readFile(new URL("../docs/art/PRODUCTION_ART_PLAN.json", import.meta.url), "utf8"));
+  const bindings = await readFile(new URL("../web/src/art-bindings.ts", import.meta.url), "utf8");
+  for (const name of new Set(MVP_CONTENT.enemyGroups.flatMap(group => group.units.map(unit => unit.name)))) {
+    const id = plan.unitBindings[name];
+    assert.ok(id, name + " has a stable visual identity");
+    assert.ok(manifest.tokens.includes(id), name + " has a native map token");
+    const portrait = manifest.sharedPortraits?.[id] ?? id;
+    assert.ok(manifest.nativePortraits.includes(portrait), name + " has a native portrait or explicit ordinary-unit master");
+    assert.ok(bindings.includes(JSON.stringify(name) + ": " + JSON.stringify(id)), name + " runtime binding matches the production plan");
+  }
+  for (const character of MVP_CONTENT.characters) assert.equal(plan.unitBindings[character.name], character.id, character.name + " uses its own identity");
 });

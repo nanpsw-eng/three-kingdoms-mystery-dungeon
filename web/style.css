@@ -144,6 +144,14 @@ canvas#map { display: block; width: 100%; max-width: 100%; aspect-ratio: 1 / 1; 
 .unit.targetable { border-color: var(--vermilion); background: #fbefe6; cursor: crosshair; }
 /* hit: one short ink-brush outline pulse, no particles */
 .unit.hit { animation: hit 320ms ease-out; }
+.unit { position: relative; overflow: hidden; }
+.unit.hit::after { content: ""; position: absolute; inset: 8px; opacity: 0; pointer-events: none; background: var(--ink); clip-path: polygon(6% 84%, 78% 8%, 95% 0, 32% 87%, 12% 100%); animation: brush-hit 320ms ease-out both; }
+.unit.healed { animation: brush-heal 480ms ease-out; }
+.tag[data-status="burn"] { border-color: var(--vermilion); color: #7f2f24; }
+.tag[data-status="poison"] { border-color: var(--jade); color: #36594a; }
+.tag[data-status="confusion"] { border-color: #75607e; color: #60496b; }
+@keyframes brush-hit { from { opacity: 0.3; } to { opacity: 0; } }
+@keyframes brush-heal { from { box-shadow: inset 0 0 0 4px var(--jade); } to { box-shadow: inset 0 0 0 0 transparent; } }
 @keyframes hit { 0% { box-shadow: inset 0 0 0 3px var(--ink); transform: translateX(-2px); } 60% { transform: translateX(2px); } 100% { box-shadow: none; transform: none; } }
 .tags { display: flex; flex-wrap: wrap; gap: 2px; }
 .tag { display: inline-block; font-size: 0.64rem; padding: 0 4px; background: var(--paper); color: var(--ink-soft); border: 1px solid var(--line-soft); }
@@ -181,7 +189,7 @@ img.icon { image-rendering: auto; }
 .codex-entry.locked { color: var(--muted-text); background: var(--paper); }
 .codex-note { color: var(--ink-soft); border-left: 2px solid var(--vermilion); padding-left: 8px; }
 
-@media (prefers-reduced-motion: reduce) { *, .unit.hit { transition: none !important; animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
 
 /* Native full-body art stays proportionate inside the existing square portrait slots. */
 img.native-portrait { image-rendering: auto; }

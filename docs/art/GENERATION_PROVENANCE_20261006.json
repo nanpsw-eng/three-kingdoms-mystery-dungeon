@@ -1,0 +1,1037 @@
+{
+  "date": "2026-10-06",
+  "tool": "image_gen.imagegen",
+  "transparentBackground": true,
+  "count": 64,
+  "originalMastersPreserved": 15,
+  "originalTokensPreserved": 23,
+  "export": {
+    "script": "scripts/art/export-portraits.mjs",
+    "bustSize": 384,
+    "fullBodyMax": [
+      768,
+      1152
+    ],
+    "webpQuality": {
+      "bust": 90,
+      "full": 86
+    },
+    "alphaQuality": 100
+  },
+  "note": "The initial three Yellow Turban boss calls have source hashes and exports recorded; their exact original prompt text was not retained. Remaining 61 prompts are verbatim.",
+  "assets": [
+    {
+      "id": "boss-zhang-jiao",
+      "prompt": null,
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-dcfeb17d-3834-49e1-8401-5dfe24dc064c.png",
+      "sourceSha256": "3ba5d4cb8c6adc7be3ec8c66abec95d0e80fa632be9a716648d75a15b7e0f373",
+      "exactPromptRecorded": false,
+      "bustSha256": "ab81fcaae457b12930099d9cb0d2261d0e85c561bcbe386d6e94e48755e26320",
+      "fullBodySha256": "c7c604aaa72c97ec74235c30f56770dc37ed0bbe81284ba9100627174c8fe8fc"
+    },
+    {
+      "id": "boss-zhang-bao",
+      "prompt": null,
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-41161980-8b18-49b0-a43f-52e18a116a8c.png",
+      "sourceSha256": "2b848f7041dce722db84787098ca99c9e2695c2a475678a08c4a95aa0909b737",
+      "exactPromptRecorded": false,
+      "bustSha256": "0d311dce79830e78ea5f3834872ec5bc83848375bb134fde9496d57ab14bd898",
+      "fullBodySha256": "d08d2b89b142930ce9460a80793ce8826743b43fc8c804d61cfe54e78fe70227"
+    },
+    {
+      "id": "boss-zhang-liang",
+      "prompt": null,
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-105f74d0-2118-4323-9f23-6ccd70d1c9af.png",
+      "sourceSha256": "9e6fc8c0b85ab5efebe7ccb6047184056177a24836fc1ca3d50e4c48d11ad8e3",
+      "exactPromptRecorded": false,
+      "bustSha256": "72cc3c816aed49ee139a118ed4fb449f546c49f6007a6088eb7a0e2eb799245a",
+      "fullBodySha256": "bdd9f4f1515c5e420af4e784baaf47dac3c437407014e39b7bb10a210aa28c69"
+    },
+    {
+      "id": "boss-dong-zhuo",
+      "name": "Dong Zhuo 동탁",
+      "details": "large heavyset older tyrannical Han warlord, broad face thick black beard, tall black official cap, charcoal robes over restrained bronze armor, muted crimson sash, long straight command sword",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Dong Zhuo 동탁. large heavyset older tyrannical Han warlord, broad face thick black beard, tall black official cap, charcoal robes over restrained bronze armor, muted crimson sash, long straight command sword. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-f505b35f-11b8-41b0-bdae-7de52932e979.png",
+      "sourceSha256": "f818040146b58c696ba04ded318457a542a93a67bce24d32976028fcde74316d",
+      "exactPromptRecorded": true,
+      "bustSha256": "b12ad69267be5866f1e91fee28f746e8297eafade97801efd4c48948085a4f8c",
+      "fullBodySha256": "e51f2ade903a253133e285164cd5260741e35b14103dd5b44983774fb32cf7d3"
+    },
+    {
+      "id": "boss-li-ru",
+      "name": "Li Ru 이유",
+      "details": "lean middle-aged sinister court adviser, narrow eyes, long sparse beard, low official cap, charcoal and muted ochre robes, narrow bamboo scroll",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Li Ru 이유. lean middle-aged sinister court adviser, narrow eyes, long sparse beard, low official cap, charcoal and muted ochre robes, narrow bamboo scroll. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-6a4068c4-a245-4be1-bad1-08f05c12400b.png",
+      "sourceSha256": "f7abbbdc5617a35403e5513cead66d63756d6022a10fe1649761236ce976e464",
+      "exactPromptRecorded": true,
+      "bustSha256": "4c61f3e120d667a4d2dbd8d5b1fa75f0706e669f012d9e9e9ea3c6e43ade24ab",
+      "fullBodySha256": "ecaa2ffab161e297cea39a7bcf203411c080913668c7fe0f5871b7e9d14f116c"
+    },
+    {
+      "id": "boss-ji-ling",
+      "name": "Ji Ling 기령",
+      "details": "broad stern middle-aged commander with full beard, iron helmet, brown-gray armor, three-pointed long polearm",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Ji Ling 기령. broad stern middle-aged commander with full beard, iron helmet, brown-gray armor, three-pointed long polearm. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.08
+      },
+      "sourceFile": "exec-04d7e98a-1bfb-4ed9-becb-7896cadeabd6.png",
+      "sourceSha256": "e8bf1ddc02a189329a4110ce5070cff52fa0063d5539a92c55bae9ef4521d728",
+      "exactPromptRecorded": true,
+      "bustSha256": "7da6c3f8b28c85cefb2c7fe93ada355110cb1c578c4b9f523e861bc8e931bc7d",
+      "fullBodySha256": "5410f0b18cd58627f9e7fd2a62d56a904d2b37083445baf7d6cf0accd8965916"
+    },
+    {
+      "id": "boss-yuan-shu",
+      "name": "Yuan Shu 원술",
+      "details": "haughty middle-aged aristocrat with neat beard, tall black official cap, ivory and subdued ochre court robes, ceremonial tablet without gaudy gold",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Yuan Shu 원술. haughty middle-aged aristocrat with neat beard, tall black official cap, ivory and subdued ochre court robes, ceremonial tablet without gaudy gold. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-58537221-96fc-4bd5-a56f-fcfaaa6c6405.png",
+      "sourceSha256": "f97cd65f0d451896fb67fe24433a3b3ad2e6aac5714ae3ac477f86fd59363c9f",
+      "exactPromptRecorded": true,
+      "bustSha256": "9a05fc11870126e99aec2279e4160d18b67e4a57976faa96e4f1a8030c3ef557",
+      "fullBodySha256": "3bd29a45193b6372d150f168e44db5a4292ddfb67049b5852b9299b95908a23f"
+    },
+    {
+      "id": "boss-meng-tan",
+      "name": "Meng Tan 맹탄",
+      "details": "lean agile middle-aged gate officer, narrow mustache, dark head wrap, blue-gray armor, curved saber",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Meng Tan 맹탄. lean agile middle-aged gate officer, narrow mustache, dark head wrap, blue-gray armor, curved saber. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-e0faddb3-2722-4d31-bcd9-672a55cfed45.png",
+      "sourceSha256": "839be88b2e57d1be463b189006aeadbfe8bfa0a8cbc3b0f06b4fadc8055acc48",
+      "exactPromptRecorded": true,
+      "bustSha256": "e93240007992a802892f727087b4bd836a53b39c63092d44f2c12b60fb19fa68",
+      "fullBodySha256": "e0c409bd94e5c639368fe9b44200dc32ab98582b3c20ba1841706fbb275b9899"
+    },
+    {
+      "id": "boss-gong-sui",
+      "name": "Gong Sui 공수",
+      "details": "stocky mature checkpoint commander, gray helmet, close black beard, brown-gray armor, straight spear",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Gong Sui 공수. stocky mature checkpoint commander, gray helmet, close black beard, brown-gray armor, straight spear. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-51d2fdf0-b943-453d-b2b6-0a31c1527bb3.png",
+      "sourceSha256": "795cac66ddf7fc9b2b7f2688dc7530c6e4f258996ee6b09478f623cd30257df4",
+      "exactPromptRecorded": true,
+      "bustSha256": "e73a4c8f2c8dcac8f346340401914554fee451b43580ec11c35cf253d6a6a1e6",
+      "fullBodySha256": "e35d79b5f0ee1bf018340a64f4f321404698fa7dc99739a013207d5a4c5f52f4"
+    },
+    {
+      "id": "boss-bian-xi",
+      "name": "Bian Xi 변희",
+      "details": "mature coarse-faced guard commander, shaved hair under cloth headband, short black beard, gray robes and dark scale vest, simple mace",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Bian Xi 변희. mature coarse-faced guard commander, shaved hair under cloth headband, short black beard, gray robes and dark scale vest, simple mace. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0
+      },
+      "sourceFile": "exec-f06c11a0-0866-42e5-b219-da911eac4df8.png",
+      "sourceSha256": "a25b5a0dec4c65ccf876218b4a0e49a82c4b367ac5cb6a5e4f11662468191a55",
+      "exactPromptRecorded": true,
+      "bustSha256": "5e54990366e2fc3b8ba1848a9f2520ebee4757f69cf86fc2ad54d65cd42850f4",
+      "fullBodySha256": "770278142603831971785b47cb66621f89e5195f3f97aa40e73b593e523864b6"
+    },
+    {
+      "id": "boss-wang-zhi",
+      "name": "Wang Zhi 왕식",
+      "details": "middle-aged severe guard officer, small beard, square gray helmet, ochre-gray armor, straight sword",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Wang Zhi 왕식. middle-aged severe guard officer, small beard, square gray helmet, ochre-gray armor, straight sword. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-6ac8dafe-ccac-42af-9d7c-98b578b1f6b4.png",
+      "sourceSha256": "693dff5527e578fe04cbf40e88bf7759a9ff6f55d5e9cadc2c74f06f3f0e9719",
+      "exactPromptRecorded": true,
+      "bustSha256": "7129879363122196f40b55da54b71e39dd51e88d8360eb9359ac48a7edda03e1",
+      "fullBodySha256": "4d2b251655720f8112ad06c17ddef44a6a2d8378ad9ed8400575951e829c06e1"
+    },
+    {
+      "id": "boss-xiahou-en",
+      "name": "Xiahou En 하후은",
+      "details": "young adult elite sword bearer, clean confident face, black tied hair, dark blue-gray armor crimson sash, ornate but restrained single straight sword",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Xiahou En 하후은. young adult elite sword bearer, clean confident face, black tied hair, dark blue-gray armor crimson sash, ornate but restrained single straight sword. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-fcbf1c8b-1d15-4331-bb6f-3356fda7a701.png",
+      "sourceSha256": "d1aa31f045ee6c75e8951e069e0b82dfd08544aa087a27c473d19dfadeafdec0",
+      "exactPromptRecorded": true,
+      "bustSha256": "38d04c61cfcd19fae1f7c8fecc37f413faa8722b8ccb1e519a8bd56331f2a550",
+      "fullBodySha256": "40b1b3cf59c11392116cae1f938076a635152fecff791fc2207c1a3d299d4f12"
+    },
+    {
+      "id": "boss-cai-mao",
+      "name": "Cai Mao 채모",
+      "details": "middle-aged proud naval commander, long beard, navy blue headwrap, blue-gray robe and sparse dark armor, command tablet",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Cai Mao 채모. middle-aged proud naval commander, long beard, navy blue headwrap, blue-gray robe and sparse dark armor, command tablet. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-d78c3eb0-b8ac-4bd0-8044-ce563ed34776.png",
+      "sourceSha256": "146736ce3f4263b3392b23e7cecfd205bb83105306b52ab3f158852b1e2f00e2",
+      "exactPromptRecorded": true,
+      "bustSha256": "b048b8ef56f263871fafe8835569415472129f015f9cbb79ab3eb3553ff193cc",
+      "fullBodySha256": "2e43fe9a8d04bce44e1f60c92db6a0d0f37ead063d59b25ef8bb2d6a784c22b5"
+    },
+    {
+      "id": "boss-zhang-yun",
+      "name": "Zhang Yun 장윤",
+      "details": "mature naval officer, short beard, ivory headband, dark green and blue-gray armor, naval saber",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Zhang Yun 장윤. mature naval officer, short beard, ivory headband, dark green and blue-gray armor, naval saber. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-7c193513-30a5-4308-b5c7-46e4c7385c2b.png",
+      "sourceSha256": "cd53e548e40b80fbc5603d83dcf3a47b4a98313bc6f86f9457290a2817b3f112",
+      "exactPromptRecorded": true,
+      "bustSha256": "02d6e7a447c5d1b0170c9670eb8852c0d50a4de88c6a8ef4aea905a9ac0dda30",
+      "fullBodySha256": "a529475396fcfb80b3cd7e05aa26ea08d1bd998d0a0977147227080c2195c5dd"
+    },
+    {
+      "id": "boss-pang-de",
+      "name": "Pang De 방덕",
+      "details": "mature fearless western cavalry warrior, weathered face thick black beard, gray helmet with white cloth, ivory-gray armor, broad long saber",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Pang De 방덕. mature fearless western cavalry warrior, weathered face thick black beard, gray helmet with white cloth, ivory-gray armor, broad long saber. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-97e0b1aa-49c1-4931-9fdd-2cb17a7960ab.png",
+      "sourceSha256": "567c3faa86077d37207e912624f9b02512a75261b170c4dec3a3ed3d3e09a206",
+      "exactPromptRecorded": true,
+      "bustSha256": "73cbff25019fe88c0bba0d3fb6fb8cba055f7d506f43404f7607559325540c57",
+      "fullBodySha256": "4dce290f99440be3c06675e42b5f228a6c4b22e72886652ede7f43512ea0315b"
+    },
+    {
+      "id": "boss-meng-you",
+      "name": "Meng You 맹우",
+      "details": "strong mature southern tribal warrior, round weathered face thick beard, brown woven headband, ochre brown layered cloth armor, short spear and hide shield, restrained historical dress",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Meng You 맹우. strong mature southern tribal warrior, round weathered face thick beard, brown woven headband, ochre brown layered cloth armor, short spear and hide shield, restrained historical dress. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-a10c459d-9da0-4fb8-8b9e-e4a7f4ad22c4.png",
+      "sourceSha256": "a9aa6bd7207666786fcd1a7ed90ed95a4374e68b16d188f68a7584777db6629a",
+      "exactPromptRecorded": true,
+      "bustSha256": "24015d687cfcdcd79b94e6b742f6c282f301d7ece76a674bd5b98207f3b1ad93",
+      "fullBodySha256": "5314170f4666e0155316decb35c0365da45e9ed35ae44920cfa07ceca19c5d89"
+    },
+    {
+      "id": "boss-zhu-ran",
+      "name": "Zhu Ran 주연",
+      "details": "young adult alert southern commander, neat mustache, blue-gray cloth cap, jade green and gray armor, spear",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Zhu Ran 주연. young adult alert southern commander, neat mustache, blue-gray cloth cap, jade green and gray armor, spear. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-4530ff96-3727-4390-aaee-db4d0e65bc17.png",
+      "sourceSha256": "3ae7cdb508127802c53bcba5c2ba99bfdf17b8414f3dc4d1e9c15ca9dc046f5e",
+      "exactPromptRecorded": true,
+      "bustSha256": "46c86c77c96de858b20ebc0cef43307658691b2a6bed3f6e920df25109e9f40e",
+      "fullBodySha256": "912cde11d4b77b233124a180f2f08cdd49732f2f89826ee801b95c0680562173"
+    },
+    {
+      "id": "boss-yu-jin",
+      "name": "Yu Jin 우금",
+      "details": "mature stern disciplined commander, angular face close beard, dark low helmet, blue-gray armor, plain straight sword",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Yu Jin 우금. mature stern disciplined commander, angular face close beard, dark low helmet, blue-gray armor, plain straight sword. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-25bffd2e-4b17-4a95-87ca-514aa6efb416.png",
+      "sourceSha256": "bb43f468a45f3a1fe5e914c708b24c9de6f820141003b2729d8f39ad36fb2041",
+      "exactPromptRecorded": true,
+      "bustSha256": "f2670be634f8d8ee4dab78b065a5c8c4e60f43148276e9187d8bec726eeec59e",
+      "fullBodySha256": "f1d9dba97e7182b0abdfb133f8ee53b46b02622a851283809e1fdec5d4512f01"
+    },
+    {
+      "id": "boss-wu-tu-gu",
+      "name": "Wu Tugu 올돌골",
+      "details": "very tall muscular mature southern tribal leader, stern broad face, black tied hair, muted brown woven rattan armor and ivory trousers, large simple club and rattan shield, realistic human no supernatural anatomy",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Wu Tugu 올돌골. very tall muscular mature southern tribal leader, stern broad face, black tied hair, muted brown woven rattan armor and ivory trousers, large simple club and rattan shield, realistic human no supernatural anatomy. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-0adb051a-05f3-40aa-a017-e126bc3d9214.png",
+      "sourceSha256": "2e8f322c8b9eff10e59034c372525ab05c18b04e479642d5e9088873205abe57",
+      "exactPromptRecorded": true,
+      "bustSha256": "85518de6cafdc07c12eec126d45d7aa9fa2c4f5f4a15913e3ad49309b1046c58",
+      "fullBodySha256": "bc43ee6ad5ebfe2eca267908b324ca83b5e34e97422c75eba123c172abca9cc9"
+    },
+    {
+      "id": "yt-archer",
+      "name": "Yellow Turban archer 황건 궁병",
+      "details": "lean adult Chinese archer, yellow cloth headband, gray tunic ochre scarf, wood bow and small quiver, alert clean-shaven face",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Yellow Turban archer 황건 궁병. lean adult Chinese archer, yellow cloth headband, gray tunic ochre scarf, wood bow and small quiver, alert clean-shaven face. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-e7b75456-52d5-4bb8-829c-71735e7af01d.png",
+      "sourceSha256": "26163582216e1d8da038a5cf24a7eb9dd5d99b6d730770d322af0fe3646bdf47",
+      "exactPromptRecorded": true,
+      "bustSha256": "5a1cb9e9abedc2b0cf3c45bf27856dac706204035e8bf3fb98975711474182d9",
+      "fullBodySha256": "0ddab951db7d0aee8625940b07a65b971ef6a58f161518a6569d41d61f275918"
+    },
+    {
+      "id": "yt-raider",
+      "name": "Yellow Turban raider 황건 기병",
+      "details": "rugged adult Chinese raider standing on foot, yellow headband, gray-brown lamellar vest, short saber, rough short beard",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Yellow Turban raider 황건 기병. rugged adult Chinese raider standing on foot, yellow headband, gray-brown lamellar vest, short saber, rough short beard. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-45460084-44ee-4d34-ae34-8a3f6c0e8fa7.png",
+      "sourceSha256": "69cac5fb19ffd498f83746fd09fa7f59af8bd6df6c247c672a32720ed181f070",
+      "exactPromptRecorded": true,
+      "bustSha256": "5a9ea016befdbe57212c104843b33c65679cf7bd9206dac2ccd66aed970b2008",
+      "fullBodySha256": "b83c9c5d6422b4eb80a0b8362e7b3b37ae7acf440be7046c874c54f17278fb87"
+    },
+    {
+      "id": "yt-sorcerer",
+      "name": "Yellow Turban ritual adept 황건 술사",
+      "details": "mature Chinese ritual scholar, yellow headwrap, muted purple-gray and ivory robes, wooden ritual staff, long narrow beard",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Yellow Turban ritual adept 황건 술사. mature Chinese ritual scholar, yellow headwrap, muted purple-gray and ivory robes, wooden ritual staff, long narrow beard. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-78d8f3a2-bf6c-4567-a881-5ce9fba870d0.png",
+      "sourceSha256": "d0e4bec713be0f50e2ccada6d1b46d08d4b0b4652eb2cdabc176ec6415bbc8b9",
+      "exactPromptRecorded": true,
+      "bustSha256": "429d5907ec8aa9d373448fc1ebb664dd47721cbe09a5d5b63c9aa2bf6262dc8f",
+      "fullBodySha256": "fabc7921eb49b983125003bf033b8ec6fa86cbeff891f0c7ad0ede5026cd7002"
+    },
+    {
+      "id": "yt-spear",
+      "name": "Yellow Turban spearman 황건 창병",
+      "details": "adult Chinese infantryman, mustard cloth headband, muted ochre tunic and gray simple vest, straight spear, determined plain face short stubble",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Yellow Turban spearman 황건 창병. adult Chinese infantryman, mustard cloth headband, muted ochre tunic and gray simple vest, straight spear, determined plain face short stubble. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-ba7c82ce-7cef-4179-813a-11042bd0c6df.png",
+      "sourceSha256": "d35a0e8ba136a8ef295329b0c761ec3176c7bf4d769526dbebaab4dc43c227ec",
+      "exactPromptRecorded": true,
+      "bustSha256": "4cb7ea133ac37f1b650bbdbbd8b8bc89b945361f177ebf523f1d9d454df2f308",
+      "fullBodySha256": "7f988a31d01ab15c7767dbd5d581c8ada57452f578cadad606553406eede001e"
+    },
+    {
+      "id": "tribal-warrior",
+      "name": "Southern tribal infantry 남만병",
+      "details": "adult Chinese southern warrior, dark-tanned weathered face, woven brown headband, simple muted ochre and brown woven protective vest and trousers, spear and plain hide shield",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Southern tribal infantry 남만병. adult Chinese southern warrior, dark-tanned weathered face, woven brown headband, simple muted ochre and brown woven protective vest and trousers, spear and plain hide shield. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-d4e56f06-f89f-4a60-ac10-961f73327089.png",
+      "sourceSha256": "81e2f0974c54fffc1aaac86fc51cea781e7eb21dd53f4e707ccf3066aa991a9b",
+      "exactPromptRecorded": true,
+      "bustSha256": "90bb349a57b81591867399e6177e7584fff1ec4550a4d0bc5d8d346af8cad41e",
+      "fullBodySha256": "0cda72190de6b2336e733a3f8d8ded0a63834d3a737739404468d47a66042e99"
+    },
+    {
+      "id": "yt-chanter",
+      "name": "Taiping chanter 태평도 신도",
+      "details": "adult Chinese religious follower, ochre yellow hood and ivory gray robe, holding bamboo prayer slips, solemn face",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Taiping chanter 태평도 신도. adult Chinese religious follower, ochre yellow hood and ivory gray robe, holding bamboo prayer slips, solemn face. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-5fab937d-a97a-43c7-9e60-fa49f74bb695.png",
+      "sourceSha256": "d77bc94ec326988f020fef7c8916d511c7f236d358fe974bef2b147c0c333ee8",
+      "exactPromptRecorded": true,
+      "bustSha256": "b1c5049b3660e8fc3ef5540762e4358653002adf4dc08207cb9def936e56a0e0",
+      "fullBodySha256": "9ebfd1201cc07b6d9d9a20bcf7f2e5323443a0de1205350e69f123c2c670751b"
+    },
+    {
+      "id": "tribal-shaman",
+      "name": "Southern tribal shaman 남만 무녀",
+      "details": "adult Chinese southern woman ritual healer, black hair tied with green cloth, practical ivory and jade-gray woven robes and trousers, simple wooden staff and medicine pouch, no sexualized costume",
+      "prompt": "Use case: stylized-concept. Production full-body historical game cutout of Southern tribal shaman 남만 무녀. adult Chinese southern woman ritual healer, black hair tied with green cloth, practical ivory and jade-gray woven robes and trousers, simple wooden staff and medicine pouch, no sexualized costume. ONE single character. Entire head, all props and BOTH BOOTS contained inside image with generous margins, clear face near upper quarter for derived portrait crop. Modern traditional Chinese ink graphic novel / lianhuanhua illustration, realistic mature anatomy, confident black brush contours, subtle ink wash and muted paper-grain pigments, same family as premium traditional ink Guan Yu game cutouts. Restrained Han-era costumes, charcoal ink #171513 and ivory hanji #e8ddc4 with sparse desaturated color. Isolated on genuinely transparent background, no surrounding vignette, cast shadow or scenery, no text, panel, grid, gloss, magic glow, gold excess, anime, chibi or pixel art. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-31223dd7-2079-4c65-9f12-67d00fed0214.png",
+      "sourceSha256": "c578ff0cfb797902c9158d91000e04786ebb7f696c8b2a21930c5fc70b665a8b",
+      "exactPromptRecorded": true,
+      "bustSha256": "91367b83b5f5dbf08491a7b6ea081194b781927daaeafb5f9f4548200d6b6825",
+      "fullBodySha256": "64f9c74e661ef759c5e3b0e0a052bf66f464c7625328ce9baa30dc2b710b62f0"
+    },
+    {
+      "id": "regular-archer",
+      "name": "Han imperial archer",
+      "prompt": "Production asset: one full-body Han imperial archer. lean adult Chinese bowman, blue-gray cloth cap without yellow cloth, gray tunic and dark green sash, simple wood bow and quiver, alert face. Traditional hand-drawn Chinese ink graphic novel / lianhuanhua, realistic adult anatomy, strong black brush contours and muted gray/ivory/blue-green pigment, simple historical Han-era clothes and readable weapon silhouette. Entire head and both boots contained with generous margins. Clear face near upper quarter for portrait export. Genuinely transparent background with no surrounding vignette or scenery, no text, no glow, no glossy fantasy metal, no anime/chibi/pixels. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-1d14751f-b733-46e5-bb3f-8d54e152a2ba.png",
+      "sourceSha256": "51758f5c79b6f7b46343062fc5933905cb4eb167827bd3dc4b427842fda81913",
+      "exactPromptRecorded": true,
+      "bustSha256": "dfc59609f012e0f1886291ad80ec96147efbe18e9e5353f0af853fa42e289d25",
+      "fullBodySha256": "feab79e6cf6eae879fdc5c313a403e6d86bf6b51c8ff1c7b968baca38919f64d"
+    },
+    {
+      "id": "regular-spear",
+      "name": "Han imperial spearman",
+      "prompt": "Production asset: one full-body Han imperial spearman. adult Chinese soldier, plain blue-gray cloth headband without yellow cloth, charcoal lamellar vest and ivory-gray tunic, straight spear, determined clean-shaven face. Traditional hand-drawn Chinese ink graphic novel / lianhuanhua, realistic adult anatomy, strong black brush contours and muted gray/ivory/blue-green pigment, simple historical Han-era clothes and readable weapon silhouette. Entire head and both boots contained with generous margins. Clear face near upper quarter for portrait export. Genuinely transparent background with no surrounding vignette or scenery, no text, no glow, no glossy fantasy metal, no anime/chibi/pixels. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-3351eeb0-38b4-45a4-a546-3d5b4d94c0e7.png",
+      "sourceSha256": "ca08f92e7617ad5b873af1f54902e5b314747839692a7478e2f26292388d820a",
+      "exactPromptRecorded": true,
+      "bustSha256": "791b48f60a5bbfd82abb40eb4fd3fdfe07968d26858244ae562499e945f52c2e",
+      "fullBodySha256": "b7d6c55d0b794b9199a5e016bc41833e49d7bffc0ad67762f51b2d40ec22a585"
+    },
+    {
+      "id": "regular-raider",
+      "name": "Han imperial cavalry soldier",
+      "prompt": "Production asset: one full-body Han imperial cavalry soldier. rugged adult Chinese cavalryman standing on foot, plain dark helmet without yellow cloth, gray lamellar vest over muted blue robe, short saber, short beard. Traditional hand-drawn Chinese ink graphic novel / lianhuanhua, realistic adult anatomy, strong black brush contours and muted gray/ivory/blue-green pigment, simple historical Han-era clothes and readable weapon silhouette. Entire head and both boots contained with generous margins. Clear face near upper quarter for portrait export. Genuinely transparent background with no surrounding vignette or scenery, no text, no glow, no glossy fantasy metal, no anime/chibi/pixels. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-515951c6-286e-4bb7-ae38-a3b3b31d9359.png",
+      "sourceSha256": "086938969f45a91fb942dda1075799c9c4a4a93dfd6d3e14964b7cd40da7340e",
+      "exactPromptRecorded": true,
+      "bustSha256": "3834307e9e8076b43616dfc2adda3628b0eaa1e6bcc576485b678da0ba428a4a",
+      "fullBodySha256": "7bbbda90999aa20c92b2b22c6c30668ee5f84db2105e998e9aee7cc7ac26d9cf"
+    },
+    {
+      "id": "regular-guard",
+      "name": "Han imperial heavy guard",
+      "prompt": "Production asset: one full-body Han imperial heavy guard. broad mature Chinese guard, plain dark iron helmet without yellow cloth, charcoal scale armor and ivory gray tunic, large rectangular shield and halberd. Traditional hand-drawn Chinese ink graphic novel / lianhuanhua, realistic adult anatomy, strong black brush contours and muted gray/ivory/blue-green pigment, simple historical Han-era clothes and readable weapon silhouette. Entire head and both boots contained with generous margins. Clear face near upper quarter for portrait export. Genuinely transparent background with no surrounding vignette or scenery, no text, no glow, no glossy fantasy metal, no anime/chibi/pixels. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.13
+      },
+      "sourceFile": "exec-f6cd7eee-867b-465a-8ced-13901a739e8f.png",
+      "sourceSha256": "85f51756fb3d13350b3d0eba8db376e3caa4562bbab79ae62d1bd82eb06ece91",
+      "exactPromptRecorded": true,
+      "bustSha256": "3f28842eb0f1b0104a76b3895b069338e45601aebac8d3472d208564c952138e",
+      "fullBodySha256": "13ba3a4a630de737e40e3635d51dba4de53217d1584cf88a67ad75e7201e19a8"
+    },
+    {
+      "id": "regular-marine",
+      "name": "Han southern naval soldier",
+      "prompt": "Production asset: one full-body Han southern naval soldier. adult Chinese marine, blue-gray cloth headwrap without yellow cloth, jade-gray short layered robe over plain scale vest, trousers and boots, simple saber and rope belt. Traditional hand-drawn Chinese ink graphic novel / lianhuanhua, realistic adult anatomy, strong black brush contours and muted gray/ivory/blue-green pigment, simple historical Han-era clothes and readable weapon silhouette. Entire head and both boots contained with generous margins. Clear face near upper quarter for portrait export. Genuinely transparent background with no surrounding vignette or scenery, no text, no glow, no glossy fantasy metal, no anime/chibi/pixels. Portrait orientation.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-6ca870ea-1452-4279-9c19-469b19291077.png",
+      "sourceSha256": "347f45397b344c1ccb10dae9141dd73434ef3547f52e795ece9ba0878dc0acbf",
+      "exactPromptRecorded": true,
+      "bustSha256": "4213e5dc2beb8781d7b9c72a902c8fc7ba893c3070b5c4efceb0d5b4079f5fcc",
+      "fullBodySha256": "1c131f9a42d168a0b57423f38d1b60add4c37f5449797607b6846e6250bd4986"
+    },
+    {
+      "id": "sun-jian",
+      "name": "Sun Jian 손견",
+      "details": "rugged mature southern commander, short black beard, tiger-pattern head wrap, dark green and ivory armor, straight sword",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Sun Jian 손견. rugged mature southern commander, short black beard, tiger-pattern head wrap, dark green and ivory armor, straight sword. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-6e05c669-82f0-47bc-932c-c0b58dc385cf.png",
+      "sourceSha256": "181658437e3eb08e7bc0c75673e47707d8a1c96abd9b09aa708bf887b4b4c723",
+      "exactPromptRecorded": true,
+      "bustSha256": "96523750ea042fdfdd75c545502871da45560e0e5822dd108d217f698fa9aed4",
+      "fullBodySha256": "ca697710baa936914e67d717d186c30b741cd652482a16f6b03e064477000de1"
+    },
+    {
+      "id": "lu-bu",
+      "name": "Lu Bu 여포",
+      "details": "tall imposing warrior, sharp handsome mature face, black hair, two long pheasant plumes, muted vermilion armor over black robes, long crescent halberd",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Lu Bu 여포. tall imposing warrior, sharp handsome mature face, black hair, two long pheasant plumes, muted vermilion armor over black robes, long crescent halberd. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.14
+      },
+      "sourceFile": "exec-54dde77e-039f-484d-a27e-29dc24e3f38e.png",
+      "sourceSha256": "80a7038c775029f209bc2f8b4037c7cf1f6ef14f7bb1115120b516a226e961fd",
+      "exactPromptRecorded": true,
+      "bustSha256": "6fb985e5db902964f997a16bb16de851b4473361c3c52466f74195048de65006",
+      "fullBodySha256": "15312a622d3da55de6ee11d1f52331a4cac55a2dd3273b276b143b936b7d376a"
+    },
+    {
+      "id": "yuan-shao",
+      "name": "Yuan Shao 원소",
+      "details": "aristocratic middle-aged commander with elegant long beard, restrained bronze official cap, ivory and ochre robes over sparse armor, command staff",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Yuan Shao 원소. aristocratic middle-aged commander with elegant long beard, restrained bronze official cap, ivory and ochre robes over sparse armor, command staff. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-1041ecf8-af86-4775-b8db-2fc417379603.png",
+      "sourceSha256": "bca81be77033779f01ff7d85e524d18bb2dfa5fea88450aa7591b9daf54f7369",
+      "exactPromptRecorded": true,
+      "bustSha256": "1f2bc01aac0a9313724a6ba3d51c251b1956219c73489a31ccd2bc7d0a5a8a1f",
+      "fullBodySha256": "debf4a3a0f5a5a0276fa20e1c02d07a70a7078f8e15d91318b14e12fbcd7fe5d"
+    },
+    {
+      "id": "sima-yi",
+      "name": "Sima Yi 사마의",
+      "details": "elderly lean strategist, narrow watchful eyes, short gray beard, tall black scholar cap, charcoal and blue-gray robes, dark ivory inner collar, simple command fan",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Sima Yi 사마의. elderly lean strategist, narrow watchful eyes, short gray beard, tall black scholar cap, charcoal and blue-gray robes, dark ivory inner collar, simple command fan. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-5e2011c6-b43d-4bc8-b4bf-40c5d0f9c840.png",
+      "sourceSha256": "29290f275c16460ffb15f3b6485e8fcf83cb85643977abbfe40de8fe446f2cf3",
+      "exactPromptRecorded": true,
+      "bustSha256": "a16b5e0e8886bc6702d39f53ee89f0c250a4a338931270388b1c1b23bdbf5fce",
+      "fullBodySha256": "b8762628f0a186d0044c7c9deaa57f2997e378a5f7d5a0724cb7d682b8a552f6"
+    },
+    {
+      "id": "cao-ren",
+      "name": "Cao Ren 조인",
+      "details": "stocky disciplined commander, square face and short beard, charcoal armor, deep crimson robe, large rectangular shield and straight sword",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Cao Ren 조인. stocky disciplined commander, square face and short beard, charcoal armor, deep crimson robe, large rectangular shield and straight sword. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0
+      },
+      "sourceFile": "exec-a3cf4af0-479c-440f-87fc-c4f487768489.png",
+      "sourceSha256": "9d227b3c21fabf9e424a2ba00ac2108523799b1382c2504c5ae373adc6f78683",
+      "exactPromptRecorded": true,
+      "bustSha256": "a2de5cef5a8d823709b3618889c9ca2a9835f6796a9a77b86ba849b0be69001b",
+      "fullBodySha256": "edc0209fbaa8b692b2ba315d454f60bc5cd83fdb6320ef339c034c5324db4408"
+    },
+    {
+      "id": "hua-xiong",
+      "name": "Hua Xiong 화웅",
+      "details": "large fierce bearded western warrior, heavy dark gray lamellar armor, ochre scarf, broad single-edged saber",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Hua Xiong 화웅. large fierce bearded western warrior, heavy dark gray lamellar armor, ochre scarf, broad single-edged saber. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-778ec0b6-129f-447e-9150-ae6d76a1c5ec.png",
+      "sourceSha256": "2fcfb0f27c67b4b4105a2fde4a4de655cd45b7e9fa59dfd921eed85f0d3696e7",
+      "exactPromptRecorded": true,
+      "bustSha256": "7b61e5e239d15e294dae2cc698daf0104916dde4638e1c304d5fb93423326e31",
+      "fullBodySha256": "8957376af44db12c97859676ef92f107f0fd92f7d4f351d77404e13edc25de50"
+    },
+    {
+      "id": "zang-ba",
+      "name": "Zang Ba 장패",
+      "details": "rugged broad mountain commander, weathered face stubble, gray head scarf, brown-gray lamellar vest, polearm",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Zang Ba 장패. rugged broad mountain commander, weathered face stubble, gray head scarf, brown-gray lamellar vest, polearm. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-657ac667-ec25-4de7-8569-b746f1c73197.png",
+      "sourceSha256": "69f2304c8eef10338a410a31ed58a86abab87568d6c78c6bef677d186c98dfd7",
+      "exactPromptRecorded": true,
+      "bustSha256": "b69d262c717c5a42e97675fb4fa75c1eb3f7ab1b5a4a1267b743dd26b351fb0c",
+      "fullBodySha256": "d7d82156c0e288d5c974e96fac29a6c776dbf4807f4d02cd4f749b0dcd69285d"
+    },
+    {
+      "id": "chen-gong",
+      "name": "Chen Gong 진궁",
+      "details": "middle-aged resolute scholar, short narrow beard, gray scholarly cap, dark blue and beige robes, bamboo manuscript",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Chen Gong 진궁. middle-aged resolute scholar, short narrow beard, gray scholarly cap, dark blue and beige robes, bamboo manuscript. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-db7e290b-2780-4674-b47f-aa29a36e136e.png",
+      "sourceSha256": "67247d5300d7677fe3bac543fb1bf81fcb9e3480d8f9be36a40a98b0c3011e84",
+      "exactPromptRecorded": true,
+      "bustSha256": "a8ed886b5d64a74fd3d916c37086d48f55cc59ea265ec7422cf5e3b0b9bd378b",
+      "fullBodySha256": "3007b5fdde4ed3c5c0dc0cb7f02f51017d32f878ec63c19c1bbd22fa3f72c384"
+    },
+    {
+      "id": "xu-chu",
+      "name": "Xu Chu 허저",
+      "details": "very broad powerful muscular warrior, heavy jaw short beard, plain sleeveless charcoal tunic under dark scale armor, heavy broadsword",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Xu Chu 허저. very broad powerful muscular warrior, heavy jaw short beard, plain sleeveless charcoal tunic under dark scale armor, heavy broadsword. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0
+      },
+      "sourceFile": "exec-a27b1c90-438e-49db-b57f-40929833981a.png",
+      "sourceSha256": "25cabc1c3371b575f45b847ecdebc7a412792ccc29d7dec85c11fc30da23b6ac",
+      "exactPromptRecorded": true,
+      "bustSha256": "cdfafa05ea7f09be54d8661fae16ba1d5f0c76d9ff8ff69c203b0b20e86e8316",
+      "fullBodySha256": "5addadd8e9c95d44b60d824805b9e61335e0f202f73c5cd072d842d35a4334c6"
+    },
+    {
+      "id": "mi-zhu",
+      "name": "Mi Zhu 미축",
+      "details": "gentle middle-aged merchant adviser, round face neat beard, warm ivory and ochre robes, square scholar cap, folded silk document",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Mi Zhu 미축. gentle middle-aged merchant adviser, round face neat beard, warm ivory and ochre robes, square scholar cap, folded silk document. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-a4213615-1259-4a2e-8b5e-0c66eae636ae.png",
+      "sourceSha256": "2298046cbe8e78b1ebb3dbdd97a0352426dba7003f1adc2705a5c1c88aaa9491",
+      "exactPromptRecorded": true,
+      "bustSha256": "b6e521829d928c4ab22d0f128ddfd6c64937d725ccfe661f3c625929146448a0",
+      "fullBodySha256": "68ab05a3c6773671bf67b68468bd31a9c38a9c76b70c226b17f6b2b2caed08f3"
+    },
+    {
+      "id": "gao-shun",
+      "name": "Gao Shun 고순",
+      "details": "stern silent disciplined soldier, close beard, iron-gray armor and black sash, tall straight spear",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Gao Shun 고순. stern silent disciplined soldier, close beard, iron-gray armor and black sash, tall straight spear. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.1
+      },
+      "sourceFile": "exec-f83fed72-1056-400f-a314-f3dc745e2006.png",
+      "sourceSha256": "ddeb6a771c8f92efe6fc8b63c13020c13b4b8c0bafd5a2bd8ffc21919268807d",
+      "exactPromptRecorded": true,
+      "bustSha256": "350f51a401ceb5aa9284bae39fa4d9fe7d419fc372cc8916ed686fecfb07197d",
+      "fullBodySha256": "967e2db4641ee9a80fbc688e36e65c2c49b7a835f22c1900fe363047e1e1a8c0"
+    },
+    {
+      "id": "dian-wei",
+      "name": "Dian Wei 전위",
+      "details": "powerful older rugged warrior with bushy dark beard, plain dark red and gray armor, paired short halberds",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Dian Wei 전위. powerful older rugged warrior with bushy dark beard, plain dark red and gray armor, paired short halberds. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0
+      },
+      "sourceFile": "exec-7f7bee31-8efa-4395-9da7-72b5010c4fd3.png",
+      "sourceSha256": "6ff8c215c5029a33252bd5a6096d0e56d4b03cb54648bd1b795624e5cb23a081",
+      "exactPromptRecorded": true,
+      "bustSha256": "15a1ec344bb4372c2f952da4339817b1d6f6801a0ebbd673fd3ebe4d36ed55b8",
+      "fullBodySha256": "0bf419b04f1ede7d46106b4a76056d2c23d1a444baf27b374488979c7a6c41b5"
+    },
+    {
+      "id": "yan-liang",
+      "name": "Yan Liang 안량",
+      "details": "tall muscular stern bearded cavalry officer, angular gray helmet, desaturated ochre armor, long broad blade",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Yan Liang 안량. tall muscular stern bearded cavalry officer, angular gray helmet, desaturated ochre armor, long broad blade. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-da0ac500-2d1d-4ff9-b663-f9d4b8035854.png",
+      "sourceSha256": "fabdfc733c3002c2d22fe51e032491fd8dd0b9037f9ccf96c5df1bba06f0de36",
+      "exactPromptRecorded": true,
+      "bustSha256": "fc8256f6998a8f559e567762db7cd04ff1eb9dd0fa3ae4432b4165ce8feccdca",
+      "fullBodySha256": "63eb6b0f7e4b563e2b25e7154440f9e155ec8a9652a71a10fbacdc5fd186368a"
+    },
+    {
+      "id": "xun-yu",
+      "name": "Xun Yu 순욱",
+      "details": "refined poised middle-aged adviser, neat mustache beard, tall official black cap, warm ivory layered robes with blue-gray sash, scroll",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Xun Yu 순욱. refined poised middle-aged adviser, neat mustache beard, tall official black cap, warm ivory layered robes with blue-gray sash, scroll. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-2bb1e71e-ea8c-4599-b98b-a8e124810ccd.png",
+      "sourceSha256": "5cbe4bb6d6a2c61ddb1745d4fc1b3ddeec7bde2ac11d60d2a29997f53b377b00",
+      "exactPromptRecorded": true,
+      "bustSha256": "2890c7af6f0403b7ea14cc40cedd7a31bb6f206b44d1f3068da4a6bb5a3d61f6",
+      "fullBodySha256": "03bc1bd9c8a23ca3d90388cb1d4484c2a5871692eb808d5287a2956444263a94"
+    },
+    {
+      "id": "wen-chou",
+      "name": "Wen Chou 문추",
+      "details": "large rugged cavalry warrior, dark bushy beard, black headband, charcoal and blue-gray armor, long spear",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Wen Chou 문추. large rugged cavalry warrior, dark bushy beard, black headband, charcoal and blue-gray armor, long spear. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-8627def7-7f78-4472-8b40-be1f78a49146.png",
+      "sourceSha256": "dd648789819df758e63a53dfa03b6bb78be9484b7ee8bc768bcaa5aa2cfe50b9",
+      "exactPromptRecorded": true,
+      "bustSha256": "8e57510a7e3ab4d90264da306ed4d67a8660d1c33a28a5fd29d92f59f7c6f3a7",
+      "fullBodySha256": "7509d4fd8f731b7db31e4f08122741e500a3b18531cce541dd22a48caf50281e"
+    },
+    {
+      "id": "lu-su",
+      "name": "Lu Su 노숙",
+      "details": "calm friendly middle-aged diplomatic adviser, rounded face long neat beard, blue-gray scholar robe and ivory shawl, simple folded document",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Lu Su 노숙. calm friendly middle-aged diplomatic adviser, rounded face long neat beard, blue-gray scholar robe and ivory shawl, simple folded document. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-341bd8d1-d9e5-4794-a717-be4f85fc267b.png",
+      "sourceSha256": "dc5c23fc20e54026c47759c4789eafe103dc890224571c9f5ad930ff482bdde7",
+      "exactPromptRecorded": true,
+      "bustSha256": "58b582acf0002e707d61c30cf8a1632db101d6bd39a261054eb7ae76ae4cafc0",
+      "fullBodySha256": "526205043731b9166c82351004f4d2fa995ce611b5595bd8693d6117f6df75f0"
+    },
+    {
+      "id": "cheng-pu",
+      "name": "Cheng Pu 정보",
+      "details": "mature veteran with salt-and-pepper beard, simple blue-gray iron helmet, gray lamellar armor green sash, spear",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Cheng Pu 정보. mature veteran with salt-and-pepper beard, simple blue-gray iron helmet, gray lamellar armor green sash, spear. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.12
+      },
+      "sourceFile": "exec-9fca79c0-06d9-4b25-b470-0181aa96ef07.png",
+      "sourceSha256": "8896b9a1b92e9b41df1d0ab5c48755fb095933271c920a2f4c9f8e9e11ee82eb",
+      "exactPromptRecorded": true,
+      "bustSha256": "dbbc743bab6c3cd9c18036c4a7799e50bd6f57e91091882bf9dc0febb2f354ac",
+      "fullBodySha256": "708ca9adcde1a05e175d8d92bcadadcff9207b98464e94e9812c468fcb2e8d4a"
+    },
+    {
+      "id": "huang-gai",
+      "name": "Huang Gai 황개",
+      "details": "elderly tough veteran, white beard scarred brow, muted red and gray armor, short iron whip",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Huang Gai 황개. elderly tough veteran, white beard scarred brow, muted red and gray armor, short iron whip. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-e0c2924d-4852-4817-b698-e98c4a12bf4f.png",
+      "sourceSha256": "8b27c090adefc5bb2feb984993841951dc625ef9a7f9be9aad7821540f44d300",
+      "exactPromptRecorded": true,
+      "bustSha256": "b35c360a04a10b4449b4d5c203db8be2919e41f00a37e5dfecf919d0dd50c4e4",
+      "fullBodySha256": "5714c049ae3f55cebdc6a12aa0fd069d53ab93a0d68ab53efffb988eaecc9f54"
+    },
+    {
+      "id": "pang-tong",
+      "name": "Pang Tong 방통",
+      "details": "shorter stocky middle-aged strategist, heavy eyebrows broad asymmetrical face, rumpled black scholar cap, brown-gray patched robes, bamboo scroll",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Pang Tong 방통. shorter stocky middle-aged strategist, heavy eyebrows broad asymmetrical face, rumpled black scholar cap, brown-gray patched robes, bamboo scroll. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-f88c85dc-57e7-41bc-874e-e1c4474a8d1f.png",
+      "sourceSha256": "e3c245678fd6276cae9eeb0cfe943fe8fb76580a3a2fce61532a54d8b5a43b8c",
+      "exactPromptRecorded": true,
+      "bustSha256": "79e2c7c6311a4f57be476067621fb3cc8b3368b12a40a94ab5139e60cf362ed9",
+      "fullBodySha256": "5ab48a6c5713aa48c209d0e9f3184120d0a1d3951be0e19d37800429756f93a7"
+    },
+    {
+      "id": "ma-chao",
+      "name": "Ma Chao 마초",
+      "details": "young adult western cavalry commander, determined clean-shaven face, ivory headband and white feathered helmet, silver-gray armor white robes, spear",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Ma Chao 마초. young adult western cavalry commander, determined clean-shaven face, ivory headband and white feathered helmet, silver-gray armor white robes, spear. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.1
+      },
+      "sourceFile": "exec-e66ea555-d2ed-4114-9263-2a21f0f88545.png",
+      "sourceSha256": "61d9f57694a4d1636b792fef4e9c2ccb82e3e8042cf294a83f97b164a4a6973f",
+      "exactPromptRecorded": true,
+      "bustSha256": "cf23408f28f39204175af7049f495415d89b86218cacb9a1e4045255709b11ef",
+      "fullBodySha256": "7ffb82e605daba870e3aa618b8a7c227496b3265e04c87978ad9df2bc33a4b23"
+    },
+    {
+      "id": "wei-yan",
+      "name": "Wei Yan 위연",
+      "details": "fierce middle-aged warrior, ruddy face black pointed beard, dark green gray armor vermilion scarf, broad saber",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Wei Yan 위연. fierce middle-aged warrior, ruddy face black pointed beard, dark green gray armor vermilion scarf, broad saber. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-0049a27f-cd9a-4b61-b77e-6f58c635164f.png",
+      "sourceSha256": "c76a0c07c0d52860609db7908124f69f324773be8cc50c745aefe63eda21ecd5",
+      "exactPromptRecorded": true,
+      "bustSha256": "fd95114cb8da28388969e36e9858a4883046c2e2954d27ff46028c9ac3be5f2c",
+      "fullBodySha256": "f745ec8506f81ef1ac5bcd99ce28e0b765e0c1c5719ac9648c8b94ffbe34a2d0"
+    },
+    {
+      "id": "fa-zheng",
+      "name": "Fa Zheng 법정",
+      "details": "lean mature tactician, piercing eyes neat narrow beard, low scholar cap, charcoal robes ochre collar, bamboo scroll",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Fa Zheng 법정. lean mature tactician, piercing eyes neat narrow beard, low scholar cap, charcoal robes ochre collar, bamboo scroll. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-afc80a36-faf6-418e-ad7d-84a7af72db22.png",
+      "sourceSha256": "2b409fc8a7a77adce657b579dd70feedb277ed827db08de276f783e5da8f53f9",
+      "exactPromptRecorded": true,
+      "bustSha256": "05c6973d9c58688a0d1dfdd66f74be74efab1a9170732f91aa99e68c58882dc5",
+      "fullBodySha256": "367f6bb3be9c8f7c1ef470ddce39aafd8f18a3990d96680c5aa5218ffb2c32fc"
+    },
+    {
+      "id": "xiahou-yuan",
+      "name": "Xiahou Yuan 하후연",
+      "details": "mature tough archer commander, short dark beard, dark blue gray armor deep red sash, large composite bow",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Xiahou Yuan 하후연. mature tough archer commander, short dark beard, dark blue gray armor deep red sash, large composite bow. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-5b8abe7f-9652-473d-8026-f0295378bfb4.png",
+      "sourceSha256": "7af2f02c8702a4c7d029108e2305f5f10ae05566221ac3d892b5c8d3bee055a5",
+      "exactPromptRecorded": true,
+      "bustSha256": "e03de7a45954d23d70a3c21664c969466a4b48e47f176e020bbd9069e2c52942",
+      "fullBodySha256": "3454e4e636d9f336e2d4d40a8b569c8a75d2f5d122c3a6636069c0c49956e7b7"
+    },
+    {
+      "id": "xu-huang",
+      "name": "Xu Huang 서황",
+      "details": "strong mature disciplined commander, white head scarf, dark gray and ivory armor, large long-handled battle axe",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Xu Huang 서황. strong mature disciplined commander, white head scarf, dark gray and ivory armor, large long-handled battle axe. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0
+      },
+      "sourceFile": "exec-58038009-e69d-4e6c-ae0d-65b09bd580c5.png",
+      "sourceSha256": "1ed2caf7fcc4b7fdf5a83d7368a58ff33b8b7eb69588b9caf707258647f79e36",
+      "exactPromptRecorded": true,
+      "bustSha256": "9dc8084ce0ec273400d8b4debfc4751049149dd17ba4f7399b208b9427ae787d",
+      "fullBodySha256": "cee3c5da0cfbe72b3b74866c8a23bb9909acf7176a4bf2dce5c90a891f3dd3d6"
+    },
+    {
+      "id": "zhou-tai",
+      "name": "Zhou Tai 주태",
+      "details": "tall rugged veteran with scar across brow and visible forearm scars, dark blue gray armor, red waist sash, curved saber",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Zhou Tai 주태. tall rugged veteran with scar across brow and visible forearm scars, dark blue gray armor, red waist sash, curved saber. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-17f89680-e2e5-4427-827f-506142e81092.png",
+      "sourceSha256": "624b454138eb406c72d8295ba89a14a1fc7b2b21b54002ef4b96803e83b3707f",
+      "exactPromptRecorded": true,
+      "bustSha256": "e037a9183a7e788a210f2a36e51023b8f92364cac46568205d5e224de1fb2a67",
+      "fullBodySha256": "6f2029eeb160409c1ae09f4958d3e5197916acd9880a520de8cd740bd814543e"
+    },
+    {
+      "id": "meng-huo",
+      "name": "Meng Huo 맹획",
+      "details": "broad sturdy southern tribal king, mature dark-tanned Chinese face, black beard, ochre cloth headband, muted brown woven robes, simple hide shield and club, historical restrained clothing without fantasy",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Meng Huo 맹획. broad sturdy southern tribal king, mature dark-tanned Chinese face, black beard, ochre cloth headband, muted brown woven robes, simple hide shield and club, historical restrained clothing without fantasy. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-bbb4defe-0670-4c16-bb9f-e208149cefe7.png",
+      "sourceSha256": "a88130d6c5907e1af5d8816da2564ad3894d33ab954028ec1b509957f638f596",
+      "exactPromptRecorded": true,
+      "bustSha256": "1614c17153f0bfe25b610737e153532be9f4030d14cbdee10af1d5576a88eab0",
+      "fullBodySha256": "68516e5de24ecfce9c07f610920e373fedf124e5ed898815d7a0f28c8c5e2729"
+    },
+    {
+      "id": "lu-meng",
+      "name": "Lu Meng 여몽",
+      "details": "mature warrior-scholar, sturdy face short beard, gray armor under green robe, sword and folded scroll",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Lu Meng 여몽. mature warrior-scholar, sturdy face short beard, gray armor under green robe, sword and folded scroll. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-344129e5-d495-433d-8f1d-bef7af16c6b0.png",
+      "sourceSha256": "8bf32a776e687a5e5d80a444a82ffcfd603d8d5749856c36e3f485b073533857",
+      "exactPromptRecorded": true,
+      "bustSha256": "25945c75ca51bce0d333ec9926e1c7f3665859e3c55283a759a09ad62e42f12e",
+      "fullBodySha256": "db123e45e39f8f17a8d6a9517790348f03ebe09a264cd9bc927fc41e05894f84"
+    },
+    {
+      "id": "lu-xun",
+      "name": "Lu Xun 육손",
+      "details": "young adult refined strategist with small neat mustache, scholar cap, muted jade green and ivory robes, open plain command fan",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Lu Xun 육손. young adult refined strategist with small neat mustache, scholar cap, muted jade green and ivory robes, open plain command fan. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-413dc1ad-0251-499d-a78c-fec56cbbcdac.png",
+      "sourceSha256": "2657d81ddbacd69149ab21dd4f341b688ea1cb572a1d0a9f8e46f29de0ba674a",
+      "exactPromptRecorded": true,
+      "bustSha256": "80ed49ed87c6acdf660839e9f9e64347dcd2d41253499788bc3bf2ed5f61bf37",
+      "fullBodySha256": "687f2918ad31babb5d4ae22202df71c1e34a6fb1c21d86e62581c6570fa66d65"
+    },
+    {
+      "id": "jiang-wei",
+      "name": "Jiang Wei 강유",
+      "details": "young adult determined cavalry officer, neat small mustache, simple silver gray helmet, muted green and ivory armor, long spear",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Jiang Wei 강유. young adult determined cavalry officer, neat small mustache, simple silver gray helmet, muted green and ivory armor, long spear. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.1
+      },
+      "sourceFile": "exec-4284ec02-39ab-41c5-93f9-92ff40234e38.png",
+      "sourceSha256": "92d188bc9576bd0e3234ba553e6badaf8eb1d64e46b3436404a08f6deaf204dc",
+      "exactPromptRecorded": true,
+      "bustSha256": "93bdbc5ffa325c68edce2de55448cb02302d5635459ddd06b93e7e9634abb76b",
+      "fullBodySha256": "ccef9a698b4d4d3e2928c1c6c36be1816a00904a84ea86277b31ba4eec4c43d9"
+    },
+    {
+      "id": "zhu-rong",
+      "name": "Zhu Rong 축융",
+      "details": "adult strong female southern warrior, determined mature face, black hair tied up with simple red cloth, practical muted red and brown layered woven tunic and trousers, boots, short throwing spear and bow, no sexualized costume",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Zhu Rong 축융. adult strong female southern warrior, determined mature face, black hair tied up with simple red cloth, practical muted red and brown layered woven tunic and trousers, boots, short throwing spear and bow, no sexualized costume. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-9c368ebb-de91-4b50-8bff-a66e735271cb.png",
+      "sourceSha256": "482dda9c0b35aa59037cab7e511c7055309e06ad047b03955d7f6c4f3266fb5a",
+      "exactPromptRecorded": true,
+      "bustSha256": "427c6123348622255a2e7c961eb7634e499dbb0a6988022d0f8d5dcf8edc5a61",
+      "fullBodySha256": "365ecd1f3514fe9711c5e2e879e4b0b75a6a21d0bef11bf656bd7c29e275d892"
+    },
+    {
+      "id": "ma-su",
+      "name": "Ma Su 마속",
+      "details": "young adult scholarly officer, clean youthful face with small mustache, gray scholar cap, ivory and subdued green robes, rolled tactical map",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Ma Su 마속. young adult scholarly officer, clean youthful face with small mustache, gray scholar cap, ivory and subdued green robes, rolled tactical map. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-e5705132-2770-480b-a56a-b2b038929576.png",
+      "sourceSha256": "243a4741624d89aaef487113e042f24c03759460eb26edf90bf57872a4eb63b5",
+      "exactPromptRecorded": true,
+      "bustSha256": "d580f52cc4bc76164c3997e112e27f86692c28bcf89a88b5ecb64f2559c3b099",
+      "fullBodySha256": "ce845c6dfe92233bac9a81c45cf9b5a487bd19ab1675be0aa1677658c9ad1e49"
+    },
+    {
+      "id": "zhang-he",
+      "name": "Zhang He 장합",
+      "details": "mature agile cavalry commander with narrow face neat beard, low dark helmet, blue-gray armor green sash, long hooked spear",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Zhang He 장합. mature agile cavalry commander with narrow face neat beard, low dark helmet, blue-gray armor green sash, long hooked spear. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-5098bbd0-60cf-4f78-9024-e706ba6fe3d9.png",
+      "sourceSha256": "201c665726068d1191d4bd7dd72a1b72244465eac153d80fa6eaa13ee7aae673",
+      "exactPromptRecorded": true,
+      "bustSha256": "99698b9b0a5b4029eeff5c6249f61797b6fc27977ec9660a44a09cdcd8ccdd43",
+      "fullBodySha256": "796ac52bd4b6cf98ba0a589765614168ea7cc2f05fe41d07aeca398661a957d2"
+    },
+    {
+      "id": "deng-ai",
+      "name": "Deng Ai 등애",
+      "details": "older rugged practical commander, weathered face short gray beard, plain cloth head wrap, ochre gray travel robes over sparse armor, simple sword and rolled terrain map",
+      "prompt": "Use case: stylized-concept. Production full-body character cutout for Three Kingdoms Mystery Dungeon: Deng Ai 등애. older rugged practical commander, weathered face short gray beard, plain cloth head wrap, ochre gray travel robes over sparse armor, simple sword and rolled terrain map. ONE single character, entire head, all held props and BOTH BOOTS inside the frame with ample margins; face at upper quarter clearly legible for a derived square portrait. Modern hand-drawn Chinese ink graphic novel / lianhuanhua, realistic mature human anatomy, strong clean brush contours, subtle ink wash, muted paper-grain pigment. Restrained historical Han-era wardrobe, ink black #171513, ivory hanji #e8ddc4, sparse accents only; props readable by silhouette. Genuinely transparent background, no scenery, no cast shadow or vignette outside the figure, no text, no labels, no grids or panels, no magic glow, no glossy gold ornament, no anime/chibi/pixel art. Portrait orientation. Consistent premium traditional ink game illustration.",
+      "crop": {
+        "side": 0.4,
+        "x": 0.3,
+        "y": 0.035
+      },
+      "sourceFile": "exec-e2239766-a427-49cb-b6df-e43522b20340.png",
+      "sourceSha256": "00d845b7e88baa2c18b83c6997fc7403585095e18e9bdc0bd8cf4149d15b9340",
+      "exactPromptRecorded": true,
+      "bustSha256": "a1730ba8b8f4a35b5eff278f3e38cebef0bd5485e1f6de82c3f46041fa8f9bc1",
+      "fullBodySha256": "6a1ec7b90c731ccc70c4e20305c255476b40e9ff288024754f65ec1369e031b3"
+    }
+  ]
+}

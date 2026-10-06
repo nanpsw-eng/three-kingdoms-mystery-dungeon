@@ -5,9 +5,9 @@
 - Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon`
 - Working Branch: `art/ink-graphic-novel-v1`
 - Base Implementation Commit: `017e0c4130f914dd33d2ab74f2093d4170b0e438`
-- Art Gate: `INK_GRAPHIC_NOVEL_V1_APPROVED / PHASE_F_IN_PROGRESS / MOBILE_SLICE_QA_PASS`
-- Merge to `main`: HUMAN GATE
-- Production deploy: HUMAN GATE
+- Art Gate: `INK_GRAPHIC_NOVEL_V1_APPROVED / FULL_ROSTER_IMPLEMENTED / FINAL_VERIFICATION_PENDING`
+- Merge to `main`: APPROVED by latest explicit user instruction
+- Production deploy: APPROVED by latest explicit user instruction
 
 ## Goal
 
@@ -128,8 +128,4 @@ Required evidence: `npm test`, `npm run build:web`, UI smoke result, and 390×84
 
 ## Current continuation point — 2026-10-06
 
-Source of truth: current Track B section in SESSION_HANDOFF.md + actual remote HEAD.
-- Phase A–E assets are implemented; eight Phase F enemy/boss exploration tokens are implemented.
-- Mobile Title/Dungeon/Battle/Bag smoke and 54-asset decode/fallback checks PASS; see `docs/art/evidence/mobile-20261006/QA.md`.
-- Continue with named boss bust/full-body art and further enemy coverage. Do not recreate Phase A or the 15 playable character sets.
-- Runtime enemy busts remain legacy fallback until matching native masters are registered.
+Use current Track B in SESSION_HANDOFF.md and VISUAL_DELIVERY_20261006.md. All shipped character/enemy art is implemented; finish exact-head verification and authorized deployment. Earlier phase instructions are historical. Preserve the original 15 masters and 23 tokens. Do not recreate completed assets or source-domain code.

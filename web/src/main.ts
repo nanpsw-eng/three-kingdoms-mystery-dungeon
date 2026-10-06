@@ -65,7 +65,13 @@ const pic = (key: string, size: number, alt = ""): HTMLImageElement => {
   const id = artKey(key);
   const full = size >= 120 ? fullBodyIllustration(id) : undefined;
   const native = full ?? nativeAssetPortrait(id);
-  return spriteImg(native ?? portraitUrl(id), size, alt, native === undefined ? "px portrait" : "portrait native-portrait" + (full === undefined ? "" : " fullbody-illustration"));
+  const image = spriteImg(native ?? portraitUrl(id), size, alt, native === undefined ? "px portrait" : "portrait native-portrait" + (full === undefined ? "" : " fullbody-illustration"));
+  image.addEventListener("error", () => {
+    const fallback = nativeAssetPortrait(id);
+    image.className = fallback === undefined ? "px portrait" : "portrait native-portrait";
+    image.src = fallback ?? portraitUrl(id);
+  }, { once: true });
+  return image;
 };
 const icon = (id: string, size = 28): HTMLImageElement => spriteImg(iconUrl(id), size, "", "icon");
 const tokenPic = (key: string): HTMLImageElement => {
@@ -74,6 +80,7 @@ const tokenPic = (key: string): HTMLImageElement => {
   return spriteImg(token?.src ?? figureUrl(id), 20, "", token === undefined ? "px" : "native-token");
 };
 let hitIds = new Set<string>();
+let healedIds = new Set<string>();
 
 function say(message: string): void { log = [message, ...log].slice(0, 60); }
 
@@ -172,6 +179,7 @@ function narrateBattle(command: BattleCommand): void {
     return (names.get(u.id) ?? u.id) + (u.hp < prev ? " -" + (prev - u.hp) : " +" + (u.hp - prev)) + (u.knockedOut ? "(KO)" : "");
   }).filter(Boolean);
   hitIds = new Set(after.filter((u) => { const prev = before.get(u.id); return prev !== undefined && u.hp < prev; }).map((u) => u.id));
+  healedIds = new Set(after.filter((u) => { const prev = before.get(u.id); return prev !== undefined && u.hp > prev; }).map((u) => u.id));
   say(actor + " · " + verb + (changes.length ? " → " + changes.join(", ") : ""));
   sayEvents(events);
 }
@@ -182,7 +190,7 @@ function render(): void {
   if (run === null && showCodex) put(codexScreen({ view: buildCodex(content, meta), render, close: () => { showCodex = false; render(); }, portrait: (key, size, alt) => pic(key, size, alt) }));
   else if (run === null) renderTitle();
   else if (run.phase === "cleared" || run.phase === "failed") renderEnd();
-  else if (run.phase === "battle") { renderBattle(); hitIds = new Set(); }
+  else if (run.phase === "battle") { renderBattle(); hitIds = new Set(); healedIds = new Set(); }
   else if (run.phase === "safe-zone") renderSafeZone();
   else renderDungeon();
   if (run !== null && isStoryPhase(run.phase)) sheet(...storySheet({ run, act: (command) => { act(command); }, render, portrait: (key, size, alt) => pic(key, size, alt) }, run.pending()[0]!));
@@ -354,11 +362,11 @@ function renderBattle(): void {
         const command: BattleCommand = { type: "formation", actorId: active.actorId, targetSlot: slot }; selection = null; narrateBattle(command); render(); return;
       }
       onUnit(id);
-    }, { class: cls + (hitIds.has(id) ? " hit" : "") }).appendChild(h("div", { class: "unit-head" }, pic(id.includes("#") ? unitName(id) : id, 40, unitName(id)),
+    }, { class: cls + (hitIds.has(id) ? " hit" : "") + (healedIds.has(id) ? " healed" : "") }).appendChild(h("div", { class: "unit-head" }, pic(id.includes("#") ? unitName(id) : id, 40, unitName(id)),
       h("div", { class: "unit-meta" }, h("b", {}, unitName(id)), h("span", { class: "num" }, unit.hp + "/" + unit.stats.maxHp)))).parentElement!
       .appendChild(bar(unit.hp, unit.stats.maxHp)).parentElement!
       .appendChild(bar(unit.energy, 100, "energy")).parentElement!
-      .appendChild(h("span", { class: "tags" }, ...(statuses.get(id) ?? []).map((s) => h("span", { class: "tag" }, (STATUS_NAMES[s.type] ?? s.type) + (s.stacks > 1 ? "×" + s.stacks : ""))))).parentElement!;
+      .appendChild(h("span", { class: "tags" }, ...(statuses.get(id) ?? []).map((s) => h("span", { class: "tag", "data-status": s.type }, (STATUS_NAMES[s.type] ?? s.type) + (s.stacks > 1 ? "×" + s.stacks : ""))))).parentElement!;
   };
   const rows = (side: "ally" | "enemy"): HTMLElement[] => {
     const front = h("div", { class: "formation" }, card(side, "front-left"), card(side, "front-center"), card(side, "front-right"));

@@ -9,15 +9,18 @@
 //                "map": { "floor": [[0,4],[1,4]], "wall-face": [[1,0]], "stairs": [[3,4]], ... } }
 // }
 
+import { ART_BINDINGS } from './art-bindings.js';
+
 /** Enemy display names → ASCII asset ids (file names). Characters already use ASCII ids. */
 export const ENEMY_ASSET_IDS: Readonly<Record<string, string>> = {
   "황건 창병": "yt-spear", "황건 궁병": "yt-archer", "황건 기병": "yt-raider", "황건 술사": "yt-sorcerer", "태평도 신도": "yt-chanter",
   "장보": "boss-zhang-bao", "장량": "boss-zhang-liang", "장각": "boss-zhang-jiao",
   "동탁군 극병": "dong-halberd", "서량 기병": "xiliang-cavalry", "동탁군 궁병": "dong-archer", "관문 수비대": "gate-guard", "화웅": "boss-hua-xiong",
+  ...ART_BINDINGS,
 };
 
 interface TilesetSpec { readonly image: string; readonly tile: number; readonly gap?: number; readonly map: Readonly<Record<string, readonly (readonly [number, number])[]>> }
-interface Manifest { readonly portraits?: readonly string[]; readonly nativePortraits?: readonly string[]; readonly fullBodyIllustrations?: readonly string[]; readonly tokens?: readonly string[]; readonly portraitPixels?: number; readonly portraitColors?: number; readonly tileset?: TilesetSpec }
+interface Manifest { readonly portraits?: readonly string[]; readonly nativePortraits?: readonly string[]; readonly fullBodyIllustrations?: readonly string[]; readonly sharedPortraits?: Readonly<Record<string,string>>; readonly tokens?: readonly string[]; readonly portraitPixels?: number; readonly portraitColors?: number; readonly tileset?: TilesetSpec }
 
 const portraits = new Map<string, string>();
 const nativePortraits = new Map<string, string>();
@@ -134,7 +137,8 @@ export async function loadAssets(onReady: () => void): Promise<void> {
   });
   for (const id of manifest.fullBodyIllustrations ?? []) {
     const src = "assets/portraits/" + id + "-full.webp";
-    jobs.push(loadImage(src).then(() => { fullBodies.set(id, src); }).catch(() => undefined));
+    // Full-body masters are fetched by the visible <img>, not all on initial launch.
+    fullBodies.set(id, src);
   }
   for (const id of manifest.tokens ?? []) {
     const src = "assets/tokens/" + id + ".svg";
@@ -142,6 +146,11 @@ export async function loadAssets(onReady: () => void): Promise<void> {
   }
   for (const id of manifest.nativePortraits ?? []) {
     const src = "assets/portraits/" + id + ".webp";
+    jobs.push(loadImage(src).then(() => { nativePortraits.set(id, src); }).catch(() => undefined));
+  }
+  // Ordinary units share a portrait by role; their map tokens retain faction identity.
+  for (const [id, master] of Object.entries(manifest.sharedPortraits ?? {})) {
+    const src = "assets/portraits/" + master + ".webp";
     jobs.push(loadImage(src).then(() => { nativePortraits.set(id, src); }).catch(() => undefined));
   }
   if (manifest.tileset !== undefined) {
