@@ -29,35 +29,36 @@ function speckle(ctx: CanvasRenderingContext2D, seed: number, colors: string[], 
 
 // Stone slabs for rooms: two staggered slab rows with grout and chips.
 const FLOOR = [0, 1, 2, 3].map((variant) => makeTile((ctx) => {
-  ctx.fillStyle = "#77654a"; ctx.fillRect(0, 0, T, T);
-  ctx.fillStyle = "#857256"; ctx.fillRect(1, 1, 6, 6); ctx.fillRect(9, 1, 6, 6); ctx.fillRect(1, 9, 14, 6);
-  ctx.fillStyle = "#5c4d38";
+  ctx.fillStyle = "#cfc2a5"; ctx.fillRect(0, 0, T, T);
+  ctx.fillStyle = "#ddd1b6"; ctx.fillRect(1, 1, 6, 6); ctx.fillRect(9, 1, 6, 6); ctx.fillRect(1, 9, 14, 6);
+  ctx.fillStyle = "#9c8f78";
   ctx.fillRect(0, 7, T, 1); ctx.fillRect(0, 15, T, 1); ctx.fillRect(7, 0, 1, 7); ctx.fillRect(variant % 2 ? 4 : 11, 8, 1, 7);
-  speckle(ctx, variant + 10, ["#6a5a42", "#93805f", "#5c4d38"], 7);
+  speckle(ctx, variant + 10, ["#b8aa90", "#e8ddc4", "#a39579"], 7);
 }));
 // Packed earth for corridors.
 const CORRIDOR = [0, 1, 2].map((variant) => makeTile((ctx) => {
-  ctx.fillStyle = "#5b4a36"; ctx.fillRect(0, 0, T, T);
-  speckle(ctx, variant + 20, ["#4a3b2a", "#6a5840", "#3f3224"], 18);
+  ctx.fillStyle = "#c2b495"; ctx.fillRect(0, 0, T, T);
+  speckle(ctx, variant + 20, ["#ab9d80", "#d2c5a8", "#9c8f78"], 18);
 }));
 // Wall block: dark cap, brick face when standing above floor.
 const WALL_CAP = makeTile((ctx) => {
-  ctx.fillStyle = "#1d1712"; ctx.fillRect(0, 0, T, T);
-  speckle(ctx, 30, ["#251e17", "#16110d"], 10);
+  ctx.fillStyle = "#1b1815"; ctx.fillRect(0, 0, T, T);
+  ctx.fillStyle = "#2c2723"; ctx.fillRect(1, 1, T - 2, T - 2);
+  speckle(ctx, 30, ["#3a342e", "#171513"], 10);
 });
 const WALL_FACE = makeTile((ctx) => {
-  ctx.fillStyle = "#1d1712"; ctx.fillRect(0, 0, T, 5);
-  ctx.fillStyle = "#4a3a2a"; ctx.fillRect(0, 5, T, 11);
-  ctx.fillStyle = "#33281d";
+  ctx.fillStyle = "#1b1815"; ctx.fillRect(0, 0, T, 5);
+  ctx.fillStyle = "#5c544a"; ctx.fillRect(0, 5, T, 11);
+  ctx.fillStyle = "#3d3630";
   for (const y of [5, 10, 15]) ctx.fillRect(0, y, T, 1);
   for (const [x, y] of [[4, 6], [12, 6], [0, 11], [8, 11]] as const) ctx.fillRect(x, y, 1, 4);
-  ctx.fillStyle = "#5a4834"; ctx.fillRect(1, 6, 2, 1); ctx.fillRect(9, 11, 2, 1);
+  ctx.fillStyle = "#6e665b"; ctx.fillRect(1, 6, 2, 1); ctx.fillRect(9, 11, 2, 1);
 });
 const STAIRS = makeTile((ctx) => {
-  ctx.fillStyle = "#0e0b08"; ctx.fillRect(1, 1, 14, 14);
-  const steps = ["#9a8a6a", "#7a6b50", "#5a4d38", "#3a3024"];
+  ctx.fillStyle = "#171513"; ctx.fillRect(1, 1, 14, 14);
+  const steps = ["#e8ddc4", "#c2b495", "#8f8270", "#51483e"];
   steps.forEach((c, i) => { ctx.fillStyle = c; ctx.fillRect(2 + i * 2, 2 + i * 3, 12 - i * 4, 3); });
-  ctx.fillStyle = "#9ad0ff"; ctx.fillRect(7, 13, 2, 1);
+  ctx.fillStyle = "#a64032"; ctx.fillRect(7, 13, 2, 1);
 });
 const GATE = makeTile((ctx) => {
   ctx.fillStyle = "#6a3e1e"; ctx.fillRect(0, 0, T, T);
@@ -115,9 +116,21 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   const ctx = canvas.getContext("2d");
   if (ctx === null) return;
   ctx.imageSmoothingEnabled = false;
-  ctx.fillStyle = "#0b0907";
+  ctx.fillStyle = "#3a352f";
   ctx.fillRect(0, 0, size, size);
   const origin = { x: dungeon.position.x - VIEW_RADIUS, y: dungeon.position.y - VIEW_RADIUS };
+  // ink pooling: soft per-cell variation so unexplored space reads as wash, not a flat black block
+  for (let vy = 0; vy < VIEW; vy++) {
+    for (let vx = 0; vx < VIEW; vx++) {
+      const n = hash(origin.x + vx, origin.y + vy, 11);
+      // soft blots larger than a cell, low alpha, so neighbouring cells blend instead of forming a checkerboard
+      const blot = ctx.createRadialGradient((vx + 0.5) * cell, (vy + 0.5) * cell, 0, (vx + 0.5) * cell, (vy + 0.5) * cell, cell * 1.1);
+      blot.addColorStop(0, n < 0.5 ? `rgba(23, 21, 19, ${0.1 + n * 0.3})` : `rgba(92, 84, 74, ${(n - 0.5) * 0.3})`);
+      blot.addColorStop(1, "rgba(23, 21, 19, 0)");
+      ctx.fillStyle = blot;
+      ctx.fillRect((vx - 0.6) * cell, (vy - 0.6) * cell, cell * 2.2, cell * 2.2);
+    }
+  }
   const at = (p: Point): [number, number] => [(p.x - origin.x) * cell, (p.y - origin.y) * cell];
   const blit = (image: CanvasImageSource, p: Point, scale = 1, lift = 0): void => {
     const [x, y] = at(p);
@@ -169,18 +182,18 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
     blit(image, object.pos, object.kind === "item" ? 0.75 : 1);
   }
   // fog over remembered-but-not-visible ground
-  ctx.fillStyle = "rgba(8, 6, 4, 0.55)";
+  ctx.fillStyle = "rgba(31, 28, 25, 0.5)";
   for (const p of fog) { const [x, y] = at(p); ctx.fillRect(x, y, cell, cell); }
   // torchlight: warm glow around the ruler, falling off into darkness at the view edge
   const [lx, ly] = at(dungeon.position);
   const cx = lx + cell / 2, cy = ly + cell / 2;
   const dark = ctx.createRadialGradient(cx, cy, cell * 4, cx, cy, cell * (VIEW_RADIUS + 2));
-  dark.addColorStop(0, "rgba(6, 4, 3, 0)");
-  dark.addColorStop(1, "rgba(6, 4, 3, 0.5)");
+  dark.addColorStop(0, "rgba(23, 21, 19, 0)");
+  dark.addColorStop(1, "rgba(23, 21, 19, 0.42)");
   ctx.fillStyle = dark; ctx.fillRect(0, 0, size, size);
   const warm = ctx.createRadialGradient(cx, cy, 0, cx, cy, cell * 3.5);
-  warm.addColorStop(0, "rgba(255, 176, 92, 0.14)");
-  warm.addColorStop(1, "rgba(255, 176, 92, 0)");
+  warm.addColorStop(0, "rgba(255, 248, 230, 0.12)");
+  warm.addColorStop(1, "rgba(255, 248, 230, 0)");
   ctx.fillStyle = warm; ctx.fillRect(0, 0, size, size);
   for (const enemy of dungeon.visibleEnemies()) {
     const [x, y] = at(enemy.pos);
@@ -188,18 +201,18 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
     blit(figureCanvas(options.enemyKey(enemy.groupId)), enemy.pos, enemy.boss ? 1.35 : 1, cell * 0.08);
     if (enemy.state === "ALERT" || enemy.state === "CHASE") {
       const s = Math.max(2, Math.floor(cell / 8));
-      ctx.fillStyle = "#1a120c"; ctx.fillRect(x + cell * 0.72, y - s * 3, s * 3, s * 4);
-      ctx.fillStyle = "#f2c230"; ctx.fillRect(x + cell * 0.72 + s, y - s * 2.5, s, s * 2); ctx.fillRect(x + cell * 0.72 + s, y, s, s * 0.8);
+      ctx.fillStyle = "#f2ebdd"; ctx.fillRect(x + cell * 0.72, y - s * 3, s * 3, s * 4);
+      ctx.fillStyle = "#a64032"; ctx.fillRect(x + cell * 0.72 + s, y - s * 2.5, s, s * 2); ctx.fillRect(x + cell * 0.72 + s, y, s, s * 0.8);
     }
   }
   const [px, py] = at(dungeon.position);
   ctx.fillStyle = "rgba(0,0,0,0.35)"; ctx.fillRect(px + cell * 0.2, py + cell * 0.82, cell * 0.6, cell * 0.12);
   blit(figureCanvas(options.playerKey), dungeon.position, 1, cell * 0.08);
-  // facing marker: a gold chevron on the tile edge
+  // facing marker: a vermilion mark on the tile edge
   const facing: Record<string, [number, number]> = { n: [0, -1], ne: [1, -1], e: [1, 0], se: [1, 1], s: [0, 1], sw: [-1, 1], w: [-1, 0], nw: [-1, -1] };
   const [fx, fy] = facing[dungeon.facing] ?? [0, 1];
   const m = Math.max(2, Math.floor(cell / 8));
-  ctx.fillStyle = "#e8b84a";
+  ctx.fillStyle = "#a64032";
   ctx.fillRect(px + cell / 2 + fx * cell * 0.5 - m / 2, py + cell / 2 + fy * cell * 0.5 - m / 2, m, m);
 }
 
