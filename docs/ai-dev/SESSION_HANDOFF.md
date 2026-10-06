@@ -152,9 +152,9 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - No gameplay code changed. `npm test`, `npm run build:web`, browser/runtime smoke, and production-screen/mobile QA: `NOT_RUN`.
 
 ## NEXT_SAFE_ACTION
-1. Revise floor A/B toward warmer hanji with lower texture contrast.
-2. Define fog as a translucent overlay treatment over both light floor and dark wall, then make a mixed-cell adjacency study.
-3. Keep all concept crops separate from production exports; renderer/runtime integration remains outside this design review.
+1. Add a distinct corridor / doorway module to the exact-cell SVG and verify one-cell width at 26px.
+2. Apply the 28% feathered fog sample over the composed room/corridor and check player/object marker contrast.
+3. Keep all study files at `CONCEPT` until actual renderer contract and map screenshots can be checked.
 
 ## HUMAN GATE
 - Reversible design exploration and reference/spec updates on the art branch: no additional gate.
