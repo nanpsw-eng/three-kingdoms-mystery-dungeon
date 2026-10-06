@@ -5,9 +5,9 @@
 - Current product source: `main` at `82b38b4bf877a015e99f53ae551bfedb45bbc790`
 - Latest Claude work: PR #10 merged; Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`
 - Art/design branch: `art/ink-graphic-novel-v1`
-- Art HEAD before this handoff commit: `4887510dd4c4633a5a54897d61323cff40596dfa`
+- Art HEAD before this handoff commit: `e8f20295e458e09937d1ad2d9cf88fbaaff67ac8`
 - Open PR: none
-- Latest art CI: commit `4887510dd4c4633a5a54897d61323cff40596dfa` passed CI run #78. This next change is documentation/concept-only; local npm test/build/smoke are `NOT_RUN`.
+- Latest art CI: commit `e8f20295e458e09937d1ad2d9cf88fbaaff67ac8` is queued in CI run #79; previous commit `4887510dd4c4633a5a54897d61323cff40596dfa` passed run #78. This next change is documentation/concept-only; local npm test/build/smoke are `NOT_RUN`.
 - Art direction and Product Baseline remain unchanged.
 
 ## Current Art Phase\n- `PHASE B — Ruler Master Set`; three ruler bust, full-body, and exploration-token studies exist as concepts. Cross-view consistency and mobile-scale QA remain incomplete.\n- Phase A references exist, while implemented screen-level art QA remains unverified.\n- Last confirmed done: individual full-body studies added for all three rulers; separate busts and tokens already exist.\n- First incomplete task: cross-view character consistency review at portrait and map display sizes; keep the set at `CONCEPT` until that review passes.\n- Blocker: legacy render paths pixelize portraits and use procedural 16×16 map figures.\n\n## Work Responsibility
@@ -89,10 +89,10 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - Concept images were visually inspected; remaining design gaps are recorded above.
 
 ## NEXT_SAFE_ACTION
-1. Define a non-pixelized portrait render contract and readable locked portrait state; current `assets.ts` pixelizes and Codex darkens locked portraits.
-2. Define a non-pixelized portrait/token integration contract; validate portrait display at 40px/48px and tokens at 24–28px over hanji floor and fog before `IMPLEMENTATION_READY`.
-3. Refine Sima Yi and remaining campaign-boss/playable-general concepts against the ruler masters.
-4. Start item silhouettes once character asset integration is compatible with the approved style.
+1. Build a design-only ruler scale review board: portrait crops at 40px/48px and tokens at 24px/28px against hanji floor and ink fog, plus grayscale silhouettes.
+2. Revise any face, garment, or prop cue that fails cross-view recognition; keep all rulers at `CONCEPT` until the set passes.
+3. Keep the non-pixel portrait/token route and readable locked state documented as implementation gaps; do not use the current pixelizing portrait loader for these studies.
+4. After the ruler set passes visual QA, align Sima Yi and the next queued character concepts to the same identity system.
 
 ## HUMAN GATE
 - Reversible design exploration and reference/spec updates on the art branch: no additional gate.
