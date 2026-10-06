@@ -223,3 +223,13 @@ Separate exploration-token studies are now recorded:
 All three remain `CONCEPT`. Their repository PNGs are compact review references with transparent backgrounds; they are not production masters. Preserve transparency in eventual exports, keep identity cues to large silhouette and palette blocks, and test each against both hanji floor and ink fog at the actual 24–28px map-cell display size. Do not add facial micro-detail intended only for enlarged review.
 
 The current map renderer uses 16×16 procedural figures and pixelated canvas output. Keep that behavior available as fallback. A distinct non-pixel token-rendering path is a prerequisite for implementation; visual check of generated PNGs at runtime tile size, fog contrast, and grayscale is `NOT_RUN`. No map topology or interaction change is implied.
+
+
+## 20. Individual Ruler Full-Body Concept Review
+
+Separate full-body reference images now pair with the ruler bust and exploration-token studies:
+- `concepts/liu-bei-full-body-concept-v1-20261006.jpg`: complete ivory/beige layered robes, muted-crimson sash, long tapered beard, and an open, grounded gesture.
+- `concepts/cao-cao-full-body-concept-v1-20261006.jpg`: compact charcoal silhouette with deep-crimson inner layers and a short command sword; armor ornament remains a simplification point.
+- `concepts/sun-quan-full-body-concept-v1-20261006.jpg`: mature-young, clean-shaven face with balanced upright blue-gray/dark-green clothing and a narrow command tablet.
+
+These three images are `CONCEPT` references, reduced to 256×384 on canonical hanji for repository continuity. Keep the high-resolution generated masters separate from these downscaled comparison references. The ruler set is not approved yet: compare each face, broad palette blocks, garment silhouette, and identifying prop across bust / full-body / token; test monochrome reading and actual mobile render sizes before moving to `APPROVED` or `IMPLEMENTATION_READY`.

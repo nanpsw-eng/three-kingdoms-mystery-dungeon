@@ -5,12 +5,12 @@
 - Current product source: `main` at `82b38b4bf877a015e99f53ae551bfedb45bbc790`
 - Latest Claude work: PR #10 merged; Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`
 - Art/design branch: `art/ink-graphic-novel-v1`
-- Art HEAD before this handoff commit: `c79f9162316400f90c3cc50a3e8bffb822d88adb`
+- Art HEAD before this handoff commit: `4887510dd4c4633a5a54897d61323cff40596dfa`
 - Open PR: none
-- Latest art CI: commit `c79f9162316400f90c3cc50a3e8bffb822d88adb` passed CI run #77. This next change is documentation/concept-only; local npm test/build/smoke are `NOT_RUN`.
+- Latest art CI: commit `4887510dd4c4633a5a54897d61323cff40596dfa` passed CI run #78. This next change is documentation/concept-only; local npm test/build/smoke are `NOT_RUN`.
 - Art direction and Product Baseline remain unchanged.
 
-## Work Responsibility
+## Current Art Phase\n- `PHASE B — Ruler Master Set`; three ruler bust, full-body, and exploration-token studies exist as concepts. Cross-view consistency and mobile-scale QA remain incomplete.\n- Phase A references exist, while implemented screen-level art QA remains unverified.\n- Last confirmed done: individual full-body studies added for all three rulers; separate busts and tokens already exist.\n- First incomplete task: cross-view character consistency review at portrait and map display sizes; keep the set at `CONCEPT` until that review passes.\n- Blocker: legacy render paths pixelize portraits and use procedural 16×16 map figures.\n\n## Work Responsibility
 This Work owns visual design, concept art, asset registry, and visual QA. The user instructed that all design work continue here without a separate Codex work assignment. Keep the actual game visuals and functional behavior intact while creating design assets and specifications.
 
 ## Verified Claude Content Delta
@@ -36,7 +36,7 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - Created an E7/E8 boss duo concept for Lu Xun and Meng Huo, emphasizing fan-led vertical vs shield-led broad silhouettes; added its reference, review notes, and registry entry.
 - Refined the ruler comparison into a cleaner v2 master-reference concept and aligned Sima Yi concept v2 to its hanji/ink treatment.
 - Created separate Liu Bei, Cao Cao, and Sun Quan concept sheets, each with bust, full-body, and exploration-token views.
-- Added dedicated square bust references for all three rulers; revised Sun Quan’s bust to read as a mature young ruler.\n- Created separate ruler exploration-token studies; revised Liu Bei v2 to keep both boots within the silhouette.
+- Added dedicated square bust references for all three rulers; revised Sun Quan’s bust to read as a mature young ruler.\n- Created separate ruler exploration-token studies; revised Liu Bei v2 to keep both boots within the silhouette.\n- Created individual full-body concept references for Liu Bei, Cao Cao, and Sun Quan; all include complete feet and broad silhouette/palette cues.
 
 ## Asset State
 - Global art direction: `APPROVED`.
@@ -44,7 +44,7 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - Sima Yi v2 master: `CONCEPT`; uses the cleaned ruler ink/hanji presentation while preserving his dark strategist identity; verify separate bust/full-body/token sizes.
 - Liu Bei/Cao Cao/Sun Quan comparison v2: `CONCEPT`; background removed and ornament reduced; serves as shared style reference.
 - Individual Liu Bei / Cao Cao / Sun Quan master sheets: Liu Bei/Cao Cao `CONCEPT`; Sun Quan v1 `NEEDS_REVISION`, with bust v2 as current face reference.
-- Dedicated square bust references: all `CONCEPT`; source composition is square, but runtime use is blocked by the current portrait loader’s pixelization.\n- Separate Liu Bei/Cao Cao/Sun Quan token studies: all `CONCEPT`; distinguishable palette and prop cues are defined. Liu Bei v1 is superseded by v2 because the boots were clipped.
+- Dedicated square bust references: all `CONCEPT`; source composition is square, but runtime use is blocked by the current portrait loader’s pixelization.\n- Separate Liu Bei/Cao Cao/Sun Quan token studies: all `CONCEPT`; distinguishable palette and prop cues are defined. Liu Bei v1 is superseded by v2 because the boots were clipped.\n- Separate Liu Bei/Cao Cao/Sun Quan full-body references: all `CONCEPT`; complete silhouette and palette blocks exist, but cross-view identity and mobile-scale checks remain.
 - Dong Zhuo/Lü Bu comparison: `CONCEPT`; broad-vs-tall silhouettes established; simplify armor details and verify small tokens.
 - Codex character-detail UI: `CONCEPT`; dynamic progress fractions correct, but enlarged art is mood reference and actual code uses a 40px row portrait.
 - Codex secondary tab board: `CONCEPT`; visual state language established for campaign-grouped bosses, earned achievements, and identified/unidentified items.
@@ -75,7 +75,7 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/sun-quan-master-concept-v1-20261006.jpg`
 - `docs/art/concepts/liu-bei-bust-concept-v1-20261006.jpg`
 - `docs/art/concepts/cao-cao-bust-concept-v1-20261006.jpg`
-- `docs/art/concepts/sun-quan-bust-concept-v2-20261006.jpg`\n- `docs/art/concepts/liu-bei-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/cao-cao-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/sun-quan-exploration-token-concept-v1-20261006.png`
+- `docs/art/concepts/sun-quan-bust-concept-v2-20261006.jpg`\n- `docs/art/concepts/liu-bei-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/cao-cao-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/sun-quan-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/liu-bei-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/cao-cao-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/sun-quan-full-body-concept-v1-20261006.jpg`
 - `docs/art/concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg`
 - `docs/art/concepts/codex-secondary-tabs-20261006.jpg`
 - `docs/art/concepts/story-scene-ui-20261006.jpg`
