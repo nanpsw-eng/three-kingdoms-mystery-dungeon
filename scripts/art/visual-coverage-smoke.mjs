@@ -44,7 +44,7 @@ for(const campaign of campaigns){
   await page.evaluate(()=>localStorage.removeItem('tkmd.save.v1'));
   await page.reload({waitUntil:'networkidle'});
   await page.getByRole('button',{name:new RegExp(campaign.name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'))}).click();
-  await page.getByRole('button',{name:'관우'}).click(); await page.getByRole('button',{name:'장비'}).click();
+  await page.locator('button.pick').filter({hasText:'관우'}).click(); await page.locator('button.pick').filter({hasText:'장비'}).click();
   await page.getByRole('button',{name:'원정 시작'}).click(); await page.waitForLoadState('networkidle');
   await audit('campaign-intro-'+campaign.id);
   await page.screenshot({path:out+'/campaign-'+campaign.id+'.png',fullPage:true});
