@@ -43,6 +43,8 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 
 ## Current Implementation State
 
+| Phase E general character set — 12 | `IMPLEMENTED` | Native bust + full-body WebP and matching SVG exploration token for Guan Yu, Zhang Fei, Zhao Yun, Huang Zhong, Zhuge Liang, Zhang Liao, Xiahou Dun, Jia Xu, Taishi Ci, Zhou Yu, Gan Ning, and Hua Tuo; manifest and UI/map routes retain fallbacks | Browser QA at 390×844, then begin Phase F enemy/boss set |
+
 | Character production set | Status | Source / note | Next action |
 |---|---|---|---|
 | Guan Yu bust / full-body / exploration token | `IMPLEMENTED` | `web/assets/portraits/guan-yu.webp`, `guan-yu-full.webp`, `web/assets/tokens/guan-yu.svg`; native portrait/full-body/map routes | Continue runtime QA with ruler set, then proceed to Zhang Fei |

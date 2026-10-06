@@ -41,19 +41,19 @@ NEXT_SAFE_ACTION
 ---
 
 ## Track B — Current Visual Control (2026-10-06)
-- Art branch remains based on the latest implementation sync `7030eff`; Phase A visual slice and map/item atlas remain intact.
-- Phase B is implemented: Liu Bei, Cao Cao, and Sun Quan each have native bust, full-body illustration, and exploration token assets with fallback-safe loading.
-- Phase E has begun: Guan Yu now has matching bust, full-body illustration, and green/ivory exploration token using the same non-pixelized routes.
-- CURRENT HEAD (implementation before this handoff update): `84a9b84157a6155e968f733150b49877d5693950`.
-- CURRENT ART PHASE: Phase E — General Character Set, in progress.
-- COMPLETED: Phase A vertical slice; map/item atlas and tests; Phase B ruler master sets; Guan Yu first general master set.
-- DO_NOT_REPEAT: art direction selection; finished Phase A, map/item atlas, and ruler master art/routes; battle/dungeon/run/content logic.
-- FILES CHANGED IN THIS SLICE: `web/assets/portraits/guan-yu*.webp`, `web/assets/tokens/guan-yu.svg`, `web/assets/manifest.json`, `test/art-assets.test.mjs`.
-- TEST RESULT: GitHub CI #107 PASS (`npm ci`, `npm test`, `npm run build:web`). Local checks and browser smoke remain NOT_RUN.
-- VISUAL EVIDENCE: reviewed Guan Yu portrait/full-body composite against the hanji ground; same dark ink contour and muted green/ivory palette. Runtime screenshot is NOT_RUN.
-- KNOWN GAP: native assets are not browser-smoke-tested; missing-asset fallback is covered by loader behavior but has not been visually observed. Remaining 11 general masters are pending.
-- NEXT_SAFE_ACTION: browser-check 390×844 art branch when a local/browser preview is available; continue roster in order with Zhang Fei, then Zhao Yun and other Phase E characters.
-- HUMAN GATE: no main merge or production deploy.
+- Art branch remains aligned with implementation sync `7030eff`; Phase A Title/Dungeon/Battle ink skin and Phase C/D map/item atlas are implemented.
+- Phase B ruler masters are implemented: Liu Bei, Cao Cao, Sun Quan each have bust, full-body art, and matching exploration token.
+- Phase E general roster is implemented for all 12: Guan Yu, Zhang Fei, Zhao Yun, Huang Zhong, Zhuge Liang, Zhang Liao, Xiahou Dun, Jia Xu, Taishi Ci, Zhou Yu, Gan Ning, Hua Tuo.
+- CURRENT HEAD (code before this handoff update): `d4a77a40bd2373476d17032aa63489037a4b38c4`.
+- CURRENT ART PHASE: Phase E complete; Phase F is next.
+- COMPLETED: Phase A vertical slice; map/item atlas; Phase B ruler masters; Phase E 12 general masters. All assets connect through manifest routes; procedural fallback remains for missing/uncovered content.
+- DO_NOT_REPEAT: approved art direction, Phase A, map/item atlas, 3 ruler sets, and 12 general sets; battle/dungeon/run/content logic.
+- FILES CHANGED ACROSS RECENT ASSET COMMITS: `web/assets/manifest.json`, `web/assets/portraits/*.webp`, `web/assets/tokens/*.svg`, `web/src/assets.ts`, `web/src/main.ts`, `web/src/map.ts`, `web/style.css`, `test/art-assets.test.mjs`, `docs/art/ASSET_REGISTRY.md`.
+- TEST RESULT: GitHub CI #119 PASS (`npm ci`, `npm test`, `npm run build:web`). Local checks NOT_RUN. Browser smoke, console/page error check, and 390×844 clipping/touch-target QA NOT_RUN.
+- VISUAL EVIDENCE: transparent bust/full-body assets and distinctive 64px SVG exploration tokens exist for all 15 characters; generated figures were reviewed on hanji background in this session. Runtime screenshot remains unavailable.
+- KNOWN GAP: CI workflow does not include browser smoke or screenshot; live runtime and missing-asset fallback have not been visually exercised. Remaining Phase F/G/H art work is open.
+- NEXT_SAFE_ACTION: run the art branch in a browser at 390×844 and check Title, Dungeon, Battle, portraits/full-body event cards, map tokens, and missing-asset fallback; then implement Phase F Yellow Turban units and Zhang Bao/Zhang Liang/Zhang Jiao bosses.
+- HUMAN GATE: no PR, main merge, or production deploy performed.
 
 ## Track B — Art (Codex) — latest Codex handoff below, nested verbatim (historical snapshot; current state above)
 
