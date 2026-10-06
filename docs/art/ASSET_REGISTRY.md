@@ -43,6 +43,10 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 
 ## Current Implementation State
 
+| Character production set | Status | Source / note | Next action |
+|---|---|---|---|
+| Guan Yu bust / full-body / exploration token | `IMPLEMENTED` | `web/assets/portraits/guan-yu.webp`, `guan-yu-full.webp`, `web/assets/tokens/guan-yu.svg`; native portrait/full-body/map routes | Continue runtime QA with ruler set, then proceed to Zhang Fei |
+
 Phase A's hanji/ink skin is implemented on `main` and synced into the art branch. The art branch adds a fallback-safe, non-pixelized SVG atlas for Canvas dungeon/object marks and inventory icons, plus three native-resolution ruler bust masters. The manifest loads portraits only after successful image decode; existing pixel/procedural portraits and map figures remain fallback. Full-body art, exploration tokens, and 390×844 runtime QA remain open.
 
 | Liu Bei individual master concept v1 | `CONCEPT` | `concepts/liu-bei-master-concept-v1-20261006.jpg` | Review portrait at 40px and token in grayscale; create final production exports later |

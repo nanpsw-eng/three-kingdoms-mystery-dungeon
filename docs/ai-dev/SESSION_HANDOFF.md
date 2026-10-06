@@ -41,19 +41,19 @@ NEXT_SAFE_ACTION
 ---
 
 ## Track B — Current Visual Control (2026-10-06)
-- Art branch includes the main implementation sync `7030eff`; Phase A Title/Dungeon/Battle ink skin was already implemented and preserved.
-- Fallback-safe dungeon/object/item atlas is integrated; CI #102 passed.
-- Phase B ruler masters are implemented for Liu Bei, Cao Cao, and Sun Quan: native bust and full-body WebP art, distinct SVG exploration tokens, manifest loading that activates only after successful decode, and legacy pixel/procedural fallback. Map draws the native token when present. Large character illustrations use the full-body asset with aspect-ratio preservation.
-- CURRENT HEAD (code before this handoff update): `1435bcea10d5ab0419e984db73084e6651622595`.
-- CURRENT ART PHASE: Phase B implementation complete; cross-screen runtime QA pending.
-- COMPLETED: Phase A vertical slice; Phase C/D atlas integration; Phase B ruler bust/full-body/token art and renderer routes.
-- DO_NOT_REPEAT: approved art-direction selection; Phase A rebuild; battle/dungeon/run/content engines; existing map/item atlas work; ruler bust/full-body/token creation.
-- FILES CHANGED: `web/assets/manifest.json`, `web/assets/portraits/*.webp`, `web/assets/tokens/*.svg`, `web/src/assets.ts`, `web/src/main.ts`, `web/src/map.ts`, `web/style.css`, `test/art-assets.test.mjs`, `docs/art/ASSET_REGISTRY.md`.
-- TEST RESULT: GitHub CI #105 for `1435bcea` PASS (includes npm test and web build). Local npm test/build are NOT_RUN. Browser smoke, console/page error check, and 390×844 clipping/touch-target QA are NOT_RUN.
-- VISUAL EVIDENCE: three native bust and full-body masters are committed; inspect against `docs/art/VISUAL_BIBLE_V1.md`. Repository CI validates stable manifest IDs, WEBP assets, and token SVGs.
-- KNOWN GAP: no browser runtime screenshot; map/UI integration and missing-asset fallback still need live visual QA. Only ruler tokens are native; remaining characters/enemies retain fallback art.
-- NEXT_SAFE_ACTION: run the art branch in browser at 390×844, verify title, dungeon, battle, ruler selection/event art, map tokens, and missing-asset fallback. Fix visual regressions, then begin Phase E roster masters.
-- HUMAN GATE: no main merge or production deploy performed.
+- Art branch remains based on the latest implementation sync `7030eff`; Phase A visual slice and map/item atlas remain intact.
+- Phase B is implemented: Liu Bei, Cao Cao, and Sun Quan each have native bust, full-body illustration, and exploration token assets with fallback-safe loading.
+- Phase E has begun: Guan Yu now has matching bust, full-body illustration, and green/ivory exploration token using the same non-pixelized routes.
+- CURRENT HEAD (implementation before this handoff update): `84a9b84157a6155e968f733150b49877d5693950`.
+- CURRENT ART PHASE: Phase E — General Character Set, in progress.
+- COMPLETED: Phase A vertical slice; map/item atlas and tests; Phase B ruler master sets; Guan Yu first general master set.
+- DO_NOT_REPEAT: art direction selection; finished Phase A, map/item atlas, and ruler master art/routes; battle/dungeon/run/content logic.
+- FILES CHANGED IN THIS SLICE: `web/assets/portraits/guan-yu*.webp`, `web/assets/tokens/guan-yu.svg`, `web/assets/manifest.json`, `test/art-assets.test.mjs`.
+- TEST RESULT: GitHub CI #107 PASS (`npm ci`, `npm test`, `npm run build:web`). Local checks and browser smoke remain NOT_RUN.
+- VISUAL EVIDENCE: reviewed Guan Yu portrait/full-body composite against the hanji ground; same dark ink contour and muted green/ivory palette. Runtime screenshot is NOT_RUN.
+- KNOWN GAP: native assets are not browser-smoke-tested; missing-asset fallback is covered by loader behavior but has not been visually observed. Remaining 11 general masters are pending.
+- NEXT_SAFE_ACTION: browser-check 390×844 art branch when a local/browser preview is available; continue roster in order with Zhang Fei, then Zhao Yun and other Phase E characters.
+- HUMAN GATE: no main merge or production deploy.
 
 ## Track B — Art (Codex) — latest Codex handoff below, nested verbatim (historical snapshot; current state above)
 
