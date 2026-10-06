@@ -35,7 +35,9 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 
 | Codex Bosses / Achievements / Items three-tab concept sheet | `CONCEPT` | `concepts/codex-secondary-tabs-20261006.jpg` | Keep data-driven counters, refine defeated/earned/unknown icons at mobile size |
 | Line-by-line story scene UI two-state concept | `CONCEPT` | `concepts/story-scene-ui-20261006.jpg` | Align speaker portrait to actual 48px row, validate sheet scroll and fixed actions |
-| Dungeon modular surface grammar v1 | `CONCEPT` | `concepts/dungeon-modular-surface-grammar-concept-v1-20261006.jpg`; six studies for open floor, H/V corridor, solid wall, straight wall, and corner | Check true-cell crops and repeated joins; prepare separate edge masters after review |
+| Dungeon modular surface grammar v1 | `SUPERSEDED` | `concepts/dungeon-modular-surface-grammar-concept-v1-20261006.jpg`; first six-surface study without a second floor variant | Retain as history; v2 is the current crop/repeat review source |
+| Dungeon modular surface grammar v2 | `CONCEPT` | `concepts/dungeon-modular-surface-grammar-concept-v2-20261006.jpg`; Floor A/B, H/V corridor, horizontal wall segment, and inner corner studies in square cells | Review tile adjacency; add wall endpoints, T-junctions, exterior corners, and fog variants before production |
+| Dungeon modular surface scale review v2 | `CONCEPT` | `concepts/dungeon-modular-surface-scale-review-v2-20261006.jpg`; 26px color/grayscale crops plus H/V floor joins, repeated wall, and alternating floor samples | Current design QA evidence only; tile variants and actual Canvas/runtime integration remain open |
 
 ## Current Implementation State
 

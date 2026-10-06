@@ -5,17 +5,17 @@
 - Current product source: `main` at `82b38b4bf877a015e99f53ae551bfedb45bbc790`
 - Latest Claude work: PR #10 merged; Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`
 - Art/design branch: `art/ink-graphic-novel-v1`
-- Current art HEAD before this handoff update: `18ab7ab7c1541ca6a470d057105f4af5a83fc055`
+- Current art HEAD before this handoff update: `ce12be9c2350733823abd031b101cb8916ce5b3b`
 - Open PR: none
-- Latest art CI: commit `18ab7ab7c1541ca6a470d057105f4af5a83fc055` passed CI run #87. This handoff-only sync is documentation-only; local npm test/build/browser smoke are `NOT_RUN`.
+- Latest art CI: commit `ce12be9c2350733823abd031b101cb8916ce5b3b` passed CI run #88. This update adds concept references only; local npm test/build/browser smoke are `NOT_RUN`.
 - Art direction and Product Baseline remain unchanged.
 
 ## Current Art Phase
 - `PHASE C — Dungeon Graphic Set` is active.
 - Phase B ruler identity language is `APPROVED` as a design reference; individual character images remain `CONCEPT`.
-- Last confirmed done: surface/object vignette atlases, revised trap/sorcery marks including v3, room composition study, exact-cell crop audit, and a six-surface modular grammar concept sheet.
-- First incomplete task: review and refine the new modular floor/wall/corridor grammar at true 26px cells; check repeated joins and tune fog opacity over both floor and wall.
-- Visual QA: SVG XML parses and Inkscape rendered the atlas-crop audit at 2× display (26px logical cells); it FAILS as a tile proof because atlas panels are illustrative vignettes, not modular cell art. Sorcery v3 and the six-surface modular grammar sheet remain `CONCEPT`.
+- Last confirmed done: surface/object vignette atlases, revised trap/sorcery marks including v3, exact-cell crop audit, and modular surface grammar v2 with a 26px color/grayscale and join review.
+- First incomplete task: complete the modular transition set with wall endpoints, exterior corners, and T-junctions; then tune fog over both floor and wall.
+- Visual QA: atlas-crop audit remains `NEEDS_REVISION` because its source panels are vignettes. Grammar v2 was cropped from square cells to 26px; all six silhouettes remain readable in color/grayscale and H/V floor joins read. Repeated wall texture is conspicuous; missing endpoints/T-junction/exterior-corner pieces keep the grammar at `CONCEPT`.
 - Blocker: map renderer remains procedural/pixelated; browser/canvas, mobile, and gameplay checks are unverified.
 - Latest confirmed CI: commit `18ab7ab7c1541ca6a470d057105f4af5a83fc055` passed run #87. For this design-only change, `npm test`, `npm run build:web`, and browser/runtime smoke are `NOT_RUN`; Inkscape SVG rendering passed.
 
@@ -56,14 +56,15 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - Created sorcery marker v3: open brush ring plus one violet flame; kept it as a concept and superseded v2 for current review.
 - Created a six-surface modular tile grammar concept for floor, horizontal/vertical corridor, solid/straight wall, and inside corner.
 
-## This Session — Dungeon Cell Audit
-- Rendered `docs/art/concepts/dungeon-cell-grid-review-v1.svg` through Inkscape at 2× (26px logical cells).
-- Audit result: `NEEDS_REVISION`. Surface atlas panels are illustrative vignettes; reducing them to a logical cell produces miniature scenes rather than modular room terrain.
-- Sorcery marker v2 is `SUPERSEDED`; marker v3 is `CONCEPT` and uses one open ink ring with a muted-violet flame.
-- Created a six-surface modular grammar concept sheet. It is a design study, not a production tileset.
-- Local `npm test`, `npm run build:web`, and browser/runtime smoke: `NOT_RUN`. Inkscape render and XML parsing: `PASS`.
-- Fog alpha over mixed floor/wall surfaces, actual renderer compatibility, gameplay, and mobile QA remain unverified.
-- Next safe action: inspect each modular study as a 26px crop and repeat joins; revise the seam grammar, then review fog strength.
+## This Session — Modular Surface Cell Review
+- Cropped the six square studies from modular grammar v2 to 26×26 logical cells, enlarged 4× for visual review, and checked color plus grayscale.
+- Floor A/B, horizontal/vertical corridor, wall segment, and inner-corner silhouettes read at the target scale; floor-to-corridor transitions also read.
+- Three repeated wall segments show a noticeable repeated stone rhythm. The tile family still needs wall ends, exterior corners, T-junctions, and broader floor variation.
+- Added `docs/art/concepts/dungeon-modular-surface-scale-review-v2-20261006.jpg` as visual evidence; this is a scale simulation, not runtime or production-export QA.
+- Sorcery marker v2 remains `SUPERSEDED`; v3 remains `CONCEPT`. Atlas-crop audit remains `NEEDS_REVISION`.
+- Local `npm test`, `npm run build:web`, browser/runtime smoke: `NOT_RUN`. Crop, grayscale, and adjacency visual review: `PASS` for the listed concept checks.
+- Fog over mixed floor/wall, actual renderer, gameplay, and mobile behavior remain unverified.
+- Next safe action: add the missing wall-transition pieces and floor variants, rerun the same 26px crop review, then assess fog strength.
 
 ## Asset State
 - Global art direction: `APPROVED`.
@@ -125,6 +126,8 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/dungeon-cell-grid-crop-audit-render-v1-20261006.jpg`
 - `docs/art/concepts/dungeon-sorcery-mark-concept-v3-20261006.png`
 - `docs/art/concepts/dungeon-modular-surface-grammar-concept-v1-20261006.jpg`
+- `docs/art/concepts/dungeon-modular-surface-grammar-concept-v2-20261006.jpg`
+- `docs/art/concepts/dungeon-modular-surface-scale-review-v2-20261006.jpg`
 - `docs/art/concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`
 - `docs/art/concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg`
 - `docs/art/concepts/codex-secondary-tabs-20261006.jpg`
@@ -133,13 +136,13 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/lu-xun-meng-huo-boss-concept-20261006.jpg`
 
 ## Verification
-- Latest confirmed branch CI: run #86 on parent `40039ec072a979a13ed9711027d1c681b3813b28`, `success`.
-- Inkscape render of the exact-cell atlas-crop audit: `PASS`; SVG XML parsing: `PASS`.
-- No gameplay code changed. `npm test`, `npm run build:web`, browser smoke, and production-screen visual QA: `NOT_RUN`.
+- Latest confirmed branch CI: run #88 on parent `ce12be9c2350733823abd031b101cb8916ce5b3b`, `success`.
+- Crop, grayscale, floor/corridor join, and repeated-wall review for the v2 concept: `PASS` at the visual-study level; wall rhythm still needs variants.
+- No gameplay code changed. `npm test`, `npm run build:web`, browser/runtime smoke, and production-screen/mobile QA: `NOT_RUN`.
 
 ## NEXT_SAFE_ACTION
-1. Crop the six modular surface grammar studies to true 26px cells and review grayscale legibility.
-2. Repeat edge/corner/corridor samples to check seams; revise floor and wall pieces where joins break.
+1. Add wall endpoints, exterior corners, and T-junction pieces to the modular grammar; keep floor A/B values consistent.
+2. Crop the expanded set to 26px and recheck grayscale legibility and repeated joins.
 3. Review fog alpha over both light floor and dark wall samples.
 4. Keep concept assets separate from production exports; runtime/canvas integration remains outside this design review.
 
