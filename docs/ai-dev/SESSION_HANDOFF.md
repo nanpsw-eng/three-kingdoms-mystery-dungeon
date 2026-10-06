@@ -5,17 +5,17 @@
 - Current product source: `main` at `82b38b4bf877a015e99f53ae551bfedb45bbc790`
 - Latest Claude work: PR #10 merged; Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`
 - Art/design branch: `art/ink-graphic-novel-v1`
-- Current art HEAD before this handoff update: `939a16eaa245475769396f40f804ea57418d013e`
+- Current art HEAD before this handoff update: `8af3ebca32a1d7f0f5256d2599480d1938bf7129`
 - Open PR: none
-- Latest confirmed art CI: commit `939a16eaa245475769396f40f804ea57418d013e` passed CI run #90. This session adds a fog-overlay study only; local npm test/build/browser smoke are `NOT_RUN`.
+- Latest confirmed art CI: commit `8af3ebca32a1d7f0f5256d2599480d1938bf7129` passed CI run #91. This session adds design references only; local npm test/build/browser smoke are `NOT_RUN`.
 - Art direction and Product Baseline remain unchanged.
 
 ## Current Art Phase
 - `PHASE C — Dungeon Graphic Set` is active.
 - Phase B ruler identity language is `APPROVED` as a design reference; individual character images remain `CONCEPT`.
-- Last confirmed done: surface/object vignette atlases, revised trap/sorcery marks including v3, exact-cell crop audit, and modular surface grammar v3 with expanded transition studies plus a 26px color/grayscale scale review.
-- First incomplete task: warm and simplify the explored floor pair, then compose exact mixed-cell adjacency studies for seams and edge continuity.
-- Visual QA: atlas-crop audit remains `NEEDS_REVISION` because its source panels are vignettes. Grammar v3 adds floor A/B, H/V corridors, a wall end-cap, exterior L-corner, and T-junction. At 26px the transition silhouettes read in color/grayscale; floor texture still feels cool/muddy and generated cells are not seamless runtime tiles. A separate fog study recommends a localized 28% charcoal wash with feathered edges over both floor and wall; runtime alpha remains unverified. The family remains `CONCEPT`.
+- Last confirmed done: surface/object vignette atlases, revised trap/sorcery marks including v3, modular surface grammar v3, localized 28% fog-opacity concept study, and a warm floor plus authored 26×26 exact-cell SVG study with four corner rotations.
+- First incomplete task: add an explicit corridor and doorway module to the exact-cell SVG, then place the 28% fog wash over the composed room layout and inspect marker contrast.
+- Visual QA: atlas-crop audit remains `NEEDS_REVISION` because its source panels are vignettes. The generated v4 floor study is warmer and quieter; 26px crops retain paving seams in color/grayscale, while standalone generated panels remain unsuitable for seam claims. The authored exact-cell SVG uses canonical #E8DDC4, sparse seams, four oriented corner joins, H/V walls, end cap, T-junction, and 28% fog study. Its composed wall edges align in the authored map; actual renderer integration and Canvas scaling remain unverified. All are `CONCEPT`.
 - Blocker: map renderer remains procedural/pixelated; browser/canvas, mobile, and gameplay checks are unverified.
 - Latest confirmed CI before this handoff: commit `38da2473089a227ef8882c83f0429144a36246af` passed run #89. For this design-only change, local `npm test`, `npm run build:web`, and browser/runtime smoke are `NOT_RUN`.
 
@@ -135,6 +135,10 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/dungeon-modular-surface-scale-review-v3-20261006.jpg`
 - `docs/art/concepts/dungeon-fog-alpha-study-v1-20261006.jpg`
 - `docs/art/concepts/dungeon-fog-alpha-study-v1.svg`
+- `docs/art/concepts/dungeon-floor-surface-concept-v4-20261006.jpg`
+- `docs/art/concepts/dungeon-modular-exact-cell-study-v1-20261006.svg`
+- `docs/art/concepts/dungeon-modular-exact-cell-study-v1-20261006.jpg`
+- `docs/art/concepts/dungeon-exact-cell-scale-review-v1-20261006.jpg`
 - `docs/art/concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`
 - `docs/art/concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg`
 - `docs/art/concepts/codex-secondary-tabs-20261006.jpg`
@@ -143,7 +147,7 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/lu-xun-meng-huo-boss-concept-20261006.jpg`
 
 ## Verification
-- Latest confirmed branch CI before this design commit: run #90 on parent `939a16eaa245475769396f40f804ea57418d013e`, `success`.
+- Latest confirmed branch CI before this design commit: run #91 on parent `8af3ebca32a1d7f0f5256d2599480d1938bf7129`, `success`.
 - V3 crop and grayscale scale review: `PASS` for distinguishing endpoint, L-corner, and T-junction silhouettes at the study scale; seamless edge joins and overlay alpha are `NOT_VERIFIED`.
 - No gameplay code changed. `npm test`, `npm run build:web`, browser/runtime smoke, and production-screen/mobile QA: `NOT_RUN`.
 
