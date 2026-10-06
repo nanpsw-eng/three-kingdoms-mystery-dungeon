@@ -12,7 +12,7 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 | Liu Bei portrait / full-body / exploration token | `MASTER_REQUIRED` | Visual Bible v1 ruler master | Create and approve one consistent master set |
 | Cao Cao portrait / full-body / exploration token | `MASTER_REQUIRED` | Visual Bible v1 ruler master | Create and approve one consistent master set |
 | Sun Quan portrait / full-body / exploration token | `MASTER_REQUIRED` | Visual Bible v1 ruler master | Create and approve one consistent master set |
-| Dungeon floor/wall/corridor/fog/object illustrations | `MASTER_REQUIRED` | Phase C visual language | Create after Phase A/B |
+| Dungeon floor/wall/corridor/fog/object illustrations | `MASTER_REQUIRED` | Phase C concept atlases now exist; individual production tiles/crops and runtime checks do not | Refine trap/sorcery distinction and environmental overlay, then create production masters after renderer contract |
 | Item silhouette set | `MASTER_REQUIRED` | Phase D item language | Create after Phase C |
 | Existing procedural pixel portraits/sprites/map tiles | `SUPERSEDED` | Legacy main visual language; retained as fallback | Keep functional until replacement coverage is verified |
 
@@ -64,3 +64,7 @@ The repository's current web client still uses the legacy dark/gold CSS theme an
 | Sun Quan exploration token concept v2 | `CONCEPT` | `concepts/sun-quan-exploration-token-concept-v2-20261006.png`; command tablet separates from robe silhouette | Validate width/readability in actual map renderer before integration |
 | Ruler master scale-review board | `CONCEPT` | `concepts/ruler-scale-review-revised-20261006.jpg`; simulated 40/48px busts and 24/28px tokens on hanji/fog plus monochrome silhouettes | Design-level review only; actual page/canvas QA remains open |
 | Ruler production portrait/token exports | `MASTER_REQUIRED` | Current image files are downscaled concept references; runtime loaders remain pixelizing/procedural | Prepare production masters only after actual rendering contract is available |
+
+| Dungeon surface atlas v1 | `CONCEPT` | `concepts/dungeon-surfaces-concept-v1-20261006.jpg`; explored floor, ink wall, corridor, fog, stairs, and gate | Keep grid edges consistent; create clean individual tile masters after scale QA |
+| Dungeon object and marker atlas v1 | `CONCEPT` | `concepts/dungeon-objects-concept-v1-20261006.jpg`; chest, pot, trap, sorcery, player, Yellow Turban scout, environment wash, food/medicine | Trap and sorcery forms need stronger silhouette separation; environmental wash should preserve base tile contrast |
+| Dungeon 26px scale review v1 | `CONCEPT` | `concepts/dungeon-set-scale-review-20261006.jpg`; source cells reduced to 26px and enlarged for inspection | Test mixed-cell seams, fog boundary, and markers in a composed map before advancing status |

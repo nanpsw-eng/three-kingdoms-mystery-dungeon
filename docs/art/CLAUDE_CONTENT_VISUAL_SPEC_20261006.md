@@ -244,3 +244,19 @@ Review board: `concepts/ruler-scale-review-revised-20261006.jpg`.
 - Revised monochrome silhouettes now separate Liu Bei's long-beard/open-sleeve mass, Cao Cao's compact sword-led shape, and Sun Quan's upright tablet-led pose. These are design-board simulations, not live map-canvas captures.
 - The Ruler Master visual identity system is `APPROVED` as a design reference. Individual bust/full-body/token images remain `CONCEPT`; downscaled references are not production exports.
 - Runtime portrait review, actual map-cell and fog behavior, locked-state QA, and browser/mobile clipping checks remain `NOT_RUN`. The current portrait loader pixelizes art and the current map renderer uses procedural 16×16 figures; no generated concept is approved for those paths yet.
+
+
+## 22. Phase C Dungeon Graphic Concept Set v1
+
+Concept atlases:
+- `concepts/dungeon-surfaces-concept-v1-20261006.jpg`: explored hanji floor, ink-outlined stone wall, directional corridor, soft charcoal fog, ancient stairs, and timber gate.
+- `concepts/dungeon-objects-concept-v1-20261006.jpg`: chest, food/storage pot, floor trap, sorcery circle, player marker, Yellow Turban scout, neutral environment-wash marker, and pouch/medicine find.
+- `concepts/dungeon-set-scale-review-20261006.jpg`: each source cell reduced to a 26px square for an initial readability check, then enlarged for review.
+
+Initial design review:
+- Floor, wall, corridor, fog, stairs, and gate have distinct value and structure. Fog is a layered ink wash, not a flat black tile.
+- Chest and pot have different silhouettes; the scout's ochre headband and separated spear read apart from the warm-ivory player marker.
+- Trap and sorcery currently share a circular stone base. Their current radial marks versus violet seal cues help, but silhouette-only separation is too weak; revise the trap into a plate/line mechanism and simplify sorcery marks into a more open brush seal.
+- The environment wash is intentionally abstract and does not name or create a gameplay modifier. Keep overlays light enough to preserve the explored tile underneath until mapped to existing content ids.
+- All three references remain `CONCEPT`. The reduction board is a cropped atlas simulation, not a live map or canvas capture. Tile collisions, room/corridor seams, fog adjacency, hit areas, mobile behavior, and gameplay are `NOT_RUN`.
+- Do not change dungeon topology, turn rules, content data, or Canvas interaction. Keep the procedural renderer as fallback; current implementation compatibility remains unverified.

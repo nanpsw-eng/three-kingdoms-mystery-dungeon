@@ -5,19 +5,18 @@
 - Current product source: `main` at `82b38b4bf877a015e99f53ae551bfedb45bbc790`
 - Latest Claude work: PR #10 merged; Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`
 - Art/design branch: `art/ink-graphic-novel-v1`
-- Art HEAD before this handoff commit: `e25084ae370cdd58f0cab65f9bdf978f39b790b1`
+- Art HEAD before this handoff commit: `6c5940add1f350b4129e93c34a56a5b3e656312b`
 - Open PR: none
-- Latest art CI: commit `e25084ae370cdd58f0cab65f9bdf978f39b790b1` passed CI run #80; commits `e8f20295e458e09937d1ad2d9cf88fbaaff67ac8` and `4887510dd4c4633a5a54897d61323cff40596dfa` also passed runs #79 and #78. This next change is documentation/concept-only; local npm test/build/smoke are `NOT_RUN`.
+- Latest art CI: commit `6c5940add1f350b4129e93c34a56a5b3e656312b` passed CI run #81; prior design-only commits through #80 passed. This next change is documentation/concept-only; local npm test/build/smoke are `NOT_RUN`.
 - Art direction and Product Baseline remain unchanged.
 
 ## Current Art Phase
-- `PHASE C — Dungeon Graphic Set` is active for design work.
-- Phase B ruler visual identity system is `APPROVED` as an identity reference after small-scale design-board review; individual image exports remain `CONCEPT`.
-- Phase A screen references are documented; runtime screen QA remains unverified.
-- Last confirmed done: individual bust, full-body, and exploration-token studies exist for all three rulers; Cao Cao and Sun Quan token v2 address the small-scale prop readability findings.
-- First incomplete task: define and create the Phase C dungeon graphic set (floor, wall, corridor, fog, stairs, chest, pot, trap, sorcery, player, enemy, environment modifier) without changing topology or interaction.
-- Blocker: current web renderer still uses pixelized portraits and procedural 16×16 map figures; generated references are not runtime-integrated.
-- Latest local test status: `npm test`, `npm run build:web`, and browser smoke are `NOT_RUN` (design/reference-only changes).
+- `PHASE C — Dungeon Graphic Set` is active.
+- Phase B ruler visual identity system is `APPROVED` as a design reference; individual generated images remain `CONCEPT`.
+- Last confirmed done: separate ruler bust/full-body/token references and a scale-review board; Cao Cao/Sun Quan token v2 respond to readability findings. Phase C surface and object atlases plus 26px reduction preview are recorded as concepts.
+- First incomplete task: revise the trap/sorcery silhouette difference and environmental wash strength, then produce a composed room/corridor/fog concept using the same tile language.
+- Blocker: renderer still uses procedural/pixelated graphics; actual tile seams, map canvas, mobile layout, and logic regression QA have not run.
+- Latest CI: commit `6c5940add1f350b4129e93c34a56a5b3e656312b` passed run #81. Current concept/doc changes have no code tests; local `npm test`, `npm run build:web`, browser smoke are `NOT_RUN`.
 
 ## Work Responsibility
 This Work owns visual design, concept art, asset registry, and visual QA. The user instructed that all design work continue here without a separate Codex work assignment. Keep the actual game visuals and functional behavior intact while creating design assets and specifications.
@@ -45,7 +44,7 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - Created an E7/E8 boss duo concept for Lu Xun and Meng Huo, emphasizing fan-led vertical vs shield-led broad silhouettes; added its reference, review notes, and registry entry.
 - Refined the ruler comparison into a cleaner v2 master-reference concept and aligned Sima Yi concept v2 to its hanji/ink treatment.
 - Created separate Liu Bei, Cao Cao, and Sun Quan concept sheets, each with bust, full-body, and exploration-token views.
-- Added dedicated square bust references for all three rulers; revised Sun Quan’s bust to read as a mature young ruler.\n- Created separate ruler exploration-token studies; revised Liu Bei v2 to keep both boots within the silhouette.\n- Created individual full-body concept references for Liu Bei, Cao Cao, and Sun Quan; all include complete feet and broad silhouette/palette cues.\n- Built the ruler scale-review board with 40/48px bust and 24/28px token simulations on hanji/fog and grayscale silhouettes.\n- Revised Cao Cao and Sun Quan token concepts to clarify sword and command-tablet silhouettes; v1 studies are superseded for current review.
+- Added dedicated square bust references for all three rulers; revised Sun Quan’s bust to read as a mature young ruler.\n- Created separate ruler exploration-token studies; revised Liu Bei v2 to keep both boots within the silhouette.\n- Created individual full-body concept references for Liu Bei, Cao Cao, and Sun Quan; all include complete feet and broad silhouette/palette cues.\n- Built the ruler scale-review board with 40/48px bust and 24/28px token simulations on hanji/fog and grayscale silhouettes.\n- Created Phase C surface and object atlases, then reduced 14 crops to 26px for initial tile/object readability review.\n- Revised Cao Cao and Sun Quan token concepts to clarify sword and command-tablet silhouettes; v1 studies are superseded for current review.
 
 ## Asset State
 - Global art direction: `APPROVED`.
@@ -84,7 +83,7 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/sun-quan-master-concept-v1-20261006.jpg`
 - `docs/art/concepts/liu-bei-bust-concept-v1-20261006.jpg`
 - `docs/art/concepts/cao-cao-bust-concept-v1-20261006.jpg`
-- `docs/art/concepts/sun-quan-bust-concept-v2-20261006.jpg`\n- `docs/art/concepts/liu-bei-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/cao-cao-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/sun-quan-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/liu-bei-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/cao-cao-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/sun-quan-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/cao-cao-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/sun-quan-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/ruler-scale-review-revised-20261006.jpg`
+- `docs/art/concepts/sun-quan-bust-concept-v2-20261006.jpg`\n- `docs/art/concepts/liu-bei-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/cao-cao-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/sun-quan-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/liu-bei-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/cao-cao-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/sun-quan-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/cao-cao-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/sun-quan-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/ruler-scale-review-revised-20261006.jpg`\n- `docs/art/concepts/dungeon-surfaces-concept-v1-20261006.jpg`\n- `docs/art/concepts/dungeon-objects-concept-v1-20261006.jpg`\n- `docs/art/concepts/dungeon-set-scale-review-20261006.jpg`
 - `docs/art/concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg`
 - `docs/art/concepts/codex-secondary-tabs-20261006.jpg`
 - `docs/art/concepts/story-scene-ui-20261006.jpg`
@@ -98,10 +97,10 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - Concept images were visually inspected; remaining design gaps are recorded above.
 
 ## NEXT_SAFE_ACTION
-1. Design the Phase C dungeon graphic set with one consistent hanji/ink vocabulary: explored floor, wall, corridor, fog, stairs, chest, pot, trap, sorcery, player/enemy markers, and environment modifier.
-2. Keep each object distinguishable by silhouette at current tile size; preserve topology, map data, Canvas interaction, and procedural fallback.
-3. Register each graphic as `CONCEPT` first, then compare the set on bright floor and ink fog before advancing statuses.
-4. Keep runtime renderer compatibility and mobile smoke as documented implementation/QA gaps.
+1. Revise trap vs sorcery shape at 26px and reduce the environmental-wash opacity so it cannot obscure the explored base tile.
+2. Compose the revised assets into a room/corridor sample with explored/unexplored edges and one stair/gate transition; keep topology illustrative only.
+3. Confirm mobile-scale distinctions on hanji and ink fog; leave all atlases at `CONCEPT` until live implementation compatibility is reviewed.
+4. Create individual tile/object production masters after this design review; retain the procedural renderer fallback.
 
 ## HUMAN GATE
 - Reversible design exploration and reference/spec updates on the art branch: no additional gate.
