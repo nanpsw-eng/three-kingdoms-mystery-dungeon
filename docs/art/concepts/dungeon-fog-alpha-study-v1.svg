@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+<defs>
+  <filter id="wash" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="12"/></filter>
+  <pattern id="paper" width="26" height="26" patternUnits="userSpaceOnUse"><rect width="26" height="26" fill="#E8DDC4"/><path d="M1 8L11 7M16 19L25 18M7 24L10 23" stroke="#756C63" stroke-opacity=".28" stroke-width="1"/><circle cx="20" cy="5" r="1" fill="#756C63" fill-opacity=".32"/></pattern>
+  <pattern id="stone" width="48" height="30" patternUnits="userSpaceOnUse"><rect width="48" height="30" fill="#514B45"/><path d="M0 1H48M0 29H48M24 1V15M8 15H40M8 15V29M40 15V29" fill="none" stroke="#171513" stroke-width="3"/><path d="M2 4H22M27 18H37" stroke="#77838D" stroke-opacity=".35" stroke-width="2"/></pattern>
+</defs>
+<rect width="1200" height="720" fill="#E8DDC4"/>
+<text x="32" y="44" font-family="sans-serif" font-size="26" font-weight="700" fill="#171513">DUNGEON FOG — OPACITY STUDY</text>
+<text x="32" y="72" font-family="sans-serif" font-size="15" fill="#756C63">Same charcoal ink wash over two explored surfaces. Soft edge, no black fill. Concept overlay only.</text>
+<g font-family="sans-serif" fill="#171513" font-size="18" font-weight="700" text-anchor="middle">
+ <text x="310" y="116">18% INK</text><text x="600" y="116">28% INK</text><text x="890" y="116">38% INK</text>
+</g>
+<g font-family="sans-serif" fill="#756C63" font-size="16" font-weight="700"><text x="32" y="275">HANJI FLOOR</text><text x="32" y="525">STONE WALL</text></g>
+<g id="floor">
+ <g transform="translate(150 135)">171513" opacity="(?:.18|.28|.38)"/>url(#paper)"/><g fill="#171513" opacity=".18" filter="url(#wash)"><path d="M34 106C42 46 103 49 126 81C159 32 220 60 224 107C248 150 196 165 151 145C99 177 47 152 34 106Z"/></g><rect width="270" height="190" rx="5" fill="#171513" opacity=".18"/><rect x="12" y="12" width="246" height="166" rx="4" fill="none" stroke="#756C63" opacity=".25"/></g>
+ <g transform="translate(460 135)"><rect width="270" height="190" rx="5" fill="url(#paper)"/><g fill="#171513" opacity=".28" filter="url(#wash)"><path d="M34 106C42 46 103 49 126 81C159 32 220 60 224 107C248 150 196 165 151 145C99 177 47 152 34 106Z"/></g><rect width="270" height="190" rx="5" fill="#171513" opacity=".28"/><rect x="12" y="12" width="246" height="166" rx="4" fill="none" stroke="#756C63" opacity=".25"/></g>
+ <g transform="translate(770 135)"><rect width="270" height="190" rx="5" fill="url(#paper)"/><g fill="#171513" opacity=".38" filter="url(#wash)"><path d="M34 106C42 46 103 49 126 81C159 32 220 60 224 107C248 150 196 165 151 145C99 177 47 152 34 106Z"/></g><rect width="270" height="190" rx="5" fill="#171513" opacity=".38"/><rect x="12" y="12" width="246" height="166" rx="4" fill="none" stroke="#756C63" opacity=".25"/></g>
+</g>
+<g id="walls">
+ <g transform="translate(150 375)"><rect width="270" height="190" rx="5" fill="url(#paper)"/><rect y="54" width="270" height="82" fill="url(#stone)"/><g fill="#171513" opacity=".18" filter="url(#wash)"><path d="M34 106C42 46 103 49 126 81C159 32 220 60 224 107C248 150 196 165 151 145C99 177 47 152 34 106Z"/></g><rect width="270" height="190" rx="5" fill="#171513" opacity=".18"/></g>
+ <g transform="translate(460 375)"><rect width="270" height="190" rx="5" fill="url(#paper)"/><rect y="54" width="270" height="82" fill="url(#stone)"/><g fill="#171513" opacity=".28" filter="url(#wash)"><path d="M34 106C42 46 103 49 126 81C159 32 220 60 224 107C248 150 196 165 151 145C99 177 47 152 34 106Z"/></g><rect width="270" height="190" rx="5" fill="#171513" opacity=".28"/></g>
+ <g transform="translate(770 375)"><rect width="270" height="190" rx="5" fill="url(#paper)"/><rect y="54" width="270" height="82" fill="url(#stone)"/><g fill="#171513" opacity=".38" filter="url(#wash)"><path d="M34 106C42 46 103 49 126 81C159 32 220 60 224 107C248 150 196 165 151 145C99 177 47 152 34 106Z"/></g><rect width="270" height="190" rx="5" fill="#171513" opacity=".38"/></g>
+</g>
+<text x="32" y="635" font-family="sans-serif" font-size="15" fill="#756C63">Study compares opacity against canonical #E8DDC4 floor and charcoal stone wall. It does not reproduce runtime Canvas blending.</text>
+</svg>

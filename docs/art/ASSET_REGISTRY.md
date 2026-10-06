@@ -40,6 +40,7 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 | Dungeon modular surface grammar v3 | `CONCEPT` | `concepts/dungeon-modular-surface-grammar-concept-v3-20261006.jpg`; floor A/B, H/V corridors, wall endpoint, exterior L-corner, T-junction, and split fog study | Warm/simplify floor, define translucent fog overlay, and verify mixed-cell joins before any production export |
 | Dungeon modular surface scale review v2 | `SUPERSEDED` | `concepts/dungeon-modular-surface-scale-review-v2-20261006.jpg`; 26px color/grayscale crops for the initial six-piece grammar | Retain for history; v3 is current |
 | Dungeon modular surface scale review v3 | `CONCEPT` | `concepts/dungeon-modular-surface-scale-review-v3-20261006.jpg`; eight exact-study crops reduced to 26px then enlarged 5× in color and grayscale | Design-scale silhouette review only; seamless adjacency, renderer alpha, and runtime use remain unverified |
+| Dungeon fog opacity study v1 | `CONCEPT` | `concepts/dungeon-fog-alpha-study-v1.jpg` + editable `concepts/dungeon-fog-alpha-study-v1.svg`; localized charcoal wash compared at 18/28/38% over hanji floor and stone wall | Use 28% as design starting point with feathered edges and no solid full-cell fill; verify with actual renderer before implementation approval |
 
 ## Current Implementation State
 
