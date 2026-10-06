@@ -91,3 +91,5 @@ The repository's current web client still uses the legacy dark/gold CSS theme an
 | Dungeon room/corridor composition v1 | `CONCEPT` | `concepts/dungeon-room-corridor-composition-v1-20261006.jpg`; shows explored room, corridor, second room/fog and current marker set | Reference only; wall seams, marker footprints and exact corridor width remain unapproved |
 
 | Dungeon exact-cell atlas-crop audit v1 | `NEEDS_REVISION` | `concepts/dungeon-cell-grid-review-v1.svg`; Inkscape render shows vignette atlas panels reduced into logical cells | Replace the vignette crops with modular tile masters; review wall/floor seams and fog strength |
+
+| Dungeon core object-marker set v1 | `CONCEPT` | `concepts/dungeon-object-markers-v1.svg` and color/grayscale renders; stair, crossed-blade trap, open-ring sorcery, helmet/spear enemy, and handled pot, checked at 26px with localized 28% fog sample | Keep as visual vocabulary; later compare against renderer and topology screenshots before implementation readiness |

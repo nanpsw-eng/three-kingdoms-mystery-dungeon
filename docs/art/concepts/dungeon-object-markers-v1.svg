@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1480" height="1080" viewBox="0 0 1480 1080">
+<defs>
+ <pattern id="hanji" width="26" height="26" patternUnits="userSpaceOnUse"><rect width="26" height="26" fill="#E8DDC4"/><path d="M3 5l4-.5M17 7l2-.3M10 21l3-.4M21 16l2-.3" stroke="#756C63" stroke-opacity=".15" stroke-width=".45"/></pattern>
+ <filter id="fog-soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.8"/></filter>
+ <g id="floor"><rect width="26" height="26" fill="url(#hanji)"/></g>
+ <g id="fog"><path d="M1 15C2 9 6 8 9 9C11 3 17 5 18 9C24 8 26 14 23 17C22 23 16 23 13 20C8 24 2 21 1 15Z" fill="#171513" opacity=".28" filter="url(#fog-soft)"/></g>
+ <g id="stairs"><use xlink:href="#floor"/><path d="M3 7H10V11H15V15H20V19H23V22H3Z" fill="#756C63" stroke="#171513" stroke-width="1.15" stroke-linejoin="round"/><path d="M3 7H10M10 11H15M15 15H20M20 19H23" fill="none" stroke="#E8DDC4" stroke-opacity=".7" stroke-width=".85"/><path d="M5 21H21" stroke="#171513" stroke-width="1"/></g>
+ <g id="trap"><use xlink:href="#floor"/><path d="M13 3L23 13L13 23L3 13Z" fill="#756C63" fill-opacity=".55" stroke="#171513" stroke-width="1.1"/><path d="M7 7L19 19M19 7L7 19" stroke="#171513" stroke-width="1.65" stroke-linecap="round"/><circle cx="13" cy="13" r="2.1" fill="#A64032" stroke="#E8DDC4" stroke-width=".7"/></g>
+ <g id="sorcery"><use xlink:href="#floor"/><path d="M19.9 10.1A8 8 0 1 1 16 5.7" fill="none" stroke="#756C63" stroke-width="1.35" stroke-linecap="round"/><path d="M17.2 4C17.3 7.2 22.3 7.7 19.8 11.2C18.7 12.7 16.8 12.5 16.2 10.8C15.6 9 17.6 7.2 17.2 4Z" fill="#735E76" stroke="#171513" stroke-width=".75"/><circle cx="10" cy="15.8" r="1" fill="#735E76"/></g>
+ <g id="enemy"><use xlink:href="#floor"/><circle cx="13" cy="13" r="9.1" fill="#514B45" stroke="#171513" stroke-width="1.1"/><path d="M9.1 19V15.5Q9.3 12.2 13 12.2Q16.7 12.2 16.9 15.5V19Z" fill="#E8DDC4"/><path d="M9 11.8Q8 7 13 6.3Q18 7 17 11.8L15.5 10.6H10.5Z" fill="#171513"/><path d="M20.2 5L18.1 21" stroke="#E8DDC4" stroke-width=".75"/><path d="M19.6 4.3L20.8 6.1L19.1 6.1Z" fill="#A64032"/></g>
+ <g id="pot"><use xlink:href="#floor"/><path d="M10 5H16V8Q16.5 9 18 10.5Q20.5 13 19 18.8Q18.4 21 13 22Q7.6 21 7 18.8Q5.5 13 8 10.5Q9.5 9 10 8Z" fill="#756C63" stroke="#171513" stroke-width="1.15"/><path d="M9.3 5H16.7V7.4H9.3Z" fill="#514B45" stroke="#171513" stroke-width=".9"/><path d="M7.5 12.2Q4.1 11.5 5.5 15.4Q6 16.4 7.3 16.2M18.7 12.2Q22.1 11.5 20.5 15.4Q20 16.4 18.7 16.2" fill="none" stroke="#171513" stroke-width="1"/><path d="M9.2 18.1Q13 19.2 16.8 18.1" fill="none" stroke="#E8DDC4" stroke-opacity=".5" stroke-width=".7"/></g>
+</defs>
+<rect width="1480" height="1080" fill="#F3EBD9"/>
+<text x="48" y="55" font-family="sans-serif" font-size="31" font-weight="700" fill="#171513">DUNGEON OBJECT MARKERS — SILHOUETTE STUDY</text>
+<text x="48" y="88" font-family="sans-serif" font-size="17" fill="#756C63">Ink graphic novel × Three Kingdoms lianhuanhua · canonical hanji / ink / restrained vermilion · design concept</text>
+<g transform="translate(90 142) scale(5)"><use xlink:href="#stairs"/></g>
+<g transform="translate(370 142) scale(5)"><use xlink:href="#trap"/></g>
+<g transform="translate(650 142) scale(5)"><use xlink:href="#sorcery"/></g>
+<g transform="translate(930 142) scale(5)"><use xlink:href="#enemy"/></g>
+<g transform="translate(1210 142) scale(5)"><use xlink:href="#pot"/></g>
+<g font-family="sans-serif" text-anchor="middle" font-size="19" font-weight="700" fill="#171513"><text x="155" y="300">STAIR</text><text x="435" y="300">TRAP</text><text x="715" y="300">SORCERY</text><text x="995" y="300">ENEMY</text><text x="1275" y="300">POT</text></g>
+<path d="M48 340H1432" stroke="#756C63" stroke-opacity=".45"/>
+<text x="48" y="384" font-family="sans-serif" font-size="23" font-weight="700" fill="#171513">26px LOGICAL CELL — COLOR / GRAYSCALE READ</text>
+<g transform="translate(220 422) scale(5)"><use xlink:href="#stairs"/></g>
+<g transform="translate(445 422) scale(5)"><use xlink:href="#trap"/></g>
+<g transform="translate(670 422) scale(5)"><use xlink:href="#sorcery"/></g>
+<g transform="translate(895 422) scale(5)"><use xlink:href="#enemy"/></g>
+<g transform="translate(1120 422) scale(5)"><use xlink:href="#pot"/></g>
+<g font-family="sans-serif" text-anchor="middle" font-size="16" fill="#756C63"><text x="285" y="570">STEP PROFILE</text><text x="510" y="570">CROSSED BLADES</text><text x="735" y="570">OPEN RING + FLAME</text><text x="960" y="570">HELM + SPEAR</text><text x="1185" y="570">NECK + HANDLES</text></g>
+<path d="M48 620H1432" stroke="#756C63" stroke-opacity=".45"/>
+<text x="48" y="662" font-family="sans-serif" font-size="23" font-weight="700" fill="#171513">28% LOCAL FOG — OBJECT SILHOUETTE CHECK</text>
+<g transform="translate(220 700) scale(5)"><use xlink:href="#stairs"/><use xlink:href="#fog"/></g>
+<g transform="translate(445 700) scale(5)"><use xlink:href="#trap"/><use xlink:href="#fog"/></g>
+<g transform="translate(670 700) scale(5)"><use xlink:href="#sorcery"/><use xlink:href="#fog"/></g>
+<g transform="translate(895 700) scale(5)"><use xlink:href="#enemy"/><use xlink:href="#fog"/></g>
+<g transform="translate(1120 700) scale(5)"><use xlink:href="#pot"/><use xlink:href="#fog"/></g>
+<g font-family="sans-serif" text-anchor="middle" font-size="16" fill="#756C63"><text x="285" y="848">STAIR</text><text x="510" y="848">TRAP</text><text x="735" y="848">SORCERY</text><text x="960" y="848">ENEMY</text><text x="1185" y="848">POT</text></g>
+<text x="48" y="962" font-family="sans-serif" font-size="17" fill="#756C63">At one logical cell: distinct silhouettes carry meaning; color is only a secondary cue. Trap alone uses vermilion as a restrained danger mark.</text>
+<text x="48" y="993" font-family="sans-serif" font-size="17" fill="#756C63">The feathered 28% charcoal sample softens detail without swallowing the stair edge, cross-trap, ring/flame, helmet/spear, or pot handles.</text>
+<text x="48" y="1024" font-family="sans-serif" font-size="17" fill="#756C63">Authored vector design concept; renderer alpha, map integration, and production export remain unverified.</text>
+</svg>

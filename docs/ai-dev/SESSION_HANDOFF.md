@@ -5,19 +5,19 @@
 - Current product source: `main` at `82b38b4bf877a015e99f53ae551bfedb45bbc790`
 - Latest Claude work: PR #10 merged; Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`
 - Art/design branch: `art/ink-graphic-novel-v1`
-- Current art HEAD before this handoff update: `7efbaf10b28a5ce934658168d1d62804473c186b`
+- Current art HEAD before this handoff update: `0b02b5715b2966ed29024ac4b40164876d8a71fd`
 - Open PR: none
-- Latest confirmed art CI: commit `7efbaf10b28a5ce934658168d1d62804473c186b` passed CI run #96. This session adds design references only; local npm test/build/browser smoke are `NOT_RUN`.
+- Latest confirmed art CI: commit `0b02b5715b2966ed29024ac4b40164876d8a71fd` passed CI run #97. This session adds design references only; local npm test/build/browser smoke are `NOT_RUN`.
 - Art direction and Product Baseline remain unchanged.
 
 ## Current Art Phase
 - `PHASE C — Dungeon Graphic Set` is active.
 - Phase B ruler identity language is `APPROVED` as a design reference; individual character images remain `CONCEPT`.
-- Last confirmed done: surface/object vignette atlases, revised trap/sorcery marks including v3, modular surface grammar v3, localized 28% fog-opacity concept study, warm floor v4, and an authored 26×26 exact-cell SVG study with four corner rotations.
+- Last confirmed done: surface/object vignette atlases, revised trap/sorcery marks including v3, modular surface grammar v3, localized 28% fog-opacity concept study, warm floor v4, exact-cell doorway/corridor study, and core dungeon object-marker concept set.
 - First incomplete task: extend the 26px dungeon marker study with stair, trap, sorcery, enemy, and pot silhouettes, then check each on explored hanji and under localized fog in color and grayscale.
 - Visual QA: atlas-crop audit remains `NEEDS_REVISION` because its source panels are vignettes. The authored exact-cell SVG now includes a one-cell doorway, three-cell horizontal corridor, vermilion player marker, chest marker, and feathered 28% fog over explored floor and corridor boundary. Color and grayscale scale simulations at 26px retain the wall pattern and marker silhouettes. The doorway reads, though it is intentionally understated. Source-authored joins and the composed layout only; actual renderer integration, Canvas scaling, and mobile/gameplay behavior remain unverified. All are `CONCEPT`.
 - Blocker: map renderer remains procedural/pixelated; browser/canvas, mobile, and gameplay checks are unverified.
-- Latest confirmed CI before this handoff: commit `7efbaf10b28a5ce934658168d1d62804473c186b` passed run #96. For this design-only change, local `npm test`, `npm run build:web`, and browser/runtime smoke are `NOT_RUN`.
+- Latest confirmed CI before this handoff: commit `0b02b5715b2966ed29024ac4b40164876d8a71fd` passed run #97. For this design-only change, local `npm test`, `npm run build:web`, and browser/runtime smoke are `NOT_RUN`.
 
 ## Work Responsibility
 This Work owns visual design, concept art, asset registry, and visual QA. The user instructed that all design work continue here without a separate Codex work assignment. Keep the actual game visuals and functional behavior intact while creating design assets and specifications.
@@ -78,6 +78,15 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - Local `npm test`, `npm run build:web`, and browser/runtime smoke: `NOT_RUN`. Visual composition and scale inspection: `PASS` for the described design checks.
 - Known gap: map renderer compatibility, 390×844 mobile clipping, touch targets, gameplay regression, and real fog compositing remain unverified.
 - Next safe action: extend the 26px object marker board with stair, trap, sorcery, enemy, and pot silhouettes; check their grayscale separation and localized-fog contrast.
+
+## This Session — Core Dungeon Marker Silhouette Board
+- Added authored vector silhouettes for stair, trap, sorcery formation, enemy, and pot at 26×26 logical-cell scale.
+- Stair uses a stepped stone profile; trap uses crossed blades with a small vermilion trigger; sorcery uses an open ink ring and one muted-violet flame; enemy uses a helmet/bust plus spear; pot uses a narrow neck and side handles.
+- Reviewed the icons in color, grayscale, and under a localized feathered 28% charcoal fog sample. Category silhouettes remain distinct at the simulated scale; accent color is secondary.
+- Added editable SVG and color/grayscale review renders. These remain `CONCEPT`; no runtime atlas or renderer integration was attempted.
+- Local `npm test`, `npm run build:web`, browser/runtime smoke: `NOT_RUN`. Visual 26px silhouette and fog study: `PASS` for concept readability.
+- Known gap: actual renderer mapping, texture/compositing behavior, mobile layout, and gameplay visibility remain unverified.
+- Next safe action: start Phase D with food, medicine, scroll, weapon, armor, treasure, and unidentified-item silhouettes using the same 26px color/grayscale review.
 
 ## Asset State
 - Global art direction: `APPROVED`.
@@ -151,6 +160,9 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/dungeon-modular-exact-cell-study-v1-grayscale-20261006.jpg`
 - `docs/art/concepts/dungeon-exact-cell-scale-review-v1-20261006.jpg` (superseded for current scale review)
 - `docs/art/concepts/dungeon-exact-cell-scale-review-v2-20261006.jpg`
+- `docs/art/concepts/dungeon-object-markers-v1.svg`
+- `docs/art/concepts/dungeon-object-markers-v1.jpg`
+- `docs/art/concepts/dungeon-object-markers-v1-grayscale.jpg`
 - `docs/art/concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`
 - `docs/art/concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg`
 - `docs/art/concepts/codex-secondary-tabs-20261006.jpg`
@@ -159,13 +171,14 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/lu-xun-meng-huo-boss-concept-20261006.jpg`
 
 ## Verification
-- Latest confirmed branch CI before this design commit: run #96 on parent `7efbaf10b28a5ce934658168d1d62804473c186b`, `success`.
+- Latest confirmed branch CI before this design commit: run #97 on parent `0b02b5715b2966ed29024ac4b40164876d8a71fd`, `success`.
 - Exact-cell color/grayscale scale review v2: `PASS` for floor/wall separation, doorway readability, player/chest silhouette distinction, and localized fog composition at the simulated scale; runtime mapping and actual overlay alpha are `NOT_VERIFIED`.
+- Core dungeon marker board: `PASS` for distinct 26px concepts in color/grayscale and localized fog simulation; actual renderer, map topology, mobile, and gameplay QA are `NOT_RUN`.
 - No gameplay code changed. `npm test`, `npm run build:web`, browser/runtime smoke, and production-screen/mobile QA: `NOT_RUN`.
 
 ## NEXT_SAFE_ACTION
-1. Add stair, trap, sorcery, enemy, and pot marker silhouettes to the exact-cell object study; review at 26px in color/grayscale and over localized fog.
-2. Keep all study files at `CONCEPT` until actual renderer contract and map screenshots can be checked.
+1. Start Phase D with food, medicine, scroll, weapon, armor, treasure, and an unidentified-item silhouette/state at 26px.
+2. Keep all concepts at `CONCEPT` until actual renderer integration can be checked.
 
 ## HUMAN GATE
 - Reversible design exploration and reference/spec updates on the art branch: no additional gate.
