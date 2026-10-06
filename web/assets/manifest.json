@@ -305,7 +305,8 @@
     "jia-xu",
     "taishi-ci",
     "zhou-yu",
-    "gan-ning"
+    "gan-ning",
+    "hua-tuo"
   ],
   "fullBodyIllustrations": [
     "liu-bei",
@@ -321,7 +322,8 @@
     "jia-xu",
     "taishi-ci",
     "zhou-yu",
-    "gan-ning"
+    "gan-ning",
+    "hua-tuo"
   ],
   "tokens": [
     "liu-bei",
@@ -337,6 +339,7 @@
     "jia-xu",
     "taishi-ci",
     "zhou-yu",
-    "gan-ning"
+    "gan-ning",
+    "hua-tuo"
   ]
 }
