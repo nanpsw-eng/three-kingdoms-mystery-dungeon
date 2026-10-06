@@ -14,7 +14,7 @@ const campaigns=await page.evaluate(async()=>{
 });
 const layouts=[];
 async function audit(screen){
-  await page.evaluate(()=>document.fonts.ready);
+  await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode().catch(()=>undefined)));});
   const m=await page.evaluate(()=>({width:innerWidth,scrollWidth:document.documentElement.scrollWidth,
     brokenImages:[...document.images].filter(i=>!i.complete||!i.naturalWidth).map(i=>i.src),
     smallTargets:[...document.querySelectorAll('button:not(:disabled)')].map(b=>({name:b.textContent,width:b.getBoundingClientRect().width,height:b.getBoundingClientRect().height})).filter(b=>b.width>0&&b.height>0&&(b.width<44||b.height<44))}));

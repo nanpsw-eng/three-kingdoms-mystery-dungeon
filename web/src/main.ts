@@ -66,6 +66,7 @@ const pic = (key: string, size: number, alt = ""): HTMLImageElement => {
   const full = size >= 120 ? fullBodyIllustration(id) : undefined;
   const native = full ?? nativeAssetPortrait(id);
   const image = spriteImg(native ?? portraitUrl(id), size, alt, native === undefined ? "px portrait" : "portrait native-portrait" + (full === undefined ? "" : " fullbody-illustration"));
+  image.decoding = "sync"; // Preloaded portraits should paint with the visible card.
   image.addEventListener("error", () => {
     const fallback = nativeAssetPortrait(id);
     image.className = fallback === undefined ? "px portrait" : "portrait native-portrait";
