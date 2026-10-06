@@ -1,0 +1,43 @@
+name: visual-smoke
+
+on:
+  push:
+    branches: ["art/ink-graphic-novel-v1", "main"]
+    paths: ["web/**", "scripts/e2e-smoke.mjs", "scripts/serve.mjs", "scripts/art/visual-coverage-smoke.mjs", ".github/workflows/visual-smoke.yml"]
+  pull_request:
+    paths: ["web/**", "scripts/e2e-smoke.mjs", "scripts/serve.mjs", "scripts/art/visual-coverage-smoke.mjs", ".github/workflows/visual-smoke.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mobile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm install --no-save --package-lock=false playwright@1.63.0
+      - run: npx playwright install --with-deps chromium
+      - run: npm run build:web
+      - name: Verify mobile gameplay and image fallbacks
+        run: |
+          mkdir -p visual-evidence
+          PORT=8092 npm run serve > visual-evidence/server.log 2>&1 &
+          for attempt in $(seq 1 20); do
+            curl -fsS http://localhost:8092/ > /dev/null && break
+            sleep 1
+          done
+          node scripts/e2e-smoke.mjs http://localhost:8092 visual-evidence > visual-evidence/smoke-result.json
+          node scripts/art/visual-coverage-smoke.mjs http://localhost:8092 visual-evidence
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mobile-visual-${{ github.sha }}
+          path: visual-evidence/
+          retention-days: 14

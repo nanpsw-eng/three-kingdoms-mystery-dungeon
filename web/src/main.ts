@@ -3,7 +3,7 @@ import {
   type AbilityTargeting, type BattleCommand, type Direction, type FormationSlot, type MetaState, type RunCommand, type RunEvent, type RunOptions,
 } from "../../src/index.js";
 import { drawMap, tileAt } from "./map.js";
-import { loadAssets } from "./assets.js";
+import { assetToken, fullBodyIllustration, loadAssets, nativeAssetPortrait } from "./assets.js";
 import { portraitUrl } from "./portraits.js";
 import { figureUrl, iconUrl, spriteImg } from "./sprites.js";
 import { codexScreen } from "./codex.js";
@@ -61,9 +61,27 @@ function put(...children: Child[]): void {
   for (const child of children) if (child !== null && child !== undefined && child !== false) app.append(child);
 }
 
-const pic = (key: string, size: number, alt = ""): HTMLImageElement => spriteImg(portraitUrl(artKey(key)), size, alt, "px portrait");
-const icon = (id: string, size = 28): HTMLImageElement => spriteImg(iconUrl(id), size, "", "px icon");
+const pic = (key: string, size: number, alt = ""): HTMLImageElement => {
+  const id = artKey(key);
+  const full = size >= 120 ? fullBodyIllustration(id) : undefined;
+  const native = full ?? nativeAssetPortrait(id);
+  const image = spriteImg(native ?? portraitUrl(id), size, alt, native === undefined ? "px portrait" : "portrait native-portrait" + (full === undefined ? "" : " fullbody-illustration"));
+  image.decoding = "sync"; // Preloaded portraits should paint with the visible card.
+  image.addEventListener("error", () => {
+    const fallback = nativeAssetPortrait(id);
+    image.className = fallback === undefined ? "px portrait" : "portrait native-portrait";
+    image.src = fallback ?? portraitUrl(id);
+  }, { once: true });
+  return image;
+};
+const icon = (id: string, size = 28): HTMLImageElement => spriteImg(iconUrl(id), size, "", "icon");
+const tokenPic = (key: string): HTMLImageElement => {
+  const id = artKey(key);
+  const token = assetToken(id);
+  return spriteImg(token?.src ?? figureUrl(id), 20, "", token === undefined ? "px" : "native-token");
+};
 let hitIds = new Set<string>();
+let healedIds = new Set<string>();
 
 function say(message: string): void { log = [message, ...log].slice(0, 60); }
 
@@ -162,6 +180,7 @@ function narrateBattle(command: BattleCommand): void {
     return (names.get(u.id) ?? u.id) + (u.hp < prev ? " -" + (prev - u.hp) : " +" + (u.hp - prev)) + (u.knockedOut ? "(KO)" : "");
   }).filter(Boolean);
   hitIds = new Set(after.filter((u) => { const prev = before.get(u.id); return prev !== undefined && u.hp < prev; }).map((u) => u.id));
+  healedIds = new Set(after.filter((u) => { const prev = before.get(u.id); return prev !== undefined && u.hp > prev; }).map((u) => u.id));
   say(actor + " · " + verb + (changes.length ? " → " + changes.join(", ") : ""));
   sayEvents(events);
 }
@@ -172,7 +191,7 @@ function render(): void {
   if (run === null && showCodex) put(codexScreen({ view: buildCodex(content, meta), render, close: () => { showCodex = false; render(); }, portrait: (key, size, alt) => pic(key, size, alt) }));
   else if (run === null) renderTitle();
   else if (run.phase === "cleared" || run.phase === "failed") renderEnd();
-  else if (run.phase === "battle") { renderBattle(); hitIds = new Set(); }
+  else if (run.phase === "battle") { renderBattle(); hitIds = new Set(); healedIds = new Set(); }
   else if (run.phase === "safe-zone") renderSafeZone();
   else renderDungeon();
   if (run !== null && isStoryPhase(run.phase)) sheet(...storySheet({ run, act: (command) => { act(command); }, render, portrait: (key, size, alt) => pic(key, size, alt) }, run.pending()[0]!));
@@ -344,11 +363,11 @@ function renderBattle(): void {
         const command: BattleCommand = { type: "formation", actorId: active.actorId, targetSlot: slot }; selection = null; narrateBattle(command); render(); return;
       }
       onUnit(id);
-    }, { class: cls + (hitIds.has(id) ? " hit" : "") }).appendChild(h("div", { class: "unit-head" }, pic(id.includes("#") ? unitName(id) : id, 40, unitName(id)),
+    }, { class: cls + (hitIds.has(id) ? " hit" : "") + (healedIds.has(id) ? " healed" : "") }).appendChild(h("div", { class: "unit-head" }, pic(id.includes("#") ? unitName(id) : id, 40, unitName(id)),
       h("div", { class: "unit-meta" }, h("b", {}, unitName(id)), h("span", { class: "num" }, unit.hp + "/" + unit.stats.maxHp)))).parentElement!
       .appendChild(bar(unit.hp, unit.stats.maxHp)).parentElement!
       .appendChild(bar(unit.energy, 100, "energy")).parentElement!
-      .appendChild(h("span", { class: "tags" }, ...(statuses.get(id) ?? []).map((s) => h("span", { class: "tag" }, (STATUS_NAMES[s.type] ?? s.type) + (s.stacks > 1 ? "×" + s.stacks : ""))))).parentElement!;
+      .appendChild(h("span", { class: "tags" }, ...(statuses.get(id) ?? []).map((s) => h("span", { class: "tag", "data-status": s.type }, (STATUS_NAMES[s.type] ?? s.type) + (s.stacks > 1 ? "×" + s.stacks : ""))))).parentElement!;
   };
   const rows = (side: "ally" | "enemy"): HTMLElement[] => {
     const front = h("div", { class: "formation" }, card(side, "front-left"), card(side, "front-center"), card(side, "front-right"));
@@ -356,7 +375,7 @@ function renderBattle(): void {
     return side === "enemy" ? [rear, front] : [front, rear];
   };
   const timeline = h("div", { class: "timeline" }, ...[...(active ? [active] : []), ...snap.timeline].slice(0, 8).map((event, index) =>
-    h("span", { class: (event.actorId.includes("#") ? "enemy" : "ally") + (index === 0 && active ? " now" : "") }, spriteImg(figureUrl(artKey(event.actorId.includes("#") ? unitName(event.actorId) : event.actorId)), 16, "", "px"), unitName(event.actorId))));
+    h("span", { class: (event.actorId.includes("#") ? "enemy" : "ally") + (index === 0 && active ? " now" : "") }, tokenPic(event.actorId.includes("#") ? unitName(event.actorId) : event.actorId), unitName(event.actorId))));
   const controls: HTMLElement[] = [];
   if (activeAlly && autoMode === "manual") {
     const actor = snap.units.find((u) => u.id === active.actorId)!;
@@ -457,7 +476,7 @@ function renderBag(): void {
     const definition = r.equipmentDef(entry.equipment.equipmentId)!;
     const name = entry.equipment.identified ? definition.name + (entry.equipment.enhance ? " +" + entry.equipment.enhance : "") : "미식별 장비 (" + definition.slot + ")";
     const stats = entry.equipment.identified ? Object.entries(definition.stats).map(([k, v]) => k.toUpperCase() + (v! > 0 ? "+" : "") + v).join(" ") : "?";
-    return h("div", { class: "row item-row" }, entry.equipment.identified ? icon(definition.id) : h("span", { class: "icon unknown" }, "?"), h("span", { class: "grow" }, name, h("small", { class: "muted" }, " " + stats)),
+    return h("div", { class: "row item-row" }, entry.equipment.identified ? icon(definition.id) : icon("unknown-item"), h("span", { class: "grow" }, name, h("small", { class: "muted" }, " " + stats)),
       button("장착", () => { pickTarget = { label: name + " — 장착할 장수", options: members.map((m) => ({ id: m.characterId, label: m.name })), onPick: (id) => { act({ type: "equip", characterId: id, uid: entry.uid }); render(); } }; render(); }, { class: "small", disabled: !usable }),
       button("버림", () => { act({ type: "discard", uid: entry.uid }); render(); }, { class: "small" }));
   });

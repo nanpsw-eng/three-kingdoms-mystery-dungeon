@@ -1,4 +1,5 @@
 import { finish } from "./pixel.js";
+import { assetTile } from "./assets.js";
 
 // Procedural 16×16 pixel-art sprites (no image assets). Each figure is composed from parts
 // (head gear, hair, beard, robe, armor, weapon) and auto-outlined, so every character reads distinctly.
@@ -225,11 +226,26 @@ const ICONS: Record<string, string[]> = {
   "jade-seal": ["............", "............", "....kkkk....", "....kggk....", "...kkggkk...", "..kgggggk...", "..kgtgtggk..", "..kggggggk..", "..kgtggtgk..", "..kkkkkkkk..", "..krrrrrrk..", "..kkkkkkkk.."],
   "swift-boots": ["............", "...kkkk.....", "...kbbk.....", "...kbbk.....", "...kbbk.....", "...kbbk.....", "...kbbbkk...", "...kbbbbbk..", "..kbbbbbbbk.", "..kNNNNNNNk.", "..kkkkkkkkk.", "............"],
   "tiger-tally": ["............", "...kkkkk....", "..kyyyyyk...", ".kyykyyyykk.", ".kyyyyyyyyk.", ".kykykykyyk.", ".kyyyyyyyyk.", "..kyyyyyyk..", "...kykyk....", "...kk.kk....", "............", "............"],
+  "unknown-item": ["............", "...kkkkkk...", "..kcccccck..", ".kccwwwwcck.", ".kccw..wcck.", ".kccwwwwcck.", ".kcc..wcck..", ".kcc..wcck..", "..kcccccck..", "...kkkkkk...", "....kNNk....", "....kkkk...."],
 };
 
 export const ICON_IDS: readonly string[] = Object.keys(ICONS);
 
 export function iconCanvas(id: string): HTMLCanvasElement {
+  const art = assetTile("item-" + id);
+  if (art !== null) {
+    const artKey = "ink-icon:" + id;
+    let canvas = cache.get(artKey);
+    if (canvas === undefined) {
+      canvas = document.createElement("canvas");
+      canvas.width = 26; canvas.height = 26;
+      const ctx = canvas.getContext("2d")!;
+      ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(art.image, art.sx, art.sy, art.size, art.size, 0, 0, 26, 26);
+      cache.set(artKey, canvas);
+    }
+    return canvas;
+  }
   const key = "icon:" + id;
   let canvas = cache.get(key);
   if (canvas !== undefined) return canvas;
@@ -238,12 +254,14 @@ export function iconCanvas(id: string): HTMLCanvasElement {
   canvas.width = 12; canvas.height = 12;
   const ctx = canvas.getContext("2d")!;
   rows.forEach((row, y) => [...row].forEach((ch, x) => { const c = ICON_PALETTE[ch]; if (c) { ctx.fillStyle = c; ctx.fillRect(x, y, 1, 1); } }));
+  // Keep fallback canvases cached separately; if the manifest finishes loading later, the ink version can replace them.
   cache.set(key, canvas);
   return canvas;
 }
 
 export function iconUrl(id: string): string {
-  const key = "icon:" + id;
+  const artLoaded = assetTile("item-" + id) !== null;
+  const key = (artLoaded ? "ink-icon:" : "icon:") + id;
   let url = urlCache.get(key);
   if (url === undefined) { url = iconCanvas(id).toDataURL(); urlCache.set(key, url); }
   return url;

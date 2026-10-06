@@ -1,6 +1,7 @@
 // Functional story UI (S0): dialogue scenes and duel challenges. Visual design is owned by Codex
 // (STORY_EXPANSION_PLAN §6) — keep markup simple and class-based so style.css can restyle it.
 import type { PendingDecision, RunCommand, RunEngine } from "../../src/index.js";
+import { ART_BINDINGS } from './art-bindings.js';
 
 export interface StoryUi {
   readonly run: RunEngine;
@@ -92,46 +93,9 @@ function duelSheet(ui: StoryUi, groupId: string, champion: string): HTMLElement[
   ];
 }
 
-/**
- * Art fallbacks for characters/enemies added by story campaigns until Codex draws them
- * (remove an entry once `web/assets` or portraits.ts has art for that key).
- */
-const ART_ALIASES: Readonly<Record<string, string>> = {
-  // E2 playable
-  "lu-bu": "zhang-liao", "sun-jian": "sun-quan", "yuan-shao": "cao-cao", "cao-ren": "xiahou-dun", "hua-xiong": "화웅",
-  // E2 enemies
-  "여포": "zhang-liao", "동탁": "장각", "이유": "장량", "방화병": "황건 술사", "서량 친위대": "서량 기병",
-  // E3 서주
-  "chen-gong": "jia-xu", "zang-ba": "zhang-fei", "gao-shun": "xiahou-dun", "mi-zhu": "hua-tuo",
-  "원술군 보병": "동탁군 극병", "원술군 궁병": "동탁군 궁병", "산적": "황건 기병", "병주 기병": "서량 기병", "함진영": "관문 수비대",
-  "수군": "황건 술사", "기령": "화웅", "원술": "장량", "고순": "xiahou-dun", "진궁": "jia-xu",
-  // E4 관도
-  "xu-chu": "zhang-fei", "dian-wei": "xiahou-dun", "xun-yu": "zhuge-liang", "yan-liang": "zhang-liao", "wen-chou": "taishi-ci",
-  "하북 보병": "동탁군 극병", "하북 강노병": "동탁군 궁병", "하북 기병": "서량 기병", "조조군 관문병": "관문 수비대", "오소 수비병": "황건 창병",
-  "하북 대극사": "관문 수비대", "공수": "화웅", "맹탄": "화웅", "변희": "화웅", "왕식": "화웅", "안량": "zhang-liao", "문추": "taishi-ci", "원소": "cao-cao",
-  // E5 적벽
-  "lu-su": "hua-tuo", "huang-gai": "huang-zhong", "pang-tong": "jia-xu", "cheng-pu": "xiahou-dun",
-  "조조군 보병": "동탁군 극병", "청주병": "황건 창병", "호표기": "서량 기병", "형주 수군": "황건 술사", "몽충": "관문 수비대",
-  "조조군 궁병": "동탁군 궁병", "하후은": "화웅", "채모": "장량", "장윤": "화웅", "조조": "cao-cao", "허저": "zhang-fei",
-  // E6 형주·익주
-  "ma-chao": "zhao-yun", "wei-yan": "guan-yu", "fa-zheng": "jia-xu", "xu-huang": "xiahou-dun", "xiahou-yuan": "taishi-ci",
-  "유장군 보병": "황건 창병", "서량 철기": "서량 기병", "위군 정예": "동탁군 극병", "위군 궁병": "동탁군 궁병", "복병": "황건 기병",
-  "칠군 병사": "관문 수비대", "마초": "zhao-yun", "하후연": "taishi-ci", "방덕": "화웅", "우금": "xiahou-dun", "조인": "xiahou-dun",
-  // E7 이릉
-  "lu-xun": "zhou-yu", "lu-meng": "zhang-liao", "zhou-tai": "zhang-fei",
-  "오군 보병": "황건 창병", "오군 궁병": "동탁군 궁병", "오군 복병": "황건 기병", "강동 수군": "황건 술사", "해번군": "관문 수비대",
-  "감녕": "gan-ning", "주연": "taishi-ci", "주태": "zhang-fei", "육손": "zhou-yu",
-  // E8 남만
-  "meng-huo": "zhang-fei", "zhu-rong": "gan-ning", "ma-su": "jia-xu",
-  "남만병": "황건 기병", "독침병": "황건 궁병", "코끼리 부대": "관문 수비대", "등갑병": "관문 수비대", "남만 무녀": "태평도 신도",
-  "맹획": "zhang-fei", "맹우": "화웅", "축융": "gan-ning", "올돌골": "화웅",
-  // E9 북벌
-  "sima-yi": "cao-cao", "jiang-wei": "zhao-yun", "zhang-he": "zhang-liao", "deng-ai": "xiahou-dun",
-  "위군 보병": "동탁군 극병", "위군 노병": "동탁군 궁병", "위군 기병": "서량 기병", "중장 보병": "관문 수비대", "보급로 습격대": "황건 기병",
-  "강유": "zhao-yun", "장합": "zhang-liao", "사마의": "cao-cao",
-};
+/** Stable visual identities for shipped characters and enemies; unknown art uses procedural fallback. */
 export function artKey(key: string): string {
-  return ART_ALIASES[key] ?? key;
+  return ART_BINDINGS[key] ?? key;
 }
 
 export interface TimelineEntry {

@@ -1,5 +1,5 @@
 import type { DungeonEngine, Point } from "../../src/index.js";
-import { assetTile } from "./assets.js";
+import { assetTile, assetToken } from "./assets.js";
 import { figureCanvas, iconCanvas } from "./sprites.js";
 
 export const VIEW_RADIUS = 7;
@@ -135,7 +135,9 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   const blit = (image: CanvasImageSource, p: Point, scale = 1, lift = 0): void => {
     const [x, y] = at(p);
     const s = cell * scale;
+    ctx.imageSmoothingEnabled = image instanceof HTMLImageElement;
     ctx.drawImage(image, x + (cell - s) / 2, y + (cell - s) / 2 - lift, s, s);
+    ctx.imageSmoothingEnabled = false;
   };
   /** Draws a named tileset tile when one is loaded, else the procedural fallback. */
   const terrain = (name: string, fallback: CanvasImageSource, p: Point, variant = 0): void => {
@@ -178,12 +180,37 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   }
   for (const object of dungeon.objects()) {
     if (!dungeon.isExplored(object.pos)) continue;
-    const image = object.kind === "item" ? iconCanvas(object.contentId) : object.kind === "recruit" ? BANNER : object.kind === "event" ? EVENT : SORCERY;
-    blit(image, object.pos, object.kind === "item" ? 0.75 : 1);
+    const name = object.kind === "item" ? "item-" + object.contentId : object.kind === "recruit" ? "recruit" : object.kind === "event" ? "event" : "sorcery";
+    const fallback = object.kind === "item" ? iconCanvas(object.contentId) : object.kind === "recruit" ? BANNER : object.kind === "event" ? EVENT : SORCERY;
+    const tile = assetTile(name);
+    if (tile === null) {
+      blit(fallback, object.pos, object.kind === "item" ? 0.75 : 1);
+      continue;
+    }
+    const [x, y] = at(object.pos);
+    const scale = object.kind === "item" ? 0.78 : 1;
+    const s = cell * scale;
+    ctx.imageSmoothingEnabled = true;
+    ctx.drawImage(tile.image, tile.sx, tile.sy, tile.size, tile.size, x + (cell - s) / 2, y + (cell - s) / 2, s, s);
+    ctx.imageSmoothingEnabled = false;
   }
-  // fog over remembered-but-not-visible ground
-  ctx.fillStyle = "rgba(31, 28, 25, 0.5)";
-  for (const p of fog) { const [x, y] = at(p); ctx.fillRect(x, y, cell, cell); }
+  // localized 28% ink wash over remembered-but-not-visible ground; never a flat black cell.
+  for (const p of fog) {
+    const [x, y] = at(p);
+    const tile = assetTile("fog", hash(p.x, p.y, 19));
+    if (tile !== null) {
+      ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(tile.image, tile.sx, tile.sy, tile.size, tile.size, x, y, cell, cell);
+      ctx.imageSmoothingEnabled = false;
+    } else {
+      const wash = ctx.createRadialGradient(x + cell * 0.5, y + cell * 0.5, cell * 0.08, x + cell * 0.5, y + cell * 0.5, cell * 0.76);
+      wash.addColorStop(0, "rgba(23, 21, 19, 0.28)");
+      wash.addColorStop(0.68, "rgba(23, 21, 19, 0.14)");
+      wash.addColorStop(1, "rgba(23, 21, 19, 0)");
+      ctx.fillStyle = wash;
+      ctx.fillRect(x, y, cell, cell);
+    }
+  }
   // torchlight: warm glow around the ruler, falling off into darkness at the view edge
   const [lx, ly] = at(dungeon.position);
   const cx = lx + cell / 2, cy = ly + cell / 2;
@@ -198,7 +225,9 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   for (const enemy of dungeon.visibleEnemies()) {
     const [x, y] = at(enemy.pos);
     ctx.fillStyle = "rgba(0,0,0,0.35)"; ctx.fillRect(x + cell * 0.2, y + cell * 0.82, cell * 0.6, cell * 0.12);
-    blit(figureCanvas(options.enemyKey(enemy.groupId)), enemy.pos, enemy.boss ? 1.35 : 1, cell * 0.08);
+    const enemyKey = options.enemyKey(enemy.groupId);
+    const enemyToken = assetToken(enemyKey);
+    blit(enemyToken ?? figureCanvas(enemyKey), enemy.pos, enemy.boss ? 1.35 : enemyToken === undefined ? 1 : 1.2, cell * 0.08);
     if (enemy.state === "ALERT" || enemy.state === "CHASE") {
       const s = Math.max(2, Math.floor(cell / 8));
       ctx.fillStyle = "#f2ebdd"; ctx.fillRect(x + cell * 0.72, y - s * 3, s * 3, s * 4);
@@ -207,7 +236,8 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   }
   const [px, py] = at(dungeon.position);
   ctx.fillStyle = "rgba(0,0,0,0.35)"; ctx.fillRect(px + cell * 0.2, py + cell * 0.82, cell * 0.6, cell * 0.12);
-  blit(figureCanvas(options.playerKey), dungeon.position, 1, cell * 0.08);
+  const playerToken = assetToken(options.playerKey);
+  blit(playerToken ?? figureCanvas(options.playerKey), dungeon.position, playerToken === undefined ? 1 : 1.2, cell * 0.08);
   // facing marker: a vermilion mark on the tile edge
   const facing: Record<string, [number, number]> = { n: [0, -1], ne: [1, -1], e: [1, 0], se: [1, 1], s: [0, 1], sw: [-1, 1], w: [-1, 0], nw: [-1, -1] };
   const [fx, fy] = facing[dungeon.facing] ?? [0, 1];

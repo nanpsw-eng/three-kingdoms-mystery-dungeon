@@ -5,9 +5,9 @@
 - Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon`
 - Working Branch: `art/ink-graphic-novel-v1`
 - Base Implementation Commit: `017e0c4130f914dd33d2ab74f2093d4170b0e438`
-- Art Gate: `INK_GRAPHIC_NOVEL_V1_APPROVED / VERTICAL_SLICE_NEXT`
-- Merge to `main`: HUMAN GATE
-- Production deploy: HUMAN GATE
+- Art Gate: `INK_GRAPHIC_NOVEL_V1_APPROVED / FULL_ROSTER_IMPLEMENTED / FINAL_VERIFICATION_PENDING`
+- Merge to `main`: APPROVED by latest explicit user instruction
+- Production deploy: APPROVED by latest explicit user instruction
 
 ## Goal
 
@@ -111,7 +111,7 @@ Food / medicine / scroll / weapon / armor / treasure icon set를 Visual Bible �
 완료된 visual phase를 반복하지 말고, 실제 repository state 다음의 최초 미완료 task부터 이어간다.
 
 
-## Phase A Current Implementation Brief
+## Phase A Implementation Brief (historical; implemented)
 
 Implementation-ready visual spec: `docs/art/PHASE_A_VISUAL_SPEC_V1.md`
 Asset states: `docs/art/ASSET_REGISTRY.md`
@@ -124,3 +124,8 @@ First implementation scope:
 5. Keep `src/battle/`, `src/dungeon/`, `src/run/`, and `src/content/` unchanged. `main.ts` is adapter-only if a screen class/data attribute is necessary.
 
 Required evidence: `npm test`, `npm run build:web`, UI smoke result, and 390×844 screenshots for all three screens. Record any unavailable check as `NOT_RUN`; do not infer PASS. After implementation, return screenshots to Work for Visual QA before marking Phase A accepted.
+
+
+## Current continuation point — 2026-10-06
+
+Use current Track B in SESSION_HANDOFF.md and VISUAL_DELIVERY_20261006.md. All shipped character/enemy art is implemented; finish exact-head verification and authorized deployment. Earlier phase instructions are historical. Preserve the original 15 masters and 23 tokens. Do not recreate completed assets or source-domain code.
