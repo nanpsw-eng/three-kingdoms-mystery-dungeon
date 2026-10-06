@@ -5,19 +5,19 @@
 - Current product source: `main` at `82b38b4bf877a015e99f53ae551bfedb45bbc790`
 - Latest Claude work: PR #10 merged; Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`
 - Art/design branch: `art/ink-graphic-novel-v1`
-- Current art HEAD before this handoff update: `eefce32dfb74f9ab5764a91ef1f69ca01fda0664`
+- Current art HEAD before this handoff update: `40039ec072a979a13ed9711027d1c681b3813b28`
 - Open PR: none
-- Latest art CI: current commit `eefce32dfb74f9ab5764a91ef1f69ca01fda0664` passed CI run #85; previous concept/doc commits through #84 passed. This next change is documentation/concept-only; local npm test/build/smoke are `NOT_RUN`.
+- Latest art CI: current commit `40039ec072a979a13ed9711027d1c681b3813b28` passed CI run #86; previous concept/doc commits through #84 passed. This next change is documentation/concept-only; local npm test/build/smoke are `NOT_RUN`.
 - Art direction and Product Baseline remain unchanged.
 
 ## Current Art Phase
 - `PHASE C — Dungeon Graphic Set` is active.
 - Phase B ruler identity language is `APPROVED` as a design reference; individual character images remain `CONCEPT`.
-- Last confirmed done: surface/object atlases, revised trap/sorcery marks, room composition study, and an exact 26-unit SVG layout proof linked to atlas crops.
-- First incomplete task: simplify sorcery detail at cell scale and verify the SVG/layout in a real visual renderer; then adjust fog overlay strength against mixed tiles.
-- Structural QA: SVG XML parses and geometry encodes a one-cell corridor join plus one-cell object boxes. This is not a screenshot or runtime pass.
+- Last confirmed done: surface/object vignette atlases, revised trap/sorcery marks including v3, room composition study, exact-cell crop audit, and a six-surface modular grammar concept sheet.
+- First incomplete task: review and refine the new modular floor/wall/corridor grammar at true 26px cells; check repeated joins and tune fog opacity over both floor and wall.
+- Visual QA: SVG XML parses and Inkscape rendered the atlas-crop audit at 2× display (26px logical cells); it FAILS as a tile proof because atlas panels are illustrative vignettes, not modular cell art. Sorcery v3 and the six-surface modular grammar sheet remain `CONCEPT`.
 - Blocker: map renderer remains procedural/pixelated; browser/canvas, mobile, and gameplay checks are unverified.
-- Latest prior CI: commit `eefce32dfb74f9ab5764a91ef1f69ca01fda0664` passed run #85. For this design-only change, local `npm test`, `npm run build:web`, browser smoke, and actual SVG rendering are `NOT_RUN`.
+- Latest confirmed CI: commit `40039ec072a979a13ed9711027d1c681b3813b28` passed run #86. For this design-only change, `npm test`, `npm run build:web`, and browser/runtime smoke are `NOT_RUN`; Inkscape SVG rendering passed.
 
 ## Work Responsibility
 This Work owns visual design, concept art, asset registry, and visual QA. The user instructed that all design work continue here without a separate Codex work assignment. Keep the actual game visuals and functional behavior intact while creating design assets and specifications.
@@ -45,7 +45,25 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - Created an E7/E8 boss duo concept for Lu Xun and Meng Huo, emphasizing fan-led vertical vs shield-led broad silhouettes; added its reference, review notes, and registry entry.
 - Refined the ruler comparison into a cleaner v2 master-reference concept and aligned Sima Yi concept v2 to its hanji/ink treatment.
 - Created separate Liu Bei, Cao Cao, and Sun Quan concept sheets, each with bust, full-body, and exploration-token views.
-- Added dedicated square bust references for all three rulers; revised Sun Quan’s bust to read as a mature young ruler.\n- Created separate ruler exploration-token studies; revised Liu Bei v2 to keep both boots within the silhouette.\n- Created individual full-body concept references for Liu Bei, Cao Cao, and Sun Quan; all include complete feet and broad silhouette/palette cues.\n- Built the ruler scale-review board with 40/48px bust and 24/28px token simulations on hanji/fog and grayscale silhouettes.\n- Created Phase C surface and object atlases, then reduced 14 crops to 26px for initial tile/object readability review.\n- Revised trap and sorcery markers into distinct angular/open-ring silhouettes; added a 24/28px monochrome review and a room/corridor composition study.\n- Revised Cao Cao and Sun Quan token concepts to clarify sword and command-tablet silhouettes; v1 studies are superseded for current review.
+- Added dedicated square bust references for all three rulers; revised Sun Quan’s bust to read as a mature young ruler.
+- Created separate ruler exploration-token studies; revised Liu Bei v2 to keep both boots within the silhouette.
+- Created individual full-body concept references for Liu Bei, Cao Cao, and Sun Quan; all include complete feet and broad silhouette/palette cues.
+- Built the ruler scale-review board with 40/48px bust and 24/28px token simulations on hanji/fog and grayscale silhouettes.
+- Created Phase C surface and object atlases, then reduced 14 crops to 26px for initial tile/object readability review.
+- Revised trap and sorcery markers into distinct angular/open-ring silhouettes; added a 24/28px monochrome review and a room/corridor composition study.
+- Revised Cao Cao and Sun Quan token concepts to clarify sword and command-tablet silhouettes; v1 studies are superseded for current review.
+- Rendered the exact-cell dungeon SVG through Inkscape at 2×; confirmed and recorded that atlas vignettes fail as logical tile masters.
+- Created sorcery marker v3: open brush ring plus one violet flame; kept it as a concept and superseded v2 for current review.
+- Created a six-surface modular tile grammar concept for floor, horizontal/vertical corridor, solid/straight wall, and inside corner.
+
+## This Session — Dungeon Cell Audit
+- Rendered `docs/art/concepts/dungeon-cell-grid-review-v1.svg` through Inkscape at 2× (26px logical cells).
+- Audit result: `NEEDS_REVISION`. Surface atlas panels are illustrative vignettes; reducing them to a logical cell produces miniature scenes rather than modular room terrain.
+- Sorcery marker v2 is `SUPERSEDED`; marker v3 is `CONCEPT` and uses one open ink ring with a muted-violet flame.
+- Created a six-surface modular grammar concept sheet. It is a design study, not a production tileset.
+- Local `npm test`, `npm run build:web`, and browser/runtime smoke: `NOT_RUN`. Inkscape render and XML parsing: `PASS`.
+- Fog alpha over mixed floor/wall surfaces, actual renderer compatibility, gameplay, and mobile QA remain unverified.
+- Next safe action: inspect each modular study as a 26px crop and repeat joins; revise the seam grammar, then review fog strength.
 
 ## Asset State
 - Global art direction: `APPROVED`.
@@ -53,7 +71,9 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - Sima Yi v2 master: `CONCEPT`; uses the cleaned ruler ink/hanji presentation while preserving his dark strategist identity; verify separate bust/full-body/token sizes.
 - Liu Bei/Cao Cao/Sun Quan comparison v2: `CONCEPT`; background removed and ornament reduced; serves as shared style reference.
 - Individual Liu Bei / Cao Cao / Sun Quan master sheets: Liu Bei/Cao Cao `CONCEPT`; Sun Quan v1 `NEEDS_REVISION`, with bust v2 as current face reference.
-- Dedicated square bust references: all `CONCEPT`; source composition is square, but runtime use is blocked by the current portrait loader’s pixelization.\n- Separate Liu Bei/Cao Cao/Sun Quan token studies: all `CONCEPT`; distinguishable palette and prop cues are defined. Liu Bei v1 is superseded by v2 because the boots were clipped.\n- Separate Liu Bei/Cao Cao/Sun Quan full-body references: all `CONCEPT`; complete silhouette and palette blocks exist, but cross-view identity and mobile-scale checks remain.
+- Dedicated square bust references: all `CONCEPT`; source composition is square, but runtime use is blocked by the current portrait loader’s pixelization.
+- Separate Liu Bei/Cao Cao/Sun Quan token studies: all `CONCEPT`; distinguishable palette and prop cues are defined. Liu Bei v1 is superseded by v2 because the boots were clipped.
+- Separate Liu Bei/Cao Cao/Sun Quan full-body references: all `CONCEPT`; complete silhouette and palette blocks exist, but cross-view identity and mobile-scale checks remain.
 - Dong Zhuo/Lü Bu comparison: `CONCEPT`; broad-vs-tall silhouettes established; simplify armor details and verify small tokens.
 - Codex character-detail UI: `CONCEPT`; dynamic progress fractions correct, but enlarged art is mood reference and actual code uses a 40px row portrait.
 - Codex secondary tab board: `CONCEPT`; visual state language established for campaign-grouped bosses, earned achievements, and identified/unidentified items.
@@ -84,7 +104,28 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/sun-quan-master-concept-v1-20261006.jpg`
 - `docs/art/concepts/liu-bei-bust-concept-v1-20261006.jpg`
 - `docs/art/concepts/cao-cao-bust-concept-v1-20261006.jpg`
-- `docs/art/concepts/sun-quan-bust-concept-v2-20261006.jpg`\n- `docs/art/concepts/liu-bei-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/cao-cao-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/sun-quan-exploration-token-concept-v1-20261006.png`\n- `docs/art/concepts/liu-bei-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/cao-cao-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/sun-quan-full-body-concept-v1-20261006.jpg`\n- `docs/art/concepts/cao-cao-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/sun-quan-exploration-token-concept-v2-20261006.png`\n- `docs/art/concepts/ruler-scale-review-revised-20261006.jpg`\n- `docs/art/concepts/dungeon-surfaces-concept-v1-20261006.jpg`\n- `docs/art/concepts/dungeon-objects-concept-v1-20261006.jpg`\n- `docs/art/concepts/dungeon-set-scale-review-20261006.jpg`\n- `docs/art/concepts/dungeon-trap-mark-concept-v2-20261006.png`\n- `docs/art/concepts/dungeon-sorcery-mark-concept-v2-20261006.png`\n- `docs/art/concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`\n- `docs/art/concepts/dungeon-room-corridor-composition-v1-20261006.jpg`\n- `docs/art/concepts/dungeon-cell-grid-review-v1.svg`\n- `docs/art/concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`
+- `docs/art/concepts/sun-quan-bust-concept-v2-20261006.jpg`
+- `docs/art/concepts/liu-bei-exploration-token-concept-v2-20261006.png`
+- `docs/art/concepts/cao-cao-exploration-token-concept-v1-20261006.png`
+- `docs/art/concepts/sun-quan-exploration-token-concept-v1-20261006.png`
+- `docs/art/concepts/liu-bei-full-body-concept-v1-20261006.jpg`
+- `docs/art/concepts/cao-cao-full-body-concept-v1-20261006.jpg`
+- `docs/art/concepts/sun-quan-full-body-concept-v1-20261006.jpg`
+- `docs/art/concepts/cao-cao-exploration-token-concept-v2-20261006.png`
+- `docs/art/concepts/sun-quan-exploration-token-concept-v2-20261006.png`
+- `docs/art/concepts/ruler-scale-review-revised-20261006.jpg`
+- `docs/art/concepts/dungeon-surfaces-concept-v1-20261006.jpg`
+- `docs/art/concepts/dungeon-objects-concept-v1-20261006.jpg`
+- `docs/art/concepts/dungeon-set-scale-review-20261006.jpg`
+- `docs/art/concepts/dungeon-trap-mark-concept-v2-20261006.png`
+- `docs/art/concepts/dungeon-sorcery-mark-concept-v2-20261006.png`
+- `docs/art/concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`
+- `docs/art/concepts/dungeon-room-corridor-composition-v1-20261006.jpg`
+- `docs/art/concepts/dungeon-cell-grid-review-v1.svg`
+- `docs/art/concepts/dungeon-cell-grid-crop-audit-render-v1-20261006.jpg`
+- `docs/art/concepts/dungeon-sorcery-mark-concept-v3-20261006.png`
+- `docs/art/concepts/dungeon-modular-surface-grammar-concept-v1-20261006.jpg`
+- `docs/art/concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`
 - `docs/art/concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg`
 - `docs/art/concepts/codex-secondary-tabs-20261006.jpg`
 - `docs/art/concepts/story-scene-ui-20261006.jpg`
@@ -92,16 +133,15 @@ This Work owns visual design, concept art, asset registry, and visual QA. The us
 - `docs/art/concepts/lu-xun-meng-huo-boss-concept-20261006.jpg`
 
 ## Verification
-- PR #10 report states: `npm test` 156/156 PASS, `build:web` PASS, Chromium 390×844 smoke PASS, page errors 0.
-- No code was changed in these design commits; repository checks are empty for the latest commit, so tests/build/smoke are `NOT_RUN`.
-- Local build/test and production-screen visual QA: `NOT_RUN`.
-- Concept images were visually inspected; remaining design gaps are recorded above.
+- Latest confirmed branch CI: run #86 on parent `40039ec072a979a13ed9711027d1c681b3813b28`, `success`.
+- Inkscape render of the exact-cell atlas-crop audit: `PASS`; SVG XML parsing: `PASS`.
+- No gameplay code changed. `npm test`, `npm run build:web`, browser smoke, and production-screen visual QA: `NOT_RUN`.
 
 ## NEXT_SAFE_ACTION
-1. Render and visually inspect the exact-cell SVG using its committed atlas references; check image loading, wall/corridor joins, object fit, and fog edge.
-2. Simplify the sorcery mark if its 26px reduction remains too busy; tune the environment/fog overlay to preserve floor seams.
-3. Keep the SVG as a layout QA fixture, not a map layout specification; leave all generated assets at `CONCEPT`.
-4. After visual review, prepare separate tile/object masters and retain the procedural fallback.
+1. Crop the six modular surface grammar studies to true 26px cells and review grayscale legibility.
+2. Repeat edge/corner/corridor samples to check seams; revise floor and wall pieces where joins break.
+3. Review fog alpha over both light floor and dark wall samples.
+4. Keep concept assets separate from production exports; runtime/canvas integration remains outside this design review.
 
 ## HUMAN GATE
 - Reversible design exploration and reference/spec updates on the art branch: no additional gate.

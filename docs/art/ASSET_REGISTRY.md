@@ -35,6 +35,7 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 
 | Codex Bosses / Achievements / Items three-tab concept sheet | `CONCEPT` | `concepts/codex-secondary-tabs-20261006.jpg` | Keep data-driven counters, refine defeated/earned/unknown icons at mobile size |
 | Line-by-line story scene UI two-state concept | `CONCEPT` | `concepts/story-scene-ui-20261006.jpg` | Align speaker portrait to actual 48px row, validate sheet scroll and fixed actions |
+| Dungeon modular surface grammar v1 | `CONCEPT` | `concepts/dungeon-modular-surface-grammar-concept-v1-20261006.jpg`; six studies for open floor, H/V corridor, solid wall, straight wall, and corner | Check true-cell crops and repeated joins; prepare separate edge masters after review |
 
 ## Current Implementation State
 
@@ -65,16 +66,17 @@ The repository's current web client still uses the legacy dark/gold CSS theme an
 | Ruler master scale-review board | `CONCEPT` | `concepts/ruler-scale-review-revised-20261006.jpg`; simulated 40/48px busts and 24/28px tokens on hanji/fog plus monochrome silhouettes | Design-level review only; actual page/canvas QA remains open |
 | Ruler production portrait/token exports | `MASTER_REQUIRED` | Current image files are downscaled concept references; runtime loaders remain pixelizing/procedural | Prepare production masters only after actual rendering contract is available |
 
-| Dungeon surface atlas v1 | `CONCEPT` | `concepts/dungeon-surfaces-concept-v1-20261006.jpg`; explored floor, ink wall, corridor, fog, stairs, and gate | Keep grid edges consistent; create clean individual tile masters after scale QA |
+| Dungeon surface atlas v1 | `CONCEPT` | `concepts/dungeon-surfaces-concept-v1-20261006.jpg`; illustrative floor/wall/corridor vignettes plus fog/stair/gate studies | Reference only; panels are not modular 26px tile masters |
 | Dungeon object and marker atlas v1 | `CONCEPT` | `concepts/dungeon-objects-concept-v1-20261006.jpg`; chest, pot, trap, sorcery, player, Yellow Turban scout, environment wash, food/medicine | Trap and sorcery forms need stronger silhouette separation; environmental wash should preserve base tile contrast |
 | Dungeon 26px scale review v1 | `CONCEPT` | `concepts/dungeon-set-scale-review-20261006.jpg`; source cells reduced to 26px and enlarged for inspection | Test mixed-cell seams, fog boundary, and markers in a composed map before advancing status |
 
 | Dungeon trap marker v2 | `CONCEPT` | `concepts/dungeon-trap-mark-concept-v2-20261006.png`; angular fractured plate replaces circular base | Check one-cell footprint and grayscale against sorcery |
-| Dungeon sorcery formation marker v2 | `CONCEPT` | `concepts/dungeon-sorcery-mark-concept-v2-20261006.png`; open ink ring and upright seal separate from square trap | Confirm it stays inside one object cell and does not obscure walkable floor |
+| Dungeon sorcery formation marker v3 | `CONCEPT` | `concepts/dungeon-sorcery-mark-concept-v3-20261006.png`; one open ink ring and one muted-violet flame, simplified for 26px cells | Compare beside trap and fog; retain concept status until production crop and renderer QA |
+| Dungeon sorcery formation marker v2 | `SUPERSEDED` | `concepts/dungeon-sorcery-mark-concept-v2-20261006.png`; ornate open ring with talisman, radial marks, and inner flame | Retain as history; use v3 for current cell-scale review |
 | Trap / sorcery 24–28px review v2 | `CONCEPT` | `concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`; form difference survives monochrome reduction | Preserve the angular vs open-circular silhouette distinction |
 | Dungeon room/corridor composition v1 | `CONCEPT` | `concepts/dungeon-room-corridor-composition-v1-20261006.jpg`; rooms, one-cell-style corridor, explored boundary, fog, gate/stairs and markers | Composition only; create an exact 26px grid mockup before visual approval |
 
 | Dungeon trap v2 26px scale proof | `CONCEPT` | `concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg`; angular broken plate reads separately from circular sorcery in monochrome | Keep this pair as the silhouette baseline |
 | Dungeon room/corridor composition v1 | `CONCEPT` | `concepts/dungeon-room-corridor-composition-v1-20261006.jpg`; shows explored room, corridor, second room/fog and current marker set | Reference only; wall seams, marker footprints and exact corridor width remain unapproved |
 
-| Dungeon exact-cell layout proof v1 | `CONCEPT` | `concepts/dungeon-cell-grid-review-v1.svg`; deterministic 26px logical cells composed from atlas crops | SVG geometry is authored; actual browser/runtime rendering and map topology are not approved |
+| Dungeon exact-cell atlas-crop audit v1 | `NEEDS_REVISION` | `concepts/dungeon-cell-grid-review-v1.svg`; Inkscape render shows vignette atlas panels reduced into logical cells | Replace the vignette crops with modular tile masters; review wall/floor seams and fog strength |
