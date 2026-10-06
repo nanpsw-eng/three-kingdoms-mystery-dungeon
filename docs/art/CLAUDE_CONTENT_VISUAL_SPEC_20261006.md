@@ -211,3 +211,15 @@ The new square bust references are composition studies sized for portrait use, b
 4. Locked state must retain readable silhouette and contrast without relying on color alone.
 
 Local 40px browser preview, grayscale screenshot, and token-scale in-game QA are `NOT_RUN`; only the source contract and generated square compositions were inspected. This is a design/renderer compatibility gap, not a change to domain or Codex data logic.
+
+
+## 19. Ruler Exploration Token Concept Review
+
+Separate exploration-token studies are now recorded:
+- `concepts/liu-bei-exploration-token-concept-v2-20261006.png`: warm ivory / beige robe, muted crimson sash, long beard, open but grounded stance. Version 2 restores clear margin below both boots.
+- `concepts/cao-cao-exploration-token-concept-v1-20261006.png`: compact charcoal silhouette, deep-crimson cue, clipped beard, short command sword.
+- `concepts/sun-quan-exploration-token-concept-v1-20261006.png`: cool blue-gray and dark-green blocks, mature near-clean-shaven face, command tablet, upright balanced posture.
+
+All three remain `CONCEPT`. Their repository PNGs are compact review references with transparent backgrounds; they are not production masters. Preserve transparency in eventual exports, keep identity cues to large silhouette and palette blocks, and test each against both hanji floor and ink fog at the actual 24–28px map-cell display size. Do not add facial micro-detail intended only for enlarged review.
+
+The current map renderer uses 16×16 procedural figures and pixelated canvas output. Keep that behavior available as fallback. A distinct non-pixel token-rendering path is a prerequisite for implementation; visual check of generated PNGs at runtime tile size, fog contrast, and grayscale is `NOT_RUN`. No map topology or interaction change is implied.

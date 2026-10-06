@@ -46,3 +46,9 @@ The repository's current web client still uses the legacy dark/gold CSS theme an
 | E2 campaign boss trio (Yuan Shao / Cao Cao battle variant / Cao Ren) | `CONCEPT` | `concepts/e2-boss-trio-yuan-shao-cao-cao-cao-ren-20261006.jpg` | Preserve tall/elegant, compact/dark, and broad/shield-first reads; simplify ornament before master approval |
 
 | E7 / E8 boss duo (Lu Xun / Meng Huo) | `CONCEPT` | `concepts/lu-xun-meng-huo-boss-concept-20261006.jpg` | Preserve fan-led vertical strategist vs shield-led broad ruler; review armor and token detail before approval |
+
+| Liu Bei exploration token concept v2 | `CONCEPT` | `concepts/liu-bei-exploration-token-concept-v2-20261006.png`; safety margin corrected so both feet remain visible | Review at 24–28px over explored floor and fog; do not treat as production art |
+| Cao Cao exploration token concept v1 | `CONCEPT` | `concepts/cao-cao-exploration-token-concept-v1-20261006.png`; compact charcoal silhouette with short-sword cue | Review at 24–28px over explored floor and fog; do not treat as production art |
+| Sun Quan exploration token concept v1 | `CONCEPT` | `concepts/sun-quan-exploration-token-concept-v1-20261006.png`; upright cool blue-gray / dark-green silhouette with command tablet | Review at 24–28px over explored floor and fog; do not treat as production art |
+| Exploration token renderer compatibility | `MASTER_REQUIRED` | `web/src/map.ts` currently paints 16×16 procedural figures and canvas rendering is pixelated | Define a separate non-pixel token route; preserve existing procedural sprite as fallback |
+| Ruler bust and token concept bundle | `CONCEPT` | Separate busts and token studies now exist for Liu Bei, Cao Cao, and Sun Quan; Sun Quan bust v2 is the current face cue | Align all three full-body studies to their respective portrait/token before any production approval |
