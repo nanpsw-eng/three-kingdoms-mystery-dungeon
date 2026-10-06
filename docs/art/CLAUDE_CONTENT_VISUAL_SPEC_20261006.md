@@ -195,3 +195,19 @@ The ruler comparison v2 is now accompanied by individual character sheets:
 Each sheet repeats bust portrait, full-body, and simplified exploration token for one ruler, using the same hanji ground and ink contour system. Distinguishing keys remain long tapered beard/open warm posture for Liu Bei; clipped beard/compact charcoal silhouette for Cao Cao; younger nearly clean-shaven face/cool blue-gray and dark green for Sun Quan. These separate sheets are `CONCEPT`, not approved production art.
 
 Before approval, inspect the actual intended 40px portrait size and in-game token size; test silhouette/value recognition without color. Simplify small belt hardware if it competes with the face, beard, sash, or pose. The downscaled repository JPEGs are for design continuity only.
+
+
+## 18. Portrait Asset Compatibility and 40px Review
+
+Verified against the current `main` source (`web/src/codex.ts`, `web/src/assets.ts`, `web/style.css`):
+- Character Codex rows request `ui.portrait(c.id, 40, ...)`; story speaker art is 48px.
+- `assets.ts` routes external portraits through `pixelize()`, whose default output is 48px with a 28-color palette. It crops the center square before palette reduction. The global CSS also applies pixelated image rendering to `img.px` and canvas elements.
+- The Codex locked portrait currently receives grayscale + `brightness(0.35)`. That is below this design system's intended readable locked state; retain legible name/unlock hint and use a distinct silhouette/value overlay rather than near-black art.
+
+The new square bust references are composition studies sized for portrait use, but remain `CONCEPT`. Do not register them as production-ready or run them through the pixelizing portrait loader. Required visual integration contract:
+1. Preserve a non-pixelized ink portrait path for bust art; render at the requested 40px/48px CSS size without palette reduction or pixelated interpolation.
+2. Keep each source as a clean individual square portrait, not the wide composite character sheet. Face, beard/hair identity, and key palette blocks must survive the 40px crop.
+3. Keep full-body art and exploration token as separate assets with stable ids. The existing 16×16 procedural sprite is a fallback, not an image export size for final art.
+4. Locked state must retain readable silhouette and contrast without relying on color alone.
+
+Local 40px browser preview, grayscale screenshot, and token-scale in-game QA are `NOT_RUN`; only the source contract and generated square compositions were inspected. This is a design/renderer compatibility gap, not a change to domain or Codex data logic.

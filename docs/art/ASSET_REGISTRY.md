@@ -25,6 +25,10 @@ Status vocabulary: `CONCEPT`, `APPROVED`, `MASTER_REQUIRED`, `IMPLEMENTATION_REA
 | Story expansion character + enemy production art queue | `MASTER_REQUIRED` | `STORY_ART_QUEUE.md` on latest main | Work from existing stable ids / aliases; follow queue order |
 
 
+| Liu Bei square bust concept v1 | `CONCEPT` | `concepts/liu-bei-bust-concept-v1-20261006.jpg` | Design reference only; current portrait loader pixelizes images |
+| Cao Cao square bust concept v1 | `CONCEPT` | `concepts/cao-cao-bust-concept-v1-20261006.jpg` | Design reference only; current portrait loader pixelizes images |
+| Sun Quan square bust concept v2 | `CONCEPT` | `concepts/sun-quan-bust-concept-v2-20261006.jpg` | Update full-body/token identity; design reference only |
+| Non-pixelized portrait asset compatibility | `MASTER_REQUIRED` | `web/src/assets.ts` pixelizes external portraits at default 48px/28 colors; Codex asks for 40px | Define a non-pixelized route before implementation; do not feed concept boards to current loader |
 | Original ruler master comparison v2 (Liu Bei / Cao Cao / Sun Quan) | `CONCEPT` | `concepts/ruler-master-comparison-v2-20261006.jpg` | Review separate assets at target sizes; no production approval yet |
 | E2 boss duo (Dong Zhuo / Lü Bu) concept | `CONCEPT` | `concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg` | Simplify armor ornament and preserve broad-vs-tall silhouette contrast |
 
@@ -38,7 +42,7 @@ The repository's current web client still uses the legacy dark/gold CSS theme an
 
 | Liu Bei individual master concept v1 | `CONCEPT` | `concepts/liu-bei-master-concept-v1-20261006.jpg` | Review portrait at 40px and token in grayscale; create final production exports later |
 | Cao Cao individual master concept v1 | `CONCEPT` | `concepts/cao-cao-master-concept-v1-20261006.jpg` | Review portrait at 40px and token in grayscale; create final production exports later |
-| Sun Quan individual master concept v1 | `CONCEPT` | `concepts/sun-quan-master-concept-v1-20261006.jpg` | Review portrait at 40px and token in grayscale; create final production exports later |
+| Sun Quan individual master concept v1 | `NEEDS_REVISION` | `concepts/sun-quan-master-concept-v1-20261006.jpg` | Update full-body and token to the more mature face in portrait v2 |
 | E2 campaign boss trio (Yuan Shao / Cao Cao battle variant / Cao Ren) | `CONCEPT` | `concepts/e2-boss-trio-yuan-shao-cao-cao-cao-ren-20261006.jpg` | Preserve tall/elegant, compact/dark, and broad/shield-first reads; simplify ornament before master approval |
 
 | E7 / E8 boss duo (Lu Xun / Meng Huo) | `CONCEPT` | `concepts/lu-xun-meng-huo-boss-concept-20261006.jpg` | Preserve fan-led vertical strategist vs shield-led broad ruler; review armor and token detail before approval |
