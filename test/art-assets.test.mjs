@@ -1,0 +1,34 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+
+const manifest = JSON.parse(await readFile(new URL("../web/assets/manifest.json", import.meta.url), "utf8"));
+const tiles = manifest.tileset;
+const itemSource = await readFile(new URL("../src/content/items.ts", import.meta.url), "utf8");
+const svg = await readFile(new URL("../web/assets/" + tiles.image, import.meta.url), "utf8");
+
+test("ink atlas covers current item/equipment IDs and required map marks", () => {
+  const itemBlock = itemSource.slice(itemSource.indexOf("export const ITEMS"), itemSource.indexOf("type E ="));
+  const equipmentBlock = itemSource.slice(itemSource.indexOf("const ROWS: E[] = ["), itemSource.indexOf("\n];", itemSource.indexOf("const ROWS: E[] = [")));
+  const itemIds = [...itemBlock.matchAll(/\bid:\s*"([^"]+)"/g)].map((match) => match[1]);
+  const equipmentIds = [...equipmentBlock.matchAll(/^\s*\["([^"]+)"/gm)].map((match) => match[1]);
+  assert.ok(itemIds.length > 0, "item IDs are parsed");
+  assert.ok(equipmentIds.length > 0, "equipment IDs are parsed");
+
+  const missing = [...new Set([...itemIds, ...equipmentIds])].filter((id) => !Object.hasOwn(tiles.map, "item-" + id));
+  assert.deepEqual(missing, [], "every content item/equipment ID has a manifest tile");
+
+  for (const key of ["floor", "corridor", "wall-cap", "wall-face", "stairs", "gate", "doorway", "trap", "sorcery", "recruit", "event", "player", "enemy", "chest", "pot", "fog", "item-unknown-item"]) {
+    assert.ok(Object.hasOwn(tiles.map, key), "manifest includes " + key);
+  }
+
+  const viewBox = svg.match(/viewBox="0 0 (\d+) (\d+)"/);
+  assert.ok(viewBox, "atlas has a fixed cell-grid viewBox");
+  const cols = Number(viewBox[1]) / tiles.tile;
+  const rows = Number(viewBox[2]) / tiles.tile;
+  for (const [name, cells] of Object.entries(tiles.map)) {
+    for (const [x, y] of cells) {
+      assert.ok(x >= 0 && y >= 0 && x < cols && y < rows, name + " cell is inside the atlas");
+    }
+  }
+});
