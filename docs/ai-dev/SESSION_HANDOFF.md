@@ -5,9 +5,9 @@
 - Current product source: `main` at `82b38b4bf877a015e99f53ae551bfedb45bbc790`
 - Latest Claude work: PR #10 merged; Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`
 - Art/design branch: `art/ink-graphic-novel-v1`
-- Art HEAD before this handoff commit: `2dd05daa2c9aa7a736f3444eac0c759316211d04`
+- Current art HEAD before this handoff update: `1f62514141d48fb1b101626395a30391583ce344`
 - Open PR: none
-- Latest art CI: commit `2dd05daa2c9aa7a736f3444eac0c759316211d04` passed CI run #83; previous concept/doc commit #82 passed. This next change is documentation/concept-only; local npm test/build/smoke are `NOT_RUN`.
+- Latest art CI: current commit `1f62514141d48fb1b101626395a30391583ce344` passed CI run #84; previous concept/doc commits through #83 passed. This next change is documentation/concept-only; local npm test/build/smoke are `NOT_RUN`.
 - Art direction and Product Baseline remain unchanged.
 
 ## Current Art Phase
