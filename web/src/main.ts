@@ -28,7 +28,7 @@ let meta: MetaState = load<MetaState>(META_KEY) ?? initialMeta(content);
 let run: RunEngine | null = null;
 let save: SaveData | null = null;
 let log: string[] = [];
-let modal: null | "bag" | "party" | "help" | "log" | "status" = null;
+let modal: null | "bag" | "party" | "help" | "log" | "status" | "map-guide" = null;
 let mapObserver: ResizeObserver | null = null;
 let autoMode: AutoMode = "manual";
 let speed = 1;
@@ -212,6 +212,7 @@ function render(): void {
   else if (modal === "bag") renderBag();
   else if (modal === "party") renderParty();
   else if (modal === "help") renderHelp();
+  else if (modal === "map-guide") renderMapGuide();
   else if (modal === "log") sheet(h("h2", {}, "행동 기록"), ...log.map(line => h("p", {}, line)));
   else if (modal === "status") sheet(h("h2", {}, "현재 상태"), hud(), h("p", {}, "군량은 탐험 중 소모됩니다. 위험도가 높아지면 증원이 나타날 수 있습니다. 층별 특수 규칙은 위 상태창에서 확인하세요."));
   if (pickTarget !== null) renderPicker();
@@ -284,14 +285,42 @@ function hud(): HTMLElement {
   );
 }
 
-function partyBars(): HTMLElement {
-  return h("div", { class: "panel party", style: "--party-size:" + run!.party().length }, ...run!.party().map((m) => h("div", { class: "member" + (m.hp <= 0 ? " ko" : "") },
-    pic(m.characterId, 32, m.name),
+function partyBars(exploration = false): HTMLElement {
+  return h("div", { class: "panel party" + (exploration ? " expedition-party" : ""), "aria-label": "아군 체력", "data-count": run!.party().length, style: "--party-size:" + run!.party().length }, ...run!.party().map((m) => h("div", { class: "member" + (m.hp <= 0 ? " ko" : "") },
+    pic(m.characterId, exploration ? 48 : 32, m.name),
     h("div", { class: "member-info" }, h("div", { class: "row tight" }, h("span", { class: "grow" }, m.name), h("span", { class: "num" }, m.hp <= 0 ? "KO" : m.hp + "/" + m.maxHp)), bar(m.hp, m.maxHp)))));
 }
 
 const PAD: (Direction | null)[] = ["nw", "n", "ne", "w", null, "e", "sw", "s", "se"];
 const ARROWS: Record<string, string> = { nw: "↖", n: "↑", ne: "↗", w: "←", e: "→", sw: "↙", s: "↓", se: "↘" };
+const DIRECTION_NAMES: Record<Direction, string> = { nw: "북서", n: "북", ne: "북동", w: "서", e: "동", sw: "남서", s: "남", se: "남동" };
+
+function explorationHeader(): HTMLElement {
+  const r = run!, dungeon = r.dungeon;
+  return h("header", { class: "exploration-header" },
+    h("div", { class: "expedition-heading" },
+      h("h1", { class: "expedition-title" }, r.campaign.name, h("span", { class: "floor-seal" }, r.depth + "F")),
+      button("지도 안내", () => { modal = "map-guide"; render(); }, { class: "map-guide-button" })),
+    h("div", { class: "expedition-stats", "aria-label": "원정 상태" },
+      h("span", { class: "food-stat" }, icon("rice-sack", 22), "군량 ", h("b", { class: "num" }, String(r.food))),
+      h("span", {}, "금 ", h("b", { class: "num" }, String(r.gold))),
+      h("span", { class: "danger-" + dungeon.danger }, "위험도 ", h("b", {}, DANGER_NAMES[dungeon.danger] ?? "")),
+      h("span", { class: "expedition-turn num" }, "Lv " + r.level + " · " + dungeon.turn + "턴")),
+    dungeon.floor.modifier || dungeon.mechanicStatus().length ? h("div", { class: "expedition-conditions" },
+      dungeon.floor.modifier ? h("span", {}, MODIFIER_NAMES[dungeon.floor.modifier] ?? dungeon.floor.modifier) : null,
+      ...dungeon.mechanicStatus().map(s => h("span", { class: s.urgent ? "urgent" : "" }, s.label + " " + s.value))) : null);
+}
+
+function renderMapGuide(): void {
+  sheet(h("h2", {}, "탐험 지도 안내"),
+    h("p", {}, "밝은 석재는 탐험한 길, 짙은 먹안개는 아직 확인하지 않은 곳입니다. 군주를 중심으로 지도가 움직입니다."),
+    h("dl", { class: "map-legend" },
+      h("dt", {}, "군주 / 적"), h("dd", {}, "작은 인물은 아군 군주, 주홍 표시가 있는 인물은 적 부대입니다. 적과 만나면 전투가 시작됩니다."),
+      h("dt", {}, "계단"), h("dd", {}, "계단 위로 이동한 뒤 ‘계단 ▼’를 눌러 다음 층으로 내려갑니다."),
+      h("dt", {}, "상자 / 항아리 / 약 주머니"), h("dd", {}, "물품이 있는 칸입니다. 그 칸으로 이동하면 획득합니다."),
+      h("dt", {}, "함정 / 숨겨진 통로"), h("dd", {}, "‘주변 탐색’으로 확인합니다. 자동 탐색은 발견한 함정을 피합니다.")),
+    h("p", {}, "방향 버튼은 한 칸 이동, 가운데 ‘대기’는 1턴 진행입니다. 지도를 누르면 해당 칸까지 이동하다가 발견이나 적 조우 시 멈춥니다."));
+}
 
 function move(direction: Direction): void { act({ type: "dungeon", command: { type: "move", direction } }); render(); }
 
@@ -311,26 +340,26 @@ function travelTo(target: { x: number; y: number }): void {
 
 function renderDungeon(): void {
   const r = run!;
-  const canvas = h("canvas", { id: "map", "aria-label": "던전 지도" });
+  const canvas = h("canvas", { id: "map", "aria-label": "던전 지도", "aria-describedby": "map-instruction" });
   const stage = h("div", { class: "map-stage" }, canvas);
   canvas.addEventListener("pointerup", (event) => travelTo(tileAt(canvas, r.dungeon, event.clientX, event.clientY)));
   const onStairs = r.dungeon.position.x === r.dungeon.floor.stairs.x && r.dungeon.position.y === r.dungeon.floor.stairs.y;
   put(
-    hud(), stage, partyBars(),
+    explorationHeader(), stage, partyBars(true),
     h("div", { class: "dungeon-controls" },
       h("div", { class: "pad" }, ...PAD.map((d) => d === null
-        ? button("·", () => { act({ type: "dungeon", command: { type: "wait" } }); render(); }, { title: "대기 (1턴)", "aria-label": "대기" })
-        : button(ARROWS[d]!, () => move(d), { "aria-label": d }))),
+        ? button("대기", () => { act({ type: "dungeon", command: { type: "wait" } }); render(); }, { title: "대기 (1턴)", "aria-label": "대기" })
+        : button(ARROWS[d]!, () => move(d), { title: DIRECTION_NAMES[d] + "쪽 이동", "aria-label": DIRECTION_NAMES[d] + "쪽 이동", "data-direction": d }))),
       h("div", { class: "grid2 grow" },
         button("자동 탐색", () => { act({ type: "auto-explore" }); render(); }, { class: "primary" }),
         button("주변 탐색", () => { act({ type: "dungeon", command: { type: "search" } }); render(); }),
         button("조사", () => { act({ type: "dungeon", command: { type: "interact" } }); render(); }),
         button("계단 ▼", () => { act({ type: "dungeon", command: { type: "descend" } }); render(); }, { disabled: !onStairs }),
-        button("가방 (" + r.inventory().length + "/10)", () => { modal = "bag"; render(); }),
-        button("부대", () => { modal = "party"; render(); }),
       )),
-    utilityBar(),
-    h("div", { class: "latest-event", role: "status" }, log[0] ?? "지도를 누르거나 방향 버튼으로 이동하세요."),
+    utilityBar(true),
+    h("div", { class: "exploration-message" },
+      h("span", { id: "map-instruction" }, onStairs ? "계단 위 · 다음 층으로 이동 가능" : "지도 터치로 이동 · 가운데 대기는 1턴"),
+      h("div", { class: "latest-event", role: "status" }, log[0] ?? "방향 버튼으로도 이동할 수 있습니다.")),
   );
   const enemyKey = (groupId: string): string => {
     const units = r.group(groupId)?.units ?? [];
@@ -347,8 +376,10 @@ function renderDungeon(): void {
 }
 
 
-function utilityBar(): HTMLElement {
+function utilityBar(exploration = false): HTMLElement {
   return h("nav", { class: "utility-bar", "aria-label": "게임 안내" },
+    exploration ? button("가방 " + run!.inventory().length + "/10", () => { modal = "bag"; render(); }) : null,
+    exploration ? button("부대", () => { modal = "party"; render(); }) : null,
     button("상태", () => { modal = "status"; render(); }),
     button("기록", () => { modal = "log"; render(); }),
     button("도움말", () => { modal = "help"; render(); }));

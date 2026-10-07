@@ -383,3 +383,71 @@ button.primary {
 .sheet-head { background-color: var(--paper-light); }
 /* The existing illustrated story heading remains light with dark text. */
 .story-scene > h2::before { display: none; }
+
+/* Stage 2: expedition sheet. Map gets the flexible space; controls keep their touch size. */
+#app[data-screen="dungeon"] {
+  min-height: 0; gap: 5px;
+  grid-template-rows: auto minmax(160px, 1fr) auto auto auto auto;
+}
+.exploration-header { min-width: 0; border-bottom: 1px solid var(--ink-soft); padding-bottom: 5px; }
+.expedition-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.expedition-title { display: flex; align-items: center; gap: 8px; font-size: 20px; letter-spacing: .02em; text-align: left; min-width: 0; }
+.floor-seal { flex: none; font-size: 14px; color: #7f2f24; border: 2px solid #7f2f24; padding: 2px 3px; transform: rotate(-3deg); line-height: 1.2; }
+.map-guide-button { flex: none; font-size: 12px; padding: 4px 7px; }
+.expedition-stats { display: flex; flex-wrap: wrap; align-items: center; gap: 3px 12px; font-size: 13px; line-height: 24px; }
+.expedition-stats > span { white-space: nowrap; }
+.expedition-stats b { font-weight: 700; }
+.expedition-stats .food-stat { display: flex; align-items: center; gap: 3px; }
+.expedition-stats .icon { background: transparent; border: 0; padding: 0; }
+.expedition-stats .danger-stable { color: #36594a; }
+.expedition-stats .danger-caution { color: #795522; }
+.expedition-stats .danger-danger { color: #7f2f24; }
+.expedition-turn { margin-left: auto; font-size: 12px; color: var(--muted-text); }
+.expedition-conditions { display: flex; flex-wrap: wrap; gap: 3px 10px; font-size: 12px; color: var(--ink-soft); }
+.expedition-conditions .urgent { color: #7f2f24; font-weight: 700; }
+[data-screen="dungeon"] .map-stage { position: relative; background: rgba(23,21,19,.045); border: 1px solid var(--ink-soft); border-image: url("assets/ui/paper-frame.svg") 6 / 2px / 0 stretch; }
+[data-screen="dungeon"] .map-stage canvas#map { border: 0; }
+[data-screen="dungeon"] .expedition-party { border: 0; border-image: none; border-bottom: 1px solid var(--line-soft); background: transparent; padding: 6px 0; gap: 6px; }
+[data-screen="dungeon"] .expedition-party .member { flex-direction: row; gap: 5px; font-size: 12px; }
+[data-screen="dungeon"] .expedition-party .member img { display: block; width: 38px; height: 46px; object-fit: cover; object-position: top; border: 0; background: transparent; flex: none; }
+[data-screen="dungeon"] .expedition-party .member-info { gap: 5px; }
+[data-screen="dungeon"] .expedition-party .member-info .row { text-align: left; }
+[data-screen="dungeon"] .expedition-party .member-info .num { font-size: 11px; white-space: nowrap; }
+[data-screen="dungeon"] .expedition-party .member-info .bar { height: 5px; }
+[data-screen="dungeon"] .expedition-party:is([data-count="4"],[data-count="5"]) .member { flex-direction: column; gap: 2px; }
+[data-screen="dungeon"] .expedition-party:is([data-count="4"],[data-count="5"]) .member img { width: 30px; height: 30px; }
+[data-screen="dungeon"] .expedition-party:is([data-count="4"],[data-count="5"]) .member-info .row { text-align: center; }
+[data-screen="dungeon"] .dungeon-controls { gap: 8px; }
+[data-screen="dungeon"] .dungeon-controls .pad button { color: var(--ink); font-size: 20px; }
+[data-screen="dungeon"] .dungeon-controls .pad button[aria-label="대기"] { font-size: 12px; }
+[data-screen="dungeon"] .dungeon-controls .grid2 { grid-template-rows: 1fr 1fr; gap: 4px; }
+[data-screen="dungeon"] .dungeon-controls .grid2 button { font-family: var(--font-display); font-weight: 700; font-size: 15px; white-space: normal; }
+[data-screen="dungeon"] .utility-bar { grid-template-columns: repeat(5,minmax(0,1fr)); gap: 4px; }
+[data-screen="dungeon"] .utility-bar button { font-size: 12px; min-width: 0; overflow-wrap: anywhere; }
+.exploration-message { min-width: 0; font-size: 11px; line-height: 16px; color: var(--muted-text); }
+[data-screen="dungeon"] .latest-event { color: var(--ink-soft); font-size: 12px; line-height: 18px; }
+.map-legend { margin: 0; display: grid; gap: 5px; }
+.map-legend dt { font-weight: 700; border-bottom: 1px solid var(--line-soft); margin-top: 8px; padding-bottom: 3px; }
+.map-legend dd { margin: 0; line-height: 1.65; color: var(--muted-text); }
+@media (max-width: 374px) {
+  .expedition-title { font-size: 18px; }
+  .expedition-stats { gap: 2px 9px; font-size: 12px; }
+  .expedition-turn { font-size: 11px; }
+  [data-screen="dungeon"] .expedition-party .member img { width: 30px; height: 40px; }
+}
+/* On a short landscape viewport, map and command column fit side by side. */
+@media (orientation: landscape) and (max-height: 540px) and (min-width: 600px) {
+  #app[data-screen="dungeon"] {
+    max-width: 900px; min-height: 0;
+    grid-template-columns: minmax(180px,1fr) minmax(300px,340px);
+    grid-template-rows: auto auto minmax(138px,1fr) auto auto;
+    gap: 5px 12px;
+  }
+  .exploration-header { grid-column: 1 / -1; }
+  [data-screen="dungeon"] .map-stage { grid-column: 1; grid-row: 2 / 6; }
+  [data-screen="dungeon"] .expedition-party { grid-column: 2; grid-row: 2; padding: 3px 0; }
+  [data-screen="dungeon"] .dungeon-controls { grid-column: 2; grid-row: 3; align-items: center; }
+  [data-screen="dungeon"] .dungeon-controls .grid2 { align-self: stretch; }
+  [data-screen="dungeon"] .utility-bar { grid-column: 2; grid-row: 4; }
+  .exploration-message { grid-column: 2; grid-row: 5; }
+}
