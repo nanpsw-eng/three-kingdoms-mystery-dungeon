@@ -3,9 +3,9 @@ name: visual-smoke
 on:
   push:
     branches: ["art/ink-graphic-novel-v1", "main"]
-    paths: ["web/**", "scripts/e2e-smoke.mjs", "scripts/serve.mjs", "scripts/art/visual-coverage-smoke.mjs", ".github/workflows/visual-smoke.yml"]
+    paths: ["web/**", "scripts/e2e-smoke.mjs", "scripts/mobile-ux-smoke.mjs", "scripts/serve.mjs", "scripts/art/visual-coverage-smoke.mjs", ".github/workflows/visual-smoke.yml"]
   pull_request:
-    paths: ["web/**", "scripts/e2e-smoke.mjs", "scripts/serve.mjs", "scripts/art/visual-coverage-smoke.mjs", ".github/workflows/visual-smoke.yml"]
+    paths: ["web/**", "scripts/e2e-smoke.mjs", "scripts/mobile-ux-smoke.mjs", "scripts/serve.mjs", "scripts/art/visual-coverage-smoke.mjs", ".github/workflows/visual-smoke.yml"]
   workflow_dispatch:
 
 permissions:
@@ -35,6 +35,7 @@ jobs:
           done
           node scripts/e2e-smoke.mjs http://localhost:8092 visual-evidence > visual-evidence/smoke-result.json
           node scripts/art/visual-coverage-smoke.mjs http://localhost:8092 visual-evidence
+          node scripts/mobile-ux-smoke.mjs http://localhost:8092 visual-evidence
       - uses: actions/upload-artifact@v4
         if: always()
         with:

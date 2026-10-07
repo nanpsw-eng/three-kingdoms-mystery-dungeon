@@ -47,7 +47,8 @@ export function codexScreen(ui: CodexUi): HTMLElement {
       const open = openId === c.id && c.unlocked;
       const row = btn("", () => { openId = open ? null : c.id; ui.render(); }, "choice codex-entry" + (c.unlocked ? "" : " locked"));
       row.style.cssText = "display:flex;gap:10px;align-items:flex-start;width:100%;white-space:normal;text-align:left";
-      const portrait = ui.portrait(c.id, 40, c.name);
+      const portrait = ui.portrait(c.id, open ? 120 : 40, c.name);
+      row.setAttribute("aria-expanded", String(open));
       if (!c.unlocked) portrait.style.filter = "grayscale(1) brightness(0.35)";
       const title = (c.kind === "ruler" ? "군주 · " : "") + (c.unlocked ? c.name + " · " + (CLASS[c.characterClass] ?? "") : "🔒 " + c.name);
       const lines: (Node | string | null)[] = [el("b", "", title)];
@@ -76,5 +77,5 @@ export function codexScreen(ui: CodexUi): HTMLElement {
     for (const i of view.items) grid.append(el("span", "codex-entry" + (i.seen ? "" : " locked"), i.seen ? i.name : "???"));
     body.append(grid);
   }
-  return el("div", "panel codex", el("div", "row", el("h2", "", "도감 · 업적"), btn("닫기", ui.close)), tabs, body);
+  return el("div", "panel codex", el("div", "codex-header", el("h2", "", "도감 · 업적"), btn("닫기", ui.close)), tabs, body);
 }
