@@ -1,0 +1,66 @@
+{
+  "references": {
+    "paintings": [],
+    "rulers": [
+      {
+        "id": "liu-bei",
+        "source": "http://localhost:8092/assets/reference/liu-bei-exploration-token-concept-v2.png",
+        "ratio": 0.859375,
+        "portrait": true,
+        "full": true
+      },
+      {
+        "id": "cao-cao",
+        "source": "http://localhost:8092/assets/reference/cao-cao-exploration-token-concept-v2.png",
+        "ratio": 0.9186602870813397,
+        "portrait": true,
+        "full": true
+      },
+      {
+        "id": "sun-quan",
+        "source": "http://localhost:8092/assets/reference/sun-quan-exploration-token-concept-v2.png",
+        "ratio": 0.6666666666666666,
+        "portrait": true,
+        "full": true
+      }
+    ]
+  },
+  "보스": {
+    "images": 39,
+    "seals": 0,
+    "overflow": false,
+    "broken": 0
+  },
+  "업적": {
+    "images": 0,
+    "seals": 16,
+    "overflow": false,
+    "broken": 0
+  },
+  "물품": {
+    "images": 22,
+    "seals": 0,
+    "overflow": false,
+    "broken": 0
+  },
+  "story": {
+    "backdrop": true,
+    "overflow": false
+  },
+  "map": {
+    "calls": [
+      "gate",
+      "stairs",
+      "trap",
+      "sorcery",
+      "chest",
+      "pot",
+      "fog",
+      "environment"
+    ],
+    "tokenSource": "http://localhost:8092/assets/reference/liu-bei-exploration-token-concept-v2.png"
+  },
+  "reducedMotion": true,
+  "passed": true,
+  "errors": []
+}

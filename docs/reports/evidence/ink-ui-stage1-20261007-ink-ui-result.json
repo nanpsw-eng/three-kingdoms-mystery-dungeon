@@ -1,0 +1,45 @@
+{
+  "materials": [
+    {
+      "name": "paper",
+      "source": "assets/reference/visual-bible-approved-source.png",
+      "applied": true
+    },
+    {
+      "name": "ink",
+      "source": "assets/reference/visual-bible-approved-source.png",
+      "applied": true
+    },
+    {
+      "name": "vermilion",
+      "source": "assets/reference/visual-bible-approved-source.png",
+      "applied": true
+    },
+    {
+      "name": "mountains",
+      "source": "assets/reference/visual-bible-approved-source.png",
+      "applied": true
+    }
+  ],
+  "contrast": [
+    {
+      "key": "ink",
+      "minimum": 5.028587216763487
+    },
+    {
+      "key": "paper",
+      "minimum": 5.309052970564103
+    },
+    {
+      "key": "ink",
+      "minimum": 5.028587216763487
+    },
+    {
+      "key": "vermilion",
+      "minimum": 5.663629188065056
+    }
+  ],
+  "fallback": true,
+  "passed": true,
+  "errors": []
+}

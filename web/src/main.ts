@@ -1,3 +1,4 @@
+import { applyInkTheme } from "./ink-theme.js";
 import {
   MVP_CONTENT, RunEngine, buildCodex, RepeatAutoController, applyRunToMeta, chooseAllAttackCommand, chooseSmartCommand, initialMeta, FORMATION_SLOTS,
   type SkillDefinition, type ItemDefinition, type AbilityTargeting, type BattleCommand, type Direction, type FormationSlot, type MetaState, type RunCommand, type RunEvent, type RunOptions,
@@ -639,4 +640,4 @@ window.addEventListener("resize", () => render());
 };
 
 render();
-void loadAssets(() => render());
+void loadAssets(() => { applyInkTheme(); render(); });

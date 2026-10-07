@@ -935,6 +935,42 @@
         184,
         80
       ]
+    },
+    "ui:paper": {
+      "image": "reference/visual-bible-approved-source.png",
+      "rect": [
+        520,
+        535,
+        100,
+        90
+      ]
+    },
+    "ui:ink": {
+      "image": "reference/visual-bible-approved-source.png",
+      "rect": [
+        700,
+        311,
+        50,
+        48
+      ]
+    },
+    "ui:vermilion": {
+      "image": "reference/visual-bible-approved-source.png",
+      "rect": [
+        895,
+        311,
+        50,
+        48
+      ]
+    },
+    "ui:mountains": {
+      "image": "reference/visual-bible-approved-source.png",
+      "rect": [
+        717,
+        101,
+        190,
+        135
+      ]
     }
   },
   "tokenOverrides": {

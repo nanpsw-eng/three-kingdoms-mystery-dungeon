@@ -13,7 +13,7 @@
   --vermilion: #a64032;    /* primary action, current target, warning */
   --vermilion-light: #b34535;
   --muted: #756c63;        /* canonical neutral swatch */
-  --muted-text: #655e55;   /* readable small text on hanji, contrast >= 4.5:1 */
+  --muted-text: #595249;   /* readable small text on hanji, contrast >= 4.5:1 */
   --blue-gray: #77838d;    /* ally / secondary semantic (limited) */
   --jade: #668274;         /* healing / success (limited) */
   --energy: #a77d42;       /* energy fill only */
@@ -243,14 +243,31 @@ img.fullbody-illustration {
 .modal .sheet p { line-height: 1.65; overflow-wrap: anywhere; }
 .item-description { display: block; color: var(--muted-text); font-size: 12px; }
 .modal .fullbody-illustration { width: 100px; height: 150px; flex: none; }
-#app[data-screen="codex"] { height: 100dvh; min-height: 0; }
+#app[data-screen="codex"] { height: 100dvh; min-height: 0; padding-top: max(12px, env(safe-area-inset-top)); }
 .codex { display: flex; flex-direction: column; min-height: 0; flex: 1; gap: 8px; }
 .codex-header { display: flex; justify-content: space-between; align-items: center; flex: none; }
 .codex-header h2 { margin: 0; }
-.codex > .row { flex: none; }
-.codex > .row button { flex: 1; min-width: 44px; padding: 4px; font-size: 12px; white-space: nowrap; }
-.codex-body { overflow-y: auto; min-height: 0; overscroll-behavior: contain; }
-.codex-entry .fullbody-illustration { width: 90px; height: 150px; flex: none; }
+/* Scroll the list, never compress its cards into the viewport's height. */
+.codex-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; flex: none; }
+.codex-tabs button { min-width: 0; padding: 6px 2px; font-size: 12px; white-space: normal; overflow-wrap: anywhere; }
+.codex-body { display: flex; flex-direction: column; flex: 1 1 0; gap: 8px; overflow-y: auto; min-height: 0; min-width: 0; overscroll-behavior: contain; padding: 3px; }
+.codex-body > * { flex: none; }
+.codex-entry { min-width: 0; height: auto; overflow-wrap: anywhere; }
+.codex-character { display: flex; gap: 10px; align-items: flex-start; width: 100%; padding: 10px; white-space: normal; text-align: left; }
+.codex-character > img { display: block; flex: none; width: 48px; height: 48px; object-fit: contain; }
+.codex-copy { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; line-height: 1.55; }
+.codex-name { font-size: 15px; line-height: 1.45; word-break: keep-all; overflow-wrap: anywhere; }
+.codex-copy small { display: block; font-size: 12px; line-height: 1.6; color: var(--muted-text); }
+.codex-copy p { margin: 4px 0 0; font-size: 13px; line-height: 1.7; }
+.codex-character.expanded > img { width: 90px; height: 150px; }
+.codex-character[aria-disabled="true"] { cursor: default; }
+@media (max-width: 380px) {
+  #app[data-screen="codex"] { padding-left: 8px; padding-right: 8px; }
+  .codex { padding: 10px; }
+  .codex-character.expanded { flex-direction: column; }
+  .codex-character.expanded > img { align-self: center; }
+  .codex-character.expanded .codex-copy { width: 100%; }
+}
 @media (max-height: 650px) {
   [data-screen="dungeon"] .member img { display: none; }
   [data-screen="dungeon"] .party { padding: 5px; }
@@ -292,3 +309,77 @@ img.fullbody-illustration {
 .story-text { min-width: 0; flex: 1; }
 [data-screen="battle"] .unit-head .fullbody-illustration { width: 32px; height: 44px; object-fit: contain; }
 .story-scene > h2 { color: var(--ink); clip-path: none; width: 100%; padding: 6px 30% 6px 0; }
+
+@media (max-width: 380px) { .codex-items { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Approved ink/hanji common UI, stage 1. Text stays live and decoration stays inert. */
+body {
+  background-color: var(--paper);
+  background-image: linear-gradient(rgba(242,235,221,.76), rgba(242,235,221,.76)), var(--ui-paper, none);
+  background-size: auto, 160px 144px;
+}
+body::before {
+  content: ""; position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+  width: min(100%, 520px); height: 130px; z-index: 0; pointer-events: none;
+  background: var(--ui-mountains, none) center top / 100% auto no-repeat;
+  opacity: .22; mask-image: linear-gradient(black, transparent);
+}
+#app { position: relative; isolation: isolate; z-index: 1; }
+h1 { letter-spacing: .03em; text-shadow: .5px .5px 0 rgba(23,21,19,.16); }
+h2 {
+  position: relative; isolation: isolate; background: transparent; clip-path: none;
+  padding: 6px 18px 6px 12px; color: #fff8ee; letter-spacing: .08em;
+}
+h2::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-color: var(--ink); background-image: linear-gradient(rgba(23,21,19,.55), rgba(23,21,19,.55)), var(--ui-ink, none); background-size: 90px 86px;
+  mask: url("assets/ui/brush-strip.svg") center / 100% 100% no-repeat;
+}
+.panel, .field, .hud, .modal > .sheet {
+  background-color: var(--paper-light);
+  background-image: linear-gradient(rgba(242,235,221,.83), rgba(242,235,221,.83)), var(--ui-paper, none);
+  background-size: auto, 160px 144px;
+  border-image: url("assets/ui/paper-frame.svg") 6 / 2px / 0 stretch;
+  box-shadow: none;
+}
+button {
+  background-color: var(--paper-light);
+  background-image: linear-gradient(rgba(242,235,221,.85), rgba(242,235,221,.85)), var(--ui-paper, none);
+  background-size: auto, 160px 144px;
+  border-image: url("assets/ui/paper-frame.svg") 6 / 2px / 0 stretch;
+  box-shadow: none;
+}
+button:hover:not(:disabled) { background-color: #fbf6ec; }
+button.selected {
+  border-image: none; border-color: var(--vermilion); background-color: #fbf3ea;
+  box-shadow: inset 0 0 0 1px var(--vermilion);
+}
+button.selected::after { width: 7px; height: 9px; border: 1px solid #7f2f24; border-radius: 1px; transform: rotate(-6deg); }
+button.primary {
+  border-image: none; background-color: #7f2f24;
+  background-image: linear-gradient(rgba(100,28,20,.70), rgba(100,28,20,.70)), var(--ui-vermilion, none);
+  background-size: auto, 84px 80px; color: #fff8ee; border-color: #7f2f24;
+}
+/* Action areas get the approved charcoal brush material, away from long reading text. */
+.dungeon-controls .grid2 button:not(.primary), .utility-bar button, .modes button:not(.selected), .battle-actions > button:not(.selected) {
+  background-color: var(--ink-soft); background-image: linear-gradient(rgba(23,21,19,.55), rgba(23,21,19,.55)), var(--ui-ink, none);
+  background-size: 90px 86px; border-image: none; border-color: var(--ink-soft); color: #fff8ee;
+}
+.dungeon-controls .grid2 button:not(.primary):hover:not(:disabled), .utility-bar button:hover:not(:disabled),
+.modes button:not(.selected):hover:not(:disabled), .battle-actions > button:not(.selected):hover:not(:disabled) { background-color: var(--ink); }
+.codex-entry, .codex-entry.locked {
+  background-color: transparent; box-shadow: none;
+  border: 0; border-bottom: 1px solid var(--line-soft); border-image: none;
+}
+.codex-character:hover:not(:disabled) { background-color: rgba(255,248,236,.62); }
+.codex-entry.expanded {
+  border-left: 2px solid var(--vermilion);
+  background-color: rgba(255,248,236,.58);
+}
+.codex-tabs button { background-image: none; background-color: transparent; border-image: none; border-color: var(--line-soft); }
+.codex-tabs button.selected { background-color: #fbf3ea; }
+.codex-boss, .codex-achievement { padding: 10px 8px; }
+.codex-note { border-left: 0; padding-left: 0; }
+.sheet-head { background-color: var(--paper-light); }
+/* The existing illustrated story heading remains light with dark text. */
+.story-scene > h2::before { display: none; }
