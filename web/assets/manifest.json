@@ -694,5 +694,373 @@
         ]
       ]
     }
+  },
+  "paintings": {
+    "portrait:liu-bei": {
+      "image": "reference/liu-bei-bust-concept-v1.jpg"
+    },
+    "full:liu-bei": {
+      "image": "reference/liu-bei-full-body-concept-v1.jpg"
+    },
+    "portrait:cao-cao": {
+      "image": "reference/cao-cao-bust-concept-v1.jpg"
+    },
+    "full:cao-cao": {
+      "image": "reference/cao-cao-full-body-concept-v1.jpg"
+    },
+    "portrait:sun-quan": {
+      "image": "reference/sun-quan-bust-concept-v2.jpg"
+    },
+    "full:sun-quan": {
+      "image": "reference/sun-quan-full-body-concept-v1.jpg"
+    },
+    "portrait:sima-yi": {
+      "image": "reference/sima-yi-master-concept-v2.jpg",
+      "rect": [
+        0,
+        0,
+        570,
+        620
+      ]
+    },
+    "full:sima-yi": {
+      "image": "reference/sima-yi-master-concept-v2.jpg",
+      "rect": [
+        560,
+        0,
+        440,
+        640
+      ]
+    },
+    "portrait:boss-dong-zhuo": {
+      "image": "reference/dong-zhuo-lu-bu-boss-concept.jpg",
+      "rect": [
+        0,
+        0,
+        325,
+        230
+      ]
+    },
+    "full:boss-dong-zhuo": {
+      "image": "reference/dong-zhuo-lu-bu-boss-concept.jpg",
+      "rect": [
+        0,
+        205,
+        320,
+        245
+      ]
+    },
+    "portrait:lu-bu": {
+      "image": "reference/dong-zhuo-lu-bu-boss-concept.jpg",
+      "rect": [
+        350,
+        0,
+        320,
+        230
+      ]
+    },
+    "full:lu-bu": {
+      "image": "reference/dong-zhuo-lu-bu-boss-concept.jpg",
+      "rect": [
+        350,
+        205,
+        320,
+        245
+      ]
+    },
+    "portrait:yuan-shao": {
+      "image": "reference/e2-boss-trio-yuan-shao-cao-cao-cao-ren.jpg",
+      "rect": [
+        0,
+        20,
+        415,
+        410
+      ]
+    },
+    "full:yuan-shao": {
+      "image": "reference/e2-boss-trio-yuan-shao-cao-cao-cao-ren.jpg",
+      "rect": [
+        0,
+        420,
+        415,
+        425
+      ]
+    },
+    "portrait:cao-ren": {
+      "image": "reference/e2-boss-trio-yuan-shao-cao-cao-cao-ren.jpg",
+      "rect": [
+        855,
+        20,
+        415,
+        410
+      ]
+    },
+    "full:cao-ren": {
+      "image": "reference/e2-boss-trio-yuan-shao-cao-cao-cao-ren.jpg",
+      "rect": [
+        855,
+        420,
+        415,
+        425
+      ]
+    },
+    "portrait:lu-xun": {
+      "image": "reference/lu-xun-meng-huo-boss-concept.jpg",
+      "rect": [
+        0,
+        0,
+        630,
+        410
+      ]
+    },
+    "full:lu-xun": {
+      "image": "reference/lu-xun-meng-huo-boss-concept.jpg",
+      "rect": [
+        0,
+        420,
+        630,
+        425
+      ]
+    },
+    "portrait:meng-huo": {
+      "image": "reference/lu-xun-meng-huo-boss-concept.jpg",
+      "rect": [
+        650,
+        0,
+        620,
+        410
+      ]
+    },
+    "full:meng-huo": {
+      "image": "reference/lu-xun-meng-huo-boss-concept.jpg",
+      "rect": [
+        650,
+        420,
+        620,
+        425
+      ]
+    },
+    "map:stairs": {
+      "image": "reference/dungeon-surfaces-concept-v1.jpg",
+      "rect": [
+        348,
+        325,
+        264,
+        266
+      ]
+    },
+    "map:gate": {
+      "image": "reference/dungeon-surfaces-concept-v1.jpg",
+      "rect": [
+        660,
+        325,
+        264,
+        266
+      ]
+    },
+    "map:fog": {
+      "image": "reference/dungeon-surfaces-concept-v1.jpg",
+      "rect": [
+        38,
+        325,
+        260,
+        266
+      ]
+    },
+    "map:chest": {
+      "image": "reference/dungeon-objects-concept-v1.jpg",
+      "rect": [
+        24,
+        25,
+        201,
+        199
+      ]
+    },
+    "map:pot": {
+      "image": "reference/dungeon-objects-concept-v1.jpg",
+      "rect": [
+        255,
+        25,
+        205,
+        199
+      ]
+    },
+    "map:environment": {
+      "image": "reference/dungeon-objects-concept-v1.jpg",
+      "rect": [
+        485,
+        244,
+        225,
+        230
+      ]
+    },
+    "map:enemy-scout": {
+      "image": "reference/dungeon-objects-concept-v1.jpg",
+      "rect": [
+        250,
+        245,
+        225,
+        230
+      ]
+    },
+    "map:find": {
+      "image": "reference/dungeon-objects-concept-v1.jpg",
+      "rect": [
+        731,
+        245,
+        220,
+        230
+      ]
+    },
+    "map:trap": {
+      "image": "reference/dungeon-trap-mark-concept-v2.png"
+    },
+    "map:sorcery": {
+      "image": "reference/dungeon-sorcery-mark-concept-v3.png"
+    },
+    "story:backdrop": {
+      "image": "reference/story-scene-ui.jpg",
+      "rect": [
+        0,
+        0,
+        445,
+        100
+      ]
+    },
+    "story:ornament": {
+      "image": "reference/story-scene-ui.jpg",
+      "rect": [
+        260,
+        113,
+        184,
+        80
+      ]
+    }
+  },
+  "tokenOverrides": {
+    "liu-bei": "reference/liu-bei-exploration-token-concept-v2.png",
+    "cao-cao": "reference/cao-cao-exploration-token-concept-v2.png",
+    "sun-quan": "reference/sun-quan-exploration-token-concept-v2.png",
+    "guan-yu": "tokens/illustrated/guan-yu.webp",
+    "zhang-fei": "tokens/illustrated/zhang-fei.webp",
+    "zhao-yun": "tokens/illustrated/zhao-yun.webp",
+    "huang-zhong": "tokens/illustrated/huang-zhong.webp",
+    "zhuge-liang": "tokens/illustrated/zhuge-liang.webp",
+    "zhang-liao": "tokens/illustrated/zhang-liao.webp",
+    "xiahou-dun": "tokens/illustrated/xiahou-dun.webp",
+    "jia-xu": "tokens/illustrated/jia-xu.webp",
+    "taishi-ci": "tokens/illustrated/taishi-ci.webp",
+    "zhou-yu": "tokens/illustrated/zhou-yu.webp",
+    "gan-ning": "tokens/illustrated/gan-ning.webp",
+    "hua-tuo": "tokens/illustrated/hua-tuo.webp",
+    "yt-spear": "tokens/illustrated/yt-spear.webp",
+    "yt-archer": "tokens/illustrated/yt-archer.webp",
+    "yt-raider": "tokens/illustrated/yt-raider.webp",
+    "yt-sorcerer": "tokens/illustrated/yt-sorcerer.webp",
+    "yt-chanter": "tokens/illustrated/yt-chanter.webp",
+    "boss-zhang-bao": "tokens/illustrated/boss-zhang-bao.webp",
+    "boss-zhang-liang": "tokens/illustrated/boss-zhang-liang.webp",
+    "boss-zhang-jiao": "tokens/illustrated/boss-zhang-jiao.webp",
+    "lu-bu": "tokens/illustrated/lu-bu.webp",
+    "sun-jian": "tokens/illustrated/sun-jian.webp",
+    "yuan-shao": "tokens/illustrated/yuan-shao.webp",
+    "cao-ren": "tokens/illustrated/cao-ren.webp",
+    "hua-xiong": "tokens/illustrated/hua-xiong.webp",
+    "chen-gong": "tokens/illustrated/chen-gong.webp",
+    "zang-ba": "tokens/illustrated/zang-ba.webp",
+    "gao-shun": "tokens/illustrated/gao-shun.webp",
+    "mi-zhu": "tokens/illustrated/mi-zhu.webp",
+    "xu-chu": "tokens/illustrated/xu-chu.webp",
+    "dian-wei": "tokens/illustrated/dian-wei.webp",
+    "xun-yu": "tokens/illustrated/xun-yu.webp",
+    "yan-liang": "tokens/illustrated/yan-liang.webp",
+    "wen-chou": "tokens/illustrated/wen-chou.webp",
+    "lu-su": "tokens/illustrated/lu-su.webp",
+    "huang-gai": "tokens/illustrated/huang-gai.webp",
+    "pang-tong": "tokens/illustrated/pang-tong.webp",
+    "cheng-pu": "tokens/illustrated/cheng-pu.webp",
+    "ma-chao": "tokens/illustrated/ma-chao.webp",
+    "wei-yan": "tokens/illustrated/wei-yan.webp",
+    "fa-zheng": "tokens/illustrated/fa-zheng.webp",
+    "xu-huang": "tokens/illustrated/xu-huang.webp",
+    "xiahou-yuan": "tokens/illustrated/xiahou-yuan.webp",
+    "lu-xun": "tokens/illustrated/lu-xun.webp",
+    "lu-meng": "tokens/illustrated/lu-meng.webp",
+    "zhou-tai": "tokens/illustrated/zhou-tai.webp",
+    "meng-huo": "tokens/illustrated/meng-huo.webp",
+    "zhu-rong": "tokens/illustrated/zhu-rong.webp",
+    "ma-su": "tokens/illustrated/ma-su.webp",
+    "sima-yi": "tokens/illustrated/sima-yi.webp",
+    "jiang-wei": "tokens/illustrated/jiang-wei.webp",
+    "zhang-he": "tokens/illustrated/zhang-he.webp",
+    "deng-ai": "tokens/illustrated/deng-ai.webp",
+    "boss-dong-zhuo": "tokens/illustrated/boss-dong-zhuo.webp",
+    "boss-li-ru": "tokens/illustrated/boss-li-ru.webp",
+    "boss-ji-ling": "tokens/illustrated/boss-ji-ling.webp",
+    "boss-yuan-shu": "tokens/illustrated/boss-yuan-shu.webp",
+    "boss-gong-sui": "tokens/illustrated/boss-gong-sui.webp",
+    "boss-meng-tan": "tokens/illustrated/boss-meng-tan.webp",
+    "boss-bian-xi": "tokens/illustrated/boss-bian-xi.webp",
+    "boss-wang-zhi": "tokens/illustrated/boss-wang-zhi.webp",
+    "boss-xiahou-en": "tokens/illustrated/boss-xiahou-en.webp",
+    "boss-cai-mao": "tokens/illustrated/boss-cai-mao.webp",
+    "boss-zhang-yun": "tokens/illustrated/boss-zhang-yun.webp",
+    "boss-pang-de": "tokens/illustrated/boss-pang-de.webp",
+    "boss-yu-jin": "tokens/illustrated/boss-yu-jin.webp",
+    "boss-zhu-ran": "tokens/illustrated/boss-zhu-ran.webp",
+    "boss-meng-you": "tokens/illustrated/boss-meng-you.webp",
+    "boss-wu-tu-gu": "tokens/illustrated/boss-wu-tu-gu.webp",
+    "tribal-warrior": "tokens/illustrated/tribal-warrior.webp",
+    "tribal-shaman": "tokens/illustrated/tribal-shaman.webp",
+    "regular-spear": "tokens/illustrated/regular-spear.webp",
+    "regular-archer": "tokens/illustrated/regular-archer.webp",
+    "regular-raider": "tokens/illustrated/regular-raider.webp",
+    "regular-guard": "tokens/illustrated/regular-guard.webp",
+    "regular-marine": "tokens/illustrated/regular-marine.webp",
+    "dong-halberd": "tokens/illustrated/regular-guard.webp",
+    "dong-archer": "tokens/illustrated/regular-archer.webp",
+    "xiliang-cavalry": "tokens/illustrated/regular-raider.webp",
+    "gate-guard": "tokens/illustrated/regular-guard.webp",
+    "enemy-fire-thrower": "tokens/illustrated/regular-spear.webp",
+    "enemy-xiliang-guard": "tokens/illustrated/regular-guard.webp",
+    "enemy-bandit": "tokens/illustrated/regular-raider.webp",
+    "enemy-yuan-shu-infantry": "tokens/illustrated/regular-spear.webp",
+    "enemy-yuan-shu-archer": "tokens/illustrated/regular-archer.webp",
+    "enemy-bing-cavalry": "tokens/illustrated/regular-raider.webp",
+    "enemy-marine": "tokens/illustrated/regular-marine.webp",
+    "enemy-trap-guard": "tokens/illustrated/regular-guard.webp",
+    "enemy-hebei-infantry": "tokens/illustrated/regular-spear.webp",
+    "enemy-hebei-crossbow": "tokens/illustrated/regular-archer.webp",
+    "enemy-hebei-cavalry": "tokens/illustrated/regular-raider.webp",
+    "enemy-cao-gate-guard": "tokens/illustrated/regular-guard.webp",
+    "enemy-hebei-halberd": "tokens/illustrated/regular-guard.webp",
+    "enemy-wuchao-guard": "tokens/illustrated/regular-spear.webp",
+    "enemy-cao-infantry": "tokens/illustrated/regular-spear.webp",
+    "enemy-cao-archer": "tokens/illustrated/regular-archer.webp",
+    "enemy-tiger-cavalry": "tokens/illustrated/regular-raider.webp",
+    "enemy-qingzhou": "tokens/illustrated/regular-spear.webp",
+    "enemy-jing-marine": "tokens/illustrated/regular-marine.webp",
+    "enemy-naval-guard": "tokens/illustrated/regular-guard.webp",
+    "enemy-liu-zhang-infantry": "tokens/illustrated/regular-spear.webp",
+    "enemy-wei-archer": "tokens/illustrated/regular-archer.webp",
+    "enemy-xiliang-heavy-cavalry": "tokens/illustrated/regular-guard.webp",
+    "enemy-wei-elite": "tokens/illustrated/regular-guard.webp",
+    "enemy-ambusher": "tokens/illustrated/regular-raider.webp",
+    "enemy-seven-army": "tokens/illustrated/regular-spear.webp",
+    "enemy-wu-infantry": "tokens/illustrated/regular-spear.webp",
+    "enemy-wu-archer": "tokens/illustrated/regular-archer.webp",
+    "enemy-jiangdong-marine": "tokens/illustrated/regular-marine.webp",
+    "enemy-wu-ambusher": "tokens/illustrated/regular-raider.webp",
+    "enemy-jiefan": "tokens/illustrated/regular-guard.webp",
+    "enemy-nanman": "tokens/illustrated/tribal-warrior.webp",
+    "enemy-poison-dart": "tokens/illustrated/tribal-warrior.webp",
+    "enemy-tribal-shaman": "tokens/illustrated/tribal-shaman.webp",
+    "enemy-elephant": "tokens/illustrated/tribal-warrior.webp",
+    "enemy-rattan-guard": "tokens/illustrated/tribal-warrior.webp",
+    "enemy-wei-infantry": "tokens/illustrated/regular-spear.webp",
+    "enemy-wei-crossbow": "tokens/illustrated/regular-archer.webp",
+    "enemy-wei-cavalry": "tokens/illustrated/regular-raider.webp",
+    "enemy-heavy-infantry": "tokens/illustrated/regular-guard.webp",
+    "enemy-supply-raider": "tokens/illustrated/regular-raider.webp"
   }
 }

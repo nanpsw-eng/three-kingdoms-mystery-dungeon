@@ -73,7 +73,7 @@ const final = await state();
 await audit("bag");
 const manifestAssets = await page.evaluate(async () => {
   const manifest = await fetch("assets/manifest.json").then((r) => r.json());
-  const paths = [...manifest.nativePortraits.map((id) => "portraits/" + id + ".webp"), ...manifest.fullBodyIllustrations.map((id) => "portraits/" + id + "-full.webp"), ...manifest.tokens.map((id) => "tokens/" + id + ".svg"), manifest.tileset.image, ...(manifest.surfaces ? [manifest.surfaces.image] : [])];
+  const paths = [...new Set([...manifest.nativePortraits.map((id) => "portraits/" + id + ".webp"), ...manifest.fullBodyIllustrations.map((id) => "portraits/" + id + "-full.webp"), ...manifest.tokens.map((id) => "tokens/" + id + ".svg"), manifest.tileset.image, ...(manifest.surfaces ? [manifest.surfaces.image] : []), ...Object.values(manifest.paintings ?? {}).map(p => p.image), ...Object.values(manifest.tokenOverrides ?? {})])];
   return Promise.all(paths.map(async (path) => {
     const image = new Image(); image.src = "assets/" + path;
     try { await image.decode(); return { path, decoded: true }; } catch { return { path, decoded: false }; }
@@ -83,7 +83,7 @@ const fallback = await browser.newPage({ viewport: { width: 390, height: 844 } }
 const fallbackErrors = [];
 fallback.on("pageerror", (e) => fallbackErrors.push(String(e)));
 // Successful HTTP response with undecodable art exercises the image-onerror fallback.
-for (const path of ["portraits/liu-bei.webp", "tokens/liu-bei.svg"]) await fallback.route("**/assets/" + path, (route) => route.fulfill({ status: 200, contentType: "application/octet-stream", body: "missing asset" }));
+for (const path of ["portraits/liu-bei.webp", "tokens/liu-bei.svg", "reference/liu-bei-bust-concept-v1.jpg", "reference/liu-bei-exploration-token-concept-v2.png"]) await fallback.route("**/assets/" + path, (route) => route.fulfill({ status: 200, contentType: "application/octet-stream", body: "missing asset" }));
 await fallback.goto(base, { waitUntil: "networkidle" });
 const portraitFallback = await fallback.locator(".title-row img").first().getAttribute("src");
 await fallback.getByRole("button", { name: "관우" }).click();

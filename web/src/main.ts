@@ -191,7 +191,16 @@ function render(): void {
   mapObserver?.disconnect(); mapObserver = null;
   app.dataset.screen = run === null ? (showCodex ? "codex" : "title") : run.phase === "battle" ? "battle" : run.phase === "safe-zone" || run.phase === "cleared" || run.phase === "failed" ? "other" : "dungeon";
   app.replaceChildren();
-  if (run === null && showCodex) put(codexScreen({ view: buildCodex(content, meta), render, close: () => { showCodex = false; render(); }, portrait: (key, size, alt) => pic(key, size, alt) }));
+  if (run === null && showCodex) put(codexScreen({ view: buildCodex(content, meta), render, close: () => { showCodex = false; render(); }, portrait: (key, size, alt) => pic(key, size, alt),
+    bossPortrait: (groupId, revealed) => {
+      const group = content.enemyGroups.find(g => g.id === groupId);
+      const name = group?.units[0]?.name ?? "";
+      const image = pic(name, 48, revealed ? name : "미격파 보스");
+      if (!revealed) image.style.filter = "grayscale(1) brightness(0.12)";
+      return image;
+    },
+    itemIcon: (id, revealed) => icon(revealed ? id : "unknown-item", 52),
+  }));
   else if (run === null) renderTitle();
   else if (run.phase === "cleared" || run.phase === "failed") renderEnd();
   else if (run.phase === "battle") { renderBattle(); hitIds = new Set(); healedIds = new Set(); }
@@ -425,13 +434,13 @@ function renderBattle(): void {
     }
     const unit = snap.units.find((u) => u.id === id)!;
     const chosen = selection !== null && "targets" in selection && selection.targets.includes(id);
-    const cls = ["unit", side, unit.knockedOut ? "ko" : "", active?.actorId === id ? "active" : "", legal.has(id) ? "targetable" : "", chosen ? "selected" : ""].join(" ");
+    const cls = ["unit", side, unit.knockedOut ? "ko" : "", snap.guarding.includes(id) ? "guarded" : "", active?.actorId === id ? "active" : "", legal.has(id) ? "targetable" : "", chosen ? "selected" : ""].join(" ");
     return button("", () => {
       if (side === "ally" && activeAlly && selection?.kind === "formation" && id !== active.actorId) {
         const command: BattleCommand = { type: "formation", actorId: active.actorId, targetSlot: slot }; selection = null; narrateBattle(command); render(); return;
       }
       onUnit(id);
-    }, { class: cls + (hitIds.has(id) ? " hit" : "") + (healedIds.has(id) ? " healed" : "") }).appendChild(h("div", { class: "unit-head" }, pic(id.includes("#") ? unitName(id) : id, 40, unitName(id)),
+    }, { class: cls + (hitIds.has(id) ? " hit" : "") + (healedIds.has(id) ? " healed" : "") }).appendChild(h("div", { class: "unit-head" }, pic(id.includes("#") ? unitName(id) : id, 120, unitName(id)),
       h("div", { class: "unit-meta" }, h("b", {}, unitName(id)), h("span", { class: "num" }, unit.hp + "/" + unit.stats.maxHp)))).parentElement!
       .appendChild(bar(unit.hp, unit.stats.maxHp)).parentElement!
       .appendChild(bar(unit.energy, 100, "energy")).parentElement!

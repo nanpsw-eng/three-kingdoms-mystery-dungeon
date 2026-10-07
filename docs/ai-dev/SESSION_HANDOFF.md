@@ -47,3 +47,7 @@ NEXT_SAFE_ACTION: address ruler token fidelity, then codex secondary art using e
 - `docs/art/PRODUCTION_ART_PLAN.json` / `ASSET_REGISTRY.md`: graphics contract.
 - `docs/reports/VERCEL_LIVE_VERIFICATION_20261007.md`: prior live playthrough recovery.
 - `docs/operations/VERCEL_DEPLOYMENT.md`: project settings; exact ID lookup without teamId resolves the connected account reliably.
+
+## Active batch — 2026-10-07
+
+User authorized remaining graphics integration and explicitly requested a single deployment. Branch feat/complete-concept-integration implements preferred original reference paintings/tokens, detailed map objects, codex secondary art, story scenery and battle full-body/effects. Local engine 161 PASS, web build PASS; browser CI/evidence review pending. See docs/reports/CONCEPT_INTEGRATION_20261007.md. DO NOT merge intermediate checkpoints to main; collect all changes and QA before one production merge. Original surface work and earlier audit are complete; do not restart them.

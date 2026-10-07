@@ -2,6 +2,7 @@
 // (STORY_EXPANSION_PLAN §6) — keep markup simple and class-based so style.css can restyle it.
 import type { PendingDecision, RunCommand, RunEngine } from "../../src/index.js";
 import { ART_BINDINGS } from './art-bindings.js';
+import { paintingUrl } from './assets.js';
 
 export interface StoryUi {
   readonly run: RunEngine;
@@ -53,11 +54,17 @@ function sceneSheet(ui: StoryUi, sceneId: string): HTMLElement[] {
   const total = scene.lines.length;
   const done = reveal.shown >= total;
   const lines = scene.lines.slice(0, reveal.shown).map((line) => row("story-line" + (line.speaker ? "" : " narration"),
-    line.speaker ? ui.portrait(line.speaker, 48, line.name) : null,
+    line.speaker ? ui.portrait(line.speaker, 120, line.name) : null,
     el("div", "story-text", line.speaker ? el("b", "", line.name) : null, el("p", "", line.text))));
   const next = (): void => { reveal.shown = Math.min(total, reveal.shown + 1); ui.render(); };
   const finish = (): void => { ui.act({ type: "scene" }); ui.render(); };
   const box = el("div", "story-scene", scene.title ? el("h2", "", scene.title) : null, ...lines);
+  const backdrop = paintingUrl("story:backdrop"), ornament = paintingUrl("story:ornament");
+  if (backdrop) {
+    const image = document.createElement("img"); image.src = backdrop; image.alt = ""; image.className = "story-backdrop";
+    box.prepend(image);
+  }
+  if (ornament) box.style.setProperty("--story-ornament", `url("${ornament}")`);
   if (!done) { box.style.cursor = "pointer"; box.addEventListener("click", next); }
   const progress = el("small", "muted", `${Math.min(reveal.shown, total)} / ${total}`);
   let actions: HTMLElement[];
@@ -81,7 +88,7 @@ function duelSheet(ui: StoryUi, groupId: string, champion: string): HTMLElement[
   return [
     el("div", "story-scene duel",
       el("h2", "", "일기토 — " + champion),
-      row("story-line", ui.portrait(champion, 48, champion), el("div", "story-text", el("b", "", champion), el("p", "", "나와 겨룰 자가 있느냐!"))),
+      row("story-line", ui.portrait(champion, 120, champion), el("div", "story-text", el("b", "", champion), el("p", "", "나와 겨룰 자가 있느냐!"))),
       el("p", "muted", unit ? `HP ${unit.stats.maxHp} · ATK ${unit.stats.atk} · DEF ${unit.stats.def} · SPD ${unit.stats.spd}` : ""),
       el("p", "muted", "이기면 적장이 큰 부상을 입은 채 전투를 시작한다. 지면 나선 장수는 HP 1로 버티고 적의 기세가 오른다.")),
     ...fighters.map((member) => {

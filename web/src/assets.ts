@@ -21,12 +21,27 @@ export const ENEMY_ASSET_IDS: Readonly<Record<string, string>> = {
 
 interface TilesetSpec { readonly image: string; readonly tile: number; readonly gap?: number; readonly map: Readonly<Record<string, readonly (readonly [number, number])[]>> }
 interface SurfaceSpec { readonly image: string; readonly map: Readonly<Record<string, readonly (readonly [number, number, number, number])[]>> }
-interface Manifest { readonly portraits?: readonly string[]; readonly nativePortraits?: readonly string[]; readonly fullBodyIllustrations?: readonly string[]; readonly sharedPortraits?: Readonly<Record<string,string>>; readonly tokens?: readonly string[]; readonly portraitPixels?: number; readonly portraitColors?: number; readonly tileset?: TilesetSpec; readonly surfaces?: SurfaceSpec }
+interface PaintingSpec { readonly image: string; readonly rect?: readonly [number, number, number, number] }
+interface Manifest { readonly paintings?: Readonly<Record<string, PaintingSpec>>; readonly tokenOverrides?: Readonly<Record<string,string>>; readonly portraits?: readonly string[]; readonly nativePortraits?: readonly string[]; readonly fullBodyIllustrations?: readonly string[]; readonly sharedPortraits?: Readonly<Record<string,string>>; readonly tokens?: readonly string[]; readonly portraitPixels?: number; readonly portraitColors?: number; readonly tileset?: TilesetSpec; readonly surfaces?: SurfaceSpec }
 
 const portraits = new Map<string, string>();
 const nativePortraits = new Map<string, string>();
 const fullBodies = new Map<string, string>();
 const tokens = new Map<string, HTMLImageElement>();
+const paintings = new Map<string, { image: HTMLImageElement; sx: number; sy: number; width: number; height: number }>();
+const paintingUrls = new Map<string, string>();
+/** Read-only source rectangles in the original concept sheets. */
+export function assetPainting(key: string): { image: HTMLImageElement; sx: number; sy: number; width: number; height: number } | undefined { return paintings.get(key); }
+export function paintingUrl(key: string): string | undefined {
+  const cached = paintingUrls.get(key);
+  if (cached) return cached;
+  const p = paintings.get(key);
+  if (!p) return undefined;
+  const canvas = document.createElement("canvas");
+  canvas.width = p.width; canvas.height = p.height;
+  canvas.getContext("2d")!.drawImage(p.image, p.sx, p.sy, p.width, p.height, 0, 0, p.width, p.height);
+  const url = canvas.toDataURL(); paintingUrls.set(key, url); return url;
+}
 let tileset: { image: HTMLImageElement; spec: TilesetSpec } | null = null;
 let surfaces: { image: HTMLImageElement; spec: SurfaceSpec } | null = null;
 
@@ -39,7 +54,8 @@ export function assetSurface(name: string, variant = 0): { image: HTMLImageEleme
 }
 
 export function fullBodyIllustration(key: string): string | undefined {
-  return fullBodies.get(ENEMY_ASSET_IDS[key] ?? key);
+  const id = ENEMY_ASSET_IDS[key] ?? key;
+  return paintingUrl("full:" + id) ?? fullBodies.get(id);
 }
 
 export function assetToken(key: string): HTMLImageElement | undefined {
@@ -47,7 +63,8 @@ export function assetToken(key: string): HTMLImageElement | undefined {
 }
 
 export function nativeAssetPortrait(key: string): string | undefined {
-  return nativePortraits.get(ENEMY_ASSET_IDS[key] ?? key);
+  const id = ENEMY_ASSET_IDS[key] ?? key;
+  return paintingUrl("portrait:" + id) ?? nativePortraits.get(id);
 }
 
 export function assetPortrait(key: string): string | undefined {
@@ -172,5 +189,28 @@ export async function loadAssets(onReady: () => void): Promise<void> {
     jobs.push(loadImage("assets/" + spec.image).then((image) => { surfaces = { image, spec }; }).catch(() => undefined));
   }
   await Promise.all(jobs);
+  // Preferred references load after legacy art, so a failed reference keeps its fallback.
+  const sourceImages = new Map<string, Promise<HTMLImageElement>>();
+  await Promise.all(Object.entries(manifest.paintings ?? {}).map(async ([key, spec]) => {
+    try {
+      let source = sourceImages.get(spec.image);
+      if (!source) { source = loadImage("assets/" + spec.image); sourceImages.set(spec.image, source); }
+      const image = await source;
+      const [sx, sy, width, height] = spec.rect ?? [0, 0, image.naturalWidth, image.naturalHeight];
+      if (sx < 0 || sy < 0 || width <= 0 || height <= 0 || sx + width > image.naturalWidth || sy + height > image.naturalHeight) return;
+      paintings.set(key, { image, sx, sy, width, height });
+    } catch { /* optional reference; retain authored fallback */ }
+  }));
+  await Promise.all(Object.entries(manifest.tokenOverrides ?? {}).map(async ([id, path]) => {
+    try { tokens.set(id, await loadImage("assets/" + path)); } catch { /* keep SVG */ }
+  }));
+  // Named sheet references retain the same full-body identity in the map marker.
+  // Paper-backed sheet tokens blend as ink on the floor; transparent PNG rulers stay native.
+  for (const id of manifest.tokens ?? []) {
+    if (["liu-bei", "cao-cao", "sun-quan"].includes(id) || !paintings.has("full:" + id)) continue;
+    const url = paintingUrl("full:" + id);
+    if (!url) continue;
+    try { const image = await loadImage(url); image.dataset.inkPaper = "true"; tokens.set(id, image); } catch { /* retain compact token */ }
+  }
   if (portraits.size > 0 || nativePortraits.size > 0 || fullBodies.size > 0 || tokens.size > 0 || tileset !== null) onReady();
 }
