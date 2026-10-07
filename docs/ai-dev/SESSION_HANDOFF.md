@@ -5,8 +5,8 @@
 - Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon` (public).
 - Game/art baseline: main `ea8beea73f53aca9c2aa5f2c2a189ee466932504`.
 - PR #13 already MERGED (2026-10-07 08:29:53 KST); art branch has the same tree as main. Claude session branch has no unique commits beyond main at inspection.
-- State: `STORY_AND_ART_MERGED / AUTOMATED_QA_PASS / VERCEL_CREATE_BLOCKED_403 / HUMAN_PLAYTEST_NOT_RUN`.
-- Latest delivery delta: Vercel static deployment configuration + recovery/runbook + corrected continuity; see report below. This document's own commit is the recovery checkpoint; use Git refs for its exact SHA.
+- State: `STORY_AND_ART_MERGED / AUTOMATED_QA_PASS / VERCEL_PRODUCTION_LIVE / HUMAN_PLAYTEST_NOT_RUN`.
+- Latest delivery delta: verified live Vercel deployment + corrected continuity; see report below. This document's own commit is the recovery checkpoint; use Git refs for its exact SHA.
 
 ## Authority
 
@@ -29,16 +29,19 @@ Existing DEC-024 and visual completion authorization permit completing recommend
 - Fresh local Chromium checks NOT_RUN (download unavailable); reused exact-main CI evidence.
 - Full manual campaign balance/playthrough NOT_RUN.
 
-## Actual blocker / first incomplete step
+## Deployment verified — 2026-10-07 KST
 
-Vercel project creation in team `nanpsw-8495` (`team_1HfCVfi0noDdmzHMqGeazpO6`) returned HTTP 403 forbidden. No matching Vercel project exists; no independently authenticated CLI is available. **No Vercel deployment has been created.**
+- User imported and deployed directly; no extra project creation is needed.
+- Project: `prj_eqeoObsWdZptETAHK5y42urWORbV`, team `team_1HfCVfi0noDdmzHMqGeazpO6`.
+- Deployment: `dpl_H867evArxXCuG4xKcicWC5L85Wuo`, production READY, commit `28907a54190eec5cda3ef543fbc02d1c2dac65b1`.
+- Verified public URL: https://three-kingdoms-mystery-dungeon.vercel.app/
+- Live browser: party selection, dungeon exploration, battle, Smart ×3, victory return, refresh/continue restore PASS. Restored turn 29, gold 36, HP 89/103–112/112–120/120.
+- Visible title images all loaded; no horizontal overflow in tested desktop viewport. Game-origin warning/error log query returned no entries; unrelated browser-extension errors excluded.
+- Actual Vercel Node runtime is 24.x (not runbook recommendation 22.x); deployment READY, no runtime/config change needed.
+- API calls with explicit teamId returned stale/inconsistent not-found/forbidden results; exact project/deployment ID lookup without that parameter resolved to the same accountId. Do not interpret the old create error as an ongoing deployment block or repeat project creation.
+- Detailed evidence: `docs/reports/VERCEL_LIVE_VERIFICATION_20261007.md` and `docs/reports/evidence/vercel-live-gameplay-20261007.jpg`.
 
-NEXT_SAFE_ACTION:
-1. Resolve create-project access or import the repo in the authorized Vercel dashboard. Do not repeat unchanged failing API requests.
-2. Use current main, root directory, Other framework, npm ci, npm test && npm run build:web, output site, Node 22.x.
-3. Verify READY, exact deployed commit, root/assets/gameplay/save reload and actual production URL.
-4. Persist deployment result here; only then mark hosting LIVE.
-5. Human playtest/tuning remains separate, based on observed feedback; do not retune existing campaign balance without new evidence.
+NEXT_SAFE_ACTION: human playtest of later campaigns and observed UX/balance feedback. No remaining deploy setup task. Fresh mobile live verification/full manual campaign completion remain NOT_RUN; existing exact-game-tree mobile CI is retained.
 
 ## Minimal context index
 

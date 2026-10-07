@@ -35,9 +35,9 @@
 
 ## Current State
 
-`STORY_AND_ART_MERGED / AUTOMATED_QA_PASS / VERCEL_CREATE_BLOCKED_403 / HUMAN_PLAYTEST_NOT_RUN`
+`STORY_AND_ART_MERGED / AUTOMATED_QA_PASS / VERCEL_PRODUCTION_LIVE / HUMAN_PLAYTEST_NOT_RUN`
 
-현재 스토리는 E1–E9로 확장되었고 48명 플레이어블 캐릭터의 수묵 그래픽이 main에 반영되었습니다(PR #13). 2026-10-07 확인: 161개 테스트와 main 모바일 QA 통과. Vercel 배포 설정은 `vercel.json`, 재개 절차는 [배포 안내](docs/operations/VERCEL_DEPLOYMENT.md)를 따릅니다. Vercel 프로젝트 생성은 권한 오류(403)로 차단되어 실제 서비스 URL은 아직 생성되지 않았습니다.
+현재 스토리는 E1–E9로 확장되었고 48명 플레이어블 캐릭터의 수묵 그래픽이 main에 반영되었습니다(PR #13). 2026-10-07 확인: 161개 테스트와 main 모바일 QA 통과. Vercel 배포 설정은 `vercel.json`, 재개 절차는 [배포 안내](docs/operations/VERCEL_DEPLOYMENT.md)를 따릅니다. 사용자가 직접 연결·배포했으며 [게임 실행](https://three-kingdoms-mystery-dungeon.vercel.app/)에서 실제 탐험·전투·저장 복원을 확인했습니다.
 
 | Layer | Path | Status |
 |---|---|---|
