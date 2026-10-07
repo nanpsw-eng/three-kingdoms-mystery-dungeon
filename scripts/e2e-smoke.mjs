@@ -13,6 +13,8 @@ try { playwright = createRequire(import.meta.url)("playwright"); }
 catch { playwright = createRequire(execSync("npm root -g").toString().trim() + "/")("playwright"); }
 const browser = await playwright.chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
 const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
+// Fixed map seed makes the real keyboard encounter repeatable without altering game state.
+await page.addInitScript(() => { Date.now = () => 1791373352662; });
 const errors = [];
 page.on("console", (m) => { if (m.type() === "error") errors.push(m.text()); });
 page.on("pageerror", (e) => errors.push(String(e)));
