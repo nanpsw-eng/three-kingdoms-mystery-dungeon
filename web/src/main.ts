@@ -572,82 +572,61 @@ function renderParty(): void {
 
 function renderSafeZone(): void {
   const r = run!;
-  const e…4663 tokens truncated…ude screens; see CLAUDE_CONTENT_VISUAL_SPEC) */
-.story-line { border-bottom: 1px solid var(--paper-shadow); padding-bottom: 6px; }
-.story-line img { border: 1px solid var(--ink-soft); background: var(--paper-shadow); }
-.story-text b { font-family: var(--font-display); color: var(--ink); }
-.story-text p { color: var(--ink-soft); }
-.story-line.narration .story-text p { color: var(--muted-text); font-style: italic; }
-.codex-entry { background: var(--paper-light); border: 1px solid var(--line-soft); padding: 6px 8px; }
-.codex-entry.locked { color: var(--muted-text); background: var(--paper); }
-.codex-note { color: var(--ink-soft); border-left: 2px solid var(--vermilion); padding-left: 8px; }
-
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; animation: none !important; } }
-
-/* Native full-body art stays proportionate inside the existing square portrait slots. */
-img.native-portrait { image-rendering: auto; }
-img.fullbody-illustration {
-  object-fit: contain;
-  image-rendering: auto;
-  border: 0 !important;
-  background: transparent !important;
+  const equipped = r.party().flatMap((m) => (["weapon", "armor", "treasure"] as const).filter((slot) => m.equipment[slot]).map((slot) => ({ m, slot, e: m.equipment[slot]! })));
+  put(
+    h("h1", {}, "안전 정비구역"), h("p", {}, "부대가 완전히 회복되었다. 정비를 마치면 다음 층으로 향한다."),
+    h("div", { class: "hud" }, h("span", {}, "금 ", h("b", {}, String(r.gold))), h("span", {}, "가방 " + r.inventory().length + "/10")),
+    h("div", { class: "panel" }, h("h2", {}, "상점"), ...r.shop().map((offer, index) => h("div", { class: "row" },
+      icon(offer.contentId), h("span", { class: "grow" }, contentName(r, offer.contentId)), h("span", { class: "muted num" }, offer.price + "금"),
+      button(offer.sold ? "품절" : "구매", () => { act({ type: "shop-buy", offerIndex: index }); render(); }, { class: "small", disabled: offer.sold || r.gold < offer.price })))),
+    h("div", { class: "panel" }, h("h2", {}, "강화 (최대 +3)"), ...(equipped.length ? equipped.map(({ m, slot, e }) => h("div", { class: "row" },
+      h("span", { class: "grow" }, m.name + " · " + contentName(r, e.equipmentId) + (e.enhance ? " +" + e.enhance : "")),
+      button("강화 " + 40 * (e.enhance + 1) + "금", () => { act({ type: "enhance", characterId: m.characterId, slot }); render(); }, { class: "small", disabled: e.enhance >= 3 || r.gold < 40 * (e.enhance + 1) }))) : [h("p", {}, "장착한 장비가 없다.")])),
+    h("div", { class: "row" }, button("가방", () => { modal = "bag"; render(); }), button("부대", () => { modal = "party"; render(); }), h("span", { class: "grow" }), button("출발", () => { act({ type: "leave-safe-zone" }); render(); }, { class: "primary" })),
+    h("div", { class: "panel log" }, ...log.slice(0, 6).map((line) => h("div", {}, line))),
+  );
 }
 
-/* Mobile gameplay: viewport-sized map, always-visible controls, on-demand details. */
-#app[data-screen="dungeon"], #app[data-screen="battle"] {
-  height: 100dvh; min-height: 540px; gap: 6px;
-  padding: max(6px, env(safe-area-inset-top)) 10px max(6px, env(safe-area-inset-bottom));
+function renderEnd(): void {
+  const r = run!;
+  const summary = r.summary();
+  const before = new Set(unlockedBefore);
+  const fresh = [...meta.unlockedCharacters, ...meta.unlockedCampaigns].filter((id) => !before.has(id));
+  put(
+    h("h1", {}, r.phase === "cleared" ? "전역 평정!" : "원정 실패"),
+    h("div", { class: "panel" },
+      h("p", {}, `${r.campaign.name} · 도달 ${summary.depthReached}층 · Lv.${summary.level} · 전투 ${summary.battles}회 · ${summary.turns}턴`),
+      h("p", {}, "격파: " + (summary.defeatedGroups.map((id) => r.group(id)?.name ?? id).join(", ") || "없음"))),
+    fresh.length ? h("div", { class: "panel" }, h("h2", {}, "새로 해금"), h("p", {}, fresh.map((id) => content.characters.find((c) => c.id === id)?.name ?? content.campaigns.find((c) => c.id === id)?.name ?? id).join(", "))) : null,
+    h("p", {}, "레벨·특성·장비·금은 초기화되었다. 해금된 장수와 전역은 유지된다."),
+    button("타이틀로", () => { run = null; save = null; modal = null; render(); }, { class: "primary" }),
+  );
 }
-#app[data-screen="dungeon"] { display: grid; grid-template-rows: auto minmax(120px, 1fr) auto auto auto 28px; }
-.map-stage { min-width: 0; min-height: 0; display: flex; justify-content: center; align-items: center; overflow: hidden; }
-.map-stage canvas#map { flex: none; max-width: 100%; box-shadow: none; }
-[data-screen="dungeon"] .hud { padding: 6px 8px; gap: 2px 9px; font-size: 12px; }
-[data-screen="dungeon"] .hud > span { white-space: nowrap; }
-[data-screen="dungeon"] .hud > span:first-child { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
-[data-screen="dungeon"] .hud .mechanic { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
-[data-screen="dungeon"] .party { grid-template-columns: repeat(var(--party-size, 5), minmax(0, 1fr)); gap: 6px; padding: 6px; }
-[data-screen="dungeon"] .member { gap: 4px; flex-direction: column; font-size: 11px; }
-[data-screen="dungeon"] .member img { width: 24px; height: 24px; }
-[data-screen="dungeon"] .member-info { width: 100%; gap: 3px; }
-[data-screen="dungeon"] .member-info .row { flex-direction: column; gap: 0; align-items: stretch; text-align: center; }
-[data-screen="dungeon"] .member-info .num { font-size: 10px; }
-.dungeon-controls { display: grid; grid-template-columns: 138px minmax(0,1fr); gap: 8px; }
-.dungeon-controls .pad { grid-template-columns: repeat(3,44px); grid-template-rows: repeat(3,44px); gap: 3px; }
-.dungeon-controls .grid2 { gap: 3px; }
-.dungeon-controls .grid2 button { padding: 3px; font-size: 12px; white-space: nowrap; letter-spacing: 0; }
-.utility-bar { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 4px; flex: none; }
-.utility-bar button { min-height: 44px; font-size: 12px; padding: 4px; }
-.latest-event { flex: none; min-width: 0; font-size: 12px; line-height: 22px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-[data-screen="battle"] .hud { flex: none; padding: 6px 8px; }
-[data-screen="battle"] .field { flex: 1; min-height: 0; overflow: auto; padding: 5px; gap: 3px; }
-[data-screen="battle"] .formation { gap: 3px; }
-[data-screen="battle"] .unit, [data-screen="battle"] .slot { min-height: 58px; }
-[data-screen="battle"] .unit-head img { width: 28px; height: 28px; }
-[data-screen="battle"] .unit { gap: 2px; font-size: 11px; }
-[data-screen="battle"] .unit .bar { height: 4px; }
-[data-screen="battle"] .modes { flex: none; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); }
-[data-screen="battle"] .modes button { min-width: 44px; }
-.battle-actions { flex: none; max-height: 25dvh; overflow-y: auto; padding: 2px; gap: 4px; }
-.target-hint { display: flex; gap: 6px; align-items: center; justify-content: space-between; font-size: 12px; flex: none; }
-.sheet-head { position: sticky; top: -16px; display: flex; justify-content: space-between; align-items: center; gap: 8px; background: var(--paper-light); padding: 8px 0; z-index: 1; border-bottom: 1px solid var(--line-soft); }
-.sheet-head h2 { margin: 0; }
-.modal .sheet { overscroll-behavior: contain; font-size: 15px; }
-.modal .sheet p { line-height: 1.65; overflow-wrap: anywhere; }
-.item-description { display: block; color: var(--muted-text); font-size: 12px; }
-.modal .fullbody-illustration { width: 100px; height: 150px; flex: none; }
-#app[data-screen="codex"] { height: 100dvh; min-height: 0; }
-.codex { display: flex; flex-direction: column; min-height: 0; flex: 1; gap: 8px; }
-.codex-header { display: flex; justify-content: space-between; align-items: center; flex: none; }
-.codex-header h2 { margin: 0; }
-.codex > .row { flex: none; }
-.codex > .row button { flex: 1; min-width: 44px; padding: 4px; font-size: 12px; white-space: nowrap; }
-.codex-body { overflow-y: auto; min-height: 0; overscroll-behavior: contain; }
-.codex-entry .fullbody-illustration { width: 90px; height: 150px; flex: none; }
-@media (max-height: 650px) {
-  [data-screen="dungeon"] .member img { display: none; }
-  [data-screen="dungeon"] .party { padding: 5px; }
-  [data-screen="battle"] .field { min-height: 0; }
-}
-@media (orientation: landscape) and (max-height: 540px) {
-  #app[data-screen="dungeon"], #app[data-screen="battle"] { min-height: 540px; }
-}
+
+// ---------- keyboard (desktop) ----------
+const KEYS: Record<string, Direction> = {
+  ArrowUp: "n", ArrowDown: "s", ArrowLeft: "w", ArrowRight: "e", w: "n", x: "s", a: "w", d: "e", q: "nw", e: "ne", z: "sw", c: "se",
+  "8": "n", "2": "s", "4": "w", "6": "e", "7": "nw", "9": "ne", "1": "sw", "3": "se",
+};
+window.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && (modal !== null || pickTarget !== null)) { modal = null; pickTarget = null; render(); return; }
+  if (run === null || run.phase !== "dungeon" || modal !== null || pickTarget !== null) return;
+  const direction = KEYS[event.key];
+  if (direction) { event.preventDefault(); move(direction); return; }
+  if (event.key === "." || event.key === "5" || event.key === "s") { act({ type: "dungeon", command: { type: "wait" } }); render(); }
+  if (event.key === "f") { act({ type: "dungeon", command: { type: "search" } }); render(); }
+  if (event.key === "Enter") { act({ type: "auto-explore" }); render(); }
+  if (event.key === ">") { act({ type: "dungeon", command: { type: "descend" } }); render(); }
+});
+window.addEventListener("resize", () => render());
+
+// Read-only hook for automated UI smoke tests (no state mutation).
+(window as unknown as { __tkmd: unknown }).__tkmd = {
+  state: () => run === null ? { phase: "title" } : {
+    phase: run.phase, depth: run.depth, turn: run.phase === "dungeon" ? run.dungeon.turn : null,
+    enemies: run.phase === "dungeon" ? run.dungeon.visibleEnemies().map((e) => ({ dx: e.pos.x - run!.dungeon.position.x, dy: e.pos.y - run!.dungeon.position.y })) : [],
+  },
+};
+
+render();
+void loadAssets(() => render());

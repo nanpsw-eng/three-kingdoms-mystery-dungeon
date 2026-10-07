@@ -212,7 +212,7 @@ img.fullbody-illustration {
 [data-screen="dungeon"] .hud > span { white-space: nowrap; }
 [data-screen="dungeon"] .hud > span:first-child { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
 [data-screen="dungeon"] .hud .mechanic { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
-[data-screen="dungeon"] .party { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; padding: 6px; }
+[data-screen="dungeon"] .party { grid-template-columns: repeat(var(--party-size, 5), minmax(0, 1fr)); gap: 6px; padding: 6px; }
 [data-screen="dungeon"] .member { gap: 4px; flex-direction: column; font-size: 11px; }
 [data-screen="dungeon"] .member img { width: 24px; height: 24px; }
 [data-screen="dungeon"] .member-info { width: 100%; gap: 3px; }
@@ -227,6 +227,7 @@ img.fullbody-illustration {
 .latest-event { flex: none; min-width: 0; font-size: 12px; line-height: 22px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 [data-screen="battle"] .hud { flex: none; padding: 6px 8px; }
 [data-screen="battle"] .field { flex: 1; min-height: 0; overflow: auto; padding: 5px; gap: 3px; }
+[data-screen="battle"] .field > * { flex-shrink: 0; }
 [data-screen="battle"] .formation { gap: 3px; }
 [data-screen="battle"] .unit, [data-screen="battle"] .slot { min-height: 58px; }
 [data-screen="battle"] .unit-head img { width: 28px; height: 28px; }
