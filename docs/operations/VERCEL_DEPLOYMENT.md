@@ -1,5 +1,9 @@
 # Vercel 배포 / 중단 복구
 
+## 현재 배포 상태
+
+사용자가 직접 GitHub를 연결해 production 배포를 완료했습니다. `dpl_H867evArxXCuG4xKcicWC5L85Wuo` READY, 게임 커밋 `28907a5`. 실제 주소 https://three-kingdoms-mystery-dungeon.vercel.app/ 에서 탐험·전투·저장 복원을 확인했습니다. 아래 403은 초기 시도 기록이며 더 이상 배포 차단 상태가 아닙니다. 실제 Node.js는 24.x로 빌드·배포에 성공했고 별도 변경하지 않았습니다.
+
 ## 검증된 배포 대상
 
 - Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon`
@@ -16,7 +20,7 @@
 
 `vercel.json`에 설치·빌드·출력 설정을 고정한다. 브라우저 ES module과 에셋은 상대 경로를 쓰므로 별도 base URL 변경이나 전체 SPA rewrite가 필요하지 않다.
 
-## 현재 차단 상태 — 2026-10-07 KST
+## 초기 차단 기록 — 2026-10-07 KST (해결됨)
 
 Vercel 연결 도구로 위 팀의 프로젝트 생성을 시도했으나 `POST /v11/projects`에서 `403 forbidden: You don't have permission to create the project`가 반환됐다. 이름이 일치하는 기존 프로젝트도 없었다. 별도 인증된 CLI가 이 실행환경에 없어 CLI 대체 실행은 불가능했다. **프로젝트 생성 및 Vercel 배포는 완료되지 않았다.**
 
