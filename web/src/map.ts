@@ -282,7 +282,9 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
     ctx.fillStyle = "rgba(0,0,0,0.35)"; ctx.fillRect(x + cell * 0.2, y + cell * 0.82, cell * 0.6, cell * 0.12);
     const enemyKey = options.enemyKey(enemy.groupId);
     const enemyToken = assetToken(enemyKey);
-    blit(enemyToken ?? figureCanvas(enemyKey), enemy.pos, enemy.boss ? 1.35 : enemyToken === undefined ? 1 : 1.2, cell * 0.08);
+    if (enemyKey !== "yt-spear" || !paint("enemy-scout", enemy.pos, 1)) {
+      blit(enemyToken ?? figureCanvas(enemyKey), enemy.pos, enemy.boss ? 1.35 : enemyToken === undefined ? 1 : 1.2, cell * 0.08);
+    }
     if (enemy.state === "ALERT" || enemy.state === "CHASE") {
       const s = Math.max(2, Math.floor(cell / 8));
       ctx.fillStyle = "#f2ebdd"; ctx.fillRect(x + cell * 0.72, y - s * 3, s * 3, s * 4);

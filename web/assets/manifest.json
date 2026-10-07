@@ -735,109 +735,109 @@
     "portrait:boss-dong-zhuo": {
       "image": "reference/dong-zhuo-lu-bu-boss-concept.jpg",
       "rect": [
+        20,
         0,
-        0,
-        325,
-        230
+        300,
+        155
       ]
     },
     "full:boss-dong-zhuo": {
       "image": "reference/dong-zhuo-lu-bu-boss-concept.jpg",
       "rect": [
-        0,
-        205,
-        320,
-        245
+        95,
+        140,
+        240,
+        300
       ]
     },
     "portrait:lu-bu": {
       "image": "reference/dong-zhuo-lu-bu-boss-concept.jpg",
       "rect": [
-        350,
+        370,
         0,
-        320,
-        230
+        250,
+        150
       ]
     },
     "full:lu-bu": {
       "image": "reference/dong-zhuo-lu-bu-boss-concept.jpg",
       "rect": [
-        350,
-        205,
-        320,
-        245
+        455,
+        105,
+        220,
+        330
       ]
     },
     "portrait:yuan-shao": {
       "image": "reference/e2-boss-trio-yuan-shao-cao-cao-cao-ren.jpg",
       "rect": [
+        110,
         0,
-        20,
-        415,
-        410
+        300,
+        300
       ]
     },
     "full:yuan-shao": {
       "image": "reference/e2-boss-trio-yuan-shao-cao-cao-cao-ren.jpg",
       "rect": [
-        0,
-        420,
-        415,
-        425
+        8,
+        285,
+        310,
+        545
       ]
     },
     "portrait:cao-ren": {
       "image": "reference/e2-boss-trio-yuan-shao-cao-cao-cao-ren.jpg",
       "rect": [
-        855,
-        20,
-        415,
-        410
+        960,
+        0,
+        315,
+        315
       ]
     },
     "full:cao-ren": {
       "image": "reference/e2-boss-trio-yuan-shao-cao-cao-cao-ren.jpg",
       "rect": [
-        855,
-        420,
-        415,
-        425
+        865,
+        275,
+        300,
+        550
       ]
     },
     "portrait:lu-xun": {
       "image": "reference/lu-xun-meng-huo-boss-concept.jpg",
       "rect": [
+        100,
         0,
-        0,
-        630,
-        410
+        230,
+        420
       ]
     },
     "full:lu-xun": {
       "image": "reference/lu-xun-meng-huo-boss-concept.jpg",
       "rect": [
-        0,
-        420,
-        630,
-        425
+        260,
+        30,
+        375,
+        790
       ]
     },
     "portrait:meng-huo": {
       "image": "reference/lu-xun-meng-huo-boss-concept.jpg",
       "rect": [
-        650,
+        725,
         0,
-        620,
-        410
+        235,
+        440
       ]
     },
     "full:meng-huo": {
       "image": "reference/lu-xun-meng-huo-boss-concept.jpg",
       "rect": [
-        650,
-        420,
-        620,
-        425
+        870,
+        30,
+        405,
+        800
       ]
     },
     "map:stairs": {
