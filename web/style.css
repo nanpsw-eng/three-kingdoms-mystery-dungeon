@@ -443,9 +443,15 @@ button.primary {
     grid-template-rows: auto auto minmax(138px,1fr) auto auto;
     gap: 5px 12px;
   }
-  .exploration-header { grid-column: 1 / -1; }
+  .exploration-header { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 2px 12px; align-items: center; }
+  .expedition-stats { justify-content: flex-end; gap: 3px 8px; max-width: 370px; }
+  .expedition-turn { margin-left: 0; }
+  .expedition-conditions { grid-column: 1 / -1; }
   [data-screen="dungeon"] .map-stage { grid-column: 1; grid-row: 2 / 6; }
   [data-screen="dungeon"] .expedition-party { grid-column: 2; grid-row: 2; padding: 3px 0; }
+  [data-screen="dungeon"] .expedition-party:is([data-count="4"],[data-count="5"]) { padding: 0; }
+  [data-screen="dungeon"] .expedition-party:is([data-count="4"],[data-count="5"]) .member img { width: 28px; height: 28px; }
+  [data-screen="dungeon"] .expedition-party:is([data-count="4"],[data-count="5"]) .member-info { gap: 3px; }
   [data-screen="dungeon"] .dungeon-controls { grid-column: 2; grid-row: 3; align-items: center; }
   [data-screen="dungeon"] .dungeon-controls .grid2 { align-self: stretch; }
   [data-screen="dungeon"] .utility-bar { grid-column: 2; grid-row: 4; }
