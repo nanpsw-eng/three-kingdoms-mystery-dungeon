@@ -34,8 +34,8 @@ try {
   await page.locator('.codex-body').evaluate(el => { el.scrollTop = el.scrollHeight; });
   assert.equal(await page.locator('.codex-header').evaluate(el => el.getBoundingClientRect().y), headerY);
   await page.getByRole('button', { name:'닫기', exact:true }).click();
-  await page.getByRole('button', { name:'관우', exact:true }).click();
-  await page.getByRole('button', { name:'장비', exact:true }).click();
+  await page.getByRole('button', { name:'관우' }).click();
+  await page.getByRole('button', { name:'장비' }).click();
   await page.getByRole('button', { name:'원정 시작', exact:true }).click();
   for (let i=0; i<12 && (await state()).phase==='scene'; i++) await page.getByRole('button', { name:'건너뛰기', exact:true }).click();
   assert.equal((await state()).phase, 'dungeon');
@@ -83,6 +83,7 @@ try {
   await page.getByRole('button',{name:'스마트',exact:true}).click();
   await page.getByRole('button',{name:'도움말',exact:true}).click();
   const saveKey = await page.evaluate(() => Object.keys(localStorage).find(k => k.includes('save')));
+  assert.ok(saveKey, 'save exists');
   const paused = await page.evaluate(key => localStorage.getItem(key), saveKey);
   await page.waitForTimeout(1200);
   assert.equal(await page.evaluate(key => localStorage.getItem(key),saveKey),paused,'reading pauses automatic battle');
