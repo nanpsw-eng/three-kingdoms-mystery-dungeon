@@ -645,5 +645,8 @@
     "regular-raider",
     "regular-guard",
     "regular-marine"
-  ]
+  ],
+  "verificationScope": "IMPLEMENTED records file/binding coverage; visual fidelity requires reference/runtime comparison.",
+  "dungeonSurfaceReference": "concepts/dungeon-modular-surface-grammar-concept-v2-20261006.jpg",
+  "dungeonSurfaceRuntime": "web/assets/tiles/dungeon-stone-material-v2.jpg"
 }

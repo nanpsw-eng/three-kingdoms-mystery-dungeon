@@ -73,7 +73,7 @@ const final = await state();
 await audit("bag");
 const manifestAssets = await page.evaluate(async () => {
   const manifest = await fetch("assets/manifest.json").then((r) => r.json());
-  const paths = [...manifest.nativePortraits.map((id) => "portraits/" + id + ".webp"), ...manifest.fullBodyIllustrations.map((id) => "portraits/" + id + "-full.webp"), ...manifest.tokens.map((id) => "tokens/" + id + ".svg"), manifest.tileset.image];
+  const paths = [...manifest.nativePortraits.map((id) => "portraits/" + id + ".webp"), ...manifest.fullBodyIllustrations.map((id) => "portraits/" + id + "-full.webp"), ...manifest.tokens.map((id) => "tokens/" + id + ".svg"), manifest.tileset.image, ...(manifest.surfaces ? [manifest.surfaces.image] : [])];
   return Promise.all(paths.map(async (path) => {
     const image = new Image(); image.src = "assets/" + path;
     try { await image.decode(); return { path, decoded: true }; } catch { return { path, decoded: false }; }

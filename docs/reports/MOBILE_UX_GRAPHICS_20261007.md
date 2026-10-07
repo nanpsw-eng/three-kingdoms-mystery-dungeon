@@ -1,5 +1,7 @@
 # Mobile gameplay UX and graphics audit — 2026-10-07
 
+> Erratum: the graphics-completion conclusion below was too broad. Asset decoding/binding does not establish fidelity to the chosen floor/wall concepts. The user identified the mismatch after this delivery; `DUNGEON_SURFACE_FIDELITY_20261007.md` records the correction. Earlier file/interaction test results remain valid.
+
 ## Findings and implementation
 
 The supplied Android screenshot showed a width-sized map, a tall party panel and wrapping action labels pushing controls below the visible browser viewport. Dungeon layout now budgets the available dynamic viewport height: the square map fits the remaining space, party health is compact, movement and actions retain 44px touch targets, and state/log/help are explicit controls. The latest event stays visible; the complete recent log opens separately.
@@ -10,9 +12,9 @@ Battle has a bounded, internally scrolling field and action area. Selecting an a
 
 The shipped manifest contains 79 busts, 79 full-body illustrations and 124 tokens. The production plan covers 48 playable characters, 19 additional named bosses, 12 ordinary troop portrait masters and 45 explicit shared-portrait faction variants. Existing CI verifies 283 physical image assets, all 89 enemy names, item/equipment atlas bindings and procedural fallback behavior. E1–E9 campaign content is present.
 
-Two renderer gaps remained despite existing files: party detail and expanded codex entries did not request full-body illustrations, and codex navigation scrolled away with the collection. Both are connected here; codex header/tabs remain visible while its list scrolls. Recruitment already used the full-body route and is preserved. No replacement artwork is required by the current production contract.
+Two renderer gaps remained despite existing files: party detail and expanded codex entries did not request full-body illustrations, and codex navigation scrolled away with the collection. Both are connected here; codex header/tabs remain visible while its list scrolls. Recruitment already used the full-body route and is preserved. This file-coverage audit did not check the chosen floor/wall material against the rendered map. Its previous no-further-artwork conclusion is withdrawn.
 
-`CLAUDE_CONTENT_VISUAL_SPEC_20261006.md` is a chronological concept log. Its earlier roster counts and CONCEPT/NOT_RUN entries are retained as historical provenance and explicitly superseded by the production plan, registry and runtime delivery reports. They must not restart completed asset work.
+`CLAUDE_CONTENT_VISUAL_SPEC_20261006.md` is a chronological concept log. Its earlier roster counts and CONCEPT/NOT_RUN entries are retained as historical provenance and explicitly superseded by the production plan, registry and runtime delivery reports. Their requirements must be reconciled with the current user-selected visual references; historical labels alone cannot dismiss an implementation gap.
 
 ## Verification
 
