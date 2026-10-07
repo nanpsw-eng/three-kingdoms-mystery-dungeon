@@ -5,7 +5,7 @@
 - Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon`
 - Working Branch: `art/ink-graphic-novel-v1`
 - Base Implementation Commit: `017e0c4130f914dd33d2ab74f2093d4170b0e438`
-- Art Gate: `INK_GRAPHIC_NOVEL_V1_APPROVED / FULL_ROSTER_IMPLEMENTED / FINAL_VERIFICATION_PENDING`
+- Art Gate: `INK_GRAPHIC_NOVEL_V1_APPROVED / FULL_ROSTER_IMPLEMENTED / MAIN_MERGED / AUTOMATED_QA_PASS`
 - Merge to `main`: APPROVED by latest explicit user instruction
 - Production deploy: APPROVED by latest explicit user instruction
 
@@ -126,6 +126,6 @@ First implementation scope:
 Required evidence: `npm test`, `npm run build:web`, UI smoke result, and 390×844 screenshots for all three screens. Record any unavailable check as `NOT_RUN`; do not infer PASS. After implementation, return screenshots to Work for Visual QA before marking Phase A accepted.
 
 
-## Current continuation point — 2026-10-06
+## Current continuation point — 2026-10-07
 
-Use current Track B in SESSION_HANDOFF.md and VISUAL_DELIVERY_20261006.md. All shipped character/enemy art is implemented; finish exact-head verification and authorized deployment. Earlier phase instructions are historical. Preserve the original 15 masters and 23 tokens. Do not recreate completed assets or source-domain code.
+Use SESSION_HANDOFF.md and RECOVERY_AND_VERCEL_20261007.md. All shipped art is merged through PR #13; main exact-head browser QA passed. The first incomplete task is Vercel project creation, currently blocked by 403. Do not repeat art verification or merge. Earlier stop conditions for merge/deploy are satisfied by the recorded user authorization. Earlier phase instructions are historical. Preserve the original 15 masters and 23 tokens. Do not recreate completed assets or source-domain code.

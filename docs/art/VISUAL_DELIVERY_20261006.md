@@ -24,11 +24,11 @@ Contact review: evidence/final-20261006/roster-review.jpg (104px and 40px portra
 |---|---|
 | Original checkpoint exact-head mobile CI | PASS — d0d6b1d, visual-smoke run 37469154209 |
 | New-head npm test / build:web | PASS locally — 161 tests, 0 failures; build completed |
-| Manifest file decode (283 physical paths) | PENDING |
-| Mobile gameplay / missing-art fallback | PENDING |
-| Expanded roster at 360, 390 and 768px | PENDING |
-| Codex tabs and nine campaign intro screens | PENDING |
-| Main merge / Pages deployment | PENDING |
+| Manifest file decode (283 physical paths) | PASS — main run 37546880371, 283/283 |
+| Mobile gameplay / missing-art fallback | PASS — main run 37546880371 |
+| Expanded roster at 360, 390 and 768px | PASS — main run 37546880371 |
+| Codex tabs and nine campaign intro screens | PASS — main run 37546880371; 16 coverage layouts |
+| Main merge / Pages deployment | PR #13 MERGED; gh-pages publish PASS (37546880382); public URL HTTP 404 at 2026-10-07 inspection |
 | Full campaign manual playthrough / balance acceptance | NOT_RUN — remains Track A human playtest scope |
 
 GitHub Actions publishes JSON metrics and screenshots in the mobile-visual artifact for each exact SHA. The isolated visual fixture unlocks content only inside its temporary browser context; user saves and shipped progression are unchanged.
