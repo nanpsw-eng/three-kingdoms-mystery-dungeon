@@ -26,6 +26,8 @@ export interface CodexUi {
   readonly render: () => void;
   readonly close: () => void;
   readonly portrait: (key: string, size: number, alt?: string) => HTMLElement;
+  readonly bossPortrait: (groupId: string, revealed: boolean) => HTMLElement;
+  readonly itemIcon: (id: string, revealed: boolean) => HTMLElement;
 }
 
 export function codexScreen(ui: CodexUi): HTMLElement {
@@ -67,14 +69,14 @@ export function codexScreen(ui: CodexUi): HTMLElement {
     let current = "";
     for (const b of view.bosses) {
       if (b.campaign !== current) { current = b.campaign; body.append(el("h3", "", current)); }
-      body.append(el("div", "codex-entry" + (b.defeated ? "" : " locked"), b.defeated ? "⚔ " + b.name : "??? (미격파)"));
+      body.append(el("div", "codex-entry codex-boss" + (b.defeated ? "" : " locked"), ui.bossPortrait(b.id, b.defeated), el("span", "", b.defeated ? b.name : "??? (미격파)")));
     }
   } else if (tab === "achievements") {
-    for (const a of view.achievements) body.append(el("div", "codex-entry" + (a.earned ? "" : " locked"), el("b", "", (a.earned ? "🏅 " : "🔒 ") + a.name), el("small", "", " — " + a.hint)));
+    for (const a of view.achievements) body.append(el("div", "codex-entry codex-achievement" + (a.earned ? "" : " locked"), el("span", "achievement-seal" + (a.earned ? " earned" : ""), a.earned ? "達" : "未"), el("span", "", el("b", "", a.name), el("small", "", a.hint))));
   } else {
     const grid = el("div", "");
-    grid.style.cssText = "display:flex;flex-wrap:wrap;gap:6px";
-    for (const i of view.items) grid.append(el("span", "codex-entry" + (i.seen ? "" : " locked"), i.seen ? i.name : "???"));
+    grid.className = "codex-items";
+    for (const i of view.items) grid.append(el("div", "codex-entry codex-item" + (i.seen ? "" : " locked"), ui.itemIcon(i.id, i.seen), el("span", "", i.seen ? i.name : "???")));
     body.append(grid);
   }
   return el("div", "panel codex", el("div", "codex-header", el("h2", "", "도감 · 업적"), btn("닫기", ui.close)), tabs, body);

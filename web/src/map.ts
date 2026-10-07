@@ -1,5 +1,5 @@
 import type { DungeonEngine, Point } from "../../src/index.js";
-import { assetSurface, assetTile, assetToken } from "./assets.js";
+import { assetPainting, assetSurface, assetTile, assetToken } from "./assets.js";
 import { figureCanvas, iconCanvas } from "./sprites.js";
 
 export const VIEW_RADIUS = 7;
@@ -136,11 +136,25 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
     const [x, y] = at(p);
     const s = cell * scale;
     ctx.imageSmoothingEnabled = image instanceof HTMLImageElement;
-    ctx.drawImage(image, x + (cell - s) / 2, y + (cell - s) / 2 - lift, s, s);
+    const ratio = image instanceof HTMLImageElement ? image.naturalWidth / image.naturalHeight : 1;
+    const width = Math.min(s, s * ratio), height = Math.min(s, s / ratio);
+    if (image instanceof HTMLImageElement && image.dataset.inkPaper) ctx.globalCompositeOperation = "multiply";
+    ctx.drawImage(image, x + (cell - width) / 2, y + (cell - height) / 2 - lift, width, height);
+    ctx.globalCompositeOperation = "source-over";
     ctx.imageSmoothingEnabled = false;
+  };
+  const paint = (name: string, p: Point, scale = 1): boolean => {
+    const source = assetPainting("map:" + name);
+    if (!source) return false;
+    const [x, y] = at(p), s = cell * scale;
+    ctx.imageSmoothingEnabled = true;
+    ctx.drawImage(source.image, source.sx, source.sy, source.width, source.height, x + (cell-s)/2, y + (cell-s)/2, s, s);
+    ctx.imageSmoothingEnabled = false;
+    return true;
   };
   /** Draws a named tileset tile when one is loaded, else the procedural fallback. */
   const terrain = (name: string, fallback: CanvasImageSource, p: Point, variant = 0): void => {
+    if (paint(name.startsWith("trap-") ? "trap" : name, p)) return;
     const material = name === "corridor" ? "floor" : name.startsWith("wall-") ? "wall" : name;
     // A floor study spans a 3×3 world-cell patch, rather than shrinking the
     // entire crack pattern into every cell. Adjacent subrects share one sample.
@@ -207,6 +221,9 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
     if (!dungeon.isExplored(object.pos)) continue;
     const name = object.kind === "item" ? "item-" + object.contentId : object.kind === "recruit" ? "recruit" : object.kind === "event" ? "event" : "sorcery";
     const fallback = object.kind === "item" ? iconCanvas(object.contentId) : object.kind === "recruit" ? BANNER : object.kind === "event" ? EVENT : SORCERY;
+    // Containers are presentations of existing pickups; interaction/rewards stay unchanged.
+    const presentation = object.kind !== "item" ? object.kind : /rice|bun/.test(object.contentId) ? "pot" : /medicine|herb|elixir|treatment/.test(object.contentId) ? "find" : "chest";
+    if (paint(presentation, object.pos, object.kind === "item" ? 0.85 : 1)) continue;
     const tile = assetTile(name);
     if (tile === null) {
       blit(fallback, object.pos, object.kind === "item" ? 0.75 : 1);
@@ -223,6 +240,10 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   for (const p of fog) {
     const [x, y] = at(p);
     const tile = assetTile("fog", hash(p.x, p.y, 19));
+    ctx.globalAlpha = 0.28;
+    const originalFog = paint("fog", p);
+    ctx.globalAlpha = 1;
+    if (originalFog) continue;
     if (tile !== null) {
       ctx.imageSmoothingEnabled = true;
       ctx.drawImage(tile.image, tile.sx, tile.sy, tile.size, tile.size, x, y, cell, cell);
@@ -235,6 +256,15 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
       ctx.fillStyle = wash;
       ctx.fillRect(x, y, cell, cell);
     }
+  }
+  // Existing floor modifiers receive a subdued ink overlay; no new modifier semantics.
+  if (dungeon.floor.modifier) {
+    ctx.globalAlpha = 0.08;
+    for (let vy = 0; vy < VIEW; vy++) for (let vx = 0; vx < VIEW; vx++) {
+      const p = {x:origin.x+vx,y:origin.y+vy};
+      if (dungeon.isExplored(p) && passable(p)) paint("environment", p);
+    }
+    ctx.globalAlpha = 1;
   }
   // torchlight: warm glow around the ruler, falling off into darkness at the view edge
   const [lx, ly] = at(dungeon.position);
@@ -252,7 +282,9 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
     ctx.fillStyle = "rgba(0,0,0,0.35)"; ctx.fillRect(x + cell * 0.2, y + cell * 0.82, cell * 0.6, cell * 0.12);
     const enemyKey = options.enemyKey(enemy.groupId);
     const enemyToken = assetToken(enemyKey);
-    blit(enemyToken ?? figureCanvas(enemyKey), enemy.pos, enemy.boss ? 1.35 : enemyToken === undefined ? 1 : 1.2, cell * 0.08);
+    if (enemyKey !== "yt-spear" || !paint("enemy-scout", enemy.pos, 1)) {
+      blit(enemyToken ?? figureCanvas(enemyKey), enemy.pos, enemy.boss ? 1.35 : enemyToken === undefined ? 1 : 1.2, cell * 0.08);
+    }
     if (enemy.state === "ALERT" || enemy.state === "CHASE") {
       const s = Math.max(2, Math.floor(cell / 8));
       ctx.fillStyle = "#f2ebdd"; ctx.fillRect(x + cell * 0.72, y - s * 3, s * 3, s * 4);

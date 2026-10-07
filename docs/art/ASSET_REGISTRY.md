@@ -19,3 +19,7 @@ Direction: DEC-025, modern ink graphic novel × lianhuanhua. Original approved a
 General soldiers share a face by role, while named historical figures retain their own identity. Full-body files load only when visible. Asset load failures use existing procedural art.
 
 Chronological queue/gate snapshots are archived in HISTORY_ASSET_REGISTRY_20261006.md; this does not dismiss concept requirements. Remaining fidelity gaps are recorded in docs/reports/REMAINING_GRAPHICS_AUDIT_20261007.md: ruler exploration tokens, detailed raster objects, codex secondary-tab art and story scenery are not fully applied. No new gameplay, save, balance or campaign rules are introduced.
+
+## Remaining-concept integration batch — 2026-10-07
+
+Implementation now resides on `feat/complete-concept-integration` (QA PASS; single production release ready). Original ruler bust/full-body/transparent v2 token sources are preferred; named concept sheets are mapped by source rectangle. Other unit tokens use compact full-body exports, not the old generic SVG design. Detailed map object references, codex boss/item/achievement visuals, story scenery and battle full-body/status effects are connected. SVG and procedural assets remain fallbacks. See `docs/reports/CONCEPT_INTEGRATION_20261007.md` for selected sources, test evidence and scope. Earlier audit statuses describe the pre-integration state.

@@ -191,7 +191,16 @@ function render(): void {
   mapObserver?.disconnect(); mapObserver = null;
   app.dataset.screen = run === null ? (showCodex ? "codex" : "title") : run.phase === "battle" ? "battle" : run.phase === "safe-zone" || run.phase === "cleared" || run.phase === "failed" ? "other" : "dungeon";
   app.replaceChildren();
-  if (run === null && showCodex) put(codexScreen({ view: buildCodex(content, meta), render, close: () => { showCodex = false; render(); }, portrait: (key, size, alt) => pic(key, size, alt) }));
+  if (run === null && showCodex) put(codexScreen({ view: buildCodex(content, meta), render, close: () => { showCodex = false; render(); }, portrait: (key, size, alt) => pic(key, size, alt),
+    bossPortrait: (groupId, revealed) => {
+      const group = content.enemyGroups.find(g => g.id === groupId);
+      const name = group?.units[0]?.name ?? "";
+      const image = pic(name, 48, revealed ? name : "미격파 보스");
+      if (!revealed) image.style.filter = "grayscale(1) brightness(0.12)";
+      return image;
+    },
+    itemIcon: (id, revealed) => icon(revealed ? id : "unknown-item", 52),
+  }));
   else if (run === null) renderTitle();
   else if (run.phase === "cleared" || run.phase === "failed") renderEnd();
   else if (run.phase === "battle") { renderBattle(); hitIds = new Set(); healedIds = new Set(); }
@@ -381,6 +390,7 @@ function renderHelp(): void {
     h("p", {}, "방향 버튼 또는 지도를 눌러 이동합니다. 가운데 대기는 1턴을 진행합니다. 자동 탐색은 발견·적 조우 시 멈춥니다."),
     h("p", {}, "주변 탐색은 숨겨진 통로와 함정을 찾습니다. 조사는 가까운 사물에 사용하며, 계단 위에서 계단 버튼을 누르면 다음 층으로 이동합니다."),
     h("p", {}, "가방과 부대에서 아이템 효과, 스킬 설명, 체력과 장비를 확인할 수 있습니다. 탐험 중 아이템 사용·장비 변경은 1턴을 소모합니다."),
+    h("p", {}, "상자·항아리·약 주머니는 물품이 있는 칸입니다. 해당 칸으로 이동하면 물품을 획득합니다."),
     h("h3", {}, "전투"),
     h("p", {}, "수동: 공격·스킬을 선택한 뒤 강조된 대상을 누르세요. 기력이 부족한 스킬은 비활성화됩니다. 스마트는 상황에 맞춰 행동하고, 전체공격은 기본 공격을 사용합니다. 반복은 기록된 행동을 재사용합니다."),
     h("p", {}, "×1·×2·×3은 전투 재생 속도입니다. 안내 패널을 열면 자동 전투가 잠시 멈추고, 닫으면 이어집니다."),
@@ -425,13 +435,13 @@ function renderBattle(): void {
     }
     const unit = snap.units.find((u) => u.id === id)!;
     const chosen = selection !== null && "targets" in selection && selection.targets.includes(id);
-    const cls = ["unit", side, unit.knockedOut ? "ko" : "", active?.actorId === id ? "active" : "", legal.has(id) ? "targetable" : "", chosen ? "selected" : ""].join(" ");
+    const cls = ["unit", side, unit.knockedOut ? "ko" : "", snap.guarding.includes(id) ? "guarded" : "", active?.actorId === id ? "active" : "", legal.has(id) ? "targetable" : "", chosen ? "selected" : ""].join(" ");
     return button("", () => {
       if (side === "ally" && activeAlly && selection?.kind === "formation" && id !== active.actorId) {
         const command: BattleCommand = { type: "formation", actorId: active.actorId, targetSlot: slot }; selection = null; narrateBattle(command); render(); return;
       }
       onUnit(id);
-    }, { class: cls + (hitIds.has(id) ? " hit" : "") + (healedIds.has(id) ? " healed" : "") }).appendChild(h("div", { class: "unit-head" }, pic(id.includes("#") ? unitName(id) : id, 40, unitName(id)),
+    }, { class: cls + (hitIds.has(id) ? " hit" : "") + (healedIds.has(id) ? " healed" : "") }).appendChild(h("div", { class: "unit-head" }, pic(id.includes("#") ? unitName(id) : id, 120, unitName(id)),
       h("div", { class: "unit-meta" }, h("b", {}, unitName(id)), h("span", { class: "num" }, unit.hp + "/" + unit.stats.maxHp)))).parentElement!
       .appendChild(bar(unit.hp, unit.stats.maxHp)).parentElement!
       .appendChild(bar(unit.energy, 100, "energy")).parentElement!

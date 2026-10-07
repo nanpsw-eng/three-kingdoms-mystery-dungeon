@@ -262,3 +262,33 @@ img.fullbody-illustration {
 
 /* Preserve the original painted stone material rather than pixelating its crop. */
 .map-stage canvas#map { image-rendering: auto; }
+
+/* Original reference paintings, integrated into the existing interaction surfaces. */
+.native-token { object-fit: contain; image-rendering: auto; }
+.unit-head .fullbody-illustration { width: 40px; height: 50px; flex: none; }
+.codex-boss, .codex-achievement { display: flex; align-items: center; gap: 12px; min-height: 64px; }
+.codex-boss img { flex: none; width: 48px; height: 48px; object-fit: cover; }
+.codex-items { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 8px; }
+.codex-item { min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-align: center; min-height: 98px; font-size: 12px; }
+.codex-item img { width: 52px; height: 52px; object-fit: contain; image-rendering: auto; }
+.achievement-seal { flex: none; width: 42px; height: 42px; display: grid; place-items: center; border: 2px solid var(--muted); border-radius: 48% 43% 50% 46%; color: var(--muted); font: 23px var(--font-display); transform: rotate(-7deg); }
+.achievement-seal.earned { border-color: var(--vermilion); color: var(--vermilion); box-shadow: inset 0 0 0 2px var(--paper-light), inset 0 0 0 3px var(--vermilion); }
+.story-scene { position: relative; isolation: isolate; }
+.story-backdrop { display: block; width: 100%; height: clamp(72px,14vh,110px); object-fit: cover; object-position: center; margin-bottom: 8px; border-bottom: 2px solid var(--ink); }
+.story-scene > h2 { min-height: 40px; background: var(--story-ornament,none) right center / auto 52px no-repeat; padding-right: 30%; }
+.story-scene .story-line { background: var(--paper-light); }
+.unit { isolation: isolate; overflow: hidden; }
+.unit.healed::before { content: ""; position: absolute; width: 44px; height: 44px; left: 4px; top: 4px; border: 3px solid var(--jade); border-radius: 48% 42%; pointer-events: none; animation: heal-ring 480ms ease-out both; }
+.unit.guarded::before { content: "↑"; position: absolute; right: 4px; top: 0; color: var(--jade); font-size: 22px; opacity: .55; pointer-events: none; animation: rise-ink 700ms ease-out both; }
+.unit:has(.tag[data-status="burn"]) { background-image: radial-gradient(ellipse at bottom right,rgba(166,64,50,.22),transparent 70%); }
+.unit:has(.tag[data-status="poison"]) { background-image: radial-gradient(ellipse at bottom right,rgba(102,130,116,.22),transparent 70%); }
+.tag[data-status="confusion"]::before { content: "◌"; display: inline-block; margin-right: 3px; color: #735e76; animation: ink-swirl 2s ease-in-out 2; }
+.tag[data-status="defense-down"], .tag[data-status="timeline-delay"] { border-color: #735e76; color: #735e76; }
+@keyframes heal-ring { from { opacity: .7; transform: scale(.6) rotate(-20deg); } to { opacity: 0; transform: scale(1.6) rotate(10deg); } }
+@keyframes rise-ink { from { transform: translateY(14px); opacity: 0; } to { transform: translateY(0); opacity: .55; } }
+@keyframes ink-swirl { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .unit::before, .tag::before { animation: none !important; } }
+.story-line .fullbody-illustration { width: 70px; height: 105px; flex: none; }
+.story-text { min-width: 0; flex: 1; }
+[data-screen="battle"] .unit-head .fullbody-illustration { width: 32px; height: 44px; object-fit: contain; }
+.story-scene > h2 { color: var(--ink); clip-path: none; width: 100%; padding: 6px 30% 6px 0; }

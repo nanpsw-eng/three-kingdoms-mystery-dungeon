@@ -648,5 +648,15 @@
   ],
   "verificationScope": "IMPLEMENTED records file/binding coverage; visual fidelity requires reference/runtime comparison.",
   "dungeonSurfaceReference": "concepts/dungeon-modular-surface-grammar-concept-v2-20261006.jpg",
-  "dungeonSurfaceRuntime": "web/assets/tiles/dungeon-stone-material-v2.jpg"
+  "dungeonSurfaceRuntime": "web/assets/tiles/dungeon-stone-material-v2.jpg",
+  "remainingConceptIntegration": {
+    "status": "QA_PASS_READY_SINGLE_RELEASE",
+    "report": "docs/reports/CONCEPT_INTEGRATION_20261007.md",
+    "sourceRectangles": "web/assets/manifest.json#paintings",
+    "rulerTokenPreference": "original transparent v2 PNG",
+    "otherTokenPreference": "compact existing full-body exports / named original sheet",
+    "singleProductionRelease": true,
+    "browserCi": 37627136008,
+    "engineCi": 37627135988
+  }
 }
