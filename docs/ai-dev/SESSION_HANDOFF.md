@@ -1,55 +1,39 @@
-# SESSION HANDOFF — 2026-10-07 KST
+# SESSION HANDOFF — 2026-10-07 mobile UX checkpoint
 
-## Current checkpoint
+State: `MOBILE_UX_MERGED / AUTOMATED_QA_PASS / VERCEL_PRODUCTION_READY / FULL_CAMPAIGN_HUMAN_PLAYTEST_NOT_RUN`.
 
-- Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon` (public).
-- Game/art baseline: main `ea8beea73f53aca9c2aa5f2c2a189ee466932504`.
-- PR #13 already MERGED (2026-10-07 08:29:53 KST); art branch has the same tree as main. Claude session branch has no unique commits beyond main at inspection.
-- State: `STORY_AND_ART_MERGED / AUTOMATED_QA_PASS / VERCEL_PRODUCTION_LIVE / HUMAN_PLAYTEST_NOT_RUN`.
-- Latest delivery delta: verified live Vercel deployment + corrected continuity; see report below. This document's own commit is the recovery checkpoint; use Git refs for its exact SHA.
+PR #16 merged to main at `6af1e978721eaee68d8b2fdef350e9da7e84e951`. This documentation/evidence commit is a further checkpoint; use Git refs for its exact SHA. It introduces no runtime changes.
 
 ## Authority
 
-Existing DEC-024 and visual completion authorization permit completing recommended work, main merges and production deployment. Latest user explicitly requested resuming without rework and Vercel deployment. Paid-service activation, repository visibility change, a new art direction or material product change remain outside scope.
+DEC-024 and recorded visual completion delegation authorize main merges and production deployment. Latest user requested mobile UI/UX improvements and genuinely missing graphics integration. Paid services, visibility changes and material product changes remain outside scope. Follow AGENTS.md and exact AI_OS_BINDING.md.
 
 ## Completed — DO_NOT_REPEAT
 
-- Battle/dungeon/run/content engines, deterministic replay, economy/recruitment/meta.
-- Story S0–S5 / E1–E9, ending, renown; prior reports in `docs/reports/STORY_*` and `POLISH_CODEX_SCENES_SAVES.md`.
-- Approved modern ink graphic novel direction (DEC-025); all 48 playable identities and enemy bindings.
-- 79 busts, 79 full bodies, 124 tokens, dungeon/item atlas, fonts, mobile controls and fallbacks. Original assets preserved.
-- PR #13 merge and main automated graphics QA. No extra art generation or re-merge needed.
+- E1–E9 story/content, 48 playable identities, 79 busts + 79 full bodies + 124 tokens, enemy/atlas bindings, typography and fallback. PR #13 already merged.
+- Vercel project exists and is Git-connected. Do not repeat creation/login/import setup.
+- Mobile square map fits remaining viewport height; compact party HUD uses roster-sized columns; 44px movement/actions/help remain visible at tested portrait sizes.
+- State/log/help sheets, sticky close, canonical item/skill explanations, manual target guidance/cancel and auto-combat pause while reading implemented.
+- Full-body art connected to party and unlocked codex details; recruitment route preserved. Codex navigation stays visible while its list scrolls.
+- Historical concept log explicitly superseded by production plan/registry. Old CONCEPT/NOT_RUN lists are not current asset work.
 
-## Verified evidence
+## Evidence
 
-- Local main: tests 161/0; build:web PASS; 57 compiled JS modules, no missing relative imports.
-- Main CI 37546880306 PASS; visual-smoke 37546880371 PASS; artifact 11450813048 inspected.
-- 283/283 asset decodes; gameplay + fallback PASS; 48 characters / 89 enemy names / 16 coverage layouts, no errors.
-- Main deploy workflow 37546880382 PASS means site pushed to gh-pages. Intended Pages URL returned HTTP 404; actual Pages activation UNKNOWN.
-- Fresh local Chromium checks NOT_RUN (download unavailable); reused exact-main CI evidence.
-- Full manual campaign balance/playthrough NOT_RUN.
+- Source `48e4c18`: local and CI engine tests 161 PASS; web build PASS.
+- Engine CI `37617790923`; visual CI `37617790841`; artifact `11480203537`: PASS.
+- 5 portrait viewport sizes, 7 layout audits, touch wait/manual target/auto pause-resume/save reload PASS. 283 image decodes, fallback, 48 characters / 89 enemy names / 16 coverage layouts PASS.
+- Vercel project `prj_eqeoObsWdZptETAHK5y42urWORbV`; production `dpl_9RteVCiFfkLvqnwJUrDjdQCPFoBq` READY for main `6af1e978`.
+- Public URL: https://three-kingdoms-mystery-dungeon.vercel.app/.
+- Live reload/continue preserves prior save (turn 29, gold 36); new help/party/visible full-body and skill descriptions verified.
+- An intermediate transferred source snapshot failed build, never production. Final local/fetched renderer hashes match; do not resume from failed `0c225b3`.
+- Full physical Android/iOS testing, every later campaign human playthrough and balance remain NOT_RUN. Landscape below 540px height intentionally scrolls.
 
-## Deployment verified — 2026-10-07 KST
+NEXT_SAFE_ACTION: respond to observed gameplay/UX feedback or requested later-campaign human playtests. Do not regenerate approved art, rebuild engine/story, repeat deployment setup or assume an active background job. Prior chat interruption cause remains UNKNOWN.
 
-- User imported and deployed directly; no extra project creation is needed.
-- Project: `prj_eqeoObsWdZptETAHK5y42urWORbV`, team `team_1HfCVfi0noDdmzHMqGeazpO6`.
-- Deployment: `dpl_H867evArxXCuG4xKcicWC5L85Wuo`, production READY, commit `28907a54190eec5cda3ef543fbc02d1c2dac65b1`.
-- Verified public URL: https://three-kingdoms-mystery-dungeon.vercel.app/
-- Live browser: party selection, dungeon exploration, battle, Smart ×3, victory return, refresh/continue restore PASS. Restored turn 29, gold 36, HP 89/103–112/112–120/120.
-- Visible title images all loaded; no horizontal overflow in tested desktop viewport. Game-origin warning/error log query returned no entries; unrelated browser-extension errors excluded.
-- Actual Vercel Node runtime is 24.x (not runbook recommendation 22.x); deployment READY, no runtime/config change needed.
-- API calls with explicit teamId returned stale/inconsistent not-found/forbidden results; exact project/deployment ID lookup without that parameter resolved to the same accountId. Do not interpret the old create error as an ongoing deployment block or repeat project creation.
-- Detailed evidence: `docs/reports/VERCEL_LIVE_VERIFICATION_20261007.md` and `docs/reports/evidence/vercel-live-gameplay-20261007.jpg`.
+## Minimal index
 
-NEXT_SAFE_ACTION: human playtest of later campaigns and observed UX/balance feedback. No remaining deploy setup task. Fresh mobile live verification/full manual campaign completion remain NOT_RUN; existing exact-game-tree mobile CI is retained.
-
-## Minimal context index
-
-- `AGENTS.md` / `AI_OS_BINDING.md`: authority and exact binding.
-- `docs/product/GAME_DESIGN_PRD.md` / `STORY_EXPANSION_PLAN.md`: approved product.
-- `docs/decisions/DEC-024-STORY_EXPANSION_APPROVAL.md`: delegation.
-- `docs/art/VISUAL_DELIVERY_20261006.md`: delivered graphic scope.
-- `docs/reports/RECOVERY_AND_VERCEL_20261007.md` + `RECOVERY_VISUAL_EVIDENCE_20261007.json`: durable recovery evidence.
-- `docs/operations/VERCEL_DEPLOYMENT.md`: settings, access blocker and next action.
-
-Cause of repeated chat interruption remains UNKNOWN. This checkpoint prevents repeating completed work; it does not claim an unobserved background process is running.
+- `docs/reports/MOBILE_UX_GRAPHICS_20261007.md`: current changes and verification.
+- `docs/reports/evidence/mobile-ux-*20261007.*`: durable screenshots/results.
+- `docs/art/PRODUCTION_ART_PLAN.json` / `ASSET_REGISTRY.md`: graphics contract.
+- `docs/reports/VERCEL_LIVE_VERIFICATION_20261007.md`: prior live playthrough recovery.
+- `docs/operations/VERCEL_DEPLOYMENT.md`: project settings; exact ID lookup without teamId resolves the connected account reliably.
