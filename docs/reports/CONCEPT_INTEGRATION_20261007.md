@@ -1,6 +1,6 @@
 # Remaining concept integration — 2026-10-07
 
-Status: IMPLEMENTED_QA_PENDING. User requested actual integration of remaining graphics, with ONE production deployment after the complete batch. Work is isolated on feat/complete-concept-integration; no incremental main checkpoints/deploys.
+Status: QA_PASS_READY_SINGLE_RELEASE. User requested actual integration of remaining graphics, with ONE production deployment after the complete batch. Work is isolated on feat/complete-concept-integration; no incremental main checkpoints/deploys.
 
 ## Implementation contract
 
@@ -20,4 +20,8 @@ Engine tests 161 PASS and web build PASS locally. Browser QA runs in GitHub visu
 
 The malformed historical codex-character-detail JPEG was already invalid in its original commit. It remains historical UNKNOWN; current character detail is implemented from the readable shared UI specification and approved Bible. No unapproved style switch or gameplay changes. All old variants/review fixtures cannot be active simultaneously; chosen current sources above are explicit.
 
-Post-CI evidence and deploy state are recorded on the feature branch before the final merge. A later operational result must not trigger another production deploy merely to add a report.
+Browser CI 37627136008 PASS, engine CI 37627135988 PASS on source 91357a0193bcc0e86eb8116b5dcf5177e93d68f2. All 378 images decode; fallback/manual attack/auto battle/save/mobile viewport checks PASS. Coverage: 48 characters, 89 enemy names, 16 layouts. Source surface QA: 98 floor + 112 wall draws, stable source selection. Integration: 39 boss portraits, 22 item images, 16 earned seals; all 8 map source rectangles observed, story backdrop and reduced motion PASS. Errors: 0. Screenshots visually inspected and persisted with QA JSON in docs/reports/evidence/concept-*20261007.*.
+
+Fixed test-only map seed makes the actual keyboard encounter repeatable (2 steps); no engine or production randomness change. Campaign audit waits for visible application screens and decoded images instead of network-idle during running game timers.
+
+Single authorized release: merge PR18 once to main. Record the subsequent live deployment verification on this feature branch, not via a second production-triggering main commit. Historical audit describes the pre-integration state.
