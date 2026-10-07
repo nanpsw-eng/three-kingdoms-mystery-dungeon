@@ -6,7 +6,9 @@
 - 1단계 + 모바일 도감 수정은 사용자 승인 후 PR #19 병합 완료. main/운영 commit `85790c549319c774514f289e69cc8ab0f6f515fb`.
 - Vercel production `dpl_GzXqwB6LQ8kueAZx1aDuPPg6rKEX` READY, 실제 서비스 도감 목록·상세 확인 완료.
 - 기존 업로드 보류/auto-review blocker는 명시적 사용자 승인으로 해제되어 1단계 release를 마쳤다. 과거 hold를 복원하지 않는다.
-- 사용자 ‘다음도 계속 진행해’에 따라 **2단계 탐험 화면** 구현/로컬 검증 완료. Branch `feature/ink-exploration-stage2`. 이번 2단계 main 병합/운영 배포는 아직 하지 않음.
+- 사용자 ‘다음도 계속 진행해’에 따라 **2단계 탐험 화면** 구현/로컬 검증 완료. Branch `feature/ink-exploration-stage2`. PR #20 exact HEAD `f96cf0e4aafd4795ca59db244ddb12c82d00e71e`, CI/visual-smoke PASS. 운영 배포는 사용자 선택 ②로 보류.
+
+- 사용자 선택 ②: 배포를 보류하고 **3단계 전투**를 계속 구현. `feature/ink-battle-stage3`는 PR #20 위 stacked branch. 큰 초상/행동 순서/4개 명령/기술·물품·전술 패널 및 3+2 진형 유지.
 
 ## 최소 기준 / 변경 범위
 
@@ -23,4 +25,4 @@
 
 ## 다음 작업
 
-2단계 PR의 exact HEAD 기준 CI를 확인하고, main 병합/production 승인 후 GitHub 연결 Vercel의 exact merge SHA READY와 실제 서비스를 확인한다. 이어 3단계 전투(전열3/후열2 유지), 4단계 도감 열전 개선. 이미 완료된 공통 UI/원본 자산 통합/도감 겹침을 다시 작업하지 않는다.
+3단계 전투 build/도메인161/전투7개 화면/실제 기술 사용/5v5 adapter/모바일 회귀 PASS. 상세 보고서 `docs/reports/INK_BATTLE_STAGE3_20261007.md`. 원격 전투 PR checks를 확인한다. 다음은 4단계 도감 열전/상세 개선. 사용자가 배포 보류를 해제하기 전 PR #20 및 전투 PR을 main에 병합하거나 운영 배포하지 않는다. 이미 완료된 공통 UI/원본 자산 통합/도감 겹침을 다시 작업하지 않는다.
