@@ -6,6 +6,8 @@ const out = process.argv[3] ?? 'visual-evidence';
 mkdirSync(out, { recursive: true });
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 390, height: 660 }, deviceScaleFactor: 2 });
+// Keep encounter routing deterministic without changing the production RNG.
+await page.addInitScript(() => { Date.now = () => 1791373352662; });
 const errors = [], results = [];
 page.on('pageerror', e => errors.push(String(e)));
 const state = () => page.evaluate(() => window.__tkmd.state());

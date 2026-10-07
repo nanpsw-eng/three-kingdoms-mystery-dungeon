@@ -1,0 +1,979 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "label": "dungeon-360x640",
+      "width": 360,
+      "height": 640,
+      "scrollWidth": 360,
+      "controls": [
+        {
+          "label": "↖",
+          "x": 10,
+          "y": 412,
+          "width": 44,
+          "height": 44,
+          "bottom": 456
+        },
+        {
+          "label": "↑",
+          "x": 57,
+          "y": 412,
+          "width": 44,
+          "height": 44,
+          "bottom": 456
+        },
+        {
+          "label": "↗",
+          "x": 104,
+          "y": 412,
+          "width": 44,
+          "height": 44,
+          "bottom": 456
+        },
+        {
+          "label": "←",
+          "x": 10,
+          "y": 459,
+          "width": 44,
+          "height": 44,
+          "bottom": 503
+        },
+        {
+          "label": "·",
+          "x": 57,
+          "y": 459,
+          "width": 44,
+          "height": 44,
+          "bottom": 503
+        },
+        {
+          "label": "→",
+          "x": 104,
+          "y": 459,
+          "width": 44,
+          "height": 44,
+          "bottom": 503
+        },
+        {
+          "label": "↙",
+          "x": 10,
+          "y": 506,
+          "width": 44,
+          "height": 44,
+          "bottom": 550
+        },
+        {
+          "label": "↓",
+          "x": 57,
+          "y": 506,
+          "width": 44,
+          "height": 44,
+          "bottom": 550
+        },
+        {
+          "label": "↘",
+          "x": 104,
+          "y": 506,
+          "width": 44,
+          "height": 44,
+          "bottom": 550
+        },
+        {
+          "label": "자동 탐색",
+          "x": 156,
+          "y": 412,
+          "width": 95.5,
+          "height": 44,
+          "bottom": 456
+        },
+        {
+          "label": "주변 탐색",
+          "x": 254.5,
+          "y": 412,
+          "width": 95.5,
+          "height": 44,
+          "bottom": 456
+        },
+        {
+          "label": "조사",
+          "x": 156,
+          "y": 459,
+          "width": 95.5,
+          "height": 44,
+          "bottom": 503
+        },
+        {
+          "label": "계단 ▼",
+          "x": 254.5,
+          "y": 459,
+          "width": 95.5,
+          "height": 44,
+          "bottom": 503
+        },
+        {
+          "label": "가방 (3/10)",
+          "x": 156,
+          "y": 506,
+          "width": 95.5,
+          "height": 44,
+          "bottom": 550
+        },
+        {
+          "label": "부대",
+          "x": 254.5,
+          "y": 506,
+          "width": 95.5,
+          "height": 44,
+          "bottom": 550
+        },
+        {
+          "label": "상태",
+          "x": 10,
+          "y": 556,
+          "width": 110.65625,
+          "height": 44,
+          "bottom": 600
+        },
+        {
+          "label": "기록",
+          "x": 124.65625,
+          "y": 556,
+          "width": 110.671875,
+          "height": 44,
+          "bottom": 600
+        },
+        {
+          "label": "도움말",
+          "x": 239.328125,
+          "y": 556,
+          "width": 110.65625,
+          "height": 44,
+          "bottom": 600
+        }
+      ],
+      "map": {
+        "x": 30.5,
+        "y": 49.375,
+        "width": 299,
+        "height": 299,
+        "bottom": 348.375
+      }
+    },
+    {
+      "label": "dungeon-390x660",
+      "width": 390,
+      "height": 660,
+      "scrollWidth": 390,
+      "controls": [
+        {
+          "label": "↖",
+          "x": 10,
+          "y": 432,
+          "width": 44,
+          "height": 44,
+          "bottom": 476
+        },
+        {
+          "label": "↑",
+          "x": 57,
+          "y": 432,
+          "width": 44,
+          "height": 44,
+          "bottom": 476
+        },
+        {
+          "label": "↗",
+          "x": 104,
+          "y": 432,
+          "width": 44,
+          "height": 44,
+          "bottom": 476
+        },
+        {
+          "label": "←",
+          "x": 10,
+          "y": 479,
+          "width": 44,
+          "height": 44,
+          "bottom": 523
+        },
+        {
+          "label": "·",
+          "x": 57,
+          "y": 479,
+          "width": 44,
+          "height": 44,
+          "bottom": 523
+        },
+        {
+          "label": "→",
+          "x": 104,
+          "y": 479,
+          "width": 44,
+          "height": 44,
+          "bottom": 523
+        },
+        {
+          "label": "↙",
+          "x": 10,
+          "y": 526,
+          "width": 44,
+          "height": 44,
+          "bottom": 570
+        },
+        {
+          "label": "↓",
+          "x": 57,
+          "y": 526,
+          "width": 44,
+          "height": 44,
+          "bottom": 570
+        },
+        {
+          "label": "↘",
+          "x": 104,
+          "y": 526,
+          "width": 44,
+          "height": 44,
+          "bottom": 570
+        },
+        {
+          "label": "자동 탐색",
+          "x": 156,
+          "y": 432,
+          "width": 110.5,
+          "height": 44,
+          "bottom": 476
+        },
+        {
+          "label": "주변 탐색",
+          "x": 269.5,
+          "y": 432,
+          "width": 110.5,
+          "height": 44,
+          "bottom": 476
+        },
+        {
+          "label": "조사",
+          "x": 156,
+          "y": 479,
+          "width": 110.5,
+          "height": 44,
+          "bottom": 523
+        },
+        {
+          "label": "계단 ▼",
+          "x": 269.5,
+          "y": 479,
+          "width": 110.5,
+          "height": 44,
+          "bottom": 523
+        },
+        {
+          "label": "가방 (3/10)",
+          "x": 156,
+          "y": 526,
+          "width": 110.5,
+          "height": 44,
+          "bottom": 570
+        },
+        {
+          "label": "부대",
+          "x": 269.5,
+          "y": 526,
+          "width": 110.5,
+          "height": 44,
+          "bottom": 570
+        },
+        {
+          "label": "상태",
+          "x": 10,
+          "y": 576,
+          "width": 120.65625,
+          "height": 44,
+          "bottom": 620
+        },
+        {
+          "label": "기록",
+          "x": 134.65625,
+          "y": 576,
+          "width": 120.671875,
+          "height": 44,
+          "bottom": 620
+        },
+        {
+          "label": "도움말",
+          "x": 259.328125,
+          "y": 576,
+          "width": 120.65625,
+          "height": 44,
+          "bottom": 620
+        }
+      ],
+      "map": {
+        "x": 50.5,
+        "y": 49.375,
+        "width": 289,
+        "height": 289,
+        "bottom": 338.375
+      }
+    },
+    {
+      "label": "dungeon-390x844",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "controls": [
+        {
+          "label": "↖",
+          "x": 10,
+          "y": 616,
+          "width": 44,
+          "height": 44,
+          "bottom": 660
+        },
+        {
+          "label": "↑",
+          "x": 57,
+          "y": 616,
+          "width": 44,
+          "height": 44,
+          "bottom": 660
+        },
+        {
+          "label": "↗",
+          "x": 104,
+          "y": 616,
+          "width": 44,
+          "height": 44,
+          "bottom": 660
+        },
+        {
+          "label": "←",
+          "x": 10,
+          "y": 663,
+          "width": 44,
+          "height": 44,
+          "bottom": 707
+        },
+        {
+          "label": "·",
+          "x": 57,
+          "y": 663,
+          "width": 44,
+          "height": 44,
+          "bottom": 707
+        },
+        {
+          "label": "→",
+          "x": 104,
+          "y": 663,
+          "width": 44,
+          "height": 44,
+          "bottom": 707
+        },
+        {
+          "label": "↙",
+          "x": 10,
+          "y": 710,
+          "width": 44,
+          "height": 44,
+          "bottom": 754
+        },
+        {
+          "label": "↓",
+          "x": 57,
+          "y": 710,
+          "width": 44,
+          "height": 44,
+          "bottom": 754
+        },
+        {
+          "label": "↘",
+          "x": 104,
+          "y": 710,
+          "width": 44,
+          "height": 44,
+          "bottom": 754
+        },
+        {
+          "label": "자동 탐색",
+          "x": 156,
+          "y": 616,
+          "width": 110.5,
+          "height": 44,
+          "bottom": 660
+        },
+        {
+          "label": "주변 탐색",
+          "x": 269.5,
+          "y": 616,
+          "width": 110.5,
+          "height": 44,
+          "bottom": 660
+        },
+        {
+          "label": "조사",
+          "x": 156,
+          "y": 663,
+          "width": 110.5,
+          "height": 44,
+          "bottom": 707
+        },
+        {
+          "label": "계단 ▼",
+          "x": 269.5,
+          "y": 663,
+          "width": 110.5,
+          "height": 44,
+          "bottom": 707
+        },
+        {
+          "label": "가방 (3/10)",
+          "x": 156,
+          "y": 710,
+          "width": 110.5,
+          "height": 44,
+          "bottom": 754
+        },
+        {
+          "label": "부대",
+          "x": 269.5,
+          "y": 710,
+          "width": 110.5,
+          "height": 44,
+          "bottom": 754
+        },
+        {
+          "label": "상태",
+          "x": 10,
+          "y": 760,
+          "width": 120.65625,
+          "height": 44,
+          "bottom": 804
+        },
+        {
+          "label": "기록",
+          "x": 134.65625,
+          "y": 760,
+          "width": 120.671875,
+          "height": 44,
+          "bottom": 804
+        },
+        {
+          "label": "도움말",
+          "x": 259.328125,
+          "y": 760,
+          "width": 120.65625,
+          "height": 44,
+          "bottom": 804
+        }
+      ],
+      "map": {
+        "x": 10,
+        "y": 100.875,
+        "width": 370,
+        "height": 370,
+        "bottom": 470.875
+      }
+    },
+    {
+      "label": "dungeon-412x740",
+      "width": 412,
+      "height": 740,
+      "scrollWidth": 412,
+      "controls": [
+        {
+          "label": "↖",
+          "x": 10,
+          "y": 512,
+          "width": 44,
+          "height": 44,
+          "bottom": 556
+        },
+        {
+          "label": "↑",
+          "x": 57,
+          "y": 512,
+          "width": 44,
+          "height": 44,
+          "bottom": 556
+        },
+        {
+          "label": "↗",
+          "x": 104,
+          "y": 512,
+          "width": 44,
+          "height": 44,
+          "bottom": 556
+        },
+        {
+          "label": "←",
+          "x": 10,
+          "y": 559,
+          "width": 44,
+          "height": 44,
+          "bottom": 603
+        },
+        {
+          "label": "·",
+          "x": 57,
+          "y": 559,
+          "width": 44,
+          "height": 44,
+          "bottom": 603
+        },
+        {
+          "label": "→",
+          "x": 104,
+          "y": 559,
+          "width": 44,
+          "height": 44,
+          "bottom": 603
+        },
+        {
+          "label": "↙",
+          "x": 10,
+          "y": 606,
+          "width": 44,
+          "height": 44,
+          "bottom": 650
+        },
+        {
+          "label": "↓",
+          "x": 57,
+          "y": 606,
+          "width": 44,
+          "height": 44,
+          "bottom": 650
+        },
+        {
+          "label": "↘",
+          "x": 104,
+          "y": 606,
+          "width": 44,
+          "height": 44,
+          "bottom": 650
+        },
+        {
+          "label": "자동 탐색",
+          "x": 156,
+          "y": 512,
+          "width": 121.5,
+          "height": 44,
+          "bottom": 556
+        },
+        {
+          "label": "주변 탐색",
+          "x": 280.5,
+          "y": 512,
+          "width": 121.5,
+          "height": 44,
+          "bottom": 556
+        },
+        {
+          "label": "조사",
+          "x": 156,
+          "y": 559,
+          "width": 121.5,
+          "height": 44,
+          "bottom": 603
+        },
+        {
+          "label": "계단 ▼",
+          "x": 280.5,
+          "y": 559,
+          "width": 121.5,
+          "height": 44,
+          "bottom": 603
+        },
+        {
+          "label": "가방 (3/10)",
+          "x": 156,
+          "y": 606,
+          "width": 121.5,
+          "height": 44,
+          "bottom": 650
+        },
+        {
+          "label": "부대",
+          "x": 280.5,
+          "y": 606,
+          "width": 121.5,
+          "height": 44,
+          "bottom": 650
+        },
+        {
+          "label": "상태",
+          "x": 10,
+          "y": 656,
+          "width": 128,
+          "height": 44,
+          "bottom": 700
+        },
+        {
+          "label": "기록",
+          "x": 142,
+          "y": 656,
+          "width": 128,
+          "height": 44,
+          "bottom": 700
+        },
+        {
+          "label": "도움말",
+          "x": 274,
+          "y": 656,
+          "width": 128,
+          "height": 44,
+          "bottom": 700
+        }
+      ],
+      "map": {
+        "x": 21.5,
+        "y": 49.375,
+        "width": 369,
+        "height": 369,
+        "bottom": 418.375
+      }
+    },
+    {
+      "label": "dungeon-768x1024",
+      "width": 768,
+      "height": 1024,
+      "scrollWidth": 768,
+      "controls": [
+        {
+          "label": "↖",
+          "x": 134,
+          "y": 796,
+          "width": 44,
+          "height": 44,
+          "bottom": 840
+        },
+        {
+          "label": "↑",
+          "x": 181,
+          "y": 796,
+          "width": 44,
+          "height": 44,
+          "bottom": 840
+        },
+        {
+          "label": "↗",
+          "x": 228,
+          "y": 796,
+          "width": 44,
+          "height": 44,
+          "bottom": 840
+        },
+        {
+          "label": "←",
+          "x": 134,
+          "y": 843,
+          "width": 44,
+          "height": 44,
+          "bottom": 887
+        },
+        {
+          "label": "·",
+          "x": 181,
+          "y": 843,
+          "width": 44,
+          "height": 44,
+          "bottom": 887
+        },
+        {
+          "label": "→",
+          "x": 228,
+          "y": 843,
+          "width": 44,
+          "height": 44,
+          "bottom": 887
+        },
+        {
+          "label": "↙",
+          "x": 134,
+          "y": 890,
+          "width": 44,
+          "height": 44,
+          "bottom": 934
+        },
+        {
+          "label": "↓",
+          "x": 181,
+          "y": 890,
+          "width": 44,
+          "height": 44,
+          "bottom": 934
+        },
+        {
+          "label": "↘",
+          "x": 228,
+          "y": 890,
+          "width": 44,
+          "height": 44,
+          "bottom": 934
+        },
+        {
+          "label": "자동 탐색",
+          "x": 280,
+          "y": 796,
+          "width": 175.5,
+          "height": 44,
+          "bottom": 840
+        },
+        {
+          "label": "주변 탐색",
+          "x": 458.5,
+          "y": 796,
+          "width": 175.5,
+          "height": 44,
+          "bottom": 840
+        },
+        {
+          "label": "조사",
+          "x": 280,
+          "y": 843,
+          "width": 175.5,
+          "height": 44,
+          "bottom": 887
+        },
+        {
+          "label": "계단 ▼",
+          "x": 458.5,
+          "y": 843,
+          "width": 175.5,
+          "height": 44,
+          "bottom": 887
+        },
+        {
+          "label": "가방 (3/10)",
+          "x": 280,
+          "y": 890,
+          "width": 175.5,
+          "height": 44,
+          "bottom": 934
+        },
+        {
+          "label": "부대",
+          "x": 458.5,
+          "y": 890,
+          "width": 175.5,
+          "height": 44,
+          "bottom": 934
+        },
+        {
+          "label": "상태",
+          "x": 134,
+          "y": 940,
+          "width": 164,
+          "height": 44,
+          "bottom": 984
+        },
+        {
+          "label": "기록",
+          "x": 302,
+          "y": 940,
+          "width": 164,
+          "height": 44,
+          "bottom": 984
+        },
+        {
+          "label": "도움말",
+          "x": 470,
+          "y": 940,
+          "width": 164,
+          "height": 44,
+          "bottom": 984
+        }
+      ],
+      "map": {
+        "x": 134,
+        "y": 125.875,
+        "width": 500,
+        "height": 500,
+        "bottom": 625.875
+      }
+    },
+    {
+      "label": "battle-390x660",
+      "width": 390,
+      "height": 660,
+      "scrollWidth": 390,
+      "controls": [
+        {
+          "label": "수동",
+          "x": 10,
+          "y": 334,
+          "width": 89.5,
+          "height": 44,
+          "bottom": 378
+        },
+        {
+          "label": "스마트",
+          "x": 103.5,
+          "y": 334,
+          "width": 89.5,
+          "height": 44,
+          "bottom": 378
+        },
+        {
+          "label": "전체공격",
+          "x": 197,
+          "y": 334,
+          "width": 89.5,
+          "height": 44,
+          "bottom": 378
+        },
+        {
+          "label": "반복",
+          "x": 290.5,
+          "y": 334,
+          "width": 89.5,
+          "height": 44,
+          "bottom": 378
+        },
+        {
+          "label": "×1",
+          "x": 10,
+          "y": 382,
+          "width": 89.5,
+          "height": 44,
+          "bottom": 426
+        },
+        {
+          "label": "×2",
+          "x": 103.5,
+          "y": 382,
+          "width": 89.5,
+          "height": 44,
+          "bottom": 426
+        },
+        {
+          "label": "×3",
+          "x": 197,
+          "y": 382,
+          "width": 89.5,
+          "height": 44,
+          "bottom": 426
+        },
+        {
+          "label": "상태",
+          "x": 10,
+          "y": 582,
+          "width": 120.65625,
+          "height": 44,
+          "bottom": 626
+        },
+        {
+          "label": "기록",
+          "x": 134.65625,
+          "y": 582,
+          "width": 120.671875,
+          "height": 44,
+          "bottom": 626
+        },
+        {
+          "label": "도움말",
+          "x": 259.328125,
+          "y": 582,
+          "width": 120.65625,
+          "height": 44,
+          "bottom": 626
+        }
+      ],
+      "map": null
+    },
+    {
+      "label": "battle-target-selection",
+      "width": 390,
+      "height": 660,
+      "scrollWidth": 390,
+      "controls": [
+        {
+          "label": "수동",
+          "x": 10,
+          "y": 284,
+          "width": 89.5,
+          "height": 44,
+          "bottom": 328
+        },
+        {
+          "label": "스마트",
+          "x": 103.5,
+          "y": 284,
+          "width": 89.5,
+          "height": 44,
+          "bottom": 328
+        },
+        {
+          "label": "전체공격",
+          "x": 197,
+          "y": 284,
+          "width": 89.5,
+          "height": 44,
+          "bottom": 328
+        },
+        {
+          "label": "반복",
+          "x": 290.5,
+          "y": 284,
+          "width": 89.5,
+          "height": 44,
+          "bottom": 328
+        },
+        {
+          "label": "×1",
+          "x": 10,
+          "y": 332,
+          "width": 89.5,
+          "height": 44,
+          "bottom": 376
+        },
+        {
+          "label": "×2",
+          "x": 103.5,
+          "y": 332,
+          "width": 89.5,
+          "height": 44,
+          "bottom": 376
+        },
+        {
+          "label": "×3",
+          "x": 197,
+          "y": 332,
+          "width": 89.5,
+          "height": 44,
+          "bottom": 376
+        },
+        {
+          "label": "상태",
+          "x": 10,
+          "y": 582,
+          "width": 120.65625,
+          "height": 44,
+          "bottom": 626
+        },
+        {
+          "label": "기록",
+          "x": 134.65625,
+          "y": 582,
+          "width": 120.671875,
+          "height": 44,
+          "bottom": 626
+        },
+        {
+          "label": "도움말",
+          "x": 259.328125,
+          "y": 582,
+          "width": 120.65625,
+          "height": 44,
+          "bottom": 626
+        }
+      ],
+      "map": null
+    }
+  ],
+  "errors": []
+}

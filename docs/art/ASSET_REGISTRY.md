@@ -23,3 +23,7 @@ Chronological queue/gate snapshots are archived in HISTORY_ASSET_REGISTRY_202610
 ## Remaining-concept integration batch — 2026-10-07
 
 Implementation now resides on `feat/complete-concept-integration` (QA PASS; single production release ready). Original ruler bust/full-body/transparent v2 token sources are preferred; named concept sheets are mapped by source rectangle. Other unit tokens use compact full-body exports, not the old generic SVG design. Detailed map object references, codex boss/item/achievement visuals, story scenery and battle full-body/status effects are connected. SVG and procedural assets remain fallbacks. See `docs/reports/CONCEPT_INTEGRATION_20261007.md` for selected sources, test evidence and scope. Earlier audit statuses describe the pre-integration state.
+
+## Shared ink UI stage1 — local, 2026-10-07
+
+User re-supplied approved Visual Bible `17474.png` (1229×1536), copied unchanged to `web/assets/reference/visual-bible-approved-source.png`. Manifest keys `ui:paper`, `ui:ink`, `ui:vermilion`, `ui:mountains` render explicit source rectangles; `ink-theme.ts` applies them as CSS materials. `ui/brush-strip.svg` and `ui/paper-frame.svg` are native presentation assets. This is applied locally, not uploaded/deployed. Evidence: `docs/reports/INK_UI_STAGE1_20261007.md`. No whole-game fidelity/completion claim.

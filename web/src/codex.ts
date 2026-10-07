@@ -33,27 +33,42 @@ export interface CodexUi {
 export function codexScreen(ui: CodexUi): HTMLElement {
   const { view } = ui;
   const count = (done: number, total: number) => ` ${done}/${total}`;
-  const tabs = el("div", "row");
-  tabs.style.cssText = "display:flex;gap:6px;flex-wrap:wrap";
+  const tabs = el("nav", "codex-tabs");
+  tabs.setAttribute("aria-label", "도감 분류");
   const tabDefs: [Tab, string][] = [
     ["characters", "장수" + count(view.characters.filter((c) => c.unlocked).length, view.characters.length)],
     ["bosses", "보스" + count(view.bosses.filter((b) => b.defeated).length, view.bosses.length)],
     ["achievements", "업적" + count(view.achievements.filter((a) => a.earned).length, view.achievements.length)],
     ["items", "물품" + count(view.items.filter((i) => i.seen).length, view.items.length)],
   ];
-  for (const [id, label] of tabDefs) tabs.append(btn(label, () => { tab = id; openId = null; ui.render(); }, tab === id ? "selected" : ""));
+  for (const [id, label] of tabDefs) {
+    const control = btn(label, () => {
+      tab = id; openId = null; ui.render();
+      document.getElementById("codex-tab-" + id)?.focus({ preventScroll: true });
+    }, tab === id ? "selected" : "");
+    control.id = "codex-tab-" + id;
+    control.setAttribute("aria-pressed", String(tab === id));
+    tabs.append(control);
+  }
   const body = el("div", "codex-body");
-  body.style.cssText = "display:grid;gap:6px";
   if (tab === "characters") {
     for (const c of view.characters) {
       const open = openId === c.id && c.unlocked;
-      const row = btn("", () => { openId = open ? null : c.id; ui.render(); }, "choice codex-entry" + (c.unlocked ? "" : " locked"));
-      row.style.cssText = "display:flex;gap:10px;align-items:flex-start;width:100%;white-space:normal;text-align:left";
-      const portrait = ui.portrait(c.id, open ? 120 : 40, c.name);
+      const row = btn("", () => {
+        if (!c.unlocked) return;
+        const scrollTop = body.scrollTop;
+        openId = open ? null : c.id; ui.render();
+        const nextBody = document.querySelector<HTMLElement>(".codex-body");
+        if (nextBody) nextBody.scrollTop = scrollTop;
+        document.getElementById("codex-character-" + c.id)?.focus({ preventScroll: true });
+      }, "choice codex-entry codex-character" + (open ? " expanded" : "") + (c.unlocked ? "" : " locked"));
+      row.id = "codex-character-" + c.id;
+      if (!c.unlocked) row.setAttribute("aria-disabled", "true");
+      const portrait = ui.portrait(c.id, open ? 120 : 48, c.name);
       row.setAttribute("aria-expanded", String(open));
       if (!c.unlocked) portrait.style.filter = "grayscale(1) brightness(0.35)";
-      const title = (c.kind === "ruler" ? "군주 · " : "") + (c.unlocked ? c.name + " · " + (CLASS[c.characterClass] ?? "") : "🔒 " + c.name);
-      const lines: (Node | string | null)[] = [el("b", "", title)];
+      const title = (c.kind === "ruler" ? "군주 · " : "") + (c.unlocked ? c.name + " · " + (CLASS[c.characterClass] ?? "") : "미해금 · " + c.name);
+      const lines: (Node | string | null)[] = [el("b", "codex-name", title)];
       if (!c.unlocked) lines.push(el("small", "", "해금: " + (c.hint || "?") + (c.campaign ? " (" + c.campaign + ")" : "")));
       else if (!open) lines.push(el("small", "", c.note.slice(0, 40) + (c.note.length > 40 ? "…" : "")));
       else {
@@ -62,17 +77,17 @@ export function codexScreen(ui: CodexUi): HTMLElement {
         lines.push(el("small", "", "스킬: " + c.skills.join(" · ")));
         lines.push(el("p", "codex-note", "정사 — " + c.note));
       }
-      row.append(portrait, el("span", "", ...lines));
+      row.append(portrait, el("span", "codex-copy", ...lines));
       body.append(row);
     }
   } else if (tab === "bosses") {
     let current = "";
     for (const b of view.bosses) {
       if (b.campaign !== current) { current = b.campaign; body.append(el("h3", "", current)); }
-      body.append(el("div", "codex-entry codex-boss" + (b.defeated ? "" : " locked"), ui.bossPortrait(b.id, b.defeated), el("span", "", b.defeated ? b.name : "??? (미격파)")));
+      body.append(el("div", "codex-entry codex-boss" + (b.defeated ? "" : " locked"), ui.bossPortrait(b.id, b.defeated), el("span", "codex-copy", b.defeated ? b.name : "??? (미격파)")));
     }
   } else if (tab === "achievements") {
-    for (const a of view.achievements) body.append(el("div", "codex-entry codex-achievement" + (a.earned ? "" : " locked"), el("span", "achievement-seal" + (a.earned ? " earned" : ""), a.earned ? "達" : "未"), el("span", "", el("b", "", a.name), el("small", "", a.hint))));
+    for (const a of view.achievements) body.append(el("div", "codex-entry codex-achievement" + (a.earned ? "" : " locked"), el("span", "achievement-seal" + (a.earned ? " earned" : ""), a.earned ? "達" : "未"), el("span", "codex-copy", el("b", "codex-name", a.name), el("small", "", a.hint))));
   } else {
     const grid = el("div", "");
     grid.className = "codex-items";
