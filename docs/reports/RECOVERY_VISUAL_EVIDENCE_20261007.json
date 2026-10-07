@@ -1,0 +1,17 @@
+{
+  "commit": "ea8beea73f53aca9c2aa5f2c2a189ee466932504",
+  "visual_smoke_run": 37546880371,
+  "artifact": 11450813048,
+  "reachedBattle": true,
+  "gameplay_errors": [],
+  "gameplay_layouts": 4,
+  "manifest_asset_count": 283,
+  "manifest_all_decoded": true,
+  "coverage_passed": true,
+  "coverage_errors": [],
+  "coverage_layouts": 16,
+  "characters": 48,
+  "enemy_names": 89,
+  "fallbackPassed": true,
+  "fallbackErrors": []
+}

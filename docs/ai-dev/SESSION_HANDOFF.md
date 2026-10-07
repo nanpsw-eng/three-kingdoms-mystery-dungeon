@@ -1,51 +1,52 @@
-# SESSION HANDOFF — 2026-10-06 (two parallel tracks)
+# SESSION HANDOFF — 2026-10-07 KST
 
-이 파일은 두 작업 트랙의 최소 Context Index다. 각 트랙은 자기 섹션만 갱신한다.
-- **Track A — Story/Engine (Claude)**: `ccr-bb39f6f8-g46bbv` (session branch). Remote branches: `main`, `gh-pages`, `art/ink-graphic-novel-v1`, `ccr-bb39f6f8-g46bbv` (merged branches deleted by user 2026-10-06) · `src/**`, `test/**`, `scripts/simulate.mjs`, `docs/**`(아트 제외)
-- **Track B — Art (Codex)**: `art/ink-graphic-novel-v1` · `web/style.css`, `web/src/{sprites,portraits,pixel,map,assets}.ts`, `web/assets/**`, `docs/art/**`
+## Current checkpoint
 
-## Shared
-- Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon` (public)
-- Delegation: full (DEC-024). Production deploy APPROVED by user; `main` merges are performed by Track A at stage boundaries, including Track B art work ("코덱스의 그래픽 작업을 중간중간 확인해서 실제 게임 내에 반영").
-- Deploy: every `main` push → tests → `site/` to `gh-pages`. URL https://nanpsw-eng.github.io/three-kingdoms-mystery-dungeon/ (Settings → Pages → `gh-pages` once; not verifiable from sandbox)
-- Still requires the user: paid services, repo visibility change, a different art direction (DEC-025), Product Baseline material change
+- Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon` (public).
+- Game/art baseline: main `ea8beea73f53aca9c2aa5f2c2a189ee466932504`.
+- PR #13 already MERGED (2026-10-07 08:29:53 KST); art branch has the same tree as main. Claude session branch has no unique commits beyond main at inspection.
+- State: `STORY_AND_ART_MERGED / AUTOMATED_QA_PASS / VERCEL_CREATE_BLOCKED_403 / HUMAN_PLAYTEST_NOT_RUN`.
+- Latest delivery delta: Vercel static deployment configuration + recovery/runbook + corrected continuity; see report below. This document's own commit is the recovery checkpoint; use Git refs for its exact SHA.
 
----
+## Authority
 
-## Track A — Story/Engine (Claude)
-- Gate: `STORY_EXPANSION_COMPLETE (S0–S5) / HUMAN_PLAYTEST_NEXT`
-- Local: `npm test` 156/0 PASS · Phase A ink skin implemented (see Track B note) · `build:web` PASS · sim smart 200: E1 35.0% · E2 28.0% · E3 29.5% · E4 24.5% · E5 28.0% · E6 24.0% · E7 24.0% · E8 27.0% · E9 27.0% · E1 renown1 16.0% · campaign chain → ending PASS (22 runs)
+Existing DEC-024 and visual completion authorization permit completing recommended work, main merges and production deployment. Latest user explicitly requested resuming without rework and Vercel deployment. Paid-service activation, repository visibility change, a new art direction or material product change remain outside scope.
 
-| Stage | Report |
-|---|---|
-| MVP phases 7–14 | `docs/reports/*PHASE*.md`, `RUN_SIMULATION_PHASE13.md`, `WEB_CLIENT_PHASE14.md` |
-| S0 foundation | `docs/reports/STORY_S0_FOUNDATION.md` |
-| S1 E2 반동탁연합 | `docs/reports/STORY_S1_ANTI_DONG.md` |
-| S2 E3 서주 · E4 관도 | `docs/reports/STORY_S2_XUZHOU_GUANDU.md` |
-| S3 E5 적벽 | `docs/reports/STORY_S3_RED_CLIFFS.md` |
-| S4 E6 형주·익주 · E7 이릉 | `docs/reports/STORY_S4_JING_YI_YILING.md` |
-| S5 E8 남만 · E9 북벌 · 엔딩 · 명성 | `docs/reports/STORY_S5_NANMAN_NORTHERN_ENDING.md` |
-| Summary | `docs/reports/STORY_EXPANSION_COMPLETE.md` |
-| Polish (saves · codex · scenes) | `docs/reports/POLISH_CODEX_SCENES_SAVES.md` |
+## Completed — DO_NOT_REPEAT
 
-DO_NOT_REPEAT
-- MVP battle/dungeon/run/content/sim/web
-- S0: scenes/variants/choices, duel, multi-phase boss, enemy recruit + meta unlock, mechanic registry (7 types), validateContent, story.ts UI
-- S1/S2: `CampaignModule` per campaign (`src/content/campaigns/e2..e9`), renown X8, `scripts/campaign-chain.mjs`, `pursuit` mechanic, timeline UI, `ART_ALIASES`, duel HP ratio 0.6
+- Battle/dungeon/run/content engines, deterministic replay, economy/recruitment/meta.
+- Story S0–S5 / E1–E9, ending, renown; prior reports in `docs/reports/STORY_*` and `POLISH_CODEX_SCENES_SAVES.md`.
+- Approved modern ink graphic novel direction (DEC-025); all 48 playable identities and enemy bindings.
+- 79 busts, 79 full bodies, 124 tokens, dungeon/item atlas, fonts, mobile controls and fallbacks. Original assets preserved.
+- PR #13 merge and main automated graphics QA. No extra art generation or re-merge needed.
 
-NEXT_SAFE_ACTION
-1. Human playtest on the deployed site; tune first-boss walls (E2 화웅, E6 마초) from feedback in campaign module files only
-2. Keep merging Track B art; remove `ART_ALIASES` entries as real art lands
-3. Each stage: validateContent clean, sim 20–35%, tests, report, PR → main, deploy; check Track B branch and merge art
+## Verified evidence
 
----
+- Local main: tests 161/0; build:web PASS; 57 compiled JS modules, no missing relative imports.
+- Main CI 37546880306 PASS; visual-smoke 37546880371 PASS; artifact 11450813048 inspected.
+- 283/283 asset decodes; gameplay + fallback PASS; 48 characters / 89 enemy names / 16 coverage layouts, no errors.
+- Main deploy workflow 37546880382 PASS means site pushed to gh-pages. Intended Pages URL returned HTTP 404; actual Pages activation UNKNOWN.
+- Fresh local Chromium checks NOT_RUN (download unavailable); reused exact-main CI evidence.
+- Full manual campaign balance/playthrough NOT_RUN.
 
-## Track B — Graphics delivery (2026-10-06)
-- Authority: latest user explicitly instructed continuing the recommended work to completion without additional permission. Main merge and production deploy are authorized for this visual scope; AGENTS §7 gate is satisfied. No paid service activation, product/rule change, or repository visibility change is authorized.
-- Preserved checkpoint: `9428e2941e006bbd105a1c966bae350ad2872ca2`. Original 15 character masters and 23 tokens are retained. No `src/**` domain/content files changed.
-- Current delivery: all 48 playable identities; 19 additional named-boss masters; 12 ordinary-unit portrait masters; 45 explicit ordinary-unit shared portraits with faction/weapon-specific tokens. Target manifest: 79 busts, 79 full bodies, 124 tokens.
-- Runtime adapters: stable bindings replace historical-character substitutions; full-body art loads when shown; missing images keep procedural fallbacks; native timeline/map rendering, local fonts, touch targets, hit/heal/status cues retain existing controls and reduced-motion support.
-- Evidence/index: `docs/art/VISUAL_DELIVERY_20261006.md`, `docs/art/PRODUCTION_ART_PLAN.json`, `docs/art/GENERATION_PROVENANCE_20261006.json`. Exact new-head tests and deployment evidence will be recorded after CI.
-- Recovery: GitHub visual-smoke at `d0d6b1de47a818a3cc51c99c95614315dc29ab61` PASS (run 37469154209), resolving the prior current-tree browser block. Expanded final coverage pending.
-- DO_NOT_REPEAT: A–E masters, existing Yellow Turban tokens, source engine/content, approved direction, story expansion. Historical art snapshots are archived in `docs/art/HISTORY_CONTROL_SNAPSHOTS_20261006.md`.
-- NEXT: finish final exports/coverage, run required checks, merge tested art and verify Pages deployment. Whole-campaign manual balance/playthrough is NOT_RUN in this visual delivery; Track A playtest remains separate.
+## Actual blocker / first incomplete step
+
+Vercel project creation in team `nanpsw-8495` (`team_1HfCVfi0noDdmzHMqGeazpO6`) returned HTTP 403 forbidden. No matching Vercel project exists; no independently authenticated CLI is available. **No Vercel deployment has been created.**
+
+NEXT_SAFE_ACTION:
+1. Resolve create-project access or import the repo in the authorized Vercel dashboard. Do not repeat unchanged failing API requests.
+2. Use current main, root directory, Other framework, npm ci, npm test && npm run build:web, output site, Node 22.x.
+3. Verify READY, exact deployed commit, root/assets/gameplay/save reload and actual production URL.
+4. Persist deployment result here; only then mark hosting LIVE.
+5. Human playtest/tuning remains separate, based on observed feedback; do not retune existing campaign balance without new evidence.
+
+## Minimal context index
+
+- `AGENTS.md` / `AI_OS_BINDING.md`: authority and exact binding.
+- `docs/product/GAME_DESIGN_PRD.md` / `STORY_EXPANSION_PLAN.md`: approved product.
+- `docs/decisions/DEC-024-STORY_EXPANSION_APPROVAL.md`: delegation.
+- `docs/art/VISUAL_DELIVERY_20261006.md`: delivered graphic scope.
+- `docs/reports/RECOVERY_AND_VERCEL_20261007.md` + `RECOVERY_VISUAL_EVIDENCE_20261007.json`: durable recovery evidence.
+- `docs/operations/VERCEL_DEPLOYMENT.md`: settings, access blocker and next action.
+
+Cause of repeated chat interruption remains UNKNOWN. This checkpoint prevents repeating completed work; it does not claim an unobserved background process is running.

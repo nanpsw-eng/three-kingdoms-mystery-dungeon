@@ -13,7 +13,7 @@
 - Meta Progression: 영구 스탯 강화 없음. 장수·전역·장비/아이템 출현 풀·도감·업적만 해금
 - 목표 Run: **20~30분**
 
-## MVP Scope
+## Original MVP Scope (historical)
 
 - 완성 전역: **황건적의 난 15층**
 - 프리뷰 전역: **호로관 3~5층**
@@ -35,14 +35,16 @@
 
 ## Current State
 
-`MVP_FEATURE_COMPLETE (headless + web client) / HUMAN_PLAYTEST_NOT_RUN / MAIN_MERGE_PENDING_APPROVAL`
+`STORY_AND_ART_MERGED / AUTOMATED_QA_PASS / VERCEL_CREATE_BLOCKED_403 / HUMAN_PLAYTEST_NOT_RUN`
+
+현재 스토리는 E1–E9로 확장되었고 48명 플레이어블 캐릭터의 수묵 그래픽이 main에 반영되었습니다(PR #13). 2026-10-07 확인: 161개 테스트와 main 모바일 QA 통과. Vercel 배포 설정은 `vercel.json`, 재개 절차는 [배포 안내](docs/operations/VERCEL_DEPLOYMENT.md)를 따릅니다. Vercel 프로젝트 생성은 권한 오류(403)로 차단되어 실제 서비스 URL은 아직 생성되지 않았습니다.
 
 | Layer | Path | Status |
 |---|---|---|
 | Battle Engine (headless, seeded) | `src/battle/` | PASS (tests) |
 | Dungeon Core | `src/dungeon/` | PASS (tests) |
 | Run layer + meta progression | `src/run/` | PASS (tests) |
-| MVP content (15 characters, YT 15F, Hulao preview) | `src/content/` | sim-tuned, NOT_VALIDATED by humans |
+| Expanded content (48 characters, E1–E9) | `src/content/` | sim-tuned, NOT_VALIDATED by humans |
 | Autopilot + simulation | `src/sim/`, `scripts/simulate.mjs` | evidence in `docs/reports/sim/` |
 | Mobile web client | `web/` → `site/` | UI smoke PASS (headless Chromium) |
 
