@@ -56,7 +56,8 @@ try {
   await bodies.evaluateAll(async imgs => { await Promise.all(imgs.map(img => img.decode())); });
   await page.screenshot({path:out+'/mobile-ux-party.png'});
   await page.locator('.sheet').evaluate(el => { el.scrollTop = el.scrollHeight; });
-  assert.ok(await page.getByRole('button', {name:'패널 닫기',exact:true}).isVisible());
+  const closeRect = await page.getByRole('button', {name:'패널 닫기',exact:true}).boundingBox();
+  assert.ok(closeRect.y >= 0 && closeRect.y + closeRect.height <= 660, 'close stays within viewport after scrolling');
   await close();
   await page.getByRole('button', {name:'도움말',exact:true}).click();
   await page.screenshot({path:out+'/mobile-ux-help.png'});
@@ -91,6 +92,10 @@ try {
   await page.getByRole('button',{name:'×3',exact:true}).click();
   for(let i=0;i<180 && (await state()).phase==='battle';i++) await page.waitForTimeout(100);
   assert.notEqual((await state()).phase,'battle','automatic battle resumes and finishes');
+  const savedState = await state();
+  await page.reload({waitUntil:'networkidle'});
+  await page.getByRole('button',{name:'이어하기',exact:true}).click();
+  assert.deepEqual(await state(), savedState, 'save and reload preserve progress');
   assert.deepEqual(errors,[]);
   writeFileSync(out+'/mobile-ux-result.json',JSON.stringify({passed:true,results,errors},null,2));
 } finally { await browser.close(); }

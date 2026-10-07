@@ -11,7 +11,7 @@ Direction: DEC-025, modern ink graphic novel × lianhuanhua. Original approved a
 | Manifest physical files | IMPLEMENTED | 79 busts + 79 full bodies + 124 tokens; manifest and PRODUCTION_ART_PLAN.json |
 | Dungeon/object/item atlas | IMPLEMENTED | ink-dungeon-v1.svg; item/equipment IDs covered; fallback preserved |
 | UI/story/codex/battle visual layer | IMPLEMENTED | Ink/hanji skin, native portraits, local typography, touch targets, timeline tokens, hit/heal/status cues |
-| Exact final runtime verification | PENDING | VISUAL_DELIVERY_20261006.md records CI and deployment outcomes |
+| Runtime asset verification | VERIFIED | CI 37617237283: 283 images decoded, 48 characters / 89 enemy names / 16 layouts, fallback passed; MOBILE_UX_GRAPHICS_20261007.md records follow-up UI checks |
 
 General soldiers share a face by role, while named historical figures retain their own identity. Full-body files load only when visible. Asset load failures use existing procedural art.
 
