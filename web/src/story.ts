@@ -58,7 +58,7 @@ function sceneSheet(ui: StoryUi, sceneId: string): HTMLElement[] {
     el("div", "story-text", line.speaker ? el("b", "", line.name) : null, el("p", "", line.text))));
   const next = (): void => { reveal.shown = Math.min(total, reveal.shown + 1); ui.render(); };
   const finish = (): void => { ui.act({ type: "scene" }); ui.render(); };
-  const box = el("div", "story-scene", scene.title ? el("h2", "", scene.title) : null, ...lines);
+  const box = el("div", "story-scene", el("h2", "", scene.title || ui.run.campaign.name), ...lines);
   const backdrop = paintingUrl("story:backdrop"), ornament = paintingUrl("story:ornament");
   if (backdrop) {
     const image = document.createElement("img"); image.src = backdrop; image.alt = ""; image.className = "story-backdrop";
