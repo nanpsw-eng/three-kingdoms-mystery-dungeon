@@ -20,13 +20,23 @@ export const ENEMY_ASSET_IDS: Readonly<Record<string, string>> = {
 };
 
 interface TilesetSpec { readonly image: string; readonly tile: number; readonly gap?: number; readonly map: Readonly<Record<string, readonly (readonly [number, number])[]>> }
-interface Manifest { readonly portraits?: readonly string[]; readonly nativePortraits?: readonly string[]; readonly fullBodyIllustrations?: readonly string[]; readonly sharedPortraits?: Readonly<Record<string,string>>; readonly tokens?: readonly string[]; readonly portraitPixels?: number; readonly portraitColors?: number; readonly tileset?: TilesetSpec }
+interface SurfaceSpec { readonly image: string; readonly map: Readonly<Record<string, readonly (readonly [number, number, number, number])[]>> }
+interface Manifest { readonly portraits?: readonly string[]; readonly nativePortraits?: readonly string[]; readonly fullBodyIllustrations?: readonly string[]; readonly sharedPortraits?: Readonly<Record<string,string>>; readonly tokens?: readonly string[]; readonly portraitPixels?: number; readonly portraitColors?: number; readonly tileset?: TilesetSpec; readonly surfaces?: SurfaceSpec }
 
 const portraits = new Map<string, string>();
 const nativePortraits = new Map<string, string>();
 const fullBodies = new Map<string, string>();
 const tokens = new Map<string, HTMLImageElement>();
 let tileset: { image: HTMLImageElement; spec: TilesetSpec } | null = null;
+let surfaces: { image: HTMLImageElement; spec: SurfaceSpec } | null = null;
+
+/** Original raster materials, selected by stable world-coordinate variants. */
+export function assetSurface(name: string, variant = 0): { image: HTMLImageElement; sx: number; sy: number; width: number; height: number } | null {
+  const rects = surfaces?.spec.map[name];
+  if (!surfaces || !rects?.length) return null;
+  const [sx, sy, width, height] = rects[Math.floor(variant * rects.length) % rects.length]!;
+  return { image: surfaces.image, sx, sy, width, height };
+}
 
 export function fullBodyIllustration(key: string): string | undefined {
   return fullBodies.get(ENEMY_ASSET_IDS[key] ?? key);
@@ -156,6 +166,10 @@ export async function loadAssets(onReady: () => void): Promise<void> {
   if (manifest.tileset !== undefined) {
     const spec = manifest.tileset;
     jobs.push(loadImage("assets/" + spec.image).then((image) => { tileset = { image, spec }; }).catch(() => undefined));
+  }
+  if (manifest.surfaces !== undefined) {
+    const spec = manifest.surfaces;
+    jobs.push(loadImage("assets/" + spec.image).then((image) => { surfaces = { image, spec }; }).catch(() => undefined));
   }
   await Promise.all(jobs);
   if (portraits.size > 0 || nativePortraits.size > 0 || fullBodies.size > 0 || tokens.size > 0 || tileset !== null) onReady();

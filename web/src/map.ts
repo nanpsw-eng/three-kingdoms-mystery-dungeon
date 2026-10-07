@@ -1,5 +1,5 @@
 import type { DungeonEngine, Point } from "../../src/index.js";
-import { assetTile, assetToken } from "./assets.js";
+import { assetSurface, assetTile, assetToken } from "./assets.js";
 import { figureCanvas, iconCanvas } from "./sprites.js";
 
 export const VIEW_RADIUS = 7;
@@ -141,6 +141,20 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   };
   /** Draws a named tileset tile when one is loaded, else the procedural fallback. */
   const terrain = (name: string, fallback: CanvasImageSource, p: Point, variant = 0): void => {
+    const material = name === "corridor" ? "floor" : name.startsWith("wall-") ? "wall" : name;
+    // A floor study spans a 3×3 world-cell patch, rather than shrinking the
+    // entire crack pattern into every cell. Adjacent subrects share one sample.
+    const span = material === "floor" ? 3 : 1;
+    const surface = assetSurface(material, span > 1 ? hash(Math.floor(p.x / span), Math.floor(p.y / span)) : variant);
+    if (surface !== null) {
+      const [x, y] = at(p);
+      ctx.imageSmoothingEnabled = true;
+      const sw = surface.width / span, sh = surface.height / span;
+      const ix = ((p.x % span) + span) % span, iy = ((p.y % span) + span) % span;
+      ctx.drawImage(surface.image, surface.sx + ix * sw, surface.sy + iy * sh, sw, sh, x, y, cell, cell);
+      ctx.imageSmoothingEnabled = false;
+      return;
+    }
     const tile = assetTile(name, variant);
     if (tile === null) { blit(fallback, p); return; }
     const [x, y] = at(p);
@@ -159,6 +173,17 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
         if (!seen) continue;
         const face = passable(below) && dungeon.isExplored(below);
         terrain(face ? "wall-face" : "wall-cap", face ? WALL_FACE : WALL_CAP, p, hash(p.x, p.y, 3));
+        if (assetSurface("wall") !== null) {
+          // Outline only exposed stone boundaries, never every cell. Adjacent wall
+          // cells stay one connected structure; no walkability/visibility changes.
+          const [x, y] = at(p);
+          ctx.strokeStyle = "#211e1a"; ctx.lineWidth = Math.max(1, cell * 0.045);
+          for (const [dx, dy, ax, ay, bx, by] of [[0,-1,0,0,1,0],[1,0,1,0,1,1],[0,1,0,1,1,1],[-1,0,0,0,0,1]]) {
+            const q = { x: p.x + dx!, y: p.y + dy! };
+            if (!dungeon.isExplored(q) || !passable(q)) continue;
+            ctx.beginPath(); ctx.moveTo(x + ax! * cell, y + ay! * cell); ctx.lineTo(x + bx! * cell, y + by! * cell); ctx.stroke();
+          }
+        }
         if (!dungeon.isVisible(p)) fog.push(p);
         continue;
       }

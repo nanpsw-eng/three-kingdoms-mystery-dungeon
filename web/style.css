@@ -259,3 +259,6 @@ img.fullbody-illustration {
 @media (orientation: landscape) and (max-height: 540px) {
   #app[data-screen="dungeon"], #app[data-screen="battle"] { min-height: 540px; }
 }
+
+/* Preserve the original painted stone material rather than pixelating its crop. */
+.map-stage canvas#map { image-rendering: auto; }

@@ -625,5 +625,74 @@
     "enemy-wei-cavalry": "regular-raider",
     "enemy-heavy-infantry": "regular-guard",
     "enemy-supply-raider": "regular-raider"
+  },
+  "surfaces": {
+    "image": "tiles/dungeon-stone-material-v2.jpg",
+    "map": {
+      "floor": [
+        [
+          8,
+          8,
+          286,
+          283
+        ],
+        [
+          307,
+          8,
+          286,
+          283
+        ]
+      ],
+      "wall": [
+        [
+          608,
+          8,
+          68,
+          65
+        ],
+        [
+          679,
+          8,
+          68,
+          65
+        ],
+        [
+          750,
+          8,
+          68,
+          65
+        ],
+        [
+          821,
+          8,
+          68,
+          65
+        ],
+        [
+          608,
+          221,
+          68,
+          65
+        ],
+        [
+          679,
+          221,
+          68,
+          65
+        ],
+        [
+          750,
+          221,
+          68,
+          65
+        ],
+        [
+          821,
+          221,
+          68,
+          65
+        ]
+      ]
+    }
   }
 }

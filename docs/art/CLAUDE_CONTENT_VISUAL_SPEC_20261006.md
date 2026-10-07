@@ -1,8 +1,8 @@
 # Claude Content Visual Delta — 2026-10-06
 
-Status: `HISTORICAL_DESIGN_LOG`
+Status: `DESIGN_AND_IMPLEMENTATION_TRACE`
 
-> This chronological concept log is preserved for design provenance. Its old counts, CONCEPT/NOT_RUN gates and next-action lists are snapshots, not current unfinished tasks. The current production contract is `PRODUCTION_ART_PLAN.json` and `ASSET_REGISTRY.md`; see `../reports/MOBILE_UX_GRAPHICS_20261007.md` for the follow-up runtime audit.
+> Correction 2026-10-07: earlier counts and chronological statuses are historical snapshots, but this does NOT dismiss visual requirements. File coverage is separate from fidelity to the selected concepts. The user reconfirmed the v2 dungeon material study; that reference is now connected directly to the renderer. See `../reports/DUNGEON_SURFACE_FIDELITY_20261007.md`. Other surfaces require their own reference/runtime comparison before claiming visual completion.
 Content source: `main` at `82b38b4bf877a015e99f53ae551bfedb45bbc790`
 Latest Claude feature: PR #10, Claude commit `3b5bbf3b5b6bfdb7508cca815213da90c4accb5c`, merged to `main`
 Art baseline: DEC-025 + Visual Bible v1 — unchanged and approved.
