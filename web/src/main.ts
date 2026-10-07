@@ -393,21 +393,26 @@ function utilityBar(exploration = false): HTMLElement {
 function abilitySummary(skill: Pick<SkillDefinition, "targeting" | "effects">): string {
   const target = skill.targeting.team === "self" ? "자신" : skill.targeting.team === "ally" ? "아군" : "적";
   const effects = skill.effects.map(effect => {
+    const recipient = effect.recipient === "actor" && skill.targeting.team !== "self" ? "자신 " : "";
+    let text: string;
     switch (effect.type) {
-      case "damage": return (effect.kind === "physical" ? "물리" : "전술") + " 피해";
-      case "heal": return "체력 회복";
-      case "status": return (STATUS_NAMES[effect.statusType] ?? effect.statusType) + " " + effect.durationRounds + "라운드";
-      case "energy": return "기력 " + (effect.amount >= 0 ? "+" : "") + effect.amount;
-      case "timeline-shift": return "행동 순서 변경";
-      case "formation-swap": return "위치 교환";
-      case "extra-action": return "추가 행동";
-      case "cleanse": return "상태 이상 해제";
-      case "revive": return "부활 (체력 " + Math.round(effect.hpRatio * 100) + "%)";
+      case "damage": text = (effect.kind === "physical" ? "물리" : "전술") + " 피해"; break;
+      case "heal": text = "체력 회복(지력 비례)"; break;
+      case "status": text = (STATUS_NAMES[effect.statusType] ?? effect.statusType) + " " + effect.durationRounds + "라운드"; break;
+      case "energy": text = "기력 " + (effect.amount >= 0 ? "+" : "") + effect.amount; break;
+      case "timeline-shift": text = effect.amount > 0 ? "다음 행동 지연" : effect.amount < 0 ? "다음 행동 앞당김" : "행동 순서 유지"; break;
+      case "formation-swap": text = "아군과 자리 교환"; break;
+      case "extra-action": text = effect.mode === "interrupt" ? "즉시 추가 행동" : "추가 행동"; break;
+      case "cleanse": text = effect.statusTypes?.length ? effect.statusTypes.map(type => STATUS_NAMES[type] ?? type).join("·") + " 해제" : "모든 상태 해제"; break;
+      case "revive": text = "부활·체력 " + Math.round(effect.hpRatio * 100) + "%"; break;
     }
+    return recipient + text;
   });
   const access = skill.targeting.access === "front" ? " 전열" : "";
   const state = skill.targeting.state === "ko" ? " 전투불능" : "";
-  return `${target}${access}${state} 최대 ${skill.targeting.maxTargets}명 · ${effects.join(", ")}`;
+  const count = skill.targeting.team === "self" ? "" : skill.targeting.minTargets === skill.targeting.maxTargets
+    ? ` ${skill.targeting.maxTargets}명` : ` ${skill.targeting.minTargets}~${skill.targeting.maxTargets}명`;
+  return `${target}${access}${state}${count} · ${effects.join(" + ")}`;
 }
 
 function skillSummary(skill: SkillDefinition): string {
@@ -417,12 +422,17 @@ function skillSummary(skill: SkillDefinition): string {
 function itemSummary(item: ItemDefinition): string {
   switch (item.use.kind) {
     case "food": return "군량 +" + item.use.amount;
-    case "heal": return (item.use.target === "party" ? "부대 전체" : "장수 1명") + " 체력 " + Math.round(item.use.ratio * 100) + "% 회복";
-    case "treat": return "쓰러진 장수 치료 · 체력 " + Math.round(item.use.ratio * 100) + "%";
+    case "heal": return (item.use.target === "party" ? "아군 전체" : "아군 1명") + " 체력 " + Math.round(item.use.ratio * 100) + "% 회복";
+    case "treat": return "전투불능 치료 · 체력 " + Math.round(item.use.ratio * 100) + "%";
     case "identify": return "미식별 장비 1개 감정";
-    case "reveal-traps": return "주변 함정 탐지";
+    case "reveal-traps": return "현재 층 함정 위치 표시";
     case "battle": return item.battle ? abilitySummary(item.battle) : "전투 중 사용";
   }
+}
+
+function equipmentSummary(stats: Readonly<Partial<Record<string, number>>>): string {
+  const names: Record<string, string> = { atk: "공격", def: "방어", spd: "속도", int: "지력", maxHp: "체력" };
+  return Object.entries(stats).map(([key, value]) => (names[key] ?? key) + (value! > 0 ? " +" : " ") + value).join(" · ");
 }
 
 function renderHelp(): void {
@@ -617,7 +627,7 @@ function renderBag(): void {
     }
     const definition = r.equipmentDef(entry.equipment.equipmentId)!;
     const name = entry.equipment.identified ? definition.name + (entry.equipment.enhance ? " +" + entry.equipment.enhance : "") : "미식별 장비 (" + definition.slot + ")";
-    const stats = entry.equipment.identified ? Object.entries(definition.stats).map(([k, v]) => k.toUpperCase() + (v! > 0 ? "+" : "") + v).join(" ") : "?";
+    const stats = entry.equipment.identified ? equipmentSummary(definition.stats) : "?";
     return h("div", { class: "row item-row" }, entry.equipment.identified ? icon(definition.id) : icon("unknown-item"), h("span", { class: "grow" }, name, h("small", { class: "muted" }, " " + stats)),
       button("장착", () => { pickTarget = { label: name + " — 장착할 장수", options: members.map((m) => ({ id: m.characterId, label: m.name })), onPick: (id) => { act({ type: "equip", characterId: id, uid: entry.uid }); render(); } }; render(); }, { class: "small", disabled: !usable }),
       button("버림", () => { act({ type: "discard", uid: entry.uid }); render(); }, { class: "small" }));
@@ -646,7 +656,7 @@ function renderSafeZone(): void {
     h("h1", {}, "안전 정비구역"), h("p", {}, "부대가 완전히 회복되었다. 정비를 마치면 다음 층으로 향한다."),
     h("div", { class: "hud" }, h("span", {}, "금 ", h("b", {}, String(r.gold))), h("span", {}, "가방 " + r.inventory().length + "/10")),
     h("div", { class: "panel" }, h("h2", {}, "상점"), ...r.shop().map((offer, index) => h("div", { class: "row" },
-      icon(offer.contentId), h("span", { class: "grow" }, contentName(r, offer.contentId)), h("span", { class: "muted num" }, offer.price + "금"),
+      icon(offer.contentId), h("span", { class: "grow" }, contentName(r, offer.contentId), h("small", { class: "item-description" }, r.item(offer.contentId) ? itemSummary(r.item(offer.contentId)!) : equipmentSummary(r.equipmentDef(offer.contentId)!.stats))), h("span", { class: "muted num" }, offer.price + "금"),
       button(offer.sold ? "품절" : "구매", () => { act({ type: "shop-buy", offerIndex: index }); render(); }, { class: "small", disabled: offer.sold || r.gold < offer.price })))),
     h("div", { class: "panel" }, h("h2", {}, "강화 (최대 +3)"), ...(equipped.length ? equipped.map(({ m, slot, e }) => h("div", { class: "row" },
       h("span", { class: "grow" }, m.name + " · " + contentName(r, e.equipmentId) + (e.enhance ? " +" + e.enhance : "")),
