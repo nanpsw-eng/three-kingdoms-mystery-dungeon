@@ -22,7 +22,7 @@ Branch: `feature/ink-field-miniatures`, PR #21 위 stacked change.
 - `mobile-ux-smoke`: 모바일 조작/세이브/전투/자동 정지·재개 PASS. `battle-layout-smoke`: 실제 공격/방어/기술 사용과 7개 전투 화면 PASS.
 - `surface-fidelity-smoke`: 원본 석재 호출·명암 구분·deterministic draw·재료 fallback PASS.
 - `concept-integration-smoke`: 유지된 story/도감 원본과 신규 필드 miniature/요술진 인장, reduced motion PASS. 필드 자산 검증은 새 승인 방향에 맞춰 source 호출 검사를 변경했다.
-- 최신 로컬 검사는 Chromium 자동화. 실물 Android/iOS 및 모든 전역 장기 플레이: NOT_RUN. 원격 CI는 PR checks를 참조한다. production: NOT_DEPLOYED.
+- 최신 로컬 검사는 Chromium 자동화. 실물 Android/iOS 및 모든 전역 장기 플레이: NOT_RUN. 원격 최초 HEAD `18635aae0c8501294fda7ade625148bc79b97f0d`의 기본 CI PASS, 화면 회귀 중 마지막 필드 검사에서 첫 requestAnimationFrame 이전의 dataset 읽기 race가 발견됐다. 초기 배율을 canvas 생성 시점에 지정하고 검사에서 정사각 지도 렌더 완료를 기다리도록 수정했다. 최신 원격 CI는 PR checks를 참조한다. production: NOT_DEPLOYED.
 
 ## 실제 렌더링 증거
 

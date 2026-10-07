@@ -7,16 +7,17 @@ const browser=await chromium.launch(),page=await browser.newPage({viewport:{widt
 const errors=[];page.on('pageerror',e=>errors.push(String(e)));
 await page.addInitScript(()=>{Date.now=()=>1791373352662;});
 const state=()=>page.evaluate(()=>window.__tkmd.state());
+const mapReady=radius=>page.waitForFunction(radius=>{const c=document.querySelector("#map");return c?.dataset.viewRadius===String(radius)&&c.width===c.height&&c.width>0;},radius);
 try {
  await page.goto(base,{waitUntil:'networkidle'});
  await page.locator('button.pick').filter({hasText:'관우'}).click();await page.locator('button.pick').filter({hasText:'장비'}).click();await page.getByRole('button',{name:'원정 시작',exact:true}).click();
  for(let i=0;i<12&&(await state()).phase==='scene';i++)await page.getByRole('button',{name:'건너뛰기',exact:true}).click();
  assert.equal((await state()).phase,'dungeon');
  const before=await state(),oldSave=await page.evaluate(()=>localStorage.getItem('tkmd.save.v1'));
- assert.equal(await page.locator('#map').getAttribute('data-view-radius'),'5');
+ await mapReady(5);assert.equal(await page.locator('#map').getAttribute('data-view-radius'),'5');
  await page.getByRole('button',{name:'넓게 보기',exact:true}).click();
- assert.equal(await page.locator('#map').getAttribute('data-view-radius'),'7');
- await page.getByRole('button',{name:'크게 보기',exact:true}).click();
+ await mapReady(7);assert.equal(await page.locator('#map').getAttribute('data-view-radius'),'7');
+ await page.getByRole('button',{name:'크게 보기',exact:true}).click();await mapReady(5);
  assert.deepEqual(await state(),before);assert.equal(await page.evaluate(()=>localStorage.getItem('tkmd.save.v1')),oldSave,'camera changes consume no action');
  const camera=[];
  for(const [width,height]of [[320,568],[390,844],[844,390]]){

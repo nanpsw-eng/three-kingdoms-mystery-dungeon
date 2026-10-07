@@ -347,7 +347,7 @@ function travelTo(target: { x: number; y: number }): void {
 
 function renderDungeon(): void {
   const r = run!;
-  const canvas = h("canvas", { id: "map", "aria-label": "던전 지도", "aria-describedby": "map-instruction" });
+  const canvas = h("canvas", { id: "map", "aria-label": "던전 지도", "aria-describedby": "map-instruction", "data-view-radius": String(mapRadius) });
   const stage = h("div", { class: "map-stage" }, canvas, button(mapRadius === 5 ? "넓게 보기" : "크게 보기", () => { mapRadius = mapRadius === 5 ? 7 : 5; render(); }, { class: "map-zoom-button" }));
   canvas.addEventListener("pointerup", (event) => travelTo(tileAt(canvas, r.dungeon, event.clientX, event.clientY)));
   const onStairs = r.dungeon.position.x === r.dungeon.floor.stairs.x && r.dungeon.position.y === r.dungeon.floor.stairs.y;
