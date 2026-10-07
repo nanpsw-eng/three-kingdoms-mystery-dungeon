@@ -39,7 +39,7 @@ try {
       if(p.y===6&&p.x>=7&&p.x<=12||p.x===10&&p.y>=3&&p.y<=11) return 'corridor';
       return 'wall';
     };
-    const dungeon={position:{x:7,y:7},facing:'s',floor:{stairs:{x:-99,y:-99}},tile,
+    const dungeon={position:{x:7,y:6},facing:'s',floor:{stairs:{x:-99,y:-99}},tile,
       isExplored:p=>tile(p)!==undefined,isVisible:p=>tile(p)!==undefined,
       revealedTraps:()=>[],objects:()=>[],visibleEnemies:()=>[]};
     try {
