@@ -535,3 +535,7 @@ button.primary {
   .battle-heading { gap: 12px; }
   .battle-actor { padding-top: 0; }
 }
+
+/* Camera scale changes no turn and leaves space for the original movement controls. */
+.map-stage { position: relative; }
+.map-zoom-button { position: absolute; right: 6px; top: 6px; min-height: 44px; min-width: 70px; padding: 4px 7px; font-size: 12px; background: #f2ebdd; z-index: 1; }
