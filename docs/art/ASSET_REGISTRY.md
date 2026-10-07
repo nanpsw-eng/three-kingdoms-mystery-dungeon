@@ -11,7 +11,7 @@ Direction: DEC-025, modern ink graphic novel × lianhuanhua. Original approved a
 | Ordinary troop portrait masters | IMPLEMENTED | 12 role masters; Yellow Turban, imperial soldiers and southern tribes |
 | Ordinary faction variants | IMPLEMENTED | 45 explicit shared-portrait bindings, each with a distinct faction/weapon SVG token |
 | Manifest physical files | IMPLEMENTED | 79 busts + 79 full bodies + 124 tokens; manifest and PRODUCTION_ART_PLAN.json |
-| Dungeon floor / stone walls | IMPLEMENTED_QA_PENDING | Exact v2 raster reference + rectangle mapping; exposed-boundary wall outlines; see DUNGEON_SURFACE_FIDELITY_20261007.md |
+| Dungeon floor / stone walls | REFERENCE_FIDELITY_VERIFIED | Exact v2 raster reference + rectangle mapping; exposed-boundary wall outlines; see DUNGEON_SURFACE_FIDELITY_20261007.md |
 | Dungeon objects / item atlas | FILE_COVERAGE_VERIFIED | ink-dungeon-v1.svg; item/equipment IDs covered; visual fidelity is a separate review |
 | UI/story/codex/battle visual layer | IMPLEMENTED | Ink/hanji skin, native portraits, local typography, touch targets, timeline tokens, hit/heal/status cues |
 | Runtime asset verification | VERIFIED | CI 37617790841: 283 images decoded, 48 characters / 89 enemy names / 16 layouts, fallback passed; MOBILE_UX_GRAPHICS_20261007.md records follow-up UI checks |

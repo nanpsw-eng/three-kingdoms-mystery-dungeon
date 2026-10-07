@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "source": "assets/tiles/dungeon-stone-material-v2.jpg",
+  "invalid": [],
+  "stable": true,
+  "nativeDraws": 210,
+  "floorDraws": 98,
+  "wallDraws": 112,
+  "floorLuminance": 204.16860491493372,
+  "wallLuminance": 60.31029035916832,
+  "fallbackPassed": true,
+  "errors": []
+}

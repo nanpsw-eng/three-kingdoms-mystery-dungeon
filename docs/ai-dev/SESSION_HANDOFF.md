@@ -1,8 +1,8 @@
-# SESSION HANDOFF — 2026-10-07 mobile UX checkpoint
+# SESSION HANDOFF — 2026-10-07 dungeon surface fidelity checkpoint
 
-State: `MOBILE_UX_MERGED / AUTOMATED_QA_PASS / VERCEL_PRODUCTION_READY / FULL_CAMPAIGN_HUMAN_PLAYTEST_NOT_RUN`.
+State: `MOBILE_UX_AND_SURFACE_FIDELITY_MERGED / AUTOMATED_QA_PASS / VERCEL_PRODUCTION_READY / FULL_CAMPAIGN_HUMAN_PLAYTEST_NOT_RUN`.
 
-PR #16 merged to main at `6af1e978721eaee68d8b2fdef350e9da7e84e951`. This documentation/evidence commit is a further checkpoint; use Git refs for its exact SHA. It introduces no runtime changes.
+PR #17 merged to main at `8fe07c9e940b6034abfa6a738b19326e22d5a56f`; PR #16 mobile UX remains included. This documentation/evidence commit is a further checkpoint; use Git refs for its exact SHA. It introduces no runtime changes.
 
 ## Authority
 
@@ -15,9 +15,17 @@ DEC-024 and recorded visual completion delegation authorize main merges and prod
 - Mobile square map fits remaining viewport height; compact party HUD uses roster-sized columns; 44px movement/actions/help remain visible at tested portrait sizes.
 - State/log/help sheets, sticky close, canonical item/skill explanations, manual target guidance/cancel and auto-combat pause while reading implemented.
 - Full-body art connected to party and unlocked codex details; recruitment route preserved. Codex navigation stays visible while its list scrolls.
-- Historical concept log explicitly superseded by production plan/registry. Old CONCEPT/NOT_RUN lists are not current asset work.
+- User-selected v2 floor/wall reference was previously missing from actual map despite file coverage. Corrected: original JPEG copied unchanged, source rectangles rendered with 3×3 floor patches and connected exposed wall outlines.
+- Blanket graphics-completion/superseded-concept claim withdrawn. Chronological status/counts can be historical; concept requirements must be checked individually. Do not treat file decode/binding as visual fidelity.
 
-## Evidence
+## Latest surface evidence
+
+- Source `b50b8bd`: engine CI `37620211240` (161 tests + web build) PASS; visual CI `37620211206`, artifact `11481971039` PASS.
+- Native reference draw/crop/stability/contrast, malformed raster fallback and mobile/gameplay regressions PASS; 284 images decode.
+- Production `dpl_8PgKTQ1aacSQQLkfsTVidLLSMiRq` READY for main `8fe07c9`. Live reload/continue confirmed the original pale cracked floor / rough dark walls and preserved save.
+- `docs/reports/DUNGEON_SURFACE_FIDELITY_20261007.md` and `docs/reports/evidence/dungeon-surface-*20261007.*` contain comparison, mobile, production screenshots and test result.
+
+## Earlier mobile evidence
 
 - Source `48e4c18`: local and CI engine tests 161 PASS; web build PASS.
 - Engine CI `37617790923`; visual CI `37617790841`; artifact `11480203537`: PASS.
@@ -28,7 +36,7 @@ DEC-024 and recorded visual completion delegation authorize main merges and prod
 - An intermediate transferred source snapshot failed build, never production. Final local/fetched renderer hashes match; do not resume from failed `0c225b3`.
 - Full physical Android/iOS testing, every later campaign human playthrough and balance remain NOT_RUN. Landscape below 540px height intentionally scrolls.
 
-NEXT_SAFE_ACTION: respond to observed gameplay/UX feedback or requested later-campaign human playtests. Do not regenerate approved art, rebuild engine/story, repeat deployment setup or assume an active background job. Prior chat interruption cause remains UNKNOWN.
+NEXT_SAFE_ACTION: individually compare remaining selected character/token/object/UI references against actual rendering before claiming full visual fidelity; respond to observed gameplay/UX feedback or requested later-campaign human playtests. Do not regenerate approved art, rebuild engine/story, repeat deployment setup or assume an active background job. Prior chat interruption cause remains UNKNOWN.
 
 ## Minimal index
 
