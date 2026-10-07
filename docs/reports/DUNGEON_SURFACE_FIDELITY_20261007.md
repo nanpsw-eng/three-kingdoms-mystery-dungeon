@@ -10,7 +10,7 @@ The earlier broad historical/superseded classification is corrected: chronologic
 
 - Copy the original v2 JPEG byte-for-byte to `web/assets/tiles/dungeon-stone-material-v2.jpg`. No generation, repainting or replacement of the source artwork.
 - Manifest `surfaces` records source rectangles: two floor variants and eight stone samples. White sheet margins and the floor area inside the corridor examples are excluded from stone samples.
-- Floor and corridor share those original floor materials. Room/corridor widths and topology remain defined by the dungeon engine; visual reference composition does not alter collisions.
+- Floor and corridor share those original floor materials. Each original floor sample spans a stable 3×3 world-cell patch, so cracks connect inside the patch and the whole study is not squeezed into every tiny tile. Room/corridor widths and topology remain defined by the dungeon engine; visual reference composition does not alter collisions.
 - Wall cap/face use the original rough stone material. Only boundaries facing explored walkable cells receive an ink outline; adjacent wall cells do not get separate rectangular frames. Straight boundaries, corners and junctions follow the existing tile topology.
 - Native raster material uses smooth sampling. Stable world-coordinate variants preserve deterministic, non-flickering appearance. Fog, stairs, gates, objects, enemies, touch coordinates and saves retain their current behavior.
 - Missing/undecodable raster material falls back to the existing SVG atlas and then existing procedural art.

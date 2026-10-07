@@ -54,7 +54,7 @@ try {
         return sum/(data.length/4);
       };
       return {source:source.image.getAttribute('src'),invalid,stable,nativeDraws:allCalls.length,
-        floorDraws:allCalls.filter(a=>a[2]>200).length,wallDraws:allCalls.filter(a=>a[2]<100).length,
+        floorDraws:allCalls.filter(a=>a[2]>90).length,wallDraws:allCalls.filter(a=>a[2]<80).length,
         floorLuminance:luminance(4,5),wallLuminance:luminance(1,5)};
     } finally { CanvasRenderingContext2D.prototype.drawImage=original; }
   });

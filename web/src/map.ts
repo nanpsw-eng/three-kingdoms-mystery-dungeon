@@ -141,11 +141,17 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   };
   /** Draws a named tileset tile when one is loaded, else the procedural fallback. */
   const terrain = (name: string, fallback: CanvasImageSource, p: Point, variant = 0): void => {
-    const surface = assetSurface(name === "corridor" ? "floor" : name.startsWith("wall-") ? "wall" : name, variant);
+    const material = name === "corridor" ? "floor" : name.startsWith("wall-") ? "wall" : name;
+    // A floor study spans a 3×3 world-cell patch, rather than shrinking the
+    // entire crack pattern into every cell. Adjacent subrects share one sample.
+    const span = material === "floor" ? 3 : 1;
+    const surface = assetSurface(material, span > 1 ? hash(Math.floor(p.x / span), Math.floor(p.y / span)) : variant);
     if (surface !== null) {
       const [x, y] = at(p);
       ctx.imageSmoothingEnabled = true;
-      ctx.drawImage(surface.image, surface.sx, surface.sy, surface.width, surface.height, x, y, cell, cell);
+      const sw = surface.width / span, sh = surface.height / span;
+      const ix = ((p.x % span) + span) % span, iy = ((p.y % span) + span) % span;
+      ctx.drawImage(surface.image, surface.sx + ix * sw, surface.sy + iy * sh, sw, sh, x, y, cell, cell);
       ctx.imageSmoothingEnabled = false;
       return;
     }
