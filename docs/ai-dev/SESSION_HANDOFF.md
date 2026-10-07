@@ -36,7 +36,9 @@ DEC-024 and recorded visual completion delegation authorize main merges and prod
 - An intermediate transferred source snapshot failed build, never production. Final local/fetched renderer hashes match; do not resume from failed `0c225b3`.
 - Full physical Android/iOS testing, every later campaign human playthrough and balance remain NOT_RUN. Landscape below 540px height intentionally scrolls.
 
-NEXT_SAFE_ACTION: individually compare remaining selected character/token/object/UI references against actual rendering before claiming full visual fidelity; respond to observed gameplay/UX feedback or requested later-campaign human playtests. Do not regenerate approved art, rebuild engine/story, repeat deployment setup or assume an active background job. Prior chat interruption cause remains UNKNOWN.
+Latest remaining-art audit completed against main `7d022234`: 54 concept files + 3 boards, code and CI screenshots reviewed. See `docs/reports/REMAINING_GRAPHICS_AUDIT_20261007.md` and JSON evidence. Native bust/full-body production art is linked but differs from concept designs; ruler v2 full-body exploration tokens are NOT_APPLIED. Later SVG item/object silhouettes ARE_APPLIED (objects partly bound), detailed raster objects NOT_APPLIED. Codex secondary-tab art and story scenery are missing. One codex detail JPEG is invalid; exact comparison UNKNOWN. This audit did not change gameplay/runtime assets.
+
+NEXT_SAFE_ACTION: address ruler token fidelity, then codex secondary art using existing data/assets; respond to observed gameplay/UX feedback or requested later-campaign human playtests. Do not regenerate approved art, rebuild engine/story, repeat deployment setup or assume an active background job. Prior chat interruption cause remains UNKNOWN.
 
 ## Minimal index
 

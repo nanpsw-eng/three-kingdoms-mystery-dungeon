@@ -1,0 +1,408 @@
+{
+  "dateKST": "2026-10-07",
+  "sourceCommit": "7d022234e28178a24b067c0b3b9ac7a9d5d26d97",
+  "conceptFileCount": 54,
+  "referenceBoardsCount": 3,
+  "scope": "reference fidelity audit; no game changes",
+  "vectorParityNormalization": "remove study-only floor backing and normalize fog filter identifier; drawing paths and attributes preserved",
+  "vectorParity": {
+    "docs/art/concepts/item-silhouettes-v1.svg": {
+      "fog": true,
+      "food": true,
+      "medicine": true,
+      "scroll": true,
+      "weapon": true,
+      "armor": true,
+      "treasure": true,
+      "unknown": true
+    },
+    "docs/art/concepts/dungeon-object-markers-v1.svg": {
+      "fog": true,
+      "stairs": true,
+      "trap": true,
+      "sorcery": true,
+      "enemy": true,
+      "pot": true
+    }
+  },
+  "files": [
+    {
+      "path": "docs/art/concepts/cao-cao-bust-concept-v1-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "369fdc39f35ea01e26fbfb91f524891193462ed452341ac9b394e9c2eff0bcbb"
+    },
+    {
+      "path": "docs/art/concepts/cao-cao-exploration-token-concept-v1-20261006.png",
+      "group": "ruler-token",
+      "status": "NOT_APPLIED_REFERENCE_TOKEN",
+      "decode": "PASS",
+      "sha256": "2316d579842003d36e1b6b0d7f438b8606e10c2096f75c8c44ab6d32d9dac6ff"
+    },
+    {
+      "path": "docs/art/concepts/cao-cao-exploration-token-concept-v2-20261006.png",
+      "group": "ruler-token",
+      "status": "NOT_APPLIED_REFERENCE_TOKEN",
+      "decode": "PASS",
+      "sha256": "6665ef2c7e620c242f117ca46383ebaa97e878be0ced6bbadf60300208075fa6"
+    },
+    {
+      "path": "docs/art/concepts/cao-cao-full-body-concept-v1-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "a8b54c41eb0aa66d1ecc17ff26879eed7928c15ea58c3d3d116aa1d83e2b41eb"
+    },
+    {
+      "path": "docs/art/concepts/cao-cao-master-concept-v1-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "90ede4344ff63889d8714ed2bff6f346056f9ee3392cff74660edc1c53aca00b"
+    },
+    {
+      "path": "docs/art/concepts/codex-character-detail-mockup-v2-20261006.jpg",
+      "group": "codex-detail",
+      "status": "UNKNOWN_INVALID_REFERENCE",
+      "decode": "FAIL",
+      "sha256": "7d5b9e22828fb7aaa8254e74cf19e282729dfd6bdc2a99561244147e624550a7"
+    },
+    {
+      "path": "docs/art/concepts/codex-secondary-tabs-20261006.jpg",
+      "group": "codex-secondary",
+      "status": "PARTIAL_UI_MISSING_ART",
+      "decode": "PASS",
+      "sha256": "f5081fcbfedd214d50d86cdb755b821774a72101224b7a52f5647c2af0af692d"
+    },
+    {
+      "path": "docs/art/concepts/dong-zhuo-lu-bu-boss-concept-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "cd3937e5f2c8be7c2051fcb613e05baa715ae952bc4e54af9e99e85c0828e02a"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-cell-grid-crop-audit-render-v1-20261006.jpg",
+      "group": "terrain-grid-study",
+      "status": "V2_MATERIAL_APPLIED_OTHER_STUDIES_NOT_SELECTED",
+      "decode": "PASS",
+      "sha256": "240c04964fc30fb66c648ad6054da9e3731a5c59bd8cdd6ea881eee7815d742d"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-cell-grid-review-v1.svg",
+      "group": "terrain-grid-study",
+      "status": "V2_MATERIAL_APPLIED_OTHER_STUDIES_NOT_SELECTED",
+      "decode": "SVG_PARSED",
+      "sha256": "668524b0f1dee7aa2a6b88a46846a4aa02800e8a9ce2969946e525432b66a37e"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-exact-cell-scale-review-v1-20261006.jpg",
+      "group": "terrain-grid-study",
+      "status": "V2_MATERIAL_APPLIED_OTHER_STUDIES_NOT_SELECTED",
+      "decode": "PASS",
+      "sha256": "a34afd34e6f0a9306fd49bc44424dadf745afa8a39c9e2c94d78c6c0706c187d"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-exact-cell-scale-review-v2-20261006.jpg",
+      "group": "terrain-grid-study",
+      "status": "V2_MATERIAL_APPLIED_OTHER_STUDIES_NOT_SELECTED",
+      "decode": "PASS",
+      "sha256": "6bcfc11df493b1f0b332d99d02c2d592ed2482ba2708d7c3d1ce8cc130596e26"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-floor-surface-concept-v4-20261006.jpg",
+      "group": "terrain-grid-study",
+      "status": "V2_MATERIAL_APPLIED_OTHER_STUDIES_NOT_SELECTED",
+      "decode": "PASS",
+      "sha256": "95d8a66d7a7aa1f545050a0c3669bb003f06f97cf9d1e21550e28d5d6c2c396b"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-fog-alpha-study-v1.jpg",
+      "group": "fog",
+      "status": "APPLIED_VECTOR_WASH_NOT_RASTER",
+      "decode": "PASS",
+      "sha256": "3effb33ce68bea4668bb9040564cd3b7c5ade35687ef8f651c428494d4f86bc6"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-fog-alpha-study-v1.svg",
+      "group": "fog",
+      "status": "APPLIED_VECTOR_WASH_NOT_RASTER",
+      "decode": "SVG_PARSED",
+      "sha256": "fc38f8319b4315cd1cf2ca40f322881f35976d3870beb861c53a06ff7adc0cfb"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-modular-exact-cell-study-v1-20261006.jpg",
+      "group": "terrain-grid-study",
+      "status": "V2_MATERIAL_APPLIED_OTHER_STUDIES_NOT_SELECTED",
+      "decode": "PASS",
+      "sha256": "648a09145f936a42bcb123525efc455d85031ebe6067267a1074febab30eca61"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-modular-exact-cell-study-v1-20261006.svg",
+      "group": "terrain-grid-study",
+      "status": "V2_MATERIAL_APPLIED_OTHER_STUDIES_NOT_SELECTED",
+      "decode": "SVG_PARSED",
+      "sha256": "90a58ebfe85c63dae088fd456f7bf6047c44fea8a94bc100f37b4f32c6fda4f3"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-modular-exact-cell-study-v1-grayscale-20261006.jpg",
+      "group": "terrain-grid-study",
+      "status": "V2_MATERIAL_APPLIED_OTHER_STUDIES_NOT_SELECTED",
+      "decode": "PASS",
+      "sha256": "aea323362b09a3125cc0decbde420f6897ee75dd40f11ac49ad08dda21eab3ef"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-modular-surface-grammar-concept-v1-20261006.jpg",
+      "group": "terrain-grid-study",
+      "status": "V2_MATERIAL_APPLIED_OTHER_STUDIES_NOT_SELECTED",
+      "decode": "PASS",
+      "sha256": "48ca2a399001ef360c0bc109de6b6d107b34afa9294bcb00f4e729986773c504"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-modular-surface-grammar-concept-v2-20261006.jpg",
+      "group": "terrain-grid-study",
+      "status": "V2_MATERIAL_APPLIED_OTHER_STUDIES_NOT_SELECTED",
+      "decode": "PASS",
+      "sha256": "4b4986b7875fa969d8ba5946e3b4ee181d51fbf7993f38c8fdec8f6e891a827e"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-modular-surface-grammar-concept-v3-20261006.jpg",
+      "group": "terrain-grid-study",
+      "status": "V2_MATERIAL_APPLIED_OTHER_STUDIES_NOT_SELECTED",
+      "decode": "PASS",
+      "sha256": "f60f6ab339d17048b66a694e9a531d065ac6471dd53e781fc634630b04dc7fde"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-modular-surface-scale-review-v2-20261006.jpg",
+      "group": "terrain-grid-study",
+      "status": "V2_MATERIAL_APPLIED_OTHER_STUDIES_NOT_SELECTED",
+      "decode": "PASS",
+      "sha256": "a16bcff91566f54a3f7ac7c5695622551d32b0d1120a9fbef546c9dfb87618a3"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-modular-surface-scale-review-v3-20261006.jpg",
+      "group": "terrain-grid-study",
+      "status": "V2_MATERIAL_APPLIED_OTHER_STUDIES_NOT_SELECTED",
+      "decode": "PASS",
+      "sha256": "2648b81e628156c89b9acddaaf4f001bab47ab9c2cbacf64504ca7dfc4ea50f4"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-object-markers-v1-grayscale.jpg",
+      "group": "object-vector",
+      "status": "PARTIAL_BINDING",
+      "decode": "PASS",
+      "sha256": "6bef37f092a72810fc85dd559784196f3892b863099a284f7d032030b9429628"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-object-markers-v1.jpg",
+      "group": "object-vector",
+      "status": "PARTIAL_BINDING",
+      "decode": "PASS",
+      "sha256": "dc59fd07f7bf33f9ec8f8153cf0c7a8a47ed124003674eec53a18df370c8f460"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-object-markers-v1.svg",
+      "group": "object-vector",
+      "status": "PARTIAL_BINDING",
+      "decode": "SVG_PARSED",
+      "sha256": "7243fd68f59fbc6b47851cda02497a58acb2d75ed3ed052aff328096280b2406"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-objects-concept-v1-20261006.jpg",
+      "group": "raster-dungeon",
+      "status": "PARTIAL_OR_NOT_APPLIED_RASTER_OBJECTS",
+      "decode": "PASS",
+      "sha256": "603400a67f4c2060cd64c2b09894f5883d9512088c1d844416800d134abed1ff"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-room-corridor-composition-v1-20261006.jpg",
+      "group": "raster-dungeon",
+      "status": "PARTIAL_OR_NOT_APPLIED_RASTER_OBJECTS",
+      "decode": "PASS",
+      "sha256": "7d0351d4ab9d4698822dd024e7ee27e564ba08edbcd22271c383cb27acb7ed38"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-set-scale-review-20261006.jpg",
+      "group": "raster-dungeon",
+      "status": "PARTIAL_OR_NOT_APPLIED_RASTER_OBJECTS",
+      "decode": "PASS",
+      "sha256": "9d64a80e24599a925d68497f44a6ecc6946447a8832aabccb6ed2b01bebdb01a"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-sorcery-mark-concept-v2-20261006.png",
+      "group": "raster-dungeon",
+      "status": "PARTIAL_OR_NOT_APPLIED_RASTER_OBJECTS",
+      "decode": "PASS",
+      "sha256": "7184bbc33ed51bc36ae13379b2b5ccf2424acaa8d34c6af590ccd25a70483945"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-sorcery-mark-concept-v3-20261006.png",
+      "group": "raster-dungeon",
+      "status": "PARTIAL_OR_NOT_APPLIED_RASTER_OBJECTS",
+      "decode": "PASS",
+      "sha256": "8d2c5fbf8305d23776c348d6c699c7cf255ad512aecabd4c17f50e017f849a8e"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-surfaces-concept-v1-20261006.jpg",
+      "group": "raster-dungeon",
+      "status": "PARTIAL_OR_NOT_APPLIED_RASTER_OBJECTS",
+      "decode": "PASS",
+      "sha256": "714df5e2f7f2366df7c90566ea3ca59bca8658af0544a75e9d1faa973bcc7b52"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-trap-mark-concept-v2-20261006.png",
+      "group": "raster-dungeon",
+      "status": "PARTIAL_OR_NOT_APPLIED_RASTER_OBJECTS",
+      "decode": "PASS",
+      "sha256": "9727da5e9c49d3204cfec1d02980650ae513005b834b5bbfe9d3f45692c2abc4"
+    },
+    {
+      "path": "docs/art/concepts/dungeon-trap-sorcery-scale-review-v2-20261006.jpg",
+      "group": "raster-dungeon",
+      "status": "PARTIAL_OR_NOT_APPLIED_RASTER_OBJECTS",
+      "decode": "PASS",
+      "sha256": "6487a2ebb8039e91858a5335dd6e3d564e4866f57468f7b905074c5029996295"
+    },
+    {
+      "path": "docs/art/concepts/e2-boss-trio-yuan-shao-cao-cao-cao-ren-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "084e817bc84f4b00cd6efbc482eb8d2c72fae0c1fd9ccfc28c0b7c4aa5b00f21"
+    },
+    {
+      "path": "docs/art/concepts/item-silhouettes-v1-grayscale.jpg",
+      "group": "item-vector",
+      "status": "APPLIED_VECTOR_7_FAMILIES",
+      "decode": "PASS",
+      "sha256": "e733f82292c23353a5788a4cd0531f2b43ff6103d6fddcbb9e96eb8f5090d175"
+    },
+    {
+      "path": "docs/art/concepts/item-silhouettes-v1.jpg",
+      "group": "item-vector",
+      "status": "APPLIED_VECTOR_7_FAMILIES",
+      "decode": "PASS",
+      "sha256": "af04afa15052eb792ca956bf4c0882c306ea442e6bb5500201cf9f02fa697fc6"
+    },
+    {
+      "path": "docs/art/concepts/item-silhouettes-v1.svg",
+      "group": "item-vector",
+      "status": "APPLIED_VECTOR_7_FAMILIES",
+      "decode": "SVG_PARSED",
+      "sha256": "c78f2c19ccc4f43ccdf067035f47ceb6b00a4b9568065b10e6929f9d3259679d"
+    },
+    {
+      "path": "docs/art/concepts/liu-bei-bust-concept-v1-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "cfd2b2da040e0ac97ca7bb4981004f1d8992d2654ceb14d90c4794476aa2f95e"
+    },
+    {
+      "path": "docs/art/concepts/liu-bei-exploration-token-concept-v2-20261006.png",
+      "group": "ruler-token",
+      "status": "NOT_APPLIED_REFERENCE_TOKEN",
+      "decode": "PASS",
+      "sha256": "aaacd8c3ec96f63f1a28e69679a908ec3e2b2aac0f678c51dbf5e42830bb0c53"
+    },
+    {
+      "path": "docs/art/concepts/liu-bei-full-body-concept-v1-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "474441603fee38c4589276f1ea27f0d19cfea7c2ee012364728336482ecf2311"
+    },
+    {
+      "path": "docs/art/concepts/liu-bei-master-concept-v1-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "ea5aeb88065bed9d615e59cd74e8cc0a39a4f651ed41018ea373fe6d2cfed3c5"
+    },
+    {
+      "path": "docs/art/concepts/lu-xun-meng-huo-boss-concept-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "e6f2a91d4c1cf83d19afcae32602f3b6cbdd3fffb3b8c69c6a3932960fc61d19"
+    },
+    {
+      "path": "docs/art/concepts/ruler-master-comparison-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "04ffaa01409aaa678d089a7963ff5f9313efd1e88ceb7948b535734a06b1dcb5"
+    },
+    {
+      "path": "docs/art/concepts/ruler-master-comparison-v2-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "6930802bc6422dc5019d06865dbe118ef42a228cb45c79e921e8990fbe35d474"
+    },
+    {
+      "path": "docs/art/concepts/ruler-scale-review-revised-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "6536e50c2585bb9c9b1dda0dd4f801a958fdaadd57766353068457ac5c640a14"
+    },
+    {
+      "path": "docs/art/concepts/sima-yi-master-concept-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "c70681989b3d8f54b57809f1d7dfcf3ec220eccd7a9e2554e40f22a5bf7d2024"
+    },
+    {
+      "path": "docs/art/concepts/sima-yi-master-concept-v2-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "c9cd86e70aca941a4422c95d6b647bdb5815f9f6a4a7f32cf9780638e91490e1"
+    },
+    {
+      "path": "docs/art/concepts/story-scene-ui-20261006.jpg",
+      "group": "story-ui",
+      "status": "PARTIAL_UI_MISSING_SCENERY",
+      "decode": "PASS",
+      "sha256": "bde42f9b11bf371dae32615d65cf328ecb6d5e697908acc4e56f8ee44c45f9af"
+    },
+    {
+      "path": "docs/art/concepts/sun-quan-bust-concept-v2-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "f838235e6653500bbeb885f3ee1ea144739ac7b23cd4fe190a32cc133a5af6eb"
+    },
+    {
+      "path": "docs/art/concepts/sun-quan-exploration-token-concept-v1-20261006.png",
+      "group": "ruler-token",
+      "status": "NOT_APPLIED_REFERENCE_TOKEN",
+      "decode": "PASS",
+      "sha256": "3ef2b03cb3e4d0741b38cf3d1a20778be4a71e4beccda650ebcb0b8cb5fb8242"
+    },
+    {
+      "path": "docs/art/concepts/sun-quan-exploration-token-concept-v2-20261006.png",
+      "group": "ruler-token",
+      "status": "NOT_APPLIED_REFERENCE_TOKEN",
+      "decode": "PASS",
+      "sha256": "9254200532c688d4b43cbea6bb5d68160ea0f3c5d6f8a09ec2d4a90f67b85f83"
+    },
+    {
+      "path": "docs/art/concepts/sun-quan-full-body-concept-v1-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "638c636519eb645e67bb5b4708d618cc5719fa350b2d070cbfe9e15ae52eb29b"
+    },
+    {
+      "path": "docs/art/concepts/sun-quan-master-concept-v1-20261006.jpg",
+      "group": "character-identity",
+      "status": "ADAPTED_PRODUCTION_ART_NOT_IDENTICAL",
+      "decode": "PASS",
+      "sha256": "c02332cef5f273bc884b7cab0bf12ca96ae8f2fcbad27ac174565e3a51dcddd2"
+    }
+  ]
+}

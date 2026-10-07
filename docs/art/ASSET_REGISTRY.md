@@ -18,4 +18,4 @@ Direction: DEC-025, modern ink graphic novel × lianhuanhua. Original approved a
 
 General soldiers share a face by role, while named historical figures retain their own identity. Full-body files load only when visible. Asset load failures use existing procedural art.
 
-Old concept sheets and obsolete gate/queue statements are archived in HISTORY_ASSET_REGISTRY_20261006.md. They are not active production requirements. No new gameplay, save, balance or campaign rules are introduced.
+Chronological queue/gate snapshots are archived in HISTORY_ASSET_REGISTRY_20261006.md; this does not dismiss concept requirements. Remaining fidelity gaps are recorded in docs/reports/REMAINING_GRAPHICS_AUDIT_20261007.md: ruler exploration tokens, detailed raster objects, codex secondary-tab art and story scenery are not fully applied. No new gameplay, save, balance or campaign rules are introduced.
