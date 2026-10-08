@@ -3,9 +3,9 @@
 ## 현재 기준
 
 - Repo nanpsw-eng/three-kingdoms-mystery-dungeon. AI-OS exactv0.4.4 /64b5115a698cc6a94cd8df80abb2ee7109010764. AGENTS.md 및 DEC-025.
-- 운영 main5635e5b1631fb0b73424452baa2391b4a9d611fc /Vercel dpl_8htVYmMmdb85AaRDq5TpJJMs3Gx3 READY. 이전 탐험·전투·효과요약·필드28 전체 릴리스 완료. 반복 구현 금지.
+- 운영 게임 릴리스 ee9be2262f450cd4a12752e1feaa3bf025905bdf /Vercel dpl_4nBf14Vizvp2AjQXyjCmHXqVaYro READY. 이전 탐험·전투·효과요약·필드28 전체 릴리스 완료. 반복 구현 금지.
 - 2026-10-08 사용자 적대적 UX검토→핵심3화면 시안→① 구현 진행 승인. Branch feature/ink-ux-approved-v2는 운영 위의 delta.
-- 이번 변경 main NOT_MERGED /production NOT_DEPLOYED. 과거 배포 승인은 완료된 이전 릴리스 대상이며 이번 사용자 선택은 구현 승인이다.
+- 2026-10-08 추가 ① 운영 반영·배포 승인. PR #23 MERGED; 릴리스 main CI/visual-smoke/deploy SUCCESS. 정식 주소 연결 및 브라우저 신규원정·탐험·공격확인/취소·저장복원 PASS.
 
 ## 구현 / 원장
 
@@ -18,4 +18,4 @@
 
 ## 다음
 
-PR 검토 후 main 병합/운영 배포 사용자 승인. 해당 승인 전 구현을 반복하거나 main에 임의 반영하지 않는다. 이번 승인3화면과 별개로 다음 콘텐츠 작업은 도감 열전/상세이다.
+승인3화면 운영 반영 완료. 이번 릴리스를 반복 구현/재배포하지 않는다. 배포 기록 문서 커밋은 게임 릴리스와 동일 소스/자산이다. 다음 콘텐츠 후보는 도감 열전/상세이며 새 작업 승인 시 범위를 정한다.
