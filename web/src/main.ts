@@ -1,3 +1,4 @@
+import { battleField } from "./battle-ui.js";
 import { applyInkTheme } from "./ink-theme.js";
 import {
   MVP_CONTENT, RunEngine, buildCodex, RepeatAutoController, applyRunToMeta, chooseAllAttackCommand, chooseSmartCommand, initialMeta, FORMATION_SLOTS,
@@ -28,8 +29,10 @@ let meta: MetaState = load<MetaState>(META_KEY) ?? initialMeta(content);
 let run: RunEngine | null = null;
 let save: SaveData | null = null;
 let log: string[] = [];
-let modal: null | "bag" | "party" | "help" | "log" | "status" | "map-guide" = null;
+let modal: null | "bag" | "party" | "help" | "log" | "status" | "map-guide" | "skills" | "battle-items" | "tactics" = null;
 let mapObserver: ResizeObserver | null = null;
+let battlefieldScroll = 0;
+let mapRadius: 5 | 7 = 5;
 let autoMode: AutoMode = "manual";
 let speed = 1;
 let autoTimer: number | null = null;
@@ -189,6 +192,8 @@ function narrateBattle(command: BattleCommand): void {
 
 // ---------- screens ----------
 function render(): void {
+  const priorField = app.querySelector<HTMLElement>(".field");
+  battlefieldScroll = app.dataset.screen === "battle" ? priorField?.scrollTop ?? battlefieldScroll : 0;
   mapObserver?.disconnect(); mapObserver = null;
   app.dataset.screen = run === null ? (showCodex ? "codex" : "title") : run.phase === "battle" ? "battle" : run.phase === "safe-zone" || run.phase === "cleared" || run.phase === "failed" ? "other" : "dungeon";
   app.replaceChildren();
@@ -213,6 +218,7 @@ function render(): void {
   else if (modal === "party") renderParty();
   else if (modal === "help") renderHelp();
   else if (modal === "map-guide") renderMapGuide();
+  else if (modal === "skills" || modal === "battle-items" || modal === "tactics") renderBattlePanel();
   else if (modal === "log") sheet(h("h2", {}, "행동 기록"), ...log.map(line => h("p", {}, line)));
   else if (modal === "status") sheet(h("h2", {}, "현재 상태"), hud(), h("p", {}, "군량은 탐험 중 소모됩니다. 위험도가 높아지면 증원이 나타날 수 있습니다. 층별 특수 규칙은 위 상태창에서 확인하세요."));
   if (pickTarget !== null) renderPicker();
@@ -313,11 +319,12 @@ function explorationHeader(): HTMLElement {
 
 function renderMapGuide(): void {
   sheet(h("h2", {}, "탐험 지도 안내"),
-    h("p", {}, "밝은 석재는 탐험한 길, 짙은 먹안개는 아직 확인하지 않은 곳입니다. 군주를 중심으로 지도가 움직입니다."),
+    h("p", {}, "밝은 석재는 탐험한 길, 짙은 먹안개는 아직 확인하지 않은 곳입니다. 군주를 중심으로 지도가 움직입니다. ‘넓게 보기’와 ‘크게 보기’는 턴 소비 없이 지도 배율을 바꿉니다."),
     h("dl", { class: "map-legend" },
-      h("dt", {}, "군주 / 적"), h("dd", {}, "작은 인물은 아군 군주, 주홍 표시가 있는 인물은 적 부대입니다. 적과 만나면 전투가 시작됩니다."),
+      h("dt", {}, "군주 / 적"), h("dd", {}, "청록 원형·깃발은 군주와 영입 장수, 주홍 원형·삼각 깃발은 적 부대입니다. 이중 깃발은 보스입니다. 적과 만나면 전투가 시작됩니다."),
       h("dt", {}, "계단"), h("dd", {}, "계단 위로 이동한 뒤 ‘계단 ▼’를 눌러 다음 층으로 내려갑니다."),
-      h("dt", {}, "상자 / 항아리 / 약 주머니"), h("dd", {}, "물품이 있는 칸입니다. 그 칸으로 이동하면 획득합니다."),
+      h("dt", {}, "상자 / 항아리 / 약 주머니"), h("dd", {}, "황토 마름모는 물품 표시입니다. 음식·약·장비 모양으로 종류를 구분하며, 그 칸으로 이동하면 획득합니다."),
+      h("dt", {}, "요술진"), h("dd", {}, "주홍 원형 인장은 적을 강화하는 요술진입니다. 가까이에서 ‘조사’로 파괴합니다."),
       h("dt", {}, "함정 / 숨겨진 통로"), h("dd", {}, "‘주변 탐색’으로 확인합니다. 자동 탐색은 발견한 함정을 피합니다.")),
     h("p", {}, "방향 버튼은 한 칸 이동, 가운데 ‘대기’는 1턴 진행입니다. 지도를 누르면 해당 칸까지 이동하다가 발견이나 적 조우 시 멈춥니다."));
 }
@@ -340,8 +347,8 @@ function travelTo(target: { x: number; y: number }): void {
 
 function renderDungeon(): void {
   const r = run!;
-  const canvas = h("canvas", { id: "map", "aria-label": "던전 지도", "aria-describedby": "map-instruction" });
-  const stage = h("div", { class: "map-stage" }, canvas);
+  const canvas = h("canvas", { id: "map", "aria-label": "던전 지도", "aria-describedby": "map-instruction", "data-view-radius": String(mapRadius) });
+  const stage = h("div", { class: "map-stage" }, canvas, button(mapRadius === 5 ? "넓게 보기" : "크게 보기", () => { mapRadius = mapRadius === 5 ? 7 : 5; render(); }, { class: "map-zoom-button" }));
   canvas.addEventListener("pointerup", (event) => travelTo(tileAt(canvas, r.dungeon, event.clientX, event.clientY)));
   const onStairs = r.dungeon.position.x === r.dungeon.floor.stairs.x && r.dungeon.position.y === r.dungeon.floor.stairs.y;
   put(
@@ -369,7 +376,7 @@ function renderDungeon(): void {
     const size = Math.floor(Math.min(stage.clientWidth, stage.clientHeight));
     if (size <= 0 || !canvas.isConnected) return;
     canvas.style.width = size + "px"; canvas.style.height = size + "px";
-    drawMap(canvas, r.dungeon, { playerKey: artKey(r.party()[0]?.characterId ?? "liu-bei"), enemyKey });
+    drawMap(canvas, r.dungeon, { playerKey: artKey(r.party()[0]?.characterId ?? "liu-bei"), enemyKey, radius: mapRadius });
   };
   mapObserver = new ResizeObserver(paint); mapObserver.observe(stage);
   requestAnimationFrame(paint);
@@ -385,33 +392,49 @@ function utilityBar(exploration = false): HTMLElement {
     button("도움말", () => { modal = "help"; render(); }));
 }
 
-function skillSummary(skill: SkillDefinition): string {
+function abilitySummary(skill: Pick<SkillDefinition, "targeting" | "effects">): string {
   const target = skill.targeting.team === "self" ? "자신" : skill.targeting.team === "ally" ? "아군" : "적";
   const effects = skill.effects.map(effect => {
+    const recipient = effect.recipient === "actor" && skill.targeting.team !== "self" ? "자신 " : "";
+    let text: string;
     switch (effect.type) {
-      case "damage": return (effect.kind === "physical" ? "물리" : "전술") + " 피해";
-      case "heal": return "체력 회복";
-      case "status": return (STATUS_NAMES[effect.statusType] ?? effect.statusType) + " " + effect.durationRounds + "라운드";
-      case "energy": return "기력 " + (effect.amount >= 0 ? "+" : "") + effect.amount;
-      case "timeline-shift": return "행동 순서 변경";
-      case "formation-swap": return "위치 교환";
-      case "extra-action": return "추가 행동";
-      case "cleanse": return "상태 이상 해제";
-      case "revive": return "부활 (체력 " + Math.round(effect.hpRatio * 100) + "%)";
+      case "damage": text = (effect.kind === "physical" ? "물리" : "전술") + " 피해"; break;
+      case "heal": text = "체력 회복(지력 비례)"; break;
+      case "status": text = (STATUS_NAMES[effect.statusType] ?? effect.statusType) + " " + effect.durationRounds + "라운드"; break;
+      case "energy": text = "기력 " + (effect.amount >= 0 ? "+" : "") + effect.amount; break;
+      case "timeline-shift": text = effect.amount > 0 ? "다음 행동 지연" : effect.amount < 0 ? "다음 행동 앞당김" : "행동 순서 유지"; break;
+      case "formation-swap": text = "아군과 자리 교환"; break;
+      case "extra-action": text = effect.mode === "interrupt" ? "즉시 추가 행동" : "추가 행동"; break;
+      case "cleanse": text = effect.statusTypes?.length ? effect.statusTypes.map(type => STATUS_NAMES[type] ?? type).join("·") + " 해제" : "모든 상태 해제"; break;
+      case "revive": text = "부활·체력 " + Math.round(effect.hpRatio * 100) + "%"; break;
     }
+    return recipient + text;
   });
-  return `기력 ${skill.energyCost} · ${target} 최대 ${skill.targeting.maxTargets}명 · ${effects.join(", ")}`;
+  const access = skill.targeting.access === "front" ? " 전열" : "";
+  const state = skill.targeting.state === "ko" ? " 전투불능" : "";
+  const count = skill.targeting.team === "self" ? "" : skill.targeting.minTargets === skill.targeting.maxTargets
+    ? ` ${skill.targeting.maxTargets}명` : ` ${skill.targeting.minTargets}~${skill.targeting.maxTargets}명`;
+  return `${target}${access}${state}${count} · ${effects.join(" + ")}`;
+}
+
+function skillSummary(skill: SkillDefinition): string {
+  return `기력 ${skill.energyCost} · ${abilitySummary(skill)}`;
 }
 
 function itemSummary(item: ItemDefinition): string {
   switch (item.use.kind) {
     case "food": return "군량 +" + item.use.amount;
-    case "heal": return (item.use.target === "party" ? "부대 전체" : "장수 1명") + " 체력 " + Math.round(item.use.ratio * 100) + "% 회복";
-    case "treat": return "쓰러진 장수 치료 · 체력 " + Math.round(item.use.ratio * 100) + "%";
+    case "heal": return (item.use.target === "party" ? "아군 전체" : "아군 1명") + " 체력 " + Math.round(item.use.ratio * 100) + "% 회복";
+    case "treat": return "전투불능 치료 · 체력 " + Math.round(item.use.ratio * 100) + "%";
     case "identify": return "미식별 장비 1개 감정";
-    case "reveal-traps": return "주변 함정 탐지";
-    case "battle": return "전투 중 사용";
+    case "reveal-traps": return "현재 층 함정 위치 표시";
+    case "battle": return item.battle ? abilitySummary(item.battle) : "전투 중 사용";
   }
+}
+
+function equipmentSummary(stats: Readonly<Partial<Record<string, number>>>): string {
+  const names: Record<string, string> = { atk: "공격", def: "방어", spd: "속도", int: "지력", maxHp: "체력" };
+  return Object.entries(stats).map(([key, value]) => (names[key] ?? key) + (value! > 0 ? " +" : " ") + value).join(" · ");
 }
 
 function renderHelp(): void {
@@ -438,7 +461,6 @@ function renderBattle(): void {
   const snap = battle.snapshot();
   const active = snap.activeTurn;
   const activeAlly = active !== null && !active.actorId.includes("#");
-  const statuses = new Map(snap.statuses.map((s) => [s.unitId, s.statuses]));
   let legal = new Set<string>();
   if (activeAlly && selection !== null) {
     if (selection.kind === "attack") legal = new Set(battle.legalBasicTargets(active.actorId));
@@ -454,74 +476,91 @@ function renderBattle(): void {
       else render();
     }
   };
-  const card = (side: "ally" | "enemy", slot: FormationSlot): HTMLElement => {
-    const formation = side === "ally" ? snap.allyFormation : snap.enemyFormation;
-    const occupant = formation.find((entry) => entry.slot === slot);
-    const koId = snap.koSlots.find((entry) => entry.slot === slot && snap.units.find((u) => u.id === entry.unitId)?.side === side)?.unitId;
-    const id = occupant?.unitId ?? koId;
-    if (id === undefined) {
-      if (side === "ally" && activeAlly && selection?.kind === "formation") {
-        return button("이동", () => { const command: BattleCommand = { type: "formation", actorId: active.actorId, targetSlot: slot }; selection = null; narrateBattle(command); render(); }, { class: "unit targetable" });
-      }
-      return h("div", { class: "slot" });
-    }
-    const unit = snap.units.find((u) => u.id === id)!;
-    const chosen = selection !== null && "targets" in selection && selection.targets.includes(id);
-    const cls = ["unit", side, unit.knockedOut ? "ko" : "", snap.guarding.includes(id) ? "guarded" : "", active?.actorId === id ? "active" : "", legal.has(id) ? "targetable" : "", chosen ? "selected" : ""].join(" ");
-    return button("", () => {
-      if (side === "ally" && activeAlly && selection?.kind === "formation" && id !== active.actorId) {
-        const command: BattleCommand = { type: "formation", actorId: active.actorId, targetSlot: slot }; selection = null; narrateBattle(command); render(); return;
-      }
-      onUnit(id);
-    }, { class: cls + (hitIds.has(id) ? " hit" : "") + (healedIds.has(id) ? " healed" : "") }).appendChild(h("div", { class: "unit-head" }, pic(id.includes("#") ? unitName(id) : id, 120, unitName(id)),
-      h("div", { class: "unit-meta" }, h("b", {}, unitName(id)), h("span", { class: "num" }, unit.hp + "/" + unit.stats.maxHp)))).parentElement!
-      .appendChild(bar(unit.hp, unit.stats.maxHp)).parentElement!
-      .appendChild(bar(unit.energy, 100, "energy")).parentElement!
-      .appendChild(h("span", { class: "tags" }, ...(statuses.get(id) ?? []).map((s) => h("span", { class: "tag", "data-status": s.type }, (STATUS_NAMES[s.type] ?? s.type) + (s.stacks > 1 ? "×" + s.stacks : ""))))).parentElement!;
-  };
-  const rows = (side: "ally" | "enemy"): HTMLElement[] => {
-    const front = h("div", { class: "formation" }, card(side, "front-left"), card(side, "front-center"), card(side, "front-right"));
-    const rear = h("div", { class: "formation" }, card(side, "rear-left"), h("div", { class: "slot", style: "border:none" }), card(side, "rear-right"));
-    return side === "enemy" ? [rear, front] : [front, rear];
-  };
+  const field = battleField({ snapshot: snap, name: unitName,
+    portrait: id => pic(id.includes("#") ? unitName(id) : id, 96, unitName(id)),
+    legal, selected: new Set(selection && "targets" in selection ? selection.targets : []), hit: hitIds, healed: healedIds,
+    formationPicking: activeAlly && selection?.kind === "formation",
+    onUnit, onSlot: targetSlot => {
+      if (!activeAlly || selection?.kind !== "formation") return;
+      selection = null; narrateBattle({ type: "formation", actorId: active.actorId, targetSlot }); render();
+    },
+  });
   const timeline = h("div", { class: "timeline" }, ...[...(active ? [active] : []), ...snap.timeline].slice(0, 8).map((event, index) =>
     h("span", { class: (event.actorId.includes("#") ? "enemy" : "ally") + (index === 0 && active ? " now" : "") }, tokenPic(event.actorId.includes("#") ? unitName(event.actorId) : event.actorId), unitName(event.actorId))));
-  const controls: HTMLElement[] = [];
-  if (activeAlly && autoMode === "manual") {
-    const actor = snap.units.find((u) => u.id === active.actorId)!;
-    const skills = battle.ownedSkills(active.actorId);
-    const items = [...new Set(snap.inventories.ally)];
-    controls.push(h("div", { class: "grid3 battle-actions" },
-      button("공격", () => { selection = { kind: "attack" }; render(); }, { class: selection?.kind === "attack" ? "selected" : "" }),
-      button("방어", () => { const command: BattleCommand = { type: "guard", actorId: active.actorId }; selection = null; narrateBattle(command); render(); }),
-      button("진형", () => { selection = { kind: "formation" }; render(); }, { class: selection?.kind === "formation" ? "selected" : "" }),
-      ...skills.map((skill) => button((skill.kind === "ultimate" ? "★" : "") + (content.skillNames[skill.id] ?? skill.id) + " " + skill.energyCost, () => {
-        selection = { kind: "skill", skillId: skill.id, targeting: skill.targeting, targets: [] };
-        if (skill.targeting.team === "self") { selection.targets = [active.actorId]; confirmSelection(); return; }
-        render();
-      }, { class: "small " + (selection?.kind === "skill" && selection.skillId === skill.id ? "selected" : ""), disabled: actor.energy < skill.energyCost })),
-      ...items.map((itemId) => button(contentName(r, itemId), () => {
-        const definition = r.item(itemId)?.battle;
-        if (definition) { selection = { kind: "item", itemId, targeting: definition.targeting, targets: [] }; render(); }
-      }, { class: "small" })),
-      r.encounter?.retreatAllowed ? button("퇴각", () => { const command: BattleCommand = { type: "retreat", actorId: active.actorId }; narrateBattle(command); render(); }, { class: "small" }) : null,
-    ));
-    if (selection !== null && "targets" in selection && selection.targeting.maxTargets > 1) {
-      controls.push(h("div", { class: "row" }, h("span", { class: "grow muted" }, `대상 ${selection.targets.length}/${selection.targeting.maxTargets}`),
-        button("실행", confirmSelection, { class: "primary", disabled: selection.targets.length < selection.targeting.minTargets })));
-    }
-  }
+  const actor = active ? snap.units.find(u => u.id === active.actorId) : undefined;
+  const commandPanel = activeAlly && autoMode === "manual"
+    ? h("div", { class: "battle-actions" },
+      button("공격", () => { selection = { kind: "attack" }; render(); }, { class: "primary " + (selection?.kind === "attack" ? "selected" : "") }),
+      button("기술", () => { modal = "skills"; render(); }),
+      button("물품", () => { modal = "battle-items"; render(); }),
+      button("전술", () => { modal = "tactics"; render(); }))
+    : h("div", { class: "battle-auto-message", role: "status" }, "자동 전투 중 · 수동을 누르면 직접 명령할 수 있습니다.");
+  const targetText = selection?.kind === "formation" ? "이동할 아군 자리 또는 장수를 누르세요."
+    : selection?.kind === "skill" ? (content.skillNames[selection.skillId] ?? selection.skillId) + " · 대상 선택"
+    : selection?.kind === "item" ? contentName(r, selection.itemId) + " · 대상 선택" : "공격할 적을 누르세요.";
   put(
-    h("div", { class: "hud" }, h("span", {}, h("b", {}, r.depth + "F 전투")), r.encounter?.boss ? h("span", { class: "danger-danger" }, "보스") : null,
-      r.encounter?.surprise ? h("span", {}, r.encounter.surprise === "ally" ? "아군 기습" : "적의 기습") : null),
-    h("div", { class: "field" }, ...rows("enemy"), timeline, ...rows("ally")),
+    h("header", { class: "battle-header" },
+      h("div", { class: "battle-heading" }, h("h2", {}, r.encounter?.boss ? "보스 전투" : "적과 조우했다"), h("span", { class: "num" }, r.depth + "F · " + snap.turnIndex + "행동")),
+      h("div", { class: "battle-actor" }, actor ? h("b", {}, unitName(actor.id) + " 차례") : null,
+        actor ? h("span", { class: "num" }, "기력 " + actor.energy + "/100") : null,
+        r.encounter?.surprise ? h("span", {}, r.encounter.surprise === "ally" ? "아군 기습" : "적의 기습") : null)),
+    h("div", { class: "battle-timeline", "aria-label": "행동 순서" }, h("span", { class: "timeline-caption" }, "행동 순서"), timeline),
+    field,
     h("div", { class: "modes" },
       ...(["manual", "smart", "all-attack", "repeat"] as const).map((mode) => button({ manual: "수동", smart: "스마트", "all-attack": "전체공격", repeat: "반복" }[mode], () => { autoMode = mode; selection = null; render(); }, { class: "small " + (autoMode === mode ? "selected" : "") })),
       ...[1, 2, 3].map((value) => button("×" + value, () => { speed = value; render(); }, { class: "small " + (speed === value ? "selected" : "") }))),
-    selection ? h("div", { class: "target-hint", role: "status" }, selection.kind === "formation" ? "이동할 아군 위치를 누르세요." : "테두리가 강조된 대상을 누르세요.", button("취소", () => { selection = null; render(); }, { class: "small" })) : null,
-    ...controls, utilityBar(),
-    h("div", { class: "latest-event", role: "status" }, log[0] ?? "공격 또는 스킬을 선택한 뒤 대상을 누르세요."),
+    selection ? h("div", { class: "target-hint", role: "status" },
+      h("span", { class: "grow" }, targetText,
+        "targets" in selection && selection.targeting.maxTargets > 1 ? ` (${selection.targets.length}/${selection.targeting.maxTargets})` : ""),
+      "targets" in selection && selection.targeting.maxTargets > 1 ? button("실행", confirmSelection, { class: "primary", disabled: selection.targets.length < selection.targeting.minTargets }) : null,
+      button("취소", () => { selection = null; render(); }, { class: "small" })) : null,
+    commandPanel, utilityBar(),
+    h("div", { class: "latest-event", role: "status" }, log[0] ?? "공격 또는 기술을 선택하세요."),
   );
+  field.scrollTop = battlefieldScroll;
+}
+
+function renderBattlePanel(): void {
+  const r = run;
+  if (!r || r.phase !== "battle" || !r.battle) { modal = null; return; }
+  const battle = r.battle, snap = battle.snapshot(), active = snap.activeTurn;
+  const actor = active ? snap.units.find(u => u.id === active.actorId) : undefined;
+  if (!actor || actor.side !== "ally" || autoMode !== "manual") { modal = null; return; }
+  if (modal === "skills") {
+    sheet(h("h2", {}, unitName(actor.id) + " · 기술"), h("p", { class: "skill-energy num" }, "현재 기력 " + actor.energy + "/100"),
+      ...battle.ownedSkills(actor.id).map(skill => {
+        const name = content.skillNames[skill.id] ?? skill.id, available = actor.energy >= skill.energyCost;
+        return h("section", { class: "battle-option skill-option" },
+          h("div", { class: "row" }, h("h3", { class: "grow" }, (skill.kind === "ultimate" ? "궁극 · " : "") + name), h("b", { class: "energy-cost num" }, "기력 " + skill.energyCost)),
+          h("p", {}, skillSummary(skill)),
+          h("div", { class: "row" }, h("small", { class: "grow muted" }, available ? "사용 가능" : "기력 " + (skill.energyCost - actor.energy) + " 부족"),
+            button("사용", () => {
+              modal = null;
+              selection = { kind: "skill", skillId: skill.id, targeting: skill.targeting, targets: [] };
+              if (skill.targeting.team === "self") { selection.targets = [actor.id]; confirmSelection(); return; }
+              render();
+            }, { "aria-label": name + " 사용", disabled: !available })));
+      }));
+  } else if (modal === "battle-items") {
+    const items = [...new Set(snap.inventories.ally)].filter(id => r.item(id)?.battle);
+    sheet(h("h2", {}, "전투 물품"), h("p", {}, "물품을 선택한 뒤 강조된 대상을 누르세요. 사용하면 현재 장수의 행동을 소비합니다."),
+      ...(items.length ? items.map(id => {
+        const item = r.item(id)!, definition = item.battle!;
+        const quantity = snap.inventories.ally.filter(candidate => candidate === id).length;
+        return h("section", { class: "battle-option battle-item-option" },
+          h("div", { class: "row" }, icon(id, 32), h("h3", { class: "grow" }, item.name), h("b", { class: "num" }, "×" + quantity)),
+          h("p", {}, itemSummary(item)),
+          button("사용", () => { modal = null; selection = { kind: "item", itemId: id, targeting: definition.targeting, targets: [] }; render(); }, { "aria-label": item.name + " 사용" }));
+      }) : [h("p", { class: "empty-battle-items" }, "사용할 수 있는 전투 물품이 없습니다.")]));
+  } else {
+    sheet(h("h2", {}, "전술 명령"),
+      h("section", { class: "battle-option" }, h("h3", {}, "방어"), h("p", {}, "현재 장수를 방어 태세로 전환합니다."),
+        button("방어", () => { modal = null; selection = null; narrateBattle({ type: "guard", actorId: actor.id }); render(); })),
+      h("section", { class: "battle-option" }, h("h3", {}, "진형 변경"), h("p", {}, "전열 3자리 · 후열 2자리. 이동할 빈 자리 또는 교환할 아군 장수를 누르세요. 1행동을 소비합니다."),
+        button("진형", () => { modal = null; selection = { kind: "formation" }; render(); })),
+      h("section", { class: "battle-option" }, h("h3", {}, "퇴각"), h("p", {}, r.encounter?.retreatAllowed ? "전투에서 빠져나가기를 시도합니다." : "이번 전투에서는 퇴각할 수 없습니다."),
+        button("퇴각", () => { modal = null; selection = null; narrateBattle({ type: "retreat", actorId: actor.id }); render(); }, { disabled: !r.encounter?.retreatAllowed })));
+  }
 }
 
 function confirmSelection(): void {
@@ -590,7 +629,7 @@ function renderBag(): void {
     }
     const definition = r.equipmentDef(entry.equipment.equipmentId)!;
     const name = entry.equipment.identified ? definition.name + (entry.equipment.enhance ? " +" + entry.equipment.enhance : "") : "미식별 장비 (" + definition.slot + ")";
-    const stats = entry.equipment.identified ? Object.entries(definition.stats).map(([k, v]) => k.toUpperCase() + (v! > 0 ? "+" : "") + v).join(" ") : "?";
+    const stats = entry.equipment.identified ? equipmentSummary(definition.stats) : "?";
     return h("div", { class: "row item-row" }, entry.equipment.identified ? icon(definition.id) : icon("unknown-item"), h("span", { class: "grow" }, name, h("small", { class: "muted" }, " " + stats)),
       button("장착", () => { pickTarget = { label: name + " — 장착할 장수", options: members.map((m) => ({ id: m.characterId, label: m.name })), onPick: (id) => { act({ type: "equip", characterId: id, uid: entry.uid }); render(); } }; render(); }, { class: "small", disabled: !usable }),
       button("버림", () => { act({ type: "discard", uid: entry.uid }); render(); }, { class: "small" }));
@@ -619,7 +658,7 @@ function renderSafeZone(): void {
     h("h1", {}, "안전 정비구역"), h("p", {}, "부대가 완전히 회복되었다. 정비를 마치면 다음 층으로 향한다."),
     h("div", { class: "hud" }, h("span", {}, "금 ", h("b", {}, String(r.gold))), h("span", {}, "가방 " + r.inventory().length + "/10")),
     h("div", { class: "panel" }, h("h2", {}, "상점"), ...r.shop().map((offer, index) => h("div", { class: "row" },
-      icon(offer.contentId), h("span", { class: "grow" }, contentName(r, offer.contentId)), h("span", { class: "muted num" }, offer.price + "금"),
+      icon(offer.contentId), h("span", { class: "grow" }, contentName(r, offer.contentId), h("small", { class: "item-description" }, r.item(offer.contentId) ? itemSummary(r.item(offer.contentId)!) : equipmentSummary(r.equipmentDef(offer.contentId)!.stats))), h("span", { class: "muted num" }, offer.price + "금"),
       button(offer.sold ? "품절" : "구매", () => { act({ type: "shop-buy", offerIndex: index }); render(); }, { class: "small", disabled: offer.sold || r.gold < offer.price })))),
     h("div", { class: "panel" }, h("h2", {}, "강화 (최대 +3)"), ...(equipped.length ? equipped.map(({ m, slot, e }) => h("div", { class: "row" },
       h("span", { class: "grow" }, m.name + " · " + contentName(r, e.equipmentId) + (e.enhance ? " +" + e.enhance : "")),
