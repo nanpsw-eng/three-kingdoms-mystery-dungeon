@@ -3,9 +3,9 @@ name: visual-smoke
 on:
   push:
     branches: ["art/ink-graphic-novel-v1", "main"]
-    paths: ["web/**", "scripts/e2e-smoke.mjs", "scripts/mobile-ux-smoke.mjs", "scripts/codex-layout-smoke.mjs", "scripts/ink-ui-smoke.mjs", "scripts/serve.mjs", "scripts/art/visual-coverage-smoke.mjs", "scripts/art/surface-fidelity-smoke.mjs", "scripts/art/concept-integration-smoke.mjs", ".github/workflows/visual-smoke.yml"]
+    paths: ["web/**", "scripts/e2e-smoke.mjs", "scripts/mobile-ux-smoke.mjs", "scripts/exploration-layout-smoke.mjs", "scripts/battle-layout-smoke.mjs", "scripts/codex-layout-smoke.mjs", "scripts/ink-ui-smoke.mjs", "scripts/serve.mjs", "scripts/art/visual-coverage-smoke.mjs", "scripts/art/surface-fidelity-smoke.mjs", "scripts/art/concept-integration-smoke.mjs", "scripts/art/field-miniature-smoke.mjs", ".github/workflows/visual-smoke.yml"]
   pull_request:
-    paths: ["web/**", "scripts/e2e-smoke.mjs", "scripts/mobile-ux-smoke.mjs", "scripts/codex-layout-smoke.mjs", "scripts/ink-ui-smoke.mjs", "scripts/serve.mjs", "scripts/art/visual-coverage-smoke.mjs", "scripts/art/surface-fidelity-smoke.mjs", "scripts/art/concept-integration-smoke.mjs", ".github/workflows/visual-smoke.yml"]
+    paths: ["web/**", "scripts/e2e-smoke.mjs", "scripts/mobile-ux-smoke.mjs", "scripts/exploration-layout-smoke.mjs", "scripts/battle-layout-smoke.mjs", "scripts/codex-layout-smoke.mjs", "scripts/ink-ui-smoke.mjs", "scripts/serve.mjs", "scripts/art/visual-coverage-smoke.mjs", "scripts/art/surface-fidelity-smoke.mjs", "scripts/art/concept-integration-smoke.mjs", "scripts/art/field-miniature-smoke.mjs", ".github/workflows/visual-smoke.yml"]
   workflow_dispatch:
 
 permissions:
@@ -36,10 +36,13 @@ jobs:
           node scripts/e2e-smoke.mjs http://localhost:8092 visual-evidence > visual-evidence/smoke-result.json
           node scripts/art/visual-coverage-smoke.mjs http://localhost:8092 visual-evidence
           node scripts/mobile-ux-smoke.mjs http://localhost:8092 visual-evidence
+          node scripts/exploration-layout-smoke.mjs http://localhost:8092 visual-evidence
+          node scripts/battle-layout-smoke.mjs http://localhost:8092 visual-evidence
           node scripts/codex-layout-smoke.mjs http://localhost:8092 visual-evidence
           node scripts/ink-ui-smoke.mjs http://localhost:8092 visual-evidence
           node scripts/art/surface-fidelity-smoke.mjs http://localhost:8092 visual-evidence
           node scripts/art/concept-integration-smoke.mjs http://localhost:8092 visual-evidence
+          node scripts/art/field-miniature-smoke.mjs http://localhost:8092 visual-evidence
       - uses: actions/upload-artifact@v4
         if: always()
         with:
