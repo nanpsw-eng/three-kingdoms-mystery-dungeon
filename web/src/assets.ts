@@ -10,6 +10,7 @@
 // }
 
 import { ART_BINDINGS } from './art-bindings.js';
+import { loadFieldArt } from './field-art.js';
 
 /** Enemy display names → ASCII asset ids (file names). Characters already use ASCII ids. */
 export const ENEMY_ASSET_IDS: Readonly<Record<string, string>> = {
@@ -162,6 +163,7 @@ export async function loadAssets(onReady: () => void): Promise<void> {
   const jobs: Promise<void>[] = (manifest.portraits ?? []).map(async (id) => {
     try { portraits.set(id, pixelize(await loadImage("assets/portraits/" + id + ".png"), size, colors)); } catch { /* keep procedural */ }
   });
+  jobs.push(loadFieldArt());
   for (const id of manifest.fullBodyIllustrations ?? []) {
     const src = "assets/portraits/" + id + "-full.webp";
     // Full-body masters are fetched by the visible <img>, not all on initial launch.

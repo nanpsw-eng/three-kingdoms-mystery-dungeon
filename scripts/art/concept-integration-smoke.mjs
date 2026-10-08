@@ -33,15 +33,17 @@ try{
  // Real renderer with an exact-cell fixture containing every integrated object.
  result.map=await page.evaluate(async()=>{
   const {drawMap}=await import('./web/src/map.js'),{assetPainting,assetToken}=await import('./web/src/assets.js');
+  const {fieldSprite}=await import('./web/src/field-art.js');
   const calls=new Set();const original=CanvasRenderingContext2D.prototype.drawImage;
-  CanvasRenderingContext2D.prototype.drawImage=function(image,...args){for(const key of ['stairs','gate','trap','sorcery','chest','pot','fog','environment']){const p=assetPainting('map:'+key);if(p&&image===p.image&&args[0]===p.sx&&args[1]===p.sy&&args[2]===p.width&&args[3]===p.height)calls.add(key)};return original.call(this,image,...args);};
+  CanvasRenderingContext2D.prototype.drawImage=function(image,...args){for(const key of ['stairs','gate','trap','sorcery','chest','pot','fog','environment']){const p=assetPainting('map:'+key);if(p&&image===p.image&&args[0]===p.sx&&args[1]===p.sy&&args[2]===p.width&&args[3]===p.height)calls.add(key)};for(const key of ['stairs','gate','trap','treasure','sword','rice','liu-bei']){const p=fieldSprite(key);if(p&&image===p.image&&args[0]===p.sx&&args[1]===p.sy&&args[2]===p.width&&args[3]===p.height)calls.add('mini:'+key)};return original.call(this,image,...args);};
   const canvas=document.createElement('canvas');canvas.style.cssText='width:390px;height:390px';document.body.replaceChildren(canvas);
   const tile=p=>p.x<0||p.x>14||p.y<0||p.y>14?undefined:p.x===0||p.x===14||p.y===0||p.y===14?'wall':p.x===4&&p.y===4?'gate':'room';
   const d={position:{x:7,y:7},facing:'s',floor:{stairs:{x:3,y:4},modifier:'fog'},tile,isExplored:p=>tile(p)!==undefined,isVisible:p=>p.x<11,
    revealedTraps:()=>[{pos:{x:5,y:4},type:'pit'}],objects:()=>[{kind:'sorcery',pos:{x:6,y:4}},{kind:'item',contentId:'iron-sword',pos:{x:8,y:4}},{kind:'item',contentId:'bun',pos:{x:9,y:4}}],visibleEnemies:()=>[]};
-  try{drawMap(canvas,d,{playerKey:'liu-bei',enemyKey:()=>''});return {calls:[...calls],tokenSource:assetToken('liu-bei').src};}finally{CanvasRenderingContext2D.prototype.drawImage=original;}
+  try{drawMap(canvas,d,{playerKey:'liu-bei',enemyKey:()=>''});const cell=canvas.width/15, pixels=canvas.getContext('2d').getImageData(6*cell,4*cell,cell,cell).data;let sorceryInk=0;for(let i=0;i<pixels.length;i+=4)if(pixels[i]>pixels[i+1]*1.5&&pixels[i]>pixels[i+2]*1.5)sorceryInk++;return {calls:[...calls],sorceryInk,tokenSource:assetToken('liu-bei').src};}finally{CanvasRenderingContext2D.prototype.drawImage=original;}
  });
- assert.ok(['stairs','gate','trap','sorcery','chest','pot','fog','environment'].every(k=>result.map.calls.includes(k)));await page.screenshot({path:out+'/concept-map-objects.png'});
+ assert.ok(result.map.sorceryInk>15,'sorcery remains a distinct vermilion seal');
+ assert.ok(['mini:stairs','mini:gate','mini:trap','mini:sword','mini:rice','mini:liu-bei','fog','environment'].every(k=>result.map.calls.includes(k)));await page.screenshot({path:out+'/concept-map-objects.png'});
  await page.emulateMedia({reducedMotion:'reduce'});
  // No inaccessible motion: CSS effects respect the system preference.
  await page.evaluate(()=>{const n=document.createElement('div');n.className='unit healed guarded';n.innerHTML='<span class="tag" data-status="confusion">혼란</span>';document.body.append(n);});

@@ -32,6 +32,7 @@ let log: string[] = [];
 let modal: null | "bag" | "party" | "help" | "log" | "status" | "map-guide" | "skills" | "battle-items" | "tactics" = null;
 let mapObserver: ResizeObserver | null = null;
 let battlefieldScroll = 0;
+let mapRadius: 5 | 7 = 5;
 let autoMode: AutoMode = "manual";
 let speed = 1;
 let autoTimer: number | null = null;
@@ -318,11 +319,12 @@ function explorationHeader(): HTMLElement {
 
 function renderMapGuide(): void {
   sheet(h("h2", {}, "탐험 지도 안내"),
-    h("p", {}, "밝은 석재는 탐험한 길, 짙은 먹안개는 아직 확인하지 않은 곳입니다. 군주를 중심으로 지도가 움직입니다."),
+    h("p", {}, "밝은 석재는 탐험한 길, 짙은 먹안개는 아직 확인하지 않은 곳입니다. 군주를 중심으로 지도가 움직입니다. ‘넓게 보기’와 ‘크게 보기’는 턴 소비 없이 지도 배율을 바꿉니다."),
     h("dl", { class: "map-legend" },
-      h("dt", {}, "군주 / 적"), h("dd", {}, "작은 인물은 아군 군주, 주홍 표시가 있는 인물은 적 부대입니다. 적과 만나면 전투가 시작됩니다."),
+      h("dt", {}, "군주 / 적"), h("dd", {}, "청록 원형·깃발은 군주와 영입 장수, 주홍 원형·삼각 깃발은 적 부대입니다. 이중 깃발은 보스입니다. 적과 만나면 전투가 시작됩니다."),
       h("dt", {}, "계단"), h("dd", {}, "계단 위로 이동한 뒤 ‘계단 ▼’를 눌러 다음 층으로 내려갑니다."),
-      h("dt", {}, "상자 / 항아리 / 약 주머니"), h("dd", {}, "물품이 있는 칸입니다. 그 칸으로 이동하면 획득합니다."),
+      h("dt", {}, "상자 / 항아리 / 약 주머니"), h("dd", {}, "황토 마름모는 물품 표시입니다. 음식·약·장비 모양으로 종류를 구분하며, 그 칸으로 이동하면 획득합니다."),
+      h("dt", {}, "요술진"), h("dd", {}, "주홍 원형 인장은 적을 강화하는 요술진입니다. 가까이에서 ‘조사’로 파괴합니다."),
       h("dt", {}, "함정 / 숨겨진 통로"), h("dd", {}, "‘주변 탐색’으로 확인합니다. 자동 탐색은 발견한 함정을 피합니다.")),
     h("p", {}, "방향 버튼은 한 칸 이동, 가운데 ‘대기’는 1턴 진행입니다. 지도를 누르면 해당 칸까지 이동하다가 발견이나 적 조우 시 멈춥니다."));
 }
@@ -345,8 +347,8 @@ function travelTo(target: { x: number; y: number }): void {
 
 function renderDungeon(): void {
   const r = run!;
-  const canvas = h("canvas", { id: "map", "aria-label": "던전 지도", "aria-describedby": "map-instruction" });
-  const stage = h("div", { class: "map-stage" }, canvas);
+  const canvas = h("canvas", { id: "map", "aria-label": "던전 지도", "aria-describedby": "map-instruction", "data-view-radius": String(mapRadius) });
+  const stage = h("div", { class: "map-stage" }, canvas, button(mapRadius === 5 ? "넓게 보기" : "크게 보기", () => { mapRadius = mapRadius === 5 ? 7 : 5; render(); }, { class: "map-zoom-button" }));
   canvas.addEventListener("pointerup", (event) => travelTo(tileAt(canvas, r.dungeon, event.clientX, event.clientY)));
   const onStairs = r.dungeon.position.x === r.dungeon.floor.stairs.x && r.dungeon.position.y === r.dungeon.floor.stairs.y;
   put(
@@ -374,7 +376,7 @@ function renderDungeon(): void {
     const size = Math.floor(Math.min(stage.clientWidth, stage.clientHeight));
     if (size <= 0 || !canvas.isConnected) return;
     canvas.style.width = size + "px"; canvas.style.height = size + "px";
-    drawMap(canvas, r.dungeon, { playerKey: artKey(r.party()[0]?.characterId ?? "liu-bei"), enemyKey });
+    drawMap(canvas, r.dungeon, { playerKey: artKey(r.party()[0]?.characterId ?? "liu-bei"), enemyKey, radius: mapRadius });
   };
   mapObserver = new ResizeObserver(paint); mapObserver.observe(stage);
   requestAnimationFrame(paint);

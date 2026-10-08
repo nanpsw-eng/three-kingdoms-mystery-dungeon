@@ -1,9 +1,9 @@
 import type { DungeonEngine, Point } from "../../src/index.js";
 import { assetPainting, assetSurface, assetTile, assetToken } from "./assets.js";
+import { fieldSprite, fieldUnit, fieldItem } from "./field-art.js";
 import { figureCanvas, iconCanvas } from "./sprites.js";
 
 export const VIEW_RADIUS = 7;
-const VIEW = VIEW_RADIUS * 2 + 1;
 const T = 16;
 
 // Deterministic per-tile noise so floors look hand-laid but never flicker.
@@ -105,23 +105,27 @@ const SORCERY = makeTile((ctx) => {
 export interface MapOptions {
   readonly playerKey: string;
   readonly enemyKey: (groupId: string) => string;
+  readonly radius?: 5 | 7;
 }
 
 export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, options: MapOptions): void {
+  const radius = options.radius ?? VIEW_RADIUS;
+  const view = radius * 2 + 1;
+  canvas.dataset.viewRadius = String(radius);
   const ratio = window.devicePixelRatio || 1;
   const css = canvas.clientWidth || 360;
-  const cell = Math.max(T, Math.floor((css * ratio) / VIEW));
-  const size = cell * VIEW;
+  const cell = Math.max(T, Math.floor((css * ratio) / view));
+  const size = cell * view;
   if (canvas.width !== size) { canvas.width = size; canvas.height = size; }
   const ctx = canvas.getContext("2d");
   if (ctx === null) return;
   ctx.imageSmoothingEnabled = false;
   ctx.fillStyle = "#3a352f";
   ctx.fillRect(0, 0, size, size);
-  const origin = { x: dungeon.position.x - VIEW_RADIUS, y: dungeon.position.y - VIEW_RADIUS };
+  const origin = { x: dungeon.position.x - radius, y: dungeon.position.y - radius };
   // ink pooling: soft per-cell variation so unexplored space reads as wash, not a flat black block
-  for (let vy = 0; vy < VIEW; vy++) {
-    for (let vx = 0; vx < VIEW; vx++) {
+  for (let vy = 0; vy < view; vy++) {
+    for (let vx = 0; vx < view; vx++) {
       const n = hash(origin.x + vx, origin.y + vy, 11);
       // soft blots larger than a cell, low alpha, so neighbouring cells blend instead of forming a checkerboard
       const blot = ctx.createRadialGradient((vx + 0.5) * cell, (vy + 0.5) * cell, 0, (vx + 0.5) * cell, (vy + 0.5) * cell, cell * 1.1);
@@ -143,6 +147,38 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
     ctx.globalCompositeOperation = "source-over";
     ctx.imageSmoothingEnabled = false;
   };
+  const miniature = (name: string, p: Point, scale = .84): boolean => {
+    const sprite = fieldSprite(name);
+    if (!sprite) return false;
+    const [x, y] = at(p), box = cell * scale;
+    const fit = box / Math.max(sprite.width, sprite.height);
+    const width = sprite.width * fit, height = sprite.height * fit;
+    ctx.save(); ctx.imageSmoothingEnabled = true;
+    // Paper edge separates black brush contours from dark stone without a cutout square.
+    ctx.shadowColor = "#f4ebd8"; ctx.shadowBlur = Math.max(1, cell * .035);
+    ctx.drawImage(sprite.image, sprite.sx, sprite.sy, sprite.width, sprite.height,
+      x + (cell - width) / 2, y + cell * .91 - height, width, height);
+    ctx.restore(); return true;
+  };
+  const marker = (p: Point, kind: "ally" | "enemy" | "item", boss = false): void => {
+    const [x, y] = at(p), color = kind === "ally" ? "#365b50" : kind === "enemy" ? "#9d382b" : "#916221";
+    ctx.save(); ctx.lineWidth = Math.max(1, cell * .045);
+    ctx.fillStyle = "rgba(244,235,216,.88)"; ctx.strokeStyle = color;
+    ctx.beginPath(); ctx.ellipse(x + cell * .5, y + cell * .85, cell * .39, cell * .11, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = color;
+    if (kind === "item") {
+      ctx.beginPath(); ctx.moveTo(x + cell * .79, y + cell * .06); ctx.lineTo(x + cell * .89, y + cell * .16);
+      ctx.lineTo(x + cell * .79, y + cell * .26); ctx.lineTo(x + cell * .69, y + cell * .16); ctx.closePath(); ctx.fill();
+    } else {
+      ctx.beginPath(); ctx.moveTo(x + cell * .78, y + cell * .07); ctx.lineTo(x + cell * .78, y + cell * .42); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x + cell * .78, y + cell * .07); ctx.lineTo(x + cell * .96, y + cell * .12);
+      ctx.lineTo(x + cell * .78, y + cell * .23);
+      if (kind === "ally") { ctx.lineTo(x + cell * .96, y + cell * .23); ctx.lineTo(x + cell * .96, y + cell * .07); }
+      ctx.closePath(); ctx.fill();
+      if (boss) { ctx.beginPath(); ctx.moveTo(x + cell * .78, y + cell * .25); ctx.lineTo(x + cell * .96, y + cell * .30); ctx.lineTo(x + cell * .78, y + cell * .40); ctx.closePath(); ctx.fill(); }
+    }
+    ctx.restore();
+  };
   const paint = (name: string, p: Point, scale = 1): boolean => {
     const source = assetPainting("map:" + name);
     if (!source) return false;
@@ -154,6 +190,13 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   };
   /** Draws a named tileset tile when one is loaded, else the procedural fallback. */
   const terrain = (name: string, fallback: CanvasImageSource, p: Point, variant = 0): void => {
+    if (name === "gate") { const [x,y] = at(p); ctx.fillStyle = "#e5dbc4"; ctx.fillRect(x,y,cell,cell); }
+    if ((name === "stairs" || name === "gate") && miniature(name, p, .94)) return;
+    if (name.startsWith("trap-") && miniature("trap", p, .78)) {
+      const [x, y] = at(p); ctx.fillStyle = "#7f3025"; ctx.font = `${Math.max(10, cell * .3)}px "Gowun Dodum", sans-serif`;
+      const symbols: Record<string,string> = { "poison-needle": "독", "fire-circle": "화", "alarm-bell": "경", "confusion-circle": "혼", "teleport-circle": "이", "food-loss": "량", "rockfall": "낙", pit: "함" };
+      ctx.fillText(symbols[name.slice(5)] ?? "!", x + cell * .63, y + cell * .32); return;
+    }
     if (paint(name.startsWith("trap-") ? "trap" : name, p)) return;
     const material = name === "corridor" ? "floor" : name.startsWith("wall-") ? "wall" : name;
     // A floor study spans a 3×3 world-cell patch, rather than shrinking the
@@ -165,7 +208,12 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
       ctx.imageSmoothingEnabled = true;
       const sw = surface.width / span, sh = surface.height / span;
       const ix = ((p.x % span) + span) % span, iy = ((p.y % span) + span) % span;
+      const quietFloor = material === "floor";
+      if (quietFloor) { ctx.fillStyle = "#e5dbc4"; ctx.fillRect(x, y, cell, cell); ctx.globalAlpha = .22; }
       ctx.drawImage(surface.image, surface.sx + ix * sw, surface.sy + iy * sh, sw, sh, x, y, cell, cell);
+      ctx.globalAlpha = 1;
+      if (quietFloor) { ctx.strokeStyle = "rgba(83,72,53,.17)"; ctx.lineWidth = Math.max(.5,cell*.018); ctx.strokeRect(x+.5,y+.5,cell-1,cell-1); }
+      else if (material === "wall") { ctx.fillStyle = "rgba(31,28,25,.23)"; ctx.fillRect(x,y,cell,cell); }
       ctx.imageSmoothingEnabled = false;
       return;
     }
@@ -176,8 +224,8 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   };
   const passable = (p: Point): boolean => { const t = dungeon.tile(p); return t === "room" || t === "corridor" || t === "gate"; };
   const fog: Point[] = [];
-  for (let vy = 0; vy < VIEW; vy++) {
-    for (let vx = 0; vx < VIEW; vx++) {
+  for (let vy = 0; vy < view; vy++) {
+    for (let vx = 0; vx < view; vx++) {
       const p = { x: origin.x + vx, y: origin.y + vy };
       const tile = dungeon.tile(p);
       if (tile === undefined) continue;
@@ -219,6 +267,17 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   }
   for (const object of dungeon.objects()) {
     if (!dungeon.isExplored(object.pos)) continue;
+    // Harmful sorcery is a vermilion seal, never a loot marker.
+    if (object.kind === "sorcery") {
+      const [x,y] = at(object.pos); ctx.save(); ctx.strokeStyle = "#8f3429"; ctx.fillStyle = "rgba(244,235,216,.65)"; ctx.lineWidth = Math.max(1,cell*.045);
+      ctx.beginPath(); ctx.arc(x+cell*.5,y+cell*.5,cell*.35,0,Math.PI*2); ctx.fill(); ctx.stroke();
+      ctx.beginPath(); ctx.arc(x+cell*.5,y+cell*.5,cell*.26,0,Math.PI*2); ctx.stroke();
+      ctx.fillStyle = "#8f3429"; ctx.font = `${Math.max(10,cell*.4)}px "Gowun Dodum", sans-serif`; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillText("술",x+cell*.5,y+cell*.5); ctx.restore(); continue;
+    }
+    marker(object.pos, object.kind === "recruit" ? "ally" : "item");
+    const miniatureName = object.kind === "item" ? fieldItem(object.contentId) : object.kind === "recruit" ? "recruit" : object.kind === "event" ? "scroll" : "treasure";
+    if (miniature(miniatureName, object.pos, object.kind === "recruit" ? .86 : .76)) continue;
     const name = object.kind === "item" ? "item-" + object.contentId : object.kind === "recruit" ? "recruit" : object.kind === "event" ? "event" : "sorcery";
     const fallback = object.kind === "item" ? iconCanvas(object.contentId) : object.kind === "recruit" ? BANNER : object.kind === "event" ? EVENT : SORCERY;
     // Containers are presentations of existing pickups; interaction/rewards stay unchanged.
@@ -260,7 +319,7 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   // Existing floor modifiers receive a subdued ink overlay; no new modifier semantics.
   if (dungeon.floor.modifier) {
     ctx.globalAlpha = 0.08;
-    for (let vy = 0; vy < VIEW; vy++) for (let vx = 0; vx < VIEW; vx++) {
+    for (let vy = 0; vy < view; vy++) for (let vx = 0; vx < view; vx++) {
       const p = {x:origin.x+vx,y:origin.y+vy};
       if (dungeon.isExplored(p) && passable(p)) paint("environment", p);
     }
@@ -269,7 +328,7 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   // torchlight: warm glow around the ruler, falling off into darkness at the view edge
   const [lx, ly] = at(dungeon.position);
   const cx = lx + cell / 2, cy = ly + cell / 2;
-  const dark = ctx.createRadialGradient(cx, cy, cell * 4, cx, cy, cell * (VIEW_RADIUS + 2));
+  const dark = ctx.createRadialGradient(cx, cy, cell * 4, cx, cy, cell * (radius + 2));
   dark.addColorStop(0, "rgba(23, 21, 19, 0)");
   dark.addColorStop(1, "rgba(23, 21, 19, 0.42)");
   ctx.fillStyle = dark; ctx.fillRect(0, 0, size, size);
@@ -282,7 +341,8 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
     ctx.fillStyle = "rgba(0,0,0,0.35)"; ctx.fillRect(x + cell * 0.2, y + cell * 0.82, cell * 0.6, cell * 0.12);
     const enemyKey = options.enemyKey(enemy.groupId);
     const enemyToken = assetToken(enemyKey);
-    if (enemyKey !== "yt-spear" || !paint("enemy-scout", enemy.pos, 1)) {
+    marker(enemy.pos, "enemy", enemy.boss);
+    if (!miniature(fieldUnit(enemyKey, enemy.boss), enemy.pos, .86) && (enemyKey !== "yt-spear" || !paint("enemy-scout", enemy.pos, 1))) {
       blit(enemyToken ?? figureCanvas(enemyKey), enemy.pos, enemy.boss ? 1.35 : enemyToken === undefined ? 1 : 1.2, cell * 0.08);
     }
     if (enemy.state === "ALERT" || enemy.state === "CHASE") {
@@ -294,7 +354,8 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   const [px, py] = at(dungeon.position);
   ctx.fillStyle = "rgba(0,0,0,0.35)"; ctx.fillRect(px + cell * 0.2, py + cell * 0.82, cell * 0.6, cell * 0.12);
   const playerToken = assetToken(options.playerKey);
-  blit(playerToken ?? figureCanvas(options.playerKey), dungeon.position, playerToken === undefined ? 1 : 1.2, cell * 0.08);
+  marker(dungeon.position, "ally");
+  if (!miniature(fieldUnit(options.playerKey, false, true), dungeon.position, .90)) blit(playerToken ?? figureCanvas(options.playerKey), dungeon.position, playerToken === undefined ? 1 : 1.2, cell * 0.08);
   // facing marker: a vermilion mark on the tile edge
   const facing: Record<string, [number, number]> = { n: [0, -1], ne: [1, -1], e: [1, 0], se: [1, 1], s: [0, 1], sw: [-1, 1], w: [-1, 0], nw: [-1, -1] };
   const [fx, fy] = facing[dungeon.facing] ?? [0, 1];
@@ -305,9 +366,10 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
 
 export function tileAt(canvas: HTMLCanvasElement, dungeon: DungeonEngine, clientX: number, clientY: number): Point {
   const rect = canvas.getBoundingClientRect();
-  const cell = rect.width / VIEW;
+  const radius = Number(canvas.dataset.viewRadius) === 5 ? 5 : VIEW_RADIUS;
+  const cell = rect.width / (radius * 2 + 1);
   return {
-    x: dungeon.position.x - VIEW_RADIUS + Math.floor((clientX - rect.left) / cell),
-    y: dungeon.position.y - VIEW_RADIUS + Math.floor((clientY - rect.top) / cell),
+    x: dungeon.position.x - radius + Math.floor((clientX - rect.left) / cell),
+    y: dungeon.position.y - radius + Math.floor((clientY - rect.top) / cell),
   };
 }
