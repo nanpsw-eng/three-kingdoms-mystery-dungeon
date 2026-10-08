@@ -27,6 +27,7 @@ try{
   await page.screenshot({path:out+'/concept-codex-'+({'보스':'bosses','업적':'achievements','물품':'items'}[label])+'.png'});
  }
  await page.getByRole('button',{name:'닫기',exact:true}).click();
+ await page.locator('.campaign-details summary').click();
  await page.getByRole('button',{name:/190 반동탁연합/}).click();await page.locator('button.pick').filter({hasText:'관우'}).click();await page.locator('button.pick').filter({hasText:'장비'}).click();await page.getByRole('button',{name:'원정 시작',exact:true}).click();
  assert.ok(await page.locator('.story-backdrop').count()>0);await page.locator('.story-backdrop').evaluate(i=>i.decode());await page.screenshot({path:out+'/concept-story.png'});
  result.story={backdrop:true,overflow:await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth)};assert.ok(!result.story.overflow);

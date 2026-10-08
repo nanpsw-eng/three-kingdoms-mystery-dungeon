@@ -14,7 +14,7 @@ async function audit(label){
  const m=await page.evaluate(()=>{
   const rect=el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,right:r.right};};
   return {width:innerWidth,height:innerHeight,scrollWidth:document.documentElement.scrollWidth,scrollHeight:document.documentElement.scrollHeight,
-   controls:[...document.querySelectorAll('.battle-actions button,.modes button,.utility-bar button,.target-hint button')].map(el=>({name:el.textContent,...rect(el)})),
+   controls:[...document.querySelectorAll('.battle-actions button,.battle-settings-row button,.modes button,.utility-bar button,.target-hint button')].map(el=>({name:el.textContent,...rect(el)})),
    units:[...document.querySelectorAll('.unit')].map(el=>({name:el.getAttribute('aria-label'),...rect(el)})),
    portraits:[...document.querySelectorAll('.unit-head img')].map(rect),
    clipped:[...document.querySelectorAll('.unit-hp,.unit-energy,.unit-meta')].filter(el=>el.scrollWidth>el.clientWidth+1).map(el=>el.textContent)};
@@ -46,6 +46,12 @@ try{
  assert.equal(await page.locator('.battle-side.ally [data-slot="rear-center"]').count(),0);
  await audit('formation-selection');await page.getByRole('button',{name:'취소',exact:true}).click();assert.deepEqual(await saved(),before,'cancel is free');
  await page.getByRole('button',{name:'공격',exact:true}).click();await audit('attack-selection');await page.locator('.unit.targetable').first().click();
+ assert.deepEqual(await saved(),before,'target selection consumes no action');
+ for(const [width,height] of [[320,568],[390,660],[844,390]]) { await page.setViewportSize({width,height});await page.waitForTimeout(100);await audit(`attack-confirmation-${width}x${height}`); }
+ await page.setViewportSize({width:390,height:660});await page.waitForTimeout(100);await page.screenshot({path:out+'/battle-confirmation.png'});
+ await page.getByRole('button',{name:'취소',exact:true}).click();assert.deepEqual(await saved(),before,'attack cancel is free');
+ await page.getByRole('button',{name:'공격',exact:true}).click();await page.locator('.unit.targetable').first().click();
+ await page.getByRole('button',{name:'공격 실행',exact:true}).click();
  const after=await saved();assert.equal(after.log.at(-1).command.type,'attack');
  // Build genuine energy through guard commands, then select an available skill through the new sheet.
  let used=false;
@@ -55,7 +61,7 @@ try{
   if(await available.count()){
    const old=await saved();await available.first().click();
    if(await page.locator('.target-hint').count()){
-    await page.locator('.unit.targetable').first().click();
+    if(await page.locator('.unit.targetable').count() && !await page.locator('.unit.selected').count()) await page.locator('.unit.targetable').first().click();
     const execute=page.getByRole('button',{name:'실행',exact:true});if(await execute.count())await execute.click();
    }
    const next=await saved();assert.equal(next.log.length,old.log.length+1);assert.ok(['skill','ultimate'].includes(next.log.at(-1).command.type));used=true;break;

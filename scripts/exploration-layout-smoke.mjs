@@ -21,7 +21,7 @@ async function audit(label, expectedMembers = 3) {
    parties:[...document.querySelectorAll('.member')].map(el=>({text:el.innerText,...rect(el)})),
    clipped:[...document.querySelectorAll('.expedition-title,.expedition-stats span,.member-info')].filter(el=>el.scrollWidth>el.clientWidth+1).map(el=>el.textContent)};
  });
- if(metrics.scrollHeight>metrics.height+1) {
+ if(metrics.scrollHeight>metrics.height+1 || metrics.map.width<180) {
   writeFileSync(out+'/exploration-layout-failure.json',JSON.stringify({label,...metrics},null,2));
   await page.screenshot({path:out+'/exploration-layout-failure.png',fullPage:true});
  }
@@ -48,7 +48,7 @@ try {
  }
  await page.setViewportSize({width:390,height:660});
  assert.equal(await page.locator('.pad [data-direction]').count(),8,'all eight directions remain available');
- assert.equal(await page.getByRole('button',{name:'계단 ▼',exact:true}).isDisabled(),true,'stairs require standing on stairs');
+ assert.equal(await page.getByRole('button',{name:'계단 내려가기',exact:true}).isDisabled(),true,'stairs require standing on stairs');
  // DOM layout stress only: five cards and a long mechanic label, without inventing gameplay progress.
  for(const [width,height] of [[360,640],[390,660],[844,390]]){
   // Resize triggers a full real-screen render; install the fixture after it settles.
@@ -68,6 +68,7 @@ try {
  await page.reload({waitUntil:'networkidle'});await page.getByRole('button',{name:'이어하기',exact:true}).click();
  await page.setViewportSize({width:390,height:660});
  const before=await state();
+ await page.getByRole('button',{name:'더보기',exact:true}).click();
  await page.getByRole('button',{name:'지도 안내',exact:true}).click();
  assert.ok(await page.getByRole('heading',{name:'탐험 지도 안내'}).isVisible());
  assert.ok(await page.getByText('상자 / 항아리 / 약 주머니',{exact:true}).isVisible());
@@ -76,12 +77,13 @@ try {
  assert.ok(closeBox.y>=0&&closeBox.y+closeBox.height<=660);
  await close();assert.deepEqual(await state(),before,'reading legend consumes no turn');
  for(const label of ['부대','상태','기록','도움말']){
+  if(['상태','도움말'].includes(label)) await page.getByRole('button',{name:'더보기',exact:true}).click();
   await page.getByRole('button',{name:label,exact:true}).click();assert.ok(await page.locator('.sheet').isVisible());await close();
   assert.deepEqual(await state(),before,label+' consumes no turn');
  }
  await page.getByRole('button',{name:/^가방 /}).click();await close();assert.deepEqual(await state(),before);
  await page.getByRole('button',{name:'대기',exact:true}).click();assert.equal((await state()).turn,before.turn+1);
- await page.getByRole('button',{name:'주변 탐색',exact:true}).click();assert.equal((await state()).turn,before.turn+2);
+ await page.getByRole('button',{name:'함정 찾기',exact:true}).click();assert.equal((await state()).turn,before.turn+2);
  // Exact save restoration uses the same replay contract as production.
  const saved=await state();await page.reload({waitUntil:'networkidle'});
  await page.getByRole('button',{name:'이어하기',exact:true}).click();assert.deepEqual(await state(),saved);
