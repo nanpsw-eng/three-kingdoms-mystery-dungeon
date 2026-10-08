@@ -1,34 +1,21 @@
-# SESSION HANDOFF — 수묵 UI 운영 릴리스
+# SESSION HANDOFF — 승인 수묵 UX v2
 
-## 현재 상태
+## 현재 기준
 
-- Repository: `nanpsw-eng/three-kingdoms-mystery-dungeon`.
-- 2026-10-08 사용자 “배포까지 완료해”로 배포 보류 해제 및 main/production 릴리스 승인. 과거 hold를 복원하지 않는다.
-- PR #22 → #21 → #20 순서로 병합하여 탐험·전투·효과 설명·필드 미니어처 전체를 한 번에 main 반영.
-- 기능 릴리스 commit: `c8291c4fb72a1c48e7d415c41b0fac81f6484127`; tree `d232c31f43eb2856da8290ed38229efa6743a53d`는 최종 검증된 필드 branch tree와 동일.
-- Vercel production `dpl_GKa3PWmWZwayk7W98KGDwifJFkNX` READY 및 운영 도메인 연결 확인.
-- URL: https://three-kingdoms-mystery-dungeon.vercel.app/
-- 실제 운영 브라우저: 이어하기, 수묵 미니어처 표시, 크게/넓게 보기, 가방의 “아군 1명 체력 40% 회복”·“군량 +30” 표시 확인. 이동/대기/아이템 사용 없이 읽기 및 화면 전환만 검증.
-- 기존 stage1 운영 commit85790c5는 이 릴리스로 대체됨. 보고서 내 과거 NOT_DEPLOYED는 역사적 체크포인트.
+- Repo nanpsw-eng/three-kingdoms-mystery-dungeon. AI-OS exactv0.4.4 /64b5115a698cc6a94cd8df80abb2ee7109010764. AGENTS.md 및 DEC-025.
+- 운영 main5635e5b1631fb0b73424452baa2391b4a9d611fc /Vercel dpl_8htVYmMmdb85AaRDq5TpJJMs3Gx3 READY. 이전 탐험·전투·효과요약·필드28 전체 릴리스 완료. 반복 구현 금지.
+- 2026-10-08 사용자 적대적 UX검토→핵심3화면 시안→① 구현 진행 승인. Branch feature/ink-ux-approved-v2는 운영 위의 delta.
+- 이번 변경 main NOT_MERGED /production NOT_DEPLOYED. 과거 배포 승인은 완료된 이전 릴리스 대상이며 이번 사용자 선택은 구현 승인이다.
 
-## 변경 / 기준
+## 구현 / 원장
 
-- AI-OS exact v0.4.4 / `64b5115a698cc6a94cd8df80abb2ee7109010764`: AI_OS_BINDING.md 및 AGENTS.md 준수.
-- DEC-025 승인 수묵 그래픽 노블 방향. 원본은 web/assets/reference/visual-bible-approved-source.png.
-- 탐험 상태·지도·부대·조작 위계, 전투 큰 초상·행동 순서·4명령 및 기술/물품/전술 패널 개선. 진형 앞3+뒤2 유지.
-- 기술/아이템 짧은 대상·효과·비용 설명 및 상점 설명 추가.
-- 사용자 선택② 수묵 미니어처 28종과 아군/적/물품 표식, 바닥·벽 대비, 기본11×11/넓게15×15 지도 구현. 공용 병종 그림이며 개별 장수28명 초상이라는 의미가 아님.
-- 도메인·세이브·밸런스 변경 없음.
+- 명세 docs/art/UX_APPROVED_V2_SPEC.md; 보고서 docs/reports/INK_UX_V2_20261008.md; evidence docs/reports/evidence/ink-ux-v2-20261008/.
+- 탐험 명령·조건·목표·한지버튼·더보기, 전투 대상→실행/무료취소·청록행동자·자동설정, 이어하기/새편성 분리·세이브 대체 확인 구현.
+- ContentPack 실제 depth 해금 목표만 표시. 생성 시안의 상자/카드 보상은 제외. 도메인/밸런스/RNG/save v1/앞3뒤2는 그대로.
+- 로컬 Domain161/build, 탐험10, 전투7+확인3/실제기술/5v5, 신규UX, 모바일/대비/field28/e2e/도감40/전체48장수·89종적·16화면/원본재료·시안연결 PASS. 원격 checks는 branch의 exact HEAD를 확인.
+- 대량 자산 병렬 decode의 간헐 EncodingError는 테스트 동시해독4개로 제한해 모든 자산을 검사한다. 원본 자산을 삭제/재생성하지 않았다.
+- 실물 모바일/스크린리더/오조작률/장기5인 영입은 NOT_RUN. UI 기능/레이아웃 검증을 디자인 완성도 보증으로 표현하지 않는다.
 
-## 검증 / 근거
+## 다음
 
-- 기능 exact HEAD `0f0dc059d151e33376523fa0203592777d3c4130`: CI37701758466 및 visual-smoke37701758432 SUCCESS.
-- 운영 기능 merge c8291c4: CI37712317053 및 deploy37712317080 SUCCESS; visual-smoke37712317034는 릴리스 후 실행됨(해당 run의 최신 상태를 참조).
-- 로컬 도메인161, 탐험10, 전투7/실제 기술/5v5 adapter, 모바일·세이브·도감40·수묵 재료·콘텐츠 통합·필드28/fallback/카메라 PASS.
-- 운영 터미널 Playwright는 네트워크 ERR_EMPTY_RESPONSE로 실행 불가. Cloud Browser 실제 서비스 UI 검증 완료. 실제 기기 장기5인 영입 플레이는 NOT_RUN.
-- 보고서: docs/reports/INK_EXPLORATION_STAGE2_20261007.md, INK_BATTLE_STAGE3_20261007.md, INK_FIELD_MINIATURES_20261008.md.
-- 필드 자산 계약: docs/art/FIELD_MINIATURE_DIRECTION_V1.md.
-
-## 다음 작업
-
-4단계 도감 열전/상세 개선. 이미 완료된 공통 UI·원본 통합·도감 겹침 수정·탐험·전투·필드 미니어처를 다시 작업하지 않는다.
+PR 검토 후 main 병합/운영 배포 사용자 승인. 해당 승인 전 구현을 반복하거나 main에 임의 반영하지 않는다. 이번 승인3화면과 별개로 다음 콘텐츠 작업은 도감 열전/상세이다.

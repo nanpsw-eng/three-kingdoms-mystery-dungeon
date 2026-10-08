@@ -61,6 +61,7 @@ try {
   const closeRect = await page.getByRole('button', {name:'패널 닫기',exact:true}).boundingBox();
   assert.ok(closeRect.y >= 0 && closeRect.y + closeRect.height <= 660, 'close stays within viewport after scrolling');
   await close();
+  await page.getByRole('button',{name:'더보기',exact:true}).click();
   await page.getByRole('button', {name:'도움말',exact:true}).click();
   await page.screenshot({path:out+'/mobile-ux-help.png'});
   await close();
@@ -83,7 +84,10 @@ try {
   await audit('battle-target-selection');
   await page.screenshot({path:out+'/mobile-ux-battle.png'});
   await page.locator('.unit.targetable').first().click();
+  await page.getByRole('button',{name:'공격 실행',exact:true}).click();
+  await page.getByRole('button',{name:/^자동 전투 설정/}).click();
   await page.getByRole('button',{name:'스마트',exact:true}).click();
+  await close();
   await page.getByRole('button',{name:'도움말',exact:true}).click();
   const saveKey = await page.evaluate(() => Object.keys(localStorage).find(k => k.includes('save')));
   assert.ok(saveKey, 'save exists');
@@ -91,7 +95,9 @@ try {
   await page.waitForTimeout(1200);
   assert.equal(await page.evaluate(key => localStorage.getItem(key),saveKey),paused,'reading pauses automatic battle');
   await close();
+  await page.getByRole('button',{name:/^자동 전투 설정/}).click();
   await page.getByRole('button',{name:'×3',exact:true}).click();
+  await close();
   for(let i=0;i<180 && (await state()).phase==='battle';i++) await page.waitForTimeout(100);
   assert.notEqual((await state()).phase,'battle','automatic battle resumes and finishes');
   const savedState = await state();

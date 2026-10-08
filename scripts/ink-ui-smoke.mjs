@@ -29,7 +29,9 @@ try {
    const p=assetPainting('ui:'+key),canvas=document.createElement('canvas');canvas.width=p.width;canvas.height=p.height;
    const ctx=canvas.getContext('2d');ctx.drawImage(p.image,p.sx,p.sy,p.width,p.height,0,0,p.width,p.height);
    const pixels=ctx.getImageData(0,0,p.width,p.height).data,style=getComputedStyle(background),text=rgb(getComputedStyle(foreground).color);
-   const overlay=rgb(style.backgroundImage.match(/rgba\([^)]*\)/)[0]);let minimum=Infinity;
+   const match=style.backgroundImage.match(/rgba\([^)]*\)/);
+   if(!match) return {key,minimum:ratio(rgb(style.backgroundColor),text),surface:"solid"};
+   const overlay=rgb(match[0]);let minimum=Infinity;
    for(let i=0;i<pixels.length;i+=4){const bg=[0,1,2].map(c=>overlay[c]*overlay[3]+pixels[i+c]*(1-overlay[3]));minimum=Math.min(minimum,ratio(bg,text));}
    return {key,minimum};
   };
@@ -56,6 +58,7 @@ try {
  const before=await page.evaluate(()=>window.__tkmd.state().turn);
  await page.getByRole('button',{name:'대기',exact:true}).click();
  assert.equal(await page.evaluate(()=>window.__tkmd.state().turn),before+1);
+ await page.getByRole('button',{name:'더보기',exact:true}).click();
  await page.getByRole('button',{name:'도움말',exact:true}).click();
  await page.screenshot({path:out+'/ink-ui-help.png'});
  const fallback=await browser.newPage({viewport:{width:360,height:640}});

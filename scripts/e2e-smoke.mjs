@@ -64,8 +64,11 @@ if (reachedBattle) {
   await audit("battle");
   await tap(page.getByRole("button", { name: "공격" }));
   await tap(page.locator(".unit.targetable"));
+  await tap(page.getByRole("button", { name: "공격 실행" }));
+  await tap(page.getByRole("button", { name: /^자동 전투 설정/ }));
   await tap(page.getByRole("button", { name: "스마트" }));
   await tap(page.getByRole("button", { name: "×3" }));
+  await tap(page.getByRole("button", { name: "패널 닫기", exact: true }));
   for (let i = 0; i < 150 && (await state()).phase === "battle"; i += 1) await page.waitForTimeout(100);
   await page.screenshot({ path: out + "/04-after-battle.png", fullPage: true });
 }
@@ -76,10 +79,17 @@ await audit("bag");
 const manifestAssets = await page.evaluate(async () => {
   const manifest = await fetch("assets/manifest.json").then((r) => r.json());
   const paths = [...new Set([...manifest.nativePortraits.map((id) => "portraits/" + id + ".webp"), ...manifest.fullBodyIllustrations.map((id) => "portraits/" + id + "-full.webp"), ...manifest.tokens.map((id) => "tokens/" + id + ".svg"), manifest.tileset.image, ...(manifest.surfaces ? [manifest.surfaces.image] : []), ...Object.values(manifest.paintings ?? {}).map(p => p.image), ...Object.values(manifest.tokenOverrides ?? {})])];
-  return Promise.all(paths.map(async (path) => {
-    const image = new Image(); image.src = "assets/" + path;
-    try { await image.decode(); return { path, decoded: true }; } catch { return { path, decoded: false }; }
+  // Bound decode concurrency: large full-body art can exhaust Chromium's decoder
+  // when every atlas/portrait is requested simultaneously. Still verify every file.
+  const decoded = new Array(paths.length); let next = 0;
+  await Promise.all(Array.from({length:4},async()=>{
+    while(next < paths.length){
+      const index=next++,path=paths[index],image=new Image();image.src="assets/"+path;
+      try{await image.decode();decoded[index]={path,decoded:true};}
+      catch(error){decoded[index]={path,decoded:false,error:String(error)};}
+    }
   }));
+  return decoded;
 });
 const fallback = await browser.newPage({ viewport: { width: 390, height: 844 } });
 const fallbackErrors = [];
