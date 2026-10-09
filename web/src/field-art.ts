@@ -32,7 +32,7 @@ async function loadSheet(path: string, keys: readonly string[], columns: number,
 }
 export async function loadFieldArt(): Promise<void> {
   await Promise.all([
-    loadSheet("assets/modern/characters-v1.webp", ["liu-bei", "cao-cao", "sun-quan", "guan-yu", "zhang-fei", "zhao-yun", "zhuge-liang", "regular-spear", "cavalry-unit", "regular-archer", "recruit", "support-unit", "spear-unit", "archer-unit", "mage-unit", "boss-unit"], 4, [0,256,512,768,1024]),
+    loadSheet("assets/modern/characters-v1.webp", ["liu-bei", "cao-cao", "sun-quan", "guan-yu", "zhang-fei", "zhao-yun", "zhuge-liang", "regular-spear", "cavalry-unit", "regular-archer", "recruit", "support-unit", "spear-unit", "archer-unit", "mage-unit", "boss-unit"], 4, [0,256,512,768,1024], [[0,.25,.5,.75,1],[0,.25,.53,.76,1],[0,.25,.5,.75,1],[0,.25,.5,.75,1]]),
     loadSheet("assets/modern/objects-v1.webp", ["rice","medicine","herb","scroll","chest","sword","spear","bow","fan","armor","treasure","gate","stairs","trap","torch","sorcery"], 4, [0,256,512,768,1024]),
     loadSheet("assets/modern/terrain-v1.webp", ["terrain-floor", "terrain-warm", "terrain-wall-cap", "terrain-wall-face"], 2, [0,512,1024]),
   ]);
