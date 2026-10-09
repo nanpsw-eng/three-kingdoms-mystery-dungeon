@@ -1,6 +1,6 @@
 # 현대 2D RPG 개편 v1
 
-Status: IMPLEMENTED / 브라우저 검증 대기. 사용자 선택 현대 RPG 및 실제 구현 승인, 2026-10-09 방 축소 검토 이후 ‘계속 개선해’ 지시를 이번 compact-v2 구현의 승인으로 기록한다. main merge와 운영 배포는 별도 승인이다.
+Status: IMPLEMENTED / Domain165 및 전체 원격 브라우저 검증 PASS. 사용자 선택 현대 RPG 및 실제 구현 승인, 2026-10-09 방 축소 검토 이후 ‘계속 개선해’ 지시를 이번 compact-v2 구현의 승인으로 기록한다. main merge와 운영 배포는 별도 승인이다.
 
 | 요구 | 구현 | 직접 검증 |
 |---|---|---|
@@ -31,3 +31,5 @@ Status: IMPLEMENTED / 브라우저 검증 대기. 사용자 선택 현대 RPG �
 ## 검증 상태
 
 로컬 Domain165 PASS / build:web PASS / diff-check PASS. 로컬 Chromium 제공 불가, 네트워크 다운로드도 정상 ZIP을 반환하지 않음. managed preview에 필요한 control-browser 스킬이 없으므로 별도 서버·브라우저 우회 경로를 만들지 않는다. 원격 GitHub Actions에서 실제 브라우저 검증과 스크린샷을 수집한다. 새 화면에 맞지 않는 ink-ui/surface-fidelity/concept-integration 검사 대신 modern-rpg-smoke가 새 자산/명령/대비/실패 fallback/모션을 검사하며 기존 게임 흐름·모바일·도감·48인/적 coverage 검사는 유지한다.
+
+원격 검증 코드 SHA: `f0a5a63a44f451ac15cd1a98d0817178a83c50ff`. 상세 결과·실제 화면·제한: [완료 보고서](../reports/MODERN_RPG_V1_20261009.md). 실물 터치/스크린리더/장기 플레이 감각은 NOT_RUN.

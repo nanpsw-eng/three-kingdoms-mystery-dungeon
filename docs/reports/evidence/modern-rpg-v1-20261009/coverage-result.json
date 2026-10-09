@@ -1,0 +1,994 @@
+{
+  "passed": true,
+  "errors": [],
+  "layouts": [
+    {
+      "screen": "all-roster-360",
+      "width": 360,
+      "scrollWidth": 360,
+      "brokenImages": [],
+      "smallTargets": []
+    },
+    {
+      "screen": "all-roster-390",
+      "width": 390,
+      "scrollWidth": 390,
+      "brokenImages": [],
+      "smallTargets": []
+    },
+    {
+      "screen": "all-roster-768",
+      "width": 768,
+      "scrollWidth": 768,
+      "brokenImages": [],
+      "smallTargets": []
+    },
+    {
+      "screen": "codex-장수",
+      "width": 390,
+      "scrollWidth": 390,
+      "brokenImages": [],
+      "smallTargets": []
+    },
+    {
+      "screen": "codex-보스",
+      "width": 390,
+      "scrollWidth": 390,
+      "brokenImages": [],
+      "smallTargets": []
+    },
+    {
+      "screen": "codex-업적",
+      "width": 390,
+      "scrollWidth": 390,
+      "brokenImages": [],
+      "smallTargets": []
+    },
+    {
+      "screen": "codex-물품",
+      "width": 390,
+      "scrollWidth": 390,
+      "brokenImages": [],
+      "smallTargets": []
+    },
+    {
+      "screen": "campaign-intro-yellow-turban",
+      "width": 390,
+      "scrollWidth": 390,
+      "brokenImages": [],
+      "smallTargets": []
+    },
+    {
+      "screen": "campaign-intro-anti-dong",
+      "width": 390,
+      "scrollWidth": 390,
+      "brokenImages": [],
+      "smallTargets": []
+    },
+    {
+      "screen": "campaign-intro-xuzhou",
+      "width": 390,
+      "scrollWidth": 390,
+      "brokenImages": [],
+      "smallTargets": []
+    },
+    {
+      "screen": "campaign-intro-guandu",
+      "width": 390,
+      "scrollWidth": 390,
+      "brokenImages": [],
+      "smallTargets": []
+    },
+    {
+      "screen": "campaign-intro-red-cliffs",
+      "width": 390,
+      "scrollWidth": 390,
+      "brokenImages": [],
+      "smallTargets": []
+    },
+    {
+      "screen": "campaign-intro-jing-yi",
+      "width": 390,
+      "scrollWidth": 390,
+      "brokenImages": [],
+      "smallTargets": []
+    },
+    {
+      "screen": "campaign-intro-yiling",
+      "width": 390,
+      "scrollWidth": 390,
+      "brokenImages": [],
+      "smallTargets": []
+    },
+    {
+      "screen": "campaign-intro-nanman",
+      "width": 390,
+      "scrollWidth": 390,
+      "brokenImages": [],
+      "smallTargets": []
+    },
+    {
+      "screen": "campaign-intro-northern",
+      "width": 390,
+      "scrollWidth": 390,
+      "brokenImages": [],
+      "smallTargets": []
+    }
+  ],
+  "bindings": {
+    "characters": [
+      {
+        "id": "liu-bei",
+        "key": "liu-bei",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "cao-cao",
+        "key": "cao-cao",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "sun-quan",
+        "key": "sun-quan",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "guan-yu",
+        "key": "guan-yu",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "zhang-fei",
+        "key": "zhang-fei",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "zhao-yun",
+        "key": "zhao-yun",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "huang-zhong",
+        "key": "huang-zhong",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "zhuge-liang",
+        "key": "zhuge-liang",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "zhang-liao",
+        "key": "zhang-liao",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "xiahou-dun",
+        "key": "xiahou-dun",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "jia-xu",
+        "key": "jia-xu",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "taishi-ci",
+        "key": "taishi-ci",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "zhou-yu",
+        "key": "zhou-yu",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "gan-ning",
+        "key": "gan-ning",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "hua-tuo",
+        "key": "hua-tuo",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "lu-bu",
+        "key": "lu-bu",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "sun-jian",
+        "key": "sun-jian",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "yuan-shao",
+        "key": "yuan-shao",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "cao-ren",
+        "key": "cao-ren",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "hua-xiong",
+        "key": "hua-xiong",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "chen-gong",
+        "key": "chen-gong",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "zang-ba",
+        "key": "zang-ba",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "gao-shun",
+        "key": "gao-shun",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "mi-zhu",
+        "key": "mi-zhu",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "xu-chu",
+        "key": "xu-chu",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "dian-wei",
+        "key": "dian-wei",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "xun-yu",
+        "key": "xun-yu",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "yan-liang",
+        "key": "yan-liang",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "wen-chou",
+        "key": "wen-chou",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "lu-su",
+        "key": "lu-su",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "huang-gai",
+        "key": "huang-gai",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "pang-tong",
+        "key": "pang-tong",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "cheng-pu",
+        "key": "cheng-pu",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "ma-chao",
+        "key": "ma-chao",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "wei-yan",
+        "key": "wei-yan",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "fa-zheng",
+        "key": "fa-zheng",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "xu-huang",
+        "key": "xu-huang",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "xiahou-yuan",
+        "key": "xiahou-yuan",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "lu-xun",
+        "key": "lu-xun",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "lu-meng",
+        "key": "lu-meng",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "zhou-tai",
+        "key": "zhou-tai",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "meng-huo",
+        "key": "meng-huo",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "zhu-rong",
+        "key": "zhu-rong",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "ma-su",
+        "key": "ma-su",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "sima-yi",
+        "key": "sima-yi",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "jiang-wei",
+        "key": "jiang-wei",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "zhang-he",
+        "key": "zhang-he",
+        "portrait": true,
+        "full": true,
+        "token": true
+      },
+      {
+        "id": "deng-ai",
+        "key": "deng-ai",
+        "portrait": true,
+        "full": true,
+        "token": true
+      }
+    ],
+    "enemies": [
+      {
+        "name": "황건 창병",
+        "key": "yt-spear",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "황건 궁병",
+        "key": "yt-archer",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "황건 기병",
+        "key": "yt-raider",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "황건 술사",
+        "key": "yt-sorcerer",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "태평도 신도",
+        "key": "yt-chanter",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "장보",
+        "key": "boss-zhang-bao",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "장량",
+        "key": "boss-zhang-liang",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "장각",
+        "key": "boss-zhang-jiao",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "동탁군 극병",
+        "key": "dong-halberd",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "동탁군 궁병",
+        "key": "dong-archer",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "서량 기병",
+        "key": "xiliang-cavalry",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "관문 수비대",
+        "key": "gate-guard",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "방화병",
+        "key": "enemy-fire-thrower",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "서량 친위대",
+        "key": "enemy-xiliang-guard",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "화웅",
+        "key": "hua-xiong",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "여포",
+        "key": "lu-bu",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "동탁",
+        "key": "boss-dong-zhuo",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "이유",
+        "key": "boss-li-ru",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "산적",
+        "key": "enemy-bandit",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "원술군 보병",
+        "key": "enemy-yuan-shu-infantry",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "원술군 궁병",
+        "key": "enemy-yuan-shu-archer",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "병주 기병",
+        "key": "enemy-bing-cavalry",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "수군",
+        "key": "enemy-marine",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "함진영",
+        "key": "enemy-trap-guard",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "기령",
+        "key": "boss-ji-ling",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "원술",
+        "key": "boss-yuan-shu",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "고순",
+        "key": "gao-shun",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "진궁",
+        "key": "chen-gong",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "하북 보병",
+        "key": "enemy-hebei-infantry",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "하북 강노병",
+        "key": "enemy-hebei-crossbow",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "하북 기병",
+        "key": "enemy-hebei-cavalry",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "공수",
+        "key": "boss-gong-sui",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "조조군 관문병",
+        "key": "enemy-cao-gate-guard",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "맹탄",
+        "key": "boss-meng-tan",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "변희",
+        "key": "boss-bian-xi",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "왕식",
+        "key": "boss-wang-zhi",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "하북 대극사",
+        "key": "enemy-hebei-halberd",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "오소 수비병",
+        "key": "enemy-wuchao-guard",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "안량",
+        "key": "yan-liang",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "문추",
+        "key": "wen-chou",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "원소",
+        "key": "yuan-shao",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "조조군 보병",
+        "key": "enemy-cao-infantry",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "조조군 궁병",
+        "key": "enemy-cao-archer",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "호표기",
+        "key": "enemy-tiger-cavalry",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "청주병",
+        "key": "enemy-qingzhou",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "형주 수군",
+        "key": "enemy-jing-marine",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "몽충",
+        "key": "enemy-naval-guard",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "하후은",
+        "key": "boss-xiahou-en",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "채모",
+        "key": "boss-cai-mao",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "장윤",
+        "key": "boss-zhang-yun",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "조조",
+        "key": "cao-cao",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "허저",
+        "key": "xu-chu",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "유장군 보병",
+        "key": "enemy-liu-zhang-infantry",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "위군 궁병",
+        "key": "enemy-wei-archer",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "서량 철기",
+        "key": "enemy-xiliang-heavy-cavalry",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "위군 정예",
+        "key": "enemy-wei-elite",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "복병",
+        "key": "enemy-ambusher",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "칠군 병사",
+        "key": "enemy-seven-army",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "마초",
+        "key": "ma-chao",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "하후연",
+        "key": "xiahou-yuan",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "방덕",
+        "key": "boss-pang-de",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "우금",
+        "key": "boss-yu-jin",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "조인",
+        "key": "cao-ren",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "오군 보병",
+        "key": "enemy-wu-infantry",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "오군 궁병",
+        "key": "enemy-wu-archer",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "강동 수군",
+        "key": "enemy-jiangdong-marine",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "오군 복병",
+        "key": "enemy-wu-ambusher",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "해번군",
+        "key": "enemy-jiefan",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "감녕",
+        "key": "gan-ning",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "주연",
+        "key": "boss-zhu-ran",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "주태",
+        "key": "zhou-tai",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "육손",
+        "key": "lu-xun",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "남만병",
+        "key": "enemy-nanman",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "독침병",
+        "key": "enemy-poison-dart",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "남만 무녀",
+        "key": "enemy-tribal-shaman",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "코끼리 부대",
+        "key": "enemy-elephant",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "등갑병",
+        "key": "enemy-rattan-guard",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "맹획",
+        "key": "meng-huo",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "맹우",
+        "key": "boss-meng-you",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "축융",
+        "key": "zhu-rong",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "올돌골",
+        "key": "boss-wu-tu-gu",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "위군 보병",
+        "key": "enemy-wei-infantry",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "위군 노병",
+        "key": "enemy-wei-crossbow",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "위군 기병",
+        "key": "enemy-wei-cavalry",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "중장 보병",
+        "key": "enemy-heavy-infantry",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "보급로 습격대",
+        "key": "enemy-supply-raider",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "강유",
+        "key": "jiang-wei",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "장합",
+        "key": "zhang-he",
+        "portrait": true,
+        "token": true
+      },
+      {
+        "name": "사마의",
+        "key": "sima-yi",
+        "portrait": true,
+        "token": true
+      }
+    ]
+  }
+}
