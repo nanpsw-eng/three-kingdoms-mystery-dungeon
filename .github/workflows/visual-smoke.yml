@@ -33,6 +33,7 @@ jobs:
             curl -fsS http://localhost:8092/ > /dev/null && break
             sleep 1
           done
+          node scripts/modern-rpg-smoke.mjs http://localhost:8092 visual-evidence
           node scripts/e2e-smoke.mjs http://localhost:8092 visual-evidence > visual-evidence/smoke-result.json
           node scripts/art/visual-coverage-smoke.mjs http://localhost:8092 visual-evidence
           node scripts/mobile-ux-smoke.mjs http://localhost:8092 visual-evidence
@@ -40,7 +41,6 @@ jobs:
           node scripts/battle-layout-smoke.mjs http://localhost:8092 visual-evidence
           node scripts/approved-ux-smoke.mjs http://localhost:8092 visual-evidence
           node scripts/codex-layout-smoke.mjs http://localhost:8092 visual-evidence
-          node scripts/modern-rpg-smoke.mjs http://localhost:8092 visual-evidence
           node scripts/art/field-miniature-smoke.mjs http://localhost:8092 visual-evidence
       - uses: actions/upload-artifact@v4
         if: always()

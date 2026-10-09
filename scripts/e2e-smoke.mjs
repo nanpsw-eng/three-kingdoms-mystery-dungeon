@@ -50,7 +50,7 @@ for (; steps < 400; steps += 1) {
   if (s.phase !== "dungeon") { await tap(page.getByRole("button", { name: "출발" })); continue; }
   if (s.enemies.length > 0) {
     const e = [...s.enemies].sort((a, b) => Math.max(Math.abs(a.dx), Math.abs(a.dy)) - Math.max(Math.abs(b.dx), Math.abs(b.dy)))[0];
-    await page.keyboard.press(KEY[`${Math.sign(e.dx)},${Math.sign(e.dy)}`]);
+    await page.keyboard.press(({n:"8",ne:"9",e:"6",se:"3",s:"2",sw:"1",w:"4",nw:"7"})[e.approach] ?? "5");
     continue;
   }
   const before = s.turn;

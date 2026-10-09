@@ -740,7 +740,7 @@ window.addEventListener("blur", () => cancelPad?.());
 (window as unknown as { __tkmd: unknown }).__tkmd = {
   state: () => run === null ? { phase: "title" } : {
     phase: run.phase, depth: run.depth, turn: run.phase === "dungeon" ? run.dungeon.turn : null,
-    enemies: run.phase === "dungeon" ? run.dungeon.visibleEnemies().map((e) => ({ dx: e.pos.x - run!.dungeon.position.x, dy: e.pos.y - run!.dungeon.position.y })) : [],
+    enemies: run.phase === "dungeon" ? run.dungeon.visibleEnemies().map((e) => ({ dx: e.pos.x - run!.dungeon.position.x, dy: e.pos.y - run!.dungeon.position.y, approach: run!.dungeon.travelDirection(e.pos) })) : [],
   },
 };
 

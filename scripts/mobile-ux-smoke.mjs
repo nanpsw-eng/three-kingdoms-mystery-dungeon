@@ -72,7 +72,7 @@ try {
     if(s.phase!=='dungeon') { await page.getByRole('button',{name:'출발',exact:true}).click(); continue; }
     if(s.enemies.length) {
       const e=s.enemies.sort((a,b)=>Math.max(Math.abs(a.dx),Math.abs(a.dy))-Math.max(Math.abs(b.dx),Math.abs(b.dy)))[0];
-      await page.keyboard.press(keys[`${Math.sign(e.dx)},${Math.sign(e.dy)}`]);
+      await page.keyboard.press(({n:"8",ne:"9",e:"6",se:"3",s:"2",sw:"1",w:"4",nw:"7"})[e.approach] ?? "5");
     } else {
       await page.keyboard.press('Enter');
       if((await state()).turn===s.turn) await page.keyboard.press(['6','2','4','8','3','9'][i%6]);
