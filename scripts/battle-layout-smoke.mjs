@@ -74,10 +74,10 @@ try{
  const definition=representativeDefinition('battle-ui-stage3');
  const installFixture=()=>fixture.evaluate(async definition=>{
   const {BattleEngine,MVP_CONTENT}=await import('./src/index.js');const {battleField}=await import('./web/src/battle-ui.js');
-  const {nativeAssetPortrait}=await import('./web/src/assets.js');
+  const {fieldImageUrl}=await import('./web/src/field-art.js');
   const battle=new BattleEngine(definition),snapshot=battle.snapshot();
   const names=new Map(MVP_CONTENT.characters.map(c=>[c.id,c.name]));const app=document.querySelector('#app');app.dataset.screen='battle';
-  const field=battleField({snapshot,name:id=>names.get(id)??id,portrait:id=>{const img=document.createElement('img');img.className='native-portrait';img.src=nativeAssetPortrait(id);return img;},legal:new Set(),selected:new Set(),hit:new Set(),healed:new Set(),formationPicking:false,onUnit:()=>{},onSlot:()=>{}});
+  const field=battleField({snapshot,name:id=>names.get(id)??id,portrait:id=>{const img=document.createElement('img');img.className='native-portrait';img.src=fieldImageUrl(id);return img;},legal:new Set(),selected:new Set(),hit:new Set(),healed:new Set(),formationPicking:false,onUnit:()=>{},onSlot:()=>{}});
   app.replaceChildren(field);
  },definition);
  await installFixture();

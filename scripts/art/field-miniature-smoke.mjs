@@ -14,17 +14,17 @@ try {
  for(let i=0;i<12&&(await state()).phase==='scene';i++)await page.getByRole('button',{name:'건너뛰기',exact:true}).click();
  assert.equal((await state()).phase,'dungeon');
  const before=await state(),oldSave=await page.evaluate(()=>localStorage.getItem('tkmd.save.v1'));
- await mapReady(5);assert.equal(await page.locator('#map').getAttribute('data-view-radius'),'5');
+ await mapReady(4);assert.equal(await page.locator('#map').getAttribute('data-view-radius'),'4');
  await page.getByRole('button',{name:'넓게 보기',exact:true}).click();
  await mapReady(7);assert.equal(await page.locator('#map').getAttribute('data-view-radius'),'7');
- await page.getByRole('button',{name:'크게 보기',exact:true}).click();await mapReady(5);
+ await page.getByRole('button',{name:'크게 보기',exact:true}).click();await mapReady(4);
  assert.deepEqual(await state(),before);assert.equal(await page.evaluate(()=>localStorage.getItem('tkmd.save.v1')),oldSave,'camera changes consume no action');
  const camera=[];
  for(const [width,height]of [[320,568],[390,844],[844,390]]){
   await page.setViewportSize({width,height});await page.waitForTimeout(150);
   const m=await page.locator('.map-zoom-button').evaluate(el=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height,x:r.x,y:r.y,right:r.right,bottom:r.bottom,overflow:document.documentElement.scrollWidth>innerWidth||document.documentElement.scrollHeight>innerHeight+1};});
   assert.ok(m.width>=44&&m.height>=44&&!m.overflow&&m.x>=0&&m.y>=0&&m.right<=width&&m.bottom<=height);
-  const hit=await page.evaluate(async()=>{const {tileAt}=await import('./web/src/map.js');const canvas=document.querySelector('#map'),r=canvas.getBoundingClientRect();return [5,7].map(radius=>{canvas.dataset.viewRadius=String(radius);const cell=r.width/(radius*2+1);return {center:tileAt(canvas,{position:{x:40,y:30}},r.x+r.width/2,r.y+r.height/2),offset:tileAt(canvas,{position:{x:40,y:30}},r.x+r.width/2+2*cell,r.y+r.height/2-cell)};});});
+  const hit=await page.evaluate(async()=>{const {tileAt}=await import('./web/src/map.js');const canvas=document.querySelector('#map'),r=canvas.getBoundingClientRect();return [4,7].map(radius=>{canvas.dataset.viewRadius=String(radius);const cell=r.width/(radius*2+1);return {center:tileAt(canvas,{position:{x:40,y:30}},r.x+r.width/2,r.y+r.height/2),offset:tileAt(canvas,{position:{x:40,y:30}},r.x+r.width/2+2*cell,r.y+r.height/2-cell)};});});
   assert.deepEqual(hit,[{center:{x:40,y:30},offset:{x:42,y:29}},{center:{x:40,y:30},offset:{x:42,y:29}}]);camera.push({width,height,...m});
  }
  await page.setViewportSize({width:390,height:844});await page.waitForTimeout(150);await page.screenshot({path:out+'/field-real-start.png'});
@@ -44,7 +44,7 @@ try {
   const fixture={position:{x:0,y:0},facing:'s',floor:{stairs:{x:0,y:-3}},tile,isExplored:p=>Math.abs(p.x)<=5&&Math.abs(p.y)<=5,isVisible:()=>true,
    revealedTraps:()=>[{pos:{x:3,y:3},type:'poison-needle'}],objects:()=>[{kind:'recruit',pos:{x:-3,y:-2}},{kind:'item',contentId:'bun',pos:{x:-3,y:2}},{kind:'item',contentId:'herb',pos:{x:-1,y:3}},{kind:'item',contentId:'elixir',pos:{x:1,y:3}},{kind:'item',contentId:'iron-sword',pos:{x:3,y:2}}],
    visibleEnemies:()=>[{pos:{x:2,y:-2},groupId:'spear',boss:false,state:'IDLE'},{pos:{x:3,y:-1},groupId:'archer',boss:false,state:'ALERT'},{pos:{x:-3,y:0},groupId:'mage',boss:true,state:'IDLE'},{pos:{x:2,y:1},groupId:'regular',boss:false,state:'IDLE'},{pos:{x:-2,y:1},groupId:'southern',boss:false,state:'IDLE'}]};
-  const draw=()=>drawMap(canvas,fixture,{playerKey:'liu-bei',enemyKey:id=>({spear:'yt-spear',archer:'yt-archer',mage:'boss-zhang-jiao',regular:'enemy-hebei-infantry',southern:'enemy-nanman-archer'})[id],radius:5});
+  const draw=()=>drawMap(canvas,fixture,{playerKey:'liu-bei',enemyKey:id=>({spear:'yt-spear',archer:'yt-archer',mage:'boss-zhang-jiao',regular:'enemy-hebei-infantry',southern:'enemy-nanman-archer'})[id],radius:4});
   draw();const first=canvas.toDataURL();draw();const stable=first===canvas.toDataURL();
   return {missing,unmapped,missingEnemies,sprites,transparentFraction:transparent/(alpha.length/4),stable};
  });
@@ -53,12 +53,12 @@ try {
  await page.screenshot({path:out+'/field-renderer-fixture.png'});
  // A missing atlas must leave the real game playable, retaining readable role markers.
  const fallback=await browser.newPage({viewport:{width:390,height:660}});fallback.on('pageerror',e=>errors.push(String(e)));
- await fallback.route('**/assets/field/ink-miniatures-v1.webp',r=>r.fulfill({status:404,body:''}));await fallback.goto(base,{waitUntil:'networkidle'});
+ await fallback.route('**/assets/modern/characters-v1.webp',r=>r.fulfill({status:404,body:''}));await fallback.route('**/assets/field/ink-miniatures-v1.webp',r=>r.fulfill({status:404,body:''}));await fallback.goto(base,{waitUntil:'networkidle'});
  assert.equal(await fallback.evaluate(async()=>{const {fieldSprite}=await import('./web/src/field-art.js');return !!fieldSprite('liu-bei');}),false);
  await fallback.locator('button.pick').filter({hasText:'관우'}).click();await fallback.locator('button.pick').filter({hasText:'장비'}).click();await fallback.getByRole('button',{name:'원정 시작',exact:true}).click();
  for(let i=0;i<12&&await fallback.evaluate(()=>window.__tkmd.state().phase)==='scene';i++)await fallback.getByRole('button',{name:'건너뛰기',exact:true}).click();
  assert.equal(await fallback.evaluate(()=>window.__tkmd.state().phase),'dungeon');await fallback.getByRole('button',{name:'대기',exact:true}).click();
  assert.equal(await fallback.evaluate(()=>window.__tkmd.state().turn),1);assert.deepEqual(errors,[]);
  writeFileSync(out+'/field-miniature-result.json',JSON.stringify({passed:true,camera,...result,fallbackPassed:true,errors},null,2));
- console.log('PASS: 28 transparent field miniatures, content coverage, camera, hit coordinates, renderer and fallback');
+ console.log('PASS: shared modern field figures and items, content coverage, camera, hit coordinates, renderer and fallback');
 } finally { await browser.close(); }

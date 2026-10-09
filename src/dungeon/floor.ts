@@ -12,6 +12,9 @@ import {
   ROOM_MAX_WIDTH,
   ROOM_MIN_SIZE,
   ROOM_PADDING,
+  COMPACT_ROOM_MAX_WIDTH,
+  COMPACT_ROOM_MAX_HEIGHT,
+  type DungeonLayoutVersion,
 } from "./balance.js";
 import { DIRECTIONS, manhattan, rectCenter, rectContains, rectsOverlap, type Direction, type Point, type Rect } from "./geometry.js";
 
@@ -46,6 +49,7 @@ export interface FloorObjectSpec {
 }
 
 export interface FloorSpec {
+  readonly layoutVersion?: DungeonLayoutVersion;
   readonly seed: Seed;
   readonly depth: number;
   readonly enemyGroups: readonly Weighted[];
@@ -146,11 +150,11 @@ class Grid {
   set(p: Point, kind: TileKind): void { this.tiles[tileIndex(this.width, p)] = kind; }
 }
 
-function placeRooms(rng: SeededRng, count: number): Rect[] | null {
+function placeRooms(rng: SeededRng, count: number, compact: boolean): Rect[] | null {
   const rooms: Rect[] = [];
   for (let attempt = 0; attempt < 600 && rooms.length < count; attempt += 1) {
-    const width = rng.nextInt(ROOM_MIN_SIZE, ROOM_MAX_WIDTH + 1);
-    const height = rng.nextInt(ROOM_MIN_SIZE, ROOM_MAX_HEIGHT + 1);
+    const width = rng.nextInt(ROOM_MIN_SIZE, (compact ? COMPACT_ROOM_MAX_WIDTH : ROOM_MAX_WIDTH) + 1);
+    const height = rng.nextInt(ROOM_MIN_SIZE, (compact ? COMPACT_ROOM_MAX_HEIGHT : ROOM_MAX_HEIGHT) + 1);
     const room = { x: rng.nextInt(1, FLOOR_WIDTH - width - 1), y: rng.nextInt(1, FLOOR_HEIGHT - height - 1), width, height };
     if (rooms.every((other) => !rectsOverlap(room, other, ROOM_PADDING))) rooms.push(room);
   }
@@ -321,7 +325,7 @@ function tryGenerate(spec: FloorSpec, attempt: number): FloorData | null {
   const root = new SeededRng(spec.seed).fork("floor-" + spec.depth).fork("attempt-" + attempt);
   const layoutRng = root.fork("layout");
   const roomCount = layoutRng.nextInt(MIN_ROOMS, MAX_ROOMS + 1);
-  const rooms = placeRooms(layoutRng, roomCount);
+  const rooms = placeRooms(layoutRng, roomCount, spec.layoutVersion === "compact-v2");
   if (rooms === null) return null;
   const grid = new Grid(FLOOR_WIDTH, FLOOR_HEIGHT);
   for (const room of rooms) for (const p of interiorTiles(room)) grid.set(p, "room");
@@ -468,6 +472,7 @@ function tryGenerate(spec: FloorSpec, attempt: number): FloorData | null {
 
 /** Deterministic floor generation: same spec (incl. seed) → identical floor. */
 export function generateFloor(spec: FloorSpec): FloorData {
+  if (spec.layoutVersion !== undefined && spec.layoutVersion !== "legacy-v1" && spec.layoutVersion !== "compact-v2") throw new RangeError("Unknown dungeon layout version.");
   if (!Number.isSafeInteger(spec.depth) || spec.depth < 1) throw new RangeError("Floor depth must be a positive integer.");
   for (let attempt = 0; attempt < 50; attempt += 1) {
     const floor = tryGenerate(spec, attempt);

@@ -1,5 +1,6 @@
 import { battleField } from "./battle-ui.js";
-import { applyInkTheme } from "./ink-theme.js";
+import { fieldImageUrl } from "./field-art.js";
+import { thumbPad } from "./thumb-pad.js";
 import {
   MVP_CONTENT, RunEngine, buildCodex, RepeatAutoController, applyRunToMeta, chooseAllAttackCommand, chooseSmartCommand, initialMeta, FORMATION_SLOTS,
   type SkillDefinition, type ItemDefinition, type AbilityTargeting, type BattleCommand, type Direction, type FormationSlot, type MetaState, type RunCommand, type RunEvent, type RunOptions,
@@ -31,8 +32,9 @@ let save: SaveData | null = null;
 let log: string[] = [];
 let modal: null | "bag" | "party" | "help" | "log" | "status" | "map-guide" | "skills" | "battle-items" | "tactics" | "more" | "auto-settings" = null;
 let mapObserver: ResizeObserver | null = null;
+let cancelPad: (() => void) | null = null;
 let battlefieldScroll = 0;
-let mapRadius: 5 | 7 = 5;
+let mapRadius: 4 | 7 = 4;
 let autoMode: AutoMode = "manual";
 let speed = 1;
 let autoTimer: number | null = null;
@@ -72,7 +74,7 @@ function put(...children: Child[]): void {
 const pic = (key: string, size: number, alt = ""): HTMLImageElement => {
   const id = artKey(key);
   const full = size >= 120 ? fullBodyIllustration(id) : undefined;
-  const native = full ?? nativeAssetPortrait(id);
+  const native = fieldImageUrl(id, size < 120) ?? full ?? nativeAssetPortrait(id);
   const image = spriteImg(native ?? portraitUrl(id), size, alt, native === undefined ? "px portrait" : "portrait native-portrait" + (full === undefined ? "" : " fullbody-illustration"));
   image.decoding = "sync"; // Preloaded portraits should paint with the visible card.
   image.addEventListener("error", () => {
@@ -82,11 +84,12 @@ const pic = (key: string, size: number, alt = ""): HTMLImageElement => {
   }, { once: true });
   return image;
 };
-const icon = (id: string, size = 28): HTMLImageElement => spriteImg(iconUrl(id), size, "", "icon");
+const icon = (id: string, size = 28): HTMLImageElement => spriteImg(id === "unknown-item" ? iconUrl(id) : fieldImageUrl(id, false, true) ?? iconUrl(id), size, "", "icon");
+const battleFigure = (key: string): HTMLImageElement => spriteImg(fieldImageUrl(artKey(key)) ?? fullBodyIllustration(artKey(key)) ?? portraitUrl(artKey(key)), 96, "", "battle-figure");
 const tokenPic = (key: string): HTMLImageElement => {
   const id = artKey(key);
   const token = assetToken(id);
-  return spriteImg(token?.src ?? figureUrl(id), 20, "", token === undefined ? "px" : "native-token");
+  return spriteImg(fieldImageUrl(id,true) ?? token?.src ?? figureUrl(id), 24, "", "native-token");
 };
 let hitIds = new Set<string>();
 let healedIds = new Set<string>();
@@ -201,6 +204,7 @@ function render(): void {
   const priorField = app.querySelector<HTMLElement>(".field");
   battlefieldScroll = app.dataset.screen === "battle" ? priorField?.scrollTop ?? battlefieldScroll : 0;
   mapObserver?.disconnect(); mapObserver = null;
+  cancelPad?.(); cancelPad = null;
   app.dataset.screen = run === null ? (showCodex ? "codex" : "title") : run.phase === "battle" ? "battle" : run.phase === "safe-zone" || run.phase === "cleared" || run.phase === "failed" ? "other" : "dungeon";
   app.replaceChildren();
   if (run === null && showCodex) put(codexScreen({ view: buildCodex(content, meta), render, close: () => { showCodex = false; render(); }, portrait: (key, size, alt) => pic(key, size, alt),
@@ -256,7 +260,7 @@ function renderTitle(): void {
     id:c.id,name:c.name,era:c.era ?? "",summary:c.summary ?? "",floors:c.floors.length,locked:!meta.unlockedCampaigns.includes(c.id),selected:title.campaignId===c.id,best:meta.bestDepth[c.id] ?? 0,cleared:(meta.clearedCampaigns ?? []).includes(c.id),
   })), id => { title.campaignId=id; title.renown=0; render(); });
   put(h("header", {class:"title-banner title-hero"}, h("h1", {}, "삼국지 미스터리 던전"), h("p", {class:"subtitle"}, "군주와 함께, 안개 속 진실을 찾아서"),
-    h("div", {class:"title-row"}, ...["liu-bei","guan-yu","zhang-fei"].map(id => pic(id,96,content.characters.find(c=>c.id===id)!.name)))));
+    h("div", {class:"title-row"}, ...["liu-bei","guan-yu","zhang-fei"].map(id => pic(id,128,content.characters.find(c=>c.id===id)!.name)))));
   if (notice) { put(h("p", {class:"panel",role:"status"},notice)); notice=null; }
   if (saved && !preparingNewRun) {
     const key=JSON.stringify(saved);
@@ -279,7 +283,7 @@ function renderTitle(): void {
       renownPanel(meta.renown?.[title.campaignId]??0,title.renown,level=>{title.renown=level;render();}),
       button("원정 시작",()=>{
         if(title.generals.length!==2)return;
-        const begin=()=>{preparingNewRun=false;startRun({seed:Date.now().toString(36),campaignId:title.campaignId,rulerId:title.rulerId,generalIds:[...title.generals],...(title.renown>0?{renown:title.renown}:{})});};
+        const begin=()=>{preparingNewRun=false;startRun({seed:Date.now().toString(36),dungeonLayout:"compact-v2",campaignId:title.campaignId,rulerId:title.rulerId,generalIds:[...title.generals],...(title.renown>0?{renown:title.renown}:{})});};
         if(saved) pickTarget={label:"기존 원정을 마치고 새로 시작할까요?",options:[{id:"replace",label:"기존 원정을 대체하고 시작"}],onPick:begin}; else begin();
         render();
       },{class:"primary",disabled:title.generals.length!==2}),h("p", {class:"setup-note"},"원정이 끝나면 레벨·장비는 사라지고, 해금 장수와 전역은 남습니다."));
@@ -310,9 +314,6 @@ function partyBars(exploration = false): HTMLElement {
     h("div", { class: "member-info" }, h("div", { class: "row tight" }, h("span", { class: "grow" }, m.name), h("span", { class: "num" }, m.hp <= 0 ? "KO" : m.hp + "/" + m.maxHp)), bar(m.hp, m.maxHp)))));
 }
 
-const PAD: (Direction | null)[] = ["nw", "n", "ne", "w", null, "e", "sw", "s", "se"];
-const ARROWS: Record<string, string> = { nw: "↖", n: "↑", ne: "↗", w: "←", e: "→", sw: "↙", s: "↓", se: "↘" };
-const DIRECTION_NAMES: Record<Direction, string> = { nw: "북서", n: "북", ne: "북동", w: "서", e: "동", sw: "남서", s: "남", se: "남동" };
 
 function explorationHeader(): HTMLElement {
   const r = run!, dungeon = r.dungeon;
@@ -331,14 +332,14 @@ function explorationHeader(): HTMLElement {
 
 function renderMapGuide(): void {
   sheet(h("h2", {}, "탐험 지도 안내"),
-    h("p", {}, "밝은 한지 바닥은 탐험한 길, 짙은 먹안개는 아직 확인하지 않은 곳입니다. 군주를 중심으로 지도가 움직입니다. ‘넓게 보기’와 ‘크게 보기’는 턴 소비 없이 지도 배율을 바꿉니다."),
+    h("p", {}, "석재 바닥은 탐험한 길, 어두운 공간은 아직 확인하지 않은 곳입니다. 군주를 중심으로 지도가 움직입니다. 기본은 9×9칸이며 ‘넓게 보기’와 ‘크게 보기’는 턴 소비 없이 지도 배율을 바꿉니다."),
     h("dl", { class: "map-legend" },
       h("dt", {}, "군주 / 적"), h("dd", {}, "청록 원형·깃발은 군주와 영입 장수, 주홍 원형·삼각 깃발은 적 부대입니다. 이중 깃발은 보스입니다. 적과 만나면 전투가 시작됩니다."),
       h("dt", {}, "계단"), h("dd", {}, "계단 위로 이동한 뒤 ‘계단 내려가기’를 눌러 다음 층으로 내려갑니다."),
       h("dt", {}, "상자 / 항아리 / 약 주머니"), h("dd", {}, "황토 마름모는 물품 표시입니다. 음식·약·장비 모양으로 종류를 구분하며, 그 칸으로 이동하면 획득합니다."),
       h("dt", {}, "요술진"), h("dd", {}, "주홍 원형 인장은 적을 강화하는 요술진입니다. 해당 칸 위에서 ‘사물 조사’로 파괴합니다."),
       h("dt", {}, "함정 / 숨겨진 통로"), h("dd", {}, "‘함정 찾기’으로 확인합니다. 자동 이동은 발견한 함정을 피합니다.")),
-    h("p", {}, "방향 버튼은 한 칸 이동, 가운데 ‘대기’는 1턴 진행입니다. 지도를 누르면 해당 칸까지 이동하다가 발견이나 적 조우 시 멈춥니다."));
+    h("p", {}, "방향기를 밀고 놓으면 한 칸 이동합니다. 중앙이나 바깥에서 놓으면 취소하며, 별도의 ‘대기’만 1턴을 진행합니다. 지도를 누르면 해당 칸까지 이동하다가 발견이나 적 조우 시 멈춥니다."));
 }
 
 function move(direction: Direction): void { act({ type: "dungeon", command: { type: "move", direction } }); render(); }
@@ -360,16 +361,16 @@ function travelTo(target: { x: number; y: number }): void {
 function renderDungeon(): void {
   const r = run!;
   const canvas = h("canvas", { id: "map", "aria-label": "던전 지도", "aria-describedby": "map-instruction", "data-view-radius": String(mapRadius) });
-  const stage = h("div", { class: "map-stage" }, canvas, h("div", {class:"field-legend","aria-hidden":"true"}, h("span", {class:"ally"},"● 아군"),h("span", {class:"enemy"},"▲ 적"),h("span", {class:"loot"},"◆ 물품")), button(mapRadius === 5 ? "넓게 보기" : "크게 보기", () => { mapRadius = mapRadius === 5 ? 7 : 5; render(); }, { class: "map-zoom-button" }));
+  const stage = h("div", { class: "map-stage" }, canvas, h("div", {class:"field-legend","aria-hidden":"true"}, h("span", {class:"ally"},"● 아군"),h("span", {class:"enemy"},"▲ 적"),h("span", {class:"loot"},"◆ 물품")), button(mapRadius === 4 ? "넓게 보기" : "크게 보기", () => { mapRadius = mapRadius === 4 ? 7 : 4; render(); }, { class: "map-zoom-button" }));
   canvas.addEventListener("pointerup", (event) => travelTo(tileAt(canvas, r.dungeon, event.clientX, event.clientY)));
   const onStairs = r.dungeon.position.x === r.dungeon.floor.stairs.x && r.dungeon.position.y === r.dungeon.floor.stairs.y;
+  const pad = thumbPad(move); cancelPad = pad.cancel;
   put(
     explorationHeader(), h("div", {class:"exploration-goal",role:"status"}, onStairs ? "계단 위입니다 · 다음 층으로 내려갈 수 있습니다." : r.food <= 20 ? "군량 부족 주의 · 음식과 계단을 찾으세요." : r.dungeon.visibleEnemies().length ? "적 부대 발견 · 접촉하면 전투가 시작됩니다." : "계단을 찾아 다음 층으로 내려가세요."), stage, partyBars(true),
     h("div", { class: "dungeon-controls" },
-      h("div", { class: "pad" }, ...PAD.map((d) => d === null
-        ? button("대기", () => { act({ type: "dungeon", command: { type: "wait" } }); render(); }, { title: "대기 (1턴)", "aria-label": "대기" })
-        : button(ARROWS[d]!, () => move(d), { title: DIRECTION_NAMES[d] + "쪽 이동", "aria-label": DIRECTION_NAMES[d] + "쪽 이동", "data-direction": d }))),
-      h("div", { class: "grid2 grow" },
+      h("div", {class:"pad-wrap"}, pad.element, h("small",{},"밀고 놓으면 1칸 · 중앙 취소")),
+      h("div", { class: "exploration-actions grow" },
+        explorationCommand("대기", "1턴", () => { act({ type: "dungeon", command: { type: "wait" } }); render(); }),
         explorationCommand("자동 이동", "발견·적 조우 시 정지", () => { act({ type: "auto-explore" }); render(); }, true),
         explorationCommand("함정 찾기", "1턴 · 함정·통로", () => { act({ type: "dungeon", command: { type: "search" } }); render(); }),
         explorationCommand("사물 조사", "요술진 파괴 시 1턴", () => { act({ type: "dungeon", command: { type: "interact" } }); render(); }),
@@ -377,7 +378,7 @@ function renderDungeon(): void {
       )),
     utilityBar(true),
     h("div", { class: "exploration-message" },
-      h("span", { id: "map-instruction" }, onStairs ? "계단 위 · 다음 층으로 이동 가능" : "지도 터치로 이동 · 가운데 대기는 1턴"),
+      h("span", { id: "map-instruction" }, onStairs ? "계단 위 · 다음 층으로 이동 가능" : "지도 터치 또는 8방향기로 이동"),
       h("div", { class: "latest-event", role: "status" }, log[0] ?? "방향 버튼으로도 이동할 수 있습니다.")),
   );
   const enemyKey = (groupId: string): string => {
@@ -458,7 +459,7 @@ function renderHelp(): void {
   const skills = active ? run!.battle!.ownedSkills(active.actorId) : [];
   sheet(h("h2", {}, "조작과 전투 안내"),
     h("h3", {}, "탐험"),
-    h("p", {}, "방향 버튼 또는 지도를 눌러 이동합니다. 가운데 대기는 1턴을 진행합니다. 자동 이동은 발견·적 조우 시 멈춥니다."),
+    h("p", {}, "8방향기를 밀고 놓으면 한 칸 이동합니다. 중앙·바깥에서 놓으면 취소합니다. 별도 대기는 1턴을 진행합니다. 지도 터치 이동과 자동 이동은 발견·적 조우 시 멈춥니다."),
     h("p", {}, "함정 찾기는 숨겨진 통로와 함정을 찾습니다. 사물 조사는 현재 칸의 요술진에 사용하며, 계단 위에서 계단 버튼을 누르면 다음 층으로 이동합니다."),
     h("p", {}, "가방과 부대에서 아이템 효과, 스킬 설명, 체력과 장비를 확인할 수 있습니다. 탐험 중 아이템 사용·장비 변경은 1턴을 소모합니다."),
     h("p", {}, "상자·항아리·약 주머니는 물품이 있는 칸입니다. 해당 칸으로 이동하면 물품을 획득합니다."),
@@ -478,12 +479,13 @@ function renderBattle(): void {
   const active = snap.activeTurn;
   const activeAlly = active !== null && !active.actorId.includes("#");
   let legal = new Set<string>();
-  if (activeAlly && selection !== null) {
-    if (selection.kind === "attack") legal = new Set(battle.legalBasicTargets(active.actorId));
+  if (activeAlly && autoMode === "manual") {
+    if (selection === null || selection.kind === "attack") legal = new Set(battle.legalBasicTargets(active.actorId));
     else if (selection.kind === "skill" || selection.kind === "item") legal = new Set(battle.legalAbilityTargets(active.actorId, selection.targeting));
   }
   const onUnit = (id: string): void => {
-    if (!activeAlly || selection === null || !legal.has(id)) return;
+    if (!activeAlly || autoMode !== "manual" || !legal.has(id)) return;
+    if (selection === null) { selection = {kind:"attack",targets:[id]}; render(); return; }
     if (selection.kind === "attack") { selection = { kind: "attack", targets: [id] }; render(); return; }
     if (selection.kind === "skill" || selection.kind === "item") {
       const targets = selection.targets.includes(id) ? selection.targets.filter((t) => t !== id) : [...selection.targets, id].slice(-selection.targeting.maxTargets);
@@ -492,7 +494,7 @@ function renderBattle(): void {
     }
   };
   const field = battleField({ snapshot: snap, name: unitName,
-    portrait: id => pic(id.includes("#") ? unitName(id) : id, 96, unitName(id)),
+    portrait: id => battleFigure(id.includes("#") ? unitName(id) : id),
     legal, selected: new Set(selection && "targets" in selection ? selection.targets : []), hit: hitIds, healed: healedIds,
     formationPicking: activeAlly && selection?.kind === "formation",
     onUnit, onSlot: targetSlot => {
@@ -505,7 +507,7 @@ function renderBattle(): void {
   const actor = active ? snap.units.find(u => u.id === active.actorId) : undefined;
   const commandPanel = activeAlly && autoMode === "manual"
     ? h("div", { class: "battle-actions" },
-      button("공격", () => { selection = { kind: "attack", targets: [] }; render(); }, { class: "primary " + (selection?.kind === "attack" ? "selected" : "") }),
+      button("공격", () => { if(selection?.kind === "attack" && selection.targets.length) confirmSelection(); else {selection = { kind: "attack", targets: [] }; render();} }, { class: "primary " + (selection?.kind === "attack" ? "selected" : "") }),
       button("기술", () => { modal = "skills"; render(); }),
       button("물품", () => { modal = "battle-items"; render(); }),
       button("전술", () => { modal = "tactics"; render(); }))
@@ -513,6 +515,8 @@ function renderBattle(): void {
   const targetText = selection?.kind === "formation" ? "이동할 아군 자리 또는 장수를 누르세요."
     : selection?.kind === "skill" ? (content.skillNames[selection.skillId] ?? selection.skillId) + " · 대상 선택"
     : selection?.kind === "item" ? contentName(r, selection.itemId) + " · 대상 선택" : "공격할 적을 누르세요.";
+  const selectedSkillId = selection?.kind === "skill" ? selection.skillId : null;
+  const selectedSkill = selectedSkillId && active ? battle.ownedSkills(active.actorId).find(s=>s.id===selectedSkillId) : undefined;
   put(
     h("header", { class: "battle-header" },
       h("div", { class: "battle-heading" }, h("h2", {}, r.encounter?.boss ? "보스 전투" : "적과 조우했다"), h("span", { class: "num" }, r.depth + "F · " + snap.turnIndex + "행동")),
@@ -523,6 +527,7 @@ function renderBattle(): void {
     field,
     commandPanel,
     selection ? h("div", { class: "target-hint", role: "status" },
+      selectedSkill ? h("small", {class:"selection-effect"}, skillSummary(selectedSkill)) : null,
       h("span", { class: "grow" }, "targets" in selection && selection.targets.length ? "대상: " + selection.targets.map(unitName).join(" · ") : targetText,
         "targets" in selection && selection.kind !== "attack" && selection.targeting.maxTargets > 1 ? ` (${selection.targets.length}/${selection.targeting.maxTargets})` : ""),
       button("취소", () => { selection = null; render(); }, { class: "small" }),
@@ -719,6 +724,7 @@ const KEYS: Record<string, Direction> = {
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && (modal !== null || pickTarget !== null)) { modal = null; pickTarget = null; render(); return; }
   if (event.key === "Escape" && selection !== null) { selection = null; render(); return; }
+  if (event.defaultPrevented || (event.target instanceof HTMLElement && ["BUTTON","INPUT","SELECT","TEXTAREA"].includes(event.target.tagName))) return;
   if (run === null || run.phase !== "dungeon" || modal !== null || pickTarget !== null) return;
   const direction = KEYS[event.key];
   if (direction) { event.preventDefault(); move(direction); return; }
@@ -728,6 +734,7 @@ window.addEventListener("keydown", (event) => {
   if (event.key === ">") { act({ type: "dungeon", command: { type: "descend" } }); render(); }
 });
 window.addEventListener("resize", () => render());
+window.addEventListener("blur", () => cancelPad?.());
 
 // Read-only hook for automated UI smoke tests (no state mutation).
 (window as unknown as { __tkmd: unknown }).__tkmd = {
@@ -738,4 +745,4 @@ window.addEventListener("resize", () => render());
 };
 
 render();
-void loadAssets(() => { applyInkTheme(); render(); });
+void loadAssets(() => { render(); });

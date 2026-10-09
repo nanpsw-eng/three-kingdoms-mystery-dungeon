@@ -1,4 +1,5 @@
-// Field-only miniature atlas. Portraits, combat identity and domain content are unchanged.
+// Shared modern figures/items: the same source is used on the field and battle stage.
+import { MVP_CONTENT } from "../../src/content/index.js";
 export interface FieldSprite { image: HTMLImageElement; sx: number; sy: number; width: number; height: number }
 const names = [
   "liu-bei", "cao-cao", "sun-quan", "recruit", "spear-unit", "archer-unit",
@@ -31,21 +32,43 @@ async function loadSheet(path: string, keys: readonly string[], columns: number,
 }
 export async function loadFieldArt(): Promise<void> {
   await Promise.all([
-    loadSheet("assets/field/ink-miniatures-v1.webp", names, 6, [0, 280, 565, 790, 1024]),
-    loadSheet("assets/field/ink-regular-miniatures-v1.webp", ["regular-spear", "regular-archer", "southern-warrior", "southern-archer"], 2, [0, 512, 1024], [[0, .5, 1], [0, .55, 1]]),
+    loadSheet("assets/modern/characters-v1.webp", ["liu-bei", "cao-cao", "sun-quan", "guan-yu", "zhang-fei", "zhao-yun", "zhuge-liang", "regular-spear", "cavalry-unit", "regular-archer", "recruit", "support-unit", "spear-unit", "archer-unit", "mage-unit", "boss-unit"], 4, [0,256,512,768,1024]),
+    loadSheet("assets/modern/objects-v1.webp", ["rice","medicine","herb","scroll","chest","sword","spear","bow","fan","armor","treasure","gate","stairs","trap","torch","sorcery"], 4, [0,256,512,768,1024]),
+    loadSheet("assets/modern/terrain-v1.webp", ["terrain-floor", "terrain-warm", "terrain-wall-cap", "terrain-wall-face"], 2, [0,512,1024]),
   ]);
+  // A failed atlas keeps the existing optional-art fallback playable.
+  if (!sprites.has("liu-bei")) await loadSheet("assets/field/ink-miniatures-v1.webp", names.slice(0,10), 6, [0,280,565,790,1024]);
 }
-export function fieldSprite(key: string): FieldSprite | undefined { return sprites.get(key); }
+export function fieldSprite(key: string): FieldSprite | undefined { return sprites.get(({"guard-unit":"boss-unit","southern-warrior":"regular-spear","southern-archer":"regular-archer"} as Record<string,string>)[key] ?? key); }
 export function fieldUnit(key: string, boss = false, ally = false): string {
+  if (/zhang-(jiao|bao|liang)/.test(key)) return "mage-unit";
   if (boss || key.startsWith("boss-")) return /jiao|bao|liang/.test(key) ? "mage-unit" : "boss-unit";
-  if (["liu-bei", "cao-cao", "sun-quan"].includes(key)) return key;
+  if (["liu-bei", "cao-cao", "sun-quan", "guan-yu", "zhang-fei", "zhao-yun", "zhuge-liang"].includes(key)) return key;
+  const character = MVP_CONTENT.characters.find(c => c.id === key || c.name === key);
+  if (character) return {infantry:"regular-spear",cavalry:"cavalry-unit",archer:"regular-archer",strategist:"recruit",support:"support-unit"}[character.characterClass];
   if (ally) return "recruit";
   if (/nanman|tribal|southern/.test(key)) return /archer|bow/.test(key) ? "southern-archer" : "southern-warrior";
-  if (/archer|bow|crossbow/.test(key)) return key.startsWith("yt-") ? "archer-unit" : "regular-archer";
-  if (/cavalry|raider|horse/.test(key)) return "cavalry-unit";
-  if (/sorcerer|chanter|mage|taoist/.test(key)) return "mage-unit";
-  if (/guard|heavy|rattan/.test(key)) return "guard-unit";
+  if (/archer|bow|crossbow|궁병|궁수|활/.test(key)) return /yt-|황건/.test(key) ? "archer-unit" : "regular-archer";
+  if (/cavalry|raider|horse|기병|약탈/.test(key)) return "cavalry-unit";
+  if (/sorcerer|chanter|mage|taoist|술사|도사|장각|장보|장량/.test(key)) return "mage-unit";
+  if (/guard|heavy|rattan|중갑|호위/.test(key)) return "boss-unit";
+  if (/황건/.test(key)) return "spear-unit";
   return key.startsWith("yt-") ? "spear-unit" : "regular-spear";
+}
+const urls = new Map<string, string>();
+/** Runtime atlas extraction, preserving alpha; body and head crops share one figure. */
+export function fieldImageUrl(key: string, head = false, item = false): string | undefined {
+  const role = item ? fieldItem(key) : fieldUnit(key);
+  const cacheKey = role + (head ? ":head" : ":body");
+  if (urls.has(cacheKey)) return urls.get(cacheKey);
+  const s = sprites.get(role); if (!s) return undefined;
+  const canvas = document.createElement("canvas"); canvas.width = head ? 128 : 192; canvas.height = head ? 128 : 224;
+  const ctx = canvas.getContext("2d")!;
+  const sourceHeight = head ? s.height * .38 : s.height;
+  const sourceWidth = head ? Math.min(s.width * .55, s.height * .48) : s.width;
+  const scale = Math.min(canvas.width / sourceWidth, canvas.height / sourceHeight);
+  ctx.drawImage(s.image,s.sx+(s.width-sourceWidth)/2,s.sy,sourceWidth,sourceHeight,(canvas.width-sourceWidth*scale)/2,(canvas.height-sourceHeight*scale)/2,sourceWidth*scale,sourceHeight*scale);
+  const url = canvas.toDataURL(); urls.set(cacheKey,url); return url;
 }
 export function fieldItem(id: string): string {
   if (/rice|bun/.test(id)) return "rice";

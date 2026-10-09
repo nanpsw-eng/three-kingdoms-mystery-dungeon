@@ -140,6 +140,8 @@ export type RunEvent =
   | Readonly<{ type: "run-failed"; cause: "battle" | "starvation" }>;
 
 export interface RunOptions {
+  /** Persist with the save options. Missing means legacy maps on every floor. */
+  readonly dungeonLayout?: "legacy-v1" | "compact-v2";
   readonly seed: Seed;
   readonly campaignId: string;
   readonly rulerId: string;
@@ -201,6 +203,7 @@ export class RunEngine {
   readonly #rulerId: string;
   readonly #renown: number;
   readonly #seed: Seed;
+  readonly #dungeonLayout: "legacy-v1" | "compact-v2";
   readonly #rng: { traits: SeededRng; loot: SeededRng; shop: SeededRng; recruit: SeededRng; floors: SeededRng };
   readonly #unlockedCharacters: ReadonlySet<string>;
   readonly #party: Member[] = [];
@@ -232,6 +235,8 @@ export class RunEngine {
   #battles = 0;
 
   constructor(content: ContentPack, options: RunOptions) {
+    if (options.dungeonLayout !== undefined && options.dungeonLayout !== "legacy-v1" && options.dungeonLayout !== "compact-v2") throw new RangeError("Unknown dungeon layout version.");
+    this.#dungeonLayout = options.dungeonLayout ?? "legacy-v1";
     this.content = content;
     this.#characters = byId(content.characters);
     this.#traits = byId(content.traits);
@@ -713,6 +718,7 @@ export class RunEngine {
     const floorRng = this.#rng.floors.fork("floor-" + index);
     const modifier = plan.modifiers !== undefined && plan.modifiers.length > 0 && floorRng.chance(plan.modifierChance ?? 0) ? pickWeighted(floorRng, plan.modifiers) : undefined;
     const spec: FloorSpec = {
+      layoutVersion: this.#dungeonLayout,
       seed: String(this.#seed) + "::" + this.campaign.id,
       depth: plan.depth,
       enemyGroups: plan.enemyGroups,
