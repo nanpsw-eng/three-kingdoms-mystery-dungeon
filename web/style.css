@@ -26,3 +26,14 @@ button{font:inherit;color:var(--ink);min-height:44px;padding:8px 10px;background
 @media(max-height:640px) and (orientation:portrait){.expedition-turn{display:none}.expedition-party{padding:3px}.expedition-party .member img{width:28px;height:30px}.exploration-message>#map-instruction{display:none}.field{gap:8px}.unit-head img{height:52px}}
 @media(orientation:landscape) and (max-height:540px) and (min-width:600px){#app[data-screen="dungeon"]{max-width:900px;grid-template-columns:minmax(220px,1fr) minmax(310px,1fr);grid-template-rows:auto auto auto minmax(138px,1fr) auto auto}.exploration-header,.exploration-goal{grid-column:1/-1}.map-stage{grid-column:1;grid-row:3/7}.expedition-party{grid-column:2;grid-row:3}.dungeon-controls{grid-column:2;grid-row:4}.utility-bar{grid-column:2;grid-row:5}.exploration-message{grid-column:2;grid-row:6}#app[data-screen="battle"]{max-width:900px}.battle-header{display:flex;justify-content:space-between;gap:12px}.field{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}.unit-head img{height:48px}.side-caption{display:none}.battle-actor{flex:1}.battle-heading{flex:1}.battle-timeline{max-height:36px}.target-hint{flex-wrap:nowrap}.target-hint>.grow{flex:1;flex-basis:auto}.target-hint>button{flex:0 0 80px}.selection-effect{width:auto;flex:1}.battle-actions button{min-height:44px}.latest-event{line-height:16px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+/* Compact landscape party keeps five members and long floor conditions above controls. */
+@media(orientation:landscape) and (max-height:540px) and (min-width:600px){
+ .pad-wrap>small,.exploration-message>#map-instruction{display:none}
+ .expedition-party:is([data-count="4"],[data-count="5"]){padding:4px;gap:4px}
+ .expedition-party:is([data-count="4"],[data-count="5"]) .member{flex-direction:row;gap:3px}
+ .expedition-party:is([data-count="4"],[data-count="5"]) .member img{width:28px;height:28px}
+ .expedition-party:is([data-count="4"],[data-count="5"]) .member-info{min-width:0;text-align:left}
+ .expedition-party:is([data-count="4"],[data-count="5"]) .member-info .row{font-size:11px}
+}
+button.primary:hover:not(:disabled){background:#aa2c3e}
+.achievement-seal{display:grid;place-items:center;width:44px;height:44px;flex:none;border:1px solid #6a819b;border-radius:12px;color:#b7c7da;background:#0f2136;font-size:20px}.achievement-seal.earned{color:#ffd68d;border-color:#bc9864;background:#383023}
