@@ -1,0 +1,369 @@
+import { validateItemDefinition, validateSkillDefinition } from "./action.js";
+import { rollDamage } from "./damage.js";
+import { FORMATION_SLOTS, Formation } from "./formation.js";
+import { StatusStore } from "./status.js";
+import { SpdTimeline } from "./timeline.js";
+import { BattleUnit, MAX_ENERGY } from "./unit.js";
+import { BASE_EVASION_CHANCE, SURPRISE_INITIAL_ACTION_DELAY_MODIFIER, SURPRISE_INITIAL_ENERGY } from "./balance.js";
+import { SeededRng } from "../core/rng.js";
+import { BASIC_ATTACK_ENERGY, BASIC_ATTACK_POWER, CRITICAL_ENERGY, GUARD_DAMAGE_MULTIPLIER, GUARD_ENERGY, HIT_RECEIVED_ENERGY, KILL_ENERGY, MAX_ACTIVE_SKILLS_PER_ALLY, MAX_ULTIMATES_PER_ALLY } from "./balance.js";
+export { BASIC_ATTACK_ENERGY, BASIC_ATTACK_POWER, CRITICAL_ENERGY, GUARD_DAMAGE_MULTIPLIER, GUARD_ENERGY, HIT_RECEIVED_ENERGY, KILL_ENERGY };
+function oppositeSide(side) { return side === "ally" ? "enemy" : "ally"; }
+function hashStringFNV1a(value) { let hash = 0x811c9dc5; for (let index = 0; index < value.length; index += 1) {
+    hash ^= value.charCodeAt(index);
+    hash = Math.imul(hash, 0x01000193);
+} return (hash >>> 0).toString(16).padStart(8, "0"); }
+function unique(values) { return new Set(values).size === values.length; }
+export class BattleEngine {
+    #rng;
+    #evasionRng;
+    #timeline = new SpdTimeline();
+    #units = new Map();
+    #reach = new Map();
+    #formations = { ally: new Formation("ally"), enemy: new Formation("enemy") };
+    #guarding = new Set();
+    #statuses = new Map();
+    #skills = new Map();
+    #skillOwners = new Map();
+    #items = new Map();
+    #inventories = { ally: [], enemy: [] };
+    #pendingNormalShift = new Map();
+    #koSlots = new Map();
+    #retreatAllowed;
+    #activeTurn = null;
+    #turnIndex = 0;
+    #outcome = "ongoing";
+    #retreatPendingSide = null;
+    constructor(definition) {
+        this.#rng = new SeededRng(definition.seed).fork("battle");
+        this.#evasionRng = this.#rng.fork("evasion");
+        this.#retreatAllowed = definition.retreatAllowed ?? true;
+        for (const skill of definition.skills ?? []) {
+            validateSkillDefinition(skill);
+            if (this.#skills.has(skill.id))
+                throw new Error("Duplicate skill id: " + skill.id);
+            this.#skills.set(skill.id, Object.freeze({ ...skill, effects: [...skill.effects] }));
+        }
+        for (const item of definition.items ?? []) {
+            validateItemDefinition(item);
+            if (this.#items.has(item.id))
+                throw new Error("Duplicate item id: " + item.id);
+            this.#items.set(item.id, Object.freeze({ ...item, effects: [...item.effects] }));
+        }
+        const sideCount = { ally: 0, enemy: 0 };
+        for (const participant of definition.participants) {
+            const id = participant.unit.id;
+            if (this.#units.has(id))
+                throw new Error("Duplicate battle unit id: " + id);
+            sideCount[participant.unit.side] += 1;
+            if (sideCount[participant.unit.side] > 5)
+                throw new RangeError("Battle side exceeds five units: " + participant.unit.side);
+            for (const skillId of participant.skillIds ?? [])
+                if (!this.#skills.has(skillId))
+                    throw new Error("Unknown participant skill id: " + skillId);
+            if (participant.unit.side === "ally") {
+                const kinds = (participant.skillIds ?? []).map((skillId) => this.#skills.get(skillId)?.kind);
+                if (kinds.filter((kind) => kind === "active").length > MAX_ACTIVE_SKILLS_PER_ALLY || kinds.filter((kind) => kind === "ultimate").length > MAX_ULTIMATES_PER_ALLY)
+                    throw new RangeError("Ally loadout exceeds " + MAX_ACTIVE_SKILLS_PER_ALLY + " active skills or " + MAX_ULTIMATES_PER_ALLY + " ultimate: " + id);
+            }
+            const unit = new BattleUnit(participant.unit, participant.entry);
+            this.#units.set(id, unit);
+            this.#reach.set(id, participant.basicAttackReach);
+            this.#skillOwners.set(id, new Set(participant.skillIds ?? []));
+            this.#statuses.set(id, new StatusStore());
+            const koAtSlot = [...this.#koSlots].some(([other, slot]) => slot === participant.slot && this.#units.get(other)?.side === unit.side);
+            if (koAtSlot || this.#formations[unit.side].unitAt(participant.slot) !== undefined)
+                throw new Error("Formation slot already occupied: " + participant.slot);
+            if (unit.knockedOut)
+                this.#koSlots.set(id, participant.slot);
+            else
+                this.#formations[unit.side].place(id, participant.slot);
+        }
+        if (sideCount.ally === 0 || sideCount.enemy === 0)
+            throw new RangeError("Battle requires at least one ally and one enemy.");
+        for (const side of ["ally", "enemy"])
+            if (![...this.#units.values()].some((unit) => unit.side === side && !unit.knockedOut))
+                throw new RangeError("Battle requires at least one living unit per side: " + side);
+        if (definition.surprise !== undefined && definition.surprise !== "ally" && definition.surprise !== "enemy")
+            throw new RangeError("Battle surprise must be ally or enemy.");
+        for (const side of ["ally", "enemy"]) {
+            for (const itemId of definition.inventories?.[side] ?? []) {
+                if (!this.#items.has(itemId))
+                    throw new Error("Unknown inventory item id: " + itemId);
+                this.#inventories[side].push(itemId);
+            }
+        }
+        const timelineOrder = this.#rng.fork("initial-timeline-order").shuffle(definition.participants);
+        for (const participant of timelineOrder) {
+            const unit = this.#requireUnit(participant.unit.id);
+            if (unit.knockedOut)
+                continue;
+            const surprising = definition.surprise === unit.side;
+            if (surprising)
+                unit.gainEnergy(Math.min(SURPRISE_INITIAL_ENERGY, MAX_ENERGY - unit.energy));
+            this.#timeline.registerActor({ id: unit.id, spd: unit.stats.spd }, surprising ? SURPRISE_INITIAL_ACTION_DELAY_MODIFIER : 1);
+        }
+    }
+    get outcome() { return this.#outcome; }
+    nextTurn() { if (this.#outcome !== "ongoing")
+        return null; if (this.#activeTurn !== null)
+        throw new Error("Current turn must be resolved before taking the next turn."); while (true) {
+        const event = this.#timeline.takeNext();
+        if (event === undefined)
+            return null;
+        const unit = this.#requireUnit(event.actorId);
+        if (unit.knockedOut)
+            throw new Error("KO actor remained on timeline: " + event.actorId);
+        if (this.#retreatPendingSide !== null && unit.side === this.#retreatPendingSide)
+            continue;
+        this.#turnIndex += 1;
+        if (event.kind === "normal") {
+            this.#guarding.delete(event.actorId);
+            if (this.#resolveStatusDrivenNormalTurn(unit)) {
+                if (this.#outcome !== "ongoing")
+                    return null;
+                continue;
+            }
+        }
+        this.#activeTurn = event;
+        return { ...event };
+    } }
+    legalBasicTargets(actorId) { const actor = this.#requireLivingUnit(actorId); const enemyFormation = this.#formations[oppositeSide(actor.side)]; const reach = this.#reach.get(actorId); if (reach === undefined)
+        throw new Error("Missing basic attack reach: " + actorId); const base = reach === "ranged" ? [...enemyFormation.unitsInRow("front"), ...enemyFormation.unitsInRow("rear")] : (enemyFormation.unitsInRow("front").length > 0 ? enemyFormation.unitsInRow("front") : enemyFormation.unitsInRow("rear")); return this.#applyTaunt(actorId, base, true); }
+    ownedSkills(actorId) { this.#requireLivingUnit(actorId); const ids = this.#skillOwners.get(actorId) ?? new Set(); return [...ids].map((id) => this.#skills.get(id)).filter((skill) => skill !== undefined).map((skill) => ({ ...skill, effects: [...skill.effects] })); }
+    legalAbilityTargets(actorId, targeting) { const actor = this.#requireLivingUnit(actorId); const state = targeting.state ?? "living"; if (targeting.team === "self")
+        return state === "ko" ? [] : [actor.id]; const side = targeting.team === "ally" ? actor.side : oppositeSide(actor.side); const formation = this.#formations[side]; const living = targeting.access === "front" ? formation.unitsInRow("front") : [...formation.unitsInRow("front"), ...formation.unitsInRow("rear")]; const ko = [...this.#units.values()].filter((unit) => unit.side === side && unit.knockedOut).filter((unit) => { if (targeting.access !== "front")
+        return true; const slot = this.#koSlots.get(unit.id); return slot !== undefined && slot.startsWith("front-"); }).map((unit) => unit.id).sort(); let base = state === "living" ? living : state === "ko" ? ko : [...living, ...ko]; if (targeting.team === "enemy" && targeting.maxTargets === 1 && state !== "ko")
+        base = this.#applyTaunt(actorId, base, true); return base; }
+    execute(command) { if (this.#outcome !== "ongoing")
+        throw new Error("Battle is already resolved."); const active = this.#activeTurn; if (active === null)
+        throw new Error("No active turn. Call nextTurn() first."); if (command.actorId !== active.actorId)
+        throw new Error("Command actor does not own the active turn: " + command.actorId); let result; let actionSpeedModifier = 1; switch (command.type) {
+        case "attack":
+            result = this.#executeAttack(command);
+            break;
+        case "guard":
+            result = this.#executeGuard(command);
+            break;
+        case "formation":
+            result = this.#executeFormation(command);
+            break;
+        case "skill": {
+            const resolved = this.#executeSkill(command, "active");
+            result = resolved.result;
+            actionSpeedModifier = resolved.actionSpeedModifier;
+            break;
+        }
+        case "ultimate": {
+            const resolved = this.#executeSkill(command, "ultimate");
+            result = resolved.result;
+            actionSpeedModifier = resolved.actionSpeedModifier;
+            break;
+        }
+        case "item": {
+            const resolved = this.#executeItem(command);
+            result = resolved.result;
+            actionSpeedModifier = resolved.actionSpeedModifier;
+            break;
+        }
+        case "retreat":
+            result = this.#executeRetreat(command);
+            break;
+    } this.#finishActiveTurn(actionSpeedModifier); return { ...result, outcome: this.#outcome }; }
+    snapshot() { const units = [...this.#units.values()].map((unit) => unit.snapshot()).sort((left, right) => left.id.localeCompare(right.id)); const statuses = [...this.#statuses.entries()].map(([unitId, store]) => ({ unitId, statuses: store.snapshot() })).sort((left, right) => left.unitId.localeCompare(right.unitId)); return { rng: this.#rng.snapshot(), evasionRng: this.#evasionRng.snapshot(), time: this.#timeline.time, turnIndex: this.#turnIndex, outcome: this.#outcome, activeTurn: this.#activeTurn === null ? null : { ...this.#activeTurn }, units, statuses, allyFormation: this.#formations.ally.snapshot(), enemyFormation: this.#formations.enemy.snapshot(), timeline: this.#timeline.peek(), guarding: [...this.#guarding].sort(), inventories: { ally: [...this.#inventories.ally], enemy: [...this.#inventories.enemy] }, retreatPendingSide: this.#retreatPendingSide, koSlots: [...this.#koSlots.entries()].map(([unitId, slot]) => ({ unitId, slot })).sort((left, right) => left.unitId.localeCompare(right.unitId)) }; }
+    stateHash() { return hashStringFNV1a(JSON.stringify(this.snapshot())); }
+    #executeAttack(command) { const actor = this.#requireLivingUnit(command.actorId); const target = this.#requireLivingUnit(command.targetId); if (target.side === actor.side)
+        throw new Error("Basic attack target must be an enemy."); if (!this.legalBasicTargets(actor.id).includes(target.id))
+        throw new Error("Illegal basic attack target: " + target.id); const resolution = this.#applyDamage(actor.id, target.id, { type: "damage", recipient: "targets", kind: "physical", power: BASIC_ATTACK_POWER }); actor.gainEnergy(BASIC_ATTACK_ENERGY); return { actorId: actor.id, command, effects: [resolution], targetId: target.id, damage: resolution.amount, critical: resolution.critical, targetKo: resolution.targetKo, outcome: this.#outcome }; }
+    #executeGuard(command) { const actor = this.#requireLivingUnit(command.actorId); this.#guarding.add(actor.id); actor.gainEnergy(GUARD_ENERGY); return { actorId: actor.id, command, effects: [], outcome: this.#outcome }; }
+    #executeFormation(command) { const actor = this.#requireLivingUnit(command.actorId); this.#formations[actor.side].moveOrSwap(actor.id, command.targetSlot); return { actorId: actor.id, command, effects: [], outcome: this.#outcome }; }
+    #executeSkill(command, expectedKind) { const actor = this.#requireLivingUnit(command.actorId); const skill = this.#skills.get(command.skillId); if (skill === undefined)
+        throw new Error("Unknown skill: " + command.skillId); if (skill.kind !== expectedKind)
+        throw new Error("Skill kind mismatch for command: " + command.skillId); if (!this.#skillOwners.get(actor.id)?.has(skill.id))
+        throw new Error("Actor does not own skill: " + skill.id); this.#validateTargets(actor.id, command.targetIds, skill.targeting); if (actor.energy < skill.energyCost)
+        throw new Error("Insufficient energy for skill: " + skill.id); actor.spendEnergy(skill.energyCost); const effects = this.#executeEffects(actor.id, command.targetIds, skill.effects); return { result: { actorId: actor.id, command, effects, outcome: this.#outcome }, actionSpeedModifier: skill.actionSpeedModifier ?? 1 }; }
+    #executeItem(command) { const actor = this.#requireLivingUnit(command.actorId); const item = this.#items.get(command.itemId); if (item === undefined)
+        throw new Error("Unknown battle item: " + command.itemId); const inventory = this.#inventories[actor.side]; const index = inventory.indexOf(item.id); if (index < 0)
+        throw new Error("Battle item not available in " + actor.side + " inventory: " + item.id); this.#validateTargets(actor.id, command.targetIds, item.targeting); const effects = this.#executeEffects(actor.id, command.targetIds, item.effects); inventory.splice(index, 1); return { result: { actorId: actor.id, command, effects, outcome: this.#outcome }, actionSpeedModifier: item.actionSpeedModifier ?? 1 }; }
+    #executeRetreat(command) { const actor = this.#requireLivingUnit(command.actorId); if (!this.#retreatAllowed)
+        throw new Error("Retreat is not allowed in this battle."); if (this.#retreatPendingSide !== null)
+        throw new Error("A retreat is already pending."); this.#retreatPendingSide = actor.side; return { actorId: actor.id, command, effects: [], outcome: this.#outcome }; }
+    #validateTargets(actorId, targetIds, targeting) { if (!unique(targetIds))
+        throw new Error("Ability targetIds must be unique."); if (targetIds.length < targeting.minTargets || targetIds.length > targeting.maxTargets)
+        throw new RangeError("Ability target count is outside targeting bounds."); const legal = this.legalAbilityTargets(actorId, targeting); for (const targetId of targetIds)
+        if (!legal.includes(targetId))
+            throw new Error("Illegal ability target: " + targetId); }
+    #executeEffects(actorId, targetIds, effects) { const resolutions = []; const missed = new Set(); const actorSide = this.#requireUnit(actorId).side; for (const effect of effects) {
+        const recipients = this.#effectRecipients(actorId, targetIds, effect.recipient);
+        if (effect.type === "formation-swap" && recipients.length !== 1)
+            throw new Error("formation-swap requires exactly one selected target.");
+        for (const targetId of recipients) {
+            const unit = this.#units.get(targetId);
+            if (unit === undefined)
+                throw new Error("Unknown effect target: " + targetId);
+            if (missed.has(targetId)) {
+                resolutions.push({ effectType: effect.type, targetId, applied: false, evaded: true });
+                continue;
+            }
+            if (unit.knockedOut && effect.type !== "revive") {
+                resolutions.push({ effectType: effect.type, targetId, applied: false });
+                continue;
+            }
+            switch (effect.type) {
+                case "damage": {
+                    const resolution = this.#applyDamage(actorId, targetId, effect);
+                    resolutions.push(resolution);
+                    if (resolution.evaded === true && unit.side !== actorSide)
+                        missed.add(targetId);
+                    break;
+                }
+                case "heal": {
+                    const actor = this.#requireLivingUnit(actorId);
+                    const amount = Math.max(1, Math.round(effect.baseHeal * (actor.stats.int / 100) * (effect.modifier ?? 1)));
+                    const applied = unit.heal(amount);
+                    resolutions.push({ effectType: "heal", targetId, applied: applied > 0, amount: applied });
+                    break;
+                }
+                case "status": {
+                    const store = this.#statuses.get(targetId);
+                    if (store === undefined)
+                        throw new Error("Missing status store: " + targetId);
+                    const status = store.apply({ type: effect.statusType, durationRounds: effect.durationRounds, ...(effect.stacks === undefined ? {} : { stacks: effect.stacks }), ...(effect.magnitude === undefined ? {} : { magnitude: effect.magnitude }), sourceId: actorId });
+                    resolutions.push({ effectType: "status", targetId, applied: true, amount: status.stacks });
+                    break;
+                }
+                case "timeline-shift":
+                    this.#shiftTimeline(targetId, effect.amount);
+                    resolutions.push({ effectType: "timeline-shift", targetId, applied: true, amount: effect.amount });
+                    break;
+                case "energy": {
+                    let applied = 0;
+                    if (effect.amount > 0)
+                        applied = unit.gainEnergy(effect.amount);
+                    else {
+                        const drain = Math.min(unit.energy, -effect.amount);
+                        unit.spendEnergy(drain);
+                        applied = -drain;
+                    }
+                    resolutions.push({ effectType: "energy", targetId, applied: applied !== 0, amount: applied });
+                    break;
+                }
+                case "formation-swap": {
+                    const actor = this.#requireLivingUnit(actorId);
+                    if (unit.side !== actor.side)
+                        throw new Error("formation-swap target must be an ally.");
+                    const slot = this.#formations[actor.side].slotOf(unit.id);
+                    if (slot === undefined)
+                        throw new Error("Formation target has no slot: " + unit.id);
+                    this.#formations[actor.side].moveOrSwap(actor.id, slot);
+                    resolutions.push({ effectType: "formation-swap", targetId, applied: true });
+                    break;
+                }
+                case "cleanse": {
+                    const store = this.#statuses.get(targetId);
+                    if (store === undefined)
+                        throw new Error("Missing status store: " + targetId);
+                    const removed = store.clear(effect.statusTypes);
+                    resolutions.push({ effectType: "cleanse", targetId, applied: removed.length > 0, amount: removed.length });
+                    break;
+                }
+                case "extra-action": {
+                    if (effect.mode === "interrupt")
+                        this.#timeline.scheduleInterrupt(targetId);
+                    else
+                        this.#timeline.scheduleExtraAction(targetId, 0);
+                    resolutions.push({ effectType: "extra-action", targetId, applied: true });
+                    break;
+                }
+                case "revive": {
+                    if (!unit.knockedOut) {
+                        resolutions.push({ effectType: "revive", targetId, applied: false });
+                        break;
+                    }
+                    const revived = this.#reviveUnit(targetId, effect.hpRatio);
+                    resolutions.push({ effectType: "revive", targetId, applied: true, amount: revived });
+                    break;
+                }
+            }
+        }
+    } return resolutions; }
+    #effectRecipients(actorId, targetIds, recipient) { return recipient === "actor" ? [actorId] : targetIds; }
+    #applyDamage(actorId, targetId, effect) { const actor = this.#requireLivingUnit(actorId); const target = this.#requireLivingUnit(targetId); const defenseDown = this.#statuses.get(target.id)?.get("defense-down")?.magnitude ?? 0; const adjustedDef = Math.max(1, target.stats.def * Math.max(0.05, 1 - defenseDown)); if (this.#evasionRng.chance(effect.evasionChance ?? BASE_EVASION_CHANCE)) {
+        this.#updateOutcome();
+        return { effectType: "damage", targetId, applied: false, amount: 0, critical: false, targetKo: false, evaded: true };
+    } const guardedModifier = this.#guarding.has(target.id) ? GUARD_DAMAGE_MULTIPLIER : 1; const roll = rollDamage(this.#rng, { kind: effect.kind, skillPower: effect.power, attackerAtk: actor.stats.atk, attackerInt: actor.stats.int, targetDef: adjustedDef, targetInt: target.stats.int, modifier: (effect.modifier ?? 1) * guardedModifier, ...(effect.critChance === undefined ? {} : { critChance: effect.critChance }), ...(effect.critMultiplier === undefined ? {} : { critMultiplier: effect.critMultiplier }) }); const damage = target.takeDamage(roll.damage); if (roll.critical)
+        actor.gainEnergy(CRITICAL_ENERGY); if (!target.knockedOut)
+        target.gainEnergy(HIT_RECEIVED_ENERGY); if (target.knockedOut) {
+        actor.gainEnergy(KILL_ENERGY);
+        this.#recordKnockout(target);
+    } this.#updateOutcome(); return { effectType: "damage", targetId, applied: damage > 0, amount: damage, critical: roll.critical, targetKo: target.knockedOut }; }
+    #recordKnockout(unit) { this.#statuses.get(unit.id)?.clear(); const slot = this.#formations[unit.side].slotOf(unit.id); if (slot !== undefined)
+        this.#koSlots.set(unit.id, slot); this.#timeline.removeActor(unit.id); this.#formations[unit.side].remove(unit.id); this.#guarding.delete(unit.id); this.#pendingNormalShift.delete(unit.id); }
+    #reviveUnit(targetId, hpRatio) { const target = this.#requireUnit(targetId); if (!target.knockedOut)
+        throw new Error("Revive target must be KO: " + targetId); const formation = this.#formations[target.side]; const preferred = this.#koSlots.get(target.id); const slot = preferred !== undefined && formation.unitAt(preferred) === undefined ? preferred : FORMATION_SLOTS.find((candidate) => formation.unitAt(candidate) === undefined); if (slot === undefined)
+        throw new Error("No formation slot available for revived unit: " + targetId); const hp = Math.max(1, Math.round(target.stats.maxHp * hpRatio)); target.revive(hp); target.resetEnergy(); formation.place(target.id, slot); this.#koSlots.delete(target.id); this.#timeline.registerActor({ id: target.id, spd: target.stats.spd }); return target.hp; }
+    #shiftTimeline(targetId, amount) { if (this.#activeTurn?.actorId === targetId && this.#activeTurn.kind === "normal") {
+        this.#pendingNormalShift.set(targetId, (this.#pendingNormalShift.get(targetId) ?? 0) + amount);
+        return;
+    } this.#timeline.shiftNextNormalAction(targetId, amount); }
+    #resolveStatusDrivenNormalTurn(actor) { const store = this.#statuses.get(actor.id); if (store === undefined)
+        throw new Error("Missing status store: " + actor.id); const dotDamage = ["poison", "burn", "bleed"].reduce((sum, type) => { const status = store.get(type); return sum + (status === undefined ? 0 : Math.max(1, Math.round(status.magnitude * status.stacks))); }, 0); if (dotDamage > 0) {
+        actor.takeDamage(dotDamage);
+        if (actor.knockedOut) {
+            this.#recordKnockout(actor);
+            this.#updateOutcome();
+            return true;
+        }
+    } if (store.has("stun")) {
+        this.#completeNormalCycle(actor, 1);
+        return true;
+    } if (store.has("confusion")) {
+        const enemyTargets = [...this.legalBasicTargets(actor.id)];
+        const allyTargets = [...this.#formations[actor.side].unitsInRow("front"), ...this.#formations[actor.side].unitsInRow("rear")].filter((id) => id !== actor.id);
+        const targets = [...enemyTargets, ...allyTargets];
+        if (targets.length > 0) {
+            const targetId = this.#rng.pick(targets);
+            this.#applyDamage(actor.id, targetId, { type: "damage", recipient: "targets", kind: "physical", power: BASIC_ATTACK_POWER });
+            if (!actor.knockedOut)
+                actor.gainEnergy(BASIC_ATTACK_ENERGY);
+        }
+        if (this.#outcome === "ongoing" && !actor.knockedOut)
+            this.#completeNormalCycle(actor, 1);
+        else
+            store.tickRound();
+        return true;
+    } return false; }
+    #completeNormalCycle(actor, actionSpeedModifier) { const store = this.#statuses.get(actor.id); if (store === undefined)
+        throw new Error("Missing status store: " + actor.id); if (this.#outcome === "ongoing" && !actor.knockedOut && this.#retreatPendingSide !== actor.side) {
+        this.#timeline.scheduleAfterAction(actor.id, actionSpeedModifier);
+        const statusDelay = store.get("timeline-delay")?.magnitude ?? 0;
+        if (statusDelay > 0)
+            this.#timeline.shiftNextNormalAction(actor.id, statusDelay);
+        const pending = this.#pendingNormalShift.get(actor.id);
+        if (pending !== undefined) {
+            this.#timeline.shiftNextNormalAction(actor.id, pending);
+            this.#pendingNormalShift.delete(actor.id);
+        }
+    } store.tickRound(); }
+    #applyTaunt(actorId, base, single) { if (!single)
+        return base; const sourceId = this.#statuses.get(actorId)?.get("taunt")?.sourceId; return sourceId !== undefined && base.includes(sourceId) ? [sourceId] : base; }
+    #finishActiveTurn(actionSpeedModifier = 1) { const active = this.#activeTurn; if (active === null)
+        throw new Error("No active turn to finish."); const actor = this.#units.get(active.actorId); if (this.#outcome === "ongoing" && this.#retreatPendingSide !== null && actor !== undefined && actor.side !== this.#retreatPendingSide) {
+        const side = this.#retreatPendingSide;
+        for (const unit of this.#units.values())
+            if (unit.side === side && !unit.knockedOut)
+                unit.resetEnergy();
+        this.#outcome = side === "ally" ? "ally-retreated" : "enemy-retreated";
+        this.#retreatPendingSide = null;
+    } if (active.kind === "normal" && actor !== undefined && !actor.knockedOut)
+        this.#completeNormalCycle(actor, actionSpeedModifier); this.#activeTurn = null; }
+    #updateOutcome() { const livingAllies = [...this.#units.values()].some((unit) => unit.side === "ally" && !unit.knockedOut); const livingEnemies = [...this.#units.values()].some((unit) => unit.side === "enemy" && !unit.knockedOut); if (!livingEnemies)
+        this.#outcome = "ally-victory";
+    else if (!livingAllies)
+        this.#outcome = "enemy-victory"; }
+    #requireUnit(unitId) { const unit = this.#units.get(unitId); if (unit === undefined)
+        throw new Error(`Unknown battle unit: ${unitId}`); return unit; }
+    #requireLivingUnit(unitId) { const unit = this.#requireUnit(unitId); if (unit.knockedOut)
+        throw new Error(`Battle unit is KO: ${unitId}`); return unit; }
+}
+//# sourceMappingURL=battle.js.map
