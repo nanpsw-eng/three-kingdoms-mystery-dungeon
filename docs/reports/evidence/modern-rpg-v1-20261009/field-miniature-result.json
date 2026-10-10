@@ -1,0 +1,237 @@
+{
+  "passed": true,
+  "camera": [
+    {
+      "width": 70,
+      "height": 44,
+      "x": 237,
+      "y": 90.1875,
+      "right": 307,
+      "bottom": 134.1875,
+      "overflow": false
+    },
+    {
+      "width": 70,
+      "height": 44,
+      "x": 307,
+      "y": 91.390625,
+      "right": 377,
+      "bottom": 135.390625,
+      "overflow": false
+    },
+    {
+      "width": 70,
+      "height": 44,
+      "x": 344.5,
+      "y": 91.390625,
+      "right": 414.5,
+      "bottom": 135.390625,
+      "overflow": false
+    }
+  ],
+  "missing": [],
+  "unmapped": [],
+  "missingEnemies": [],
+  "sprites": [
+    {
+      "key": "liu-bei",
+      "sx": 8,
+      "sy": 6,
+      "width": 306,
+      "height": 308
+    },
+    {
+      "key": "cao-cao",
+      "sx": 314,
+      "sy": 6,
+      "width": 313,
+      "height": 306
+    },
+    {
+      "key": "sun-quan",
+      "sx": 627,
+      "sy": 6,
+      "width": 294,
+      "height": 307
+    },
+    {
+      "key": "recruit",
+      "sx": 705,
+      "sy": 633,
+      "width": 174,
+      "height": 300
+    },
+    {
+      "key": "spear-unit",
+      "sx": 43,
+      "sy": 941,
+      "width": 230,
+      "height": 298
+    },
+    {
+      "key": "archer-unit",
+      "sx": 358,
+      "sy": 941,
+      "width": 242,
+      "height": 296
+    },
+    {
+      "key": "cavalry-unit",
+      "sx": 11,
+      "sy": 629,
+      "width": 278,
+      "height": 312
+    },
+    {
+      "key": "mage-unit",
+      "sx": 649,
+      "sy": 948,
+      "width": 292,
+      "height": 292
+    },
+    {
+      "key": "guard-unit",
+      "sx": 941,
+      "sy": 941,
+      "width": 306,
+      "height": 300
+    },
+    {
+      "key": "boss-unit",
+      "sx": 941,
+      "sy": 941,
+      "width": 306,
+      "height": 300
+    },
+    {
+      "key": "rice",
+      "sx": 32,
+      "sy": 74,
+      "width": 259,
+      "height": 196
+    },
+    {
+      "key": "medicine",
+      "sx": 361,
+      "sy": 23,
+      "width": 225,
+      "height": 272
+    },
+    {
+      "key": "herb",
+      "sx": 638,
+      "sy": 16,
+      "width": 293,
+      "height": 289
+    },
+    {
+      "key": "scroll",
+      "sx": 962,
+      "sy": 45,
+      "width": 269,
+      "height": 235
+    },
+    {
+      "key": "chest",
+      "sx": 21,
+      "sy": 353,
+      "width": 287,
+      "height": 251
+    },
+    {
+      "key": "sword",
+      "sx": 332,
+      "sy": 338,
+      "width": 288,
+      "height": 275
+    },
+    {
+      "key": "spear",
+      "sx": 631,
+      "sy": 321,
+      "width": 296,
+      "height": 292
+    },
+    {
+      "key": "bow",
+      "sx": 963,
+      "sy": 320,
+      "width": 265,
+      "height": 296
+    },
+    {
+      "key": "fan",
+      "sx": 43,
+      "sy": 646,
+      "width": 251,
+      "height": 282
+    },
+    {
+      "key": "armor",
+      "sx": 323,
+      "sy": 634,
+      "width": 285,
+      "height": 297
+    },
+    {
+      "key": "treasure",
+      "sx": 650,
+      "sy": 642,
+      "width": 291,
+      "height": 299
+    },
+    {
+      "key": "gate",
+      "sx": 941,
+      "sy": 629,
+      "width": 306,
+      "height": 312
+    },
+    {
+      "key": "stairs",
+      "sx": 14,
+      "sy": 958,
+      "width": 292,
+      "height": 275
+    },
+    {
+      "key": "trap",
+      "sx": 320,
+      "sy": 984,
+      "width": 302,
+      "height": 219
+    },
+    {
+      "key": "regular-spear",
+      "sx": 1045,
+      "sy": 317,
+      "width": 186,
+      "height": 309
+    },
+    {
+      "key": "regular-archer",
+      "sx": 362,
+      "sy": 628,
+      "width": 249,
+      "height": 313
+    },
+    {
+      "key": "southern-warrior",
+      "sx": 1045,
+      "sy": 317,
+      "width": 186,
+      "height": 309
+    },
+    {
+      "key": "southern-archer",
+      "sx": 362,
+      "sy": 628,
+      "width": 249,
+      "height": 313
+    }
+  ],
+  "transparentFraction": 0.5737664990372117,
+  "stable": true,
+  "fallbackPassed": true,
+  "errors": []
+}

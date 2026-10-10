@@ -5,6 +5,13 @@ import { figureCanvas, iconCanvas } from "./sprites.js";
 
 export const VIEW_RADIUS = 7;
 const T = 16;
+/** Fit a revealed compact room plus its wall rim; large legacy rooms follow the player. */
+export function mapOrigin(dungeon: DungeonEngine, radius: number): Point {
+  const p=dungeon.position, view=radius*2+1;
+  const room=dungeon.floor?.rooms?.find(r=>p.x>=r.x&&p.y>=r.y&&p.x<r.x+r.width&&p.y<r.y+r.height);
+  if(room && room.width+2<=view && room.height+2<=view) return {x:room.x+Math.floor(room.width/2)-radius,y:room.y+Math.floor(room.height/2)-radius};
+  return {x:p.x-radius,y:p.y-radius};
+}
 
 // Deterministic per-tile noise so floors look hand-laid but never flicker.
 function hash(x: number, y: number, salt = 0): number {
@@ -105,11 +112,11 @@ const SORCERY = makeTile((ctx) => {
 export interface MapOptions {
   readonly playerKey: string;
   readonly enemyKey: (groupId: string) => string;
-  readonly radius?: 5 | 7;
+  readonly radius?: 4 | 5 | 7;
 }
 
 export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, options: MapOptions): void {
-  const radius = options.radius ?? VIEW_RADIUS;
+  const radius = options.radius ?? 4;
   const view = radius * 2 + 1;
   canvas.dataset.viewRadius = String(radius);
   const ratio = window.devicePixelRatio || 1;
@@ -120,11 +127,11 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   const ctx = canvas.getContext("2d");
   if (ctx === null) return;
   ctx.imageSmoothingEnabled = false;
-  ctx.fillStyle = "#3a352f";
+  ctx.fillStyle = "#060d17";
   ctx.fillRect(0, 0, size, size);
-  const origin = { x: dungeon.position.x - radius, y: dungeon.position.y - radius };
-  // ink pooling: soft per-cell variation so unexplored space reads as wash, not a flat black block
-  for (let vy = 0; vy < view; vy++) {
+  const origin = mapOrigin(dungeon,radius);
+  // Legacy fallback wash is only used if the modern terrain failed to load.
+  for (let vy = 0; !fieldSprite("terrain-floor") && vy < view; vy++) {
     for (let vx = 0; vx < view; vx++) {
       const n = hash(origin.x + vx, origin.y + vy, 11);
       // soft blots larger than a cell, low alpha, so neighbouring cells blend instead of forming a checkerboard
@@ -161,9 +168,9 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
     ctx.restore(); return true;
   };
   const marker = (p: Point, kind: "ally" | "enemy" | "item", boss = false): void => {
-    const [x, y] = at(p), color = kind === "ally" ? "#365b50" : kind === "enemy" ? "#9d382b" : "#916221";
+    const [x, y] = at(p), color = kind === "ally" ? "#73ffdb" : kind === "enemy" ? "#ff6b87" : "#ffd68d";
     ctx.save(); ctx.lineWidth = Math.max(1, cell * .045);
-    ctx.fillStyle = "rgba(244,235,216,.88)"; ctx.strokeStyle = color;
+    ctx.fillStyle = kind === "ally" ? "rgba(34,197,160,.32)" : kind === "enemy" ? "rgba(219,36,85,.35)" : "rgba(215,166,60,.25)"; ctx.strokeStyle = color;
     ctx.beginPath(); ctx.ellipse(x + cell * .5, y + cell * .85, cell * .39, cell * .11, 0, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
     ctx.fillStyle = color;
     if (kind === "item") {
@@ -190,6 +197,15 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   };
   /** Draws a named tileset tile when one is loaded, else the procedural fallback. */
   const terrain = (name: string, fallback: CanvasImageSource, p: Point, variant = 0): void => {
+    const modern = fieldSprite(name.startsWith("wall-") ? "terrain-" + name : "terrain-" + (variant > .8 ? "warm" : "floor"));
+    if (modern) {
+      const [x,y] = at(p); ctx.imageSmoothingEnabled=true;
+      ctx.drawImage(modern.image,modern.sx,modern.sy,modern.width,modern.height,x,y,cell,cell);
+      ctx.strokeStyle="rgba(3,10,18,.28)";ctx.lineWidth=Math.max(1,cell*.02);ctx.strokeRect(x,y,cell,cell);
+      if(name==="stairs" || name==="gate") miniature(name,p,.96);
+      if(name.startsWith("trap-")) { miniature("trap",p,.78); ctx.fillStyle="#fff0d2";ctx.font=`bold ${Math.max(11,cell*.28)}px sans-serif`;ctx.fillText("!",x+cell*.74,y+cell*.29); }
+      return;
+    }
     if (name === "gate") { const [x,y] = at(p); ctx.fillStyle = "#e5dbc4"; ctx.fillRect(x,y,cell,cell); }
     if ((name === "stairs" || name === "gate") && miniature(name, p, .94)) return;
     if (name.startsWith("trap-") && miniature("trap", p, .78)) {
@@ -269,6 +285,7 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
     if (!dungeon.isExplored(object.pos)) continue;
     // Harmful sorcery is a vermilion seal, never a loot marker.
     if (object.kind === "sorcery") {
+      if(miniature("sorcery",object.pos,.98)) continue;
       const [x,y] = at(object.pos); ctx.save(); ctx.strokeStyle = "#8f3429"; ctx.fillStyle = "rgba(244,235,216,.65)"; ctx.lineWidth = Math.max(1,cell*.045);
       ctx.beginPath(); ctx.arc(x+cell*.5,y+cell*.5,cell*.35,0,Math.PI*2); ctx.fill(); ctx.stroke();
       ctx.beginPath(); ctx.arc(x+cell*.5,y+cell*.5,cell*.26,0,Math.PI*2); ctx.stroke();
@@ -298,6 +315,7 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
   // localized 28% ink wash over remembered-but-not-visible ground; never a flat black cell.
   for (const p of fog) {
     const [x, y] = at(p);
+    if(fieldSprite("terrain-floor")){ctx.fillStyle="rgba(4,11,22,.55)";ctx.fillRect(x,y,cell,cell);continue;}
     const tile = assetTile("fog", hash(p.x, p.y, 19));
     ctx.globalAlpha = 0.28;
     const originalFog = paint("fog", p);
@@ -317,7 +335,7 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
     }
   }
   // Existing floor modifiers receive a subdued ink overlay; no new modifier semantics.
-  if (dungeon.floor.modifier) {
+  if (dungeon.floor.modifier && !fieldSprite("terrain-floor")) {
     ctx.globalAlpha = 0.08;
     for (let vy = 0; vy < view; vy++) for (let vx = 0; vx < view; vx++) {
       const p = {x:origin.x+vx,y:origin.y+vy};
@@ -366,10 +384,12 @@ export function drawMap(canvas: HTMLCanvasElement, dungeon: DungeonEngine, optio
 
 export function tileAt(canvas: HTMLCanvasElement, dungeon: DungeonEngine, clientX: number, clientY: number): Point {
   const rect = canvas.getBoundingClientRect();
-  const radius = Number(canvas.dataset.viewRadius) === 5 ? 5 : VIEW_RADIUS;
+  const raw = Number(canvas.dataset.viewRadius);
+  const radius = raw === 4 || raw === 5 || raw === 7 ? raw : 4;
   const cell = rect.width / (radius * 2 + 1);
+  const origin = mapOrigin(dungeon,radius);
   return {
-    x: dungeon.position.x - radius + Math.floor((clientX - rect.left) / cell),
-    y: dungeon.position.y - radius + Math.floor((clientY - rect.top) / cell),
+    x: origin.x + Math.floor((clientX - rect.left) / cell),
+    y: origin.y + Math.floor((clientY - rect.top) / cell),
   };
 }

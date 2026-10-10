@@ -1,0 +1,535 @@
+[
+  {
+    "spec": {
+      "seed": "legacy-layout-0",
+      "depth": 1,
+      "enemyGroups": [
+        {
+          "id": "yt",
+          "weight": 1
+        }
+      ],
+      "enemyCount": [
+        3,
+        5
+      ],
+      "traps": [
+        {
+          "id": "rockfall",
+          "weight": 1
+        }
+      ],
+      "trapCount": [
+        2,
+        4
+      ],
+      "objects": [
+        {
+          "kind": "item",
+          "pool": [
+            {
+              "id": "bun",
+              "weight": 1
+            }
+          ],
+          "count": [
+            2,
+            3
+          ]
+        }
+      ],
+      "mechanics": {
+        "gates": {
+          "defenderGroupId": "guard"
+        }
+      },
+      "boss": {
+        "groupId": "boss"
+      }
+    },
+    "sha256": "9bce6ccac5100f15f2a31fd3cb1b60b4e52a4fd807bbecd5678a8c5169c3b144"
+  },
+  {
+    "spec": {
+      "seed": "legacy-layout-1",
+      "depth": 2,
+      "enemyGroups": [
+        {
+          "id": "yt",
+          "weight": 1
+        }
+      ],
+      "enemyCount": [
+        3,
+        5
+      ],
+      "traps": [
+        {
+          "id": "rockfall",
+          "weight": 1
+        }
+      ],
+      "trapCount": [
+        2,
+        4
+      ],
+      "objects": [
+        {
+          "kind": "item",
+          "pool": [
+            {
+              "id": "bun",
+              "weight": 1
+            }
+          ],
+          "count": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    "sha256": "b6caa4b58cd2d16965aa8e343a09821a0dc7fda10e66bc1bae11d428c47d08f6"
+  },
+  {
+    "spec": {
+      "seed": "legacy-layout-2",
+      "depth": 3,
+      "enemyGroups": [
+        {
+          "id": "yt",
+          "weight": 1
+        }
+      ],
+      "enemyCount": [
+        3,
+        5
+      ],
+      "traps": [
+        {
+          "id": "rockfall",
+          "weight": 1
+        }
+      ],
+      "trapCount": [
+        2,
+        4
+      ],
+      "objects": [
+        {
+          "kind": "item",
+          "pool": [
+            {
+              "id": "bun",
+              "weight": 1
+            }
+          ],
+          "count": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    "sha256": "dc2782e065d9cf6ca2672c674d9a902d17d267cf5f418d1f513a3fc0ed29867a"
+  },
+  {
+    "spec": {
+      "seed": "legacy-layout-3",
+      "depth": 4,
+      "enemyGroups": [
+        {
+          "id": "yt",
+          "weight": 1
+        }
+      ],
+      "enemyCount": [
+        3,
+        5
+      ],
+      "traps": [
+        {
+          "id": "rockfall",
+          "weight": 1
+        }
+      ],
+      "trapCount": [
+        2,
+        4
+      ],
+      "objects": [
+        {
+          "kind": "item",
+          "pool": [
+            {
+              "id": "bun",
+              "weight": 1
+            }
+          ],
+          "count": [
+            2,
+            3
+          ]
+        }
+      ],
+      "mechanics": {
+        "gates": {
+          "defenderGroupId": "guard"
+        }
+      }
+    },
+    "sha256": "9d51cc7b52a72fcc701f0fbede718405b274f4a16f215b54af784063aab6281d"
+  },
+  {
+    "spec": {
+      "seed": "legacy-layout-4",
+      "depth": 5,
+      "enemyGroups": [
+        {
+          "id": "yt",
+          "weight": 1
+        }
+      ],
+      "enemyCount": [
+        3,
+        5
+      ],
+      "traps": [
+        {
+          "id": "rockfall",
+          "weight": 1
+        }
+      ],
+      "trapCount": [
+        2,
+        4
+      ],
+      "objects": [
+        {
+          "kind": "item",
+          "pool": [
+            {
+              "id": "bun",
+              "weight": 1
+            }
+          ],
+          "count": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    "sha256": "5f1cb18c177a1d8a174b90f9f789effb7efbdcc786dece27779a30a62ceed972"
+  },
+  {
+    "spec": {
+      "seed": "legacy-layout-5",
+      "depth": 6,
+      "enemyGroups": [
+        {
+          "id": "yt",
+          "weight": 1
+        }
+      ],
+      "enemyCount": [
+        3,
+        5
+      ],
+      "traps": [
+        {
+          "id": "rockfall",
+          "weight": 1
+        }
+      ],
+      "trapCount": [
+        2,
+        4
+      ],
+      "objects": [
+        {
+          "kind": "item",
+          "pool": [
+            {
+              "id": "bun",
+              "weight": 1
+            }
+          ],
+          "count": [
+            2,
+            3
+          ]
+        }
+      ],
+      "boss": {
+        "groupId": "boss"
+      }
+    },
+    "sha256": "3a0d63079a580195139e8367316a8f75b1e9ca05aec340868d613773739d5934"
+  },
+  {
+    "spec": {
+      "seed": "legacy-layout-6",
+      "depth": 7,
+      "enemyGroups": [
+        {
+          "id": "yt",
+          "weight": 1
+        }
+      ],
+      "enemyCount": [
+        3,
+        5
+      ],
+      "traps": [
+        {
+          "id": "rockfall",
+          "weight": 1
+        }
+      ],
+      "trapCount": [
+        2,
+        4
+      ],
+      "objects": [
+        {
+          "kind": "item",
+          "pool": [
+            {
+              "id": "bun",
+              "weight": 1
+            }
+          ],
+          "count": [
+            2,
+            3
+          ]
+        }
+      ],
+      "mechanics": {
+        "gates": {
+          "defenderGroupId": "guard"
+        }
+      }
+    },
+    "sha256": "981476338fb2ca687ee031affa3b7721f6ae9b3eebd778d7e9f90e5f356e73a2"
+  },
+  {
+    "spec": {
+      "seed": "legacy-layout-7",
+      "depth": 8,
+      "enemyGroups": [
+        {
+          "id": "yt",
+          "weight": 1
+        }
+      ],
+      "enemyCount": [
+        3,
+        5
+      ],
+      "traps": [
+        {
+          "id": "rockfall",
+          "weight": 1
+        }
+      ],
+      "trapCount": [
+        2,
+        4
+      ],
+      "objects": [
+        {
+          "kind": "item",
+          "pool": [
+            {
+              "id": "bun",
+              "weight": 1
+            }
+          ],
+          "count": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    "sha256": "6865b5e09a434298ae7cf829fce0334fccb4443b91ba7f0d2bbd2dba0f005723"
+  },
+  {
+    "spec": {
+      "seed": "legacy-layout-8",
+      "depth": 9,
+      "enemyGroups": [
+        {
+          "id": "yt",
+          "weight": 1
+        }
+      ],
+      "enemyCount": [
+        3,
+        5
+      ],
+      "traps": [
+        {
+          "id": "rockfall",
+          "weight": 1
+        }
+      ],
+      "trapCount": [
+        2,
+        4
+      ],
+      "objects": [
+        {
+          "kind": "item",
+          "pool": [
+            {
+              "id": "bun",
+              "weight": 1
+            }
+          ],
+          "count": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    "sha256": "80c6b2d6c9944f1a5b054cfe79a6ee9cc9066c47eefaa81c3b8a41aefe0c63f5"
+  },
+  {
+    "spec": {
+      "seed": "legacy-layout-9",
+      "depth": 10,
+      "enemyGroups": [
+        {
+          "id": "yt",
+          "weight": 1
+        }
+      ],
+      "enemyCount": [
+        3,
+        5
+      ],
+      "traps": [
+        {
+          "id": "rockfall",
+          "weight": 1
+        }
+      ],
+      "trapCount": [
+        2,
+        4
+      ],
+      "objects": [
+        {
+          "kind": "item",
+          "pool": [
+            {
+              "id": "bun",
+              "weight": 1
+            }
+          ],
+          "count": [
+            2,
+            3
+          ]
+        }
+      ],
+      "mechanics": {
+        "gates": {
+          "defenderGroupId": "guard"
+        }
+      }
+    },
+    "sha256": "efa2229cb17cff2d641b150c081bf28e419fea9bc24eb59b1f2435bbd2c04eac"
+  },
+  {
+    "spec": {
+      "seed": "legacy-layout-10",
+      "depth": 11,
+      "enemyGroups": [
+        {
+          "id": "yt",
+          "weight": 1
+        }
+      ],
+      "enemyCount": [
+        3,
+        5
+      ],
+      "traps": [
+        {
+          "id": "rockfall",
+          "weight": 1
+        }
+      ],
+      "trapCount": [
+        2,
+        4
+      ],
+      "objects": [
+        {
+          "kind": "item",
+          "pool": [
+            {
+              "id": "bun",
+              "weight": 1
+            }
+          ],
+          "count": [
+            2,
+            3
+          ]
+        }
+      ],
+      "boss": {
+        "groupId": "boss"
+      }
+    },
+    "sha256": "7e12a221158f2fde9530cfba793285863abe09a15c305d9a29013b7311588eff"
+  },
+  {
+    "spec": {
+      "seed": "legacy-layout-11",
+      "depth": 12,
+      "enemyGroups": [
+        {
+          "id": "yt",
+          "weight": 1
+        }
+      ],
+      "enemyCount": [
+        3,
+        5
+      ],
+      "traps": [
+        {
+          "id": "rockfall",
+          "weight": 1
+        }
+      ],
+      "trapCount": [
+        2,
+        4
+      ],
+      "objects": [
+        {
+          "kind": "item",
+          "pool": [
+            {
+              "id": "bun",
+              "weight": 1
+            }
+          ],
+          "count": [
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    "sha256": "d0c66087f7a65fca744163d1943911bd36d287fe4834f0d6280ba86103f72919"
+  }
+]

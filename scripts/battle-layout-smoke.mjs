@@ -31,7 +31,7 @@ try{
  for(let i=0;i<400&&(await state()).phase!=='battle';i++){
   const s=await state();if(await page.locator('.modal').count()){await page.locator('.modal .choice,.modal button.primary').first().click();continue;}
   if(s.phase!=='dungeon'){await page.getByRole('button',{name:'출발',exact:true}).click();continue;}
-  if(s.enemies.length){const e=s.enemies.sort((a,b)=>Math.max(Math.abs(a.dx),Math.abs(a.dy))-Math.max(Math.abs(b.dx),Math.abs(b.dy)))[0];await page.keyboard.press(keys[`${Math.sign(e.dx)},${Math.sign(e.dy)}`]);}
+  if(s.enemies.length){const e=s.enemies.sort((a,b)=>Math.max(Math.abs(a.dx),Math.abs(a.dy))-Math.max(Math.abs(b.dx),Math.abs(b.dy)))[0];await page.keyboard.press(({n:"8",ne:"9",e:"6",se:"3",s:"2",sw:"1",w:"4",nw:"7"})[e.approach] ?? "5");}
   else{await page.keyboard.press('Enter');if((await state()).turn===s.turn)await page.keyboard.press(['6','2','4','8','3','9'][i%6]);}
  }
  assert.equal((await state()).phase,'battle');
@@ -74,10 +74,10 @@ try{
  const definition=representativeDefinition('battle-ui-stage3');
  const installFixture=()=>fixture.evaluate(async definition=>{
   const {BattleEngine,MVP_CONTENT}=await import('./src/index.js');const {battleField}=await import('./web/src/battle-ui.js');
-  const {nativeAssetPortrait}=await import('./web/src/assets.js');
+  const {fieldImageUrl}=await import('./web/src/field-art.js');
   const battle=new BattleEngine(definition),snapshot=battle.snapshot();
   const names=new Map(MVP_CONTENT.characters.map(c=>[c.id,c.name]));const app=document.querySelector('#app');app.dataset.screen='battle';
-  const field=battleField({snapshot,name:id=>names.get(id)??id,portrait:id=>{const img=document.createElement('img');img.className='native-portrait';img.src=nativeAssetPortrait(id);return img;},legal:new Set(),selected:new Set(),hit:new Set(),healed:new Set(),formationPicking:false,onUnit:()=>{},onSlot:()=>{}});
+  const field=battleField({snapshot,name:id=>names.get(id)??id,portrait:id=>{const img=document.createElement('img');img.className='native-portrait';img.src=fieldImageUrl(id);return img;},legal:new Set(),selected:new Set(),hit:new Set(),healed:new Set(),formationPicking:false,onUnit:()=>{},onSlot:()=>{}});
   app.replaceChildren(field);
  },definition);
  await installFixture();

@@ -8,6 +8,10 @@ export const MAX_ROOMS = 9 as const;
 export const ROOM_MIN_SIZE = 4 as const;
 export const ROOM_MAX_WIDTH = 9 as const;
 export const ROOM_MAX_HEIGHT = 7 as const;
+/** Opt-in generation version; absent versions retain the original seed/replay map. */
+export type DungeonLayoutVersion = "legacy-v1" | "compact-v2";
+export const COMPACT_ROOM_MAX_WIDTH = 6 as const;
+export const COMPACT_ROOM_MAX_HEIGHT = 6 as const;
 export const ROOM_PADDING = 2 as const;
 export const EXTRA_EDGE_CHANCE = 0.15 as const;
 export const MAX_EXTRA_EDGES = 2 as const;

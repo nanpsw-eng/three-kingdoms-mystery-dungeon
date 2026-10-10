@@ -1,0 +1,1590 @@
+{
+  "note": "Observational, fixed party and simple automated policy; not human balance validation.",
+  "profiles": [
+    {
+      "dungeonLayout": "legacy-v1",
+      "runs": 20,
+      "outcomes": {
+        "failed": 19,
+        "cleared": 1
+      },
+      "meanTurns": 1733.85,
+      "meanDepth": 11.1,
+      "meanBattles": 38.15,
+      "rows": [
+        {
+          "seed": 0,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 484,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 6,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "yt-cult",
+            "yt-elite",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-warband"
+          ],
+          "recruited": [],
+          "itemsSeen": [
+            "bun",
+            "herb",
+            "iron-sword",
+            "jade-seal",
+            "smoke-bomb"
+          ],
+          "level": 6,
+          "turns": 862,
+          "battles": 19,
+          "renown": 0
+        },
+        {
+          "seed": 1,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 1323,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 15,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "taishi-ci",
+            "gan-ning"
+          ],
+          "itemsSeen": [
+            "ancient-blade",
+            "bun",
+            "dragon-armor",
+            "elixir",
+            "fire-pot",
+            "herb",
+            "horn-bow",
+            "identify-scroll",
+            "leather-armor",
+            "medicine",
+            "scale-armor",
+            "smoke-bomb",
+            "tiger-tally",
+            "treatment-kit"
+          ],
+          "level": 10,
+          "turns": 2525,
+          "battles": 51,
+          "renown": 0
+        },
+        {
+          "seed": 2,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 1304,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 15,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "zhang-liao",
+            "taishi-ci"
+          ],
+          "itemsSeen": [
+            "bun",
+            "dragon-armor",
+            "elixir",
+            "fire-pot",
+            "herb",
+            "identify-scroll",
+            "medicine",
+            "silk-robe",
+            "smoke-bomb",
+            "tiger-tally",
+            "treatment-kit"
+          ],
+          "level": 10,
+          "turns": 2230,
+          "battles": 49,
+          "renown": 0
+        },
+        {
+          "seed": 3,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 440,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 6,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "yt-band",
+            "yt-elite",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts"
+          ],
+          "recruited": [],
+          "itemsSeen": [
+            "bun",
+            "elixir",
+            "herb",
+            "jade-seal",
+            "smoke-bomb"
+          ],
+          "level": 6,
+          "turns": 795,
+          "battles": 18,
+          "renown": 0
+        },
+        {
+          "seed": 4,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 1333,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 15,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "xiahou-dun",
+            "taishi-ci"
+          ],
+          "itemsSeen": [
+            "ancient-blade",
+            "bun",
+            "dragon-armor",
+            "elixir",
+            "fire-pot",
+            "herb",
+            "identify-scroll",
+            "leather-armor",
+            "long-spear",
+            "medicine",
+            "rice-sack",
+            "smoke-bomb",
+            "tiger-tally"
+          ],
+          "level": 10,
+          "turns": 2450,
+          "battles": 50,
+          "renown": 0
+        },
+        {
+          "seed": 5,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 930,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 11,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "gan-ning"
+          ],
+          "itemsSeen": [
+            "bun",
+            "dragon-armor",
+            "elixir",
+            "fire-pot",
+            "herb",
+            "jade-seal",
+            "long-spear",
+            "medicine",
+            "rice-sack",
+            "silk-robe",
+            "tiger-tally"
+          ],
+          "level": 10,
+          "turns": 1673,
+          "battles": 38,
+          "renown": 0
+        },
+        {
+          "seed": 6,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 648,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 11,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "taishi-ci",
+            "xiahou-dun"
+          ],
+          "itemsSeen": [
+            "ancient-blade",
+            "bun",
+            "elixir",
+            "fire-pot",
+            "herb",
+            "iron-sword",
+            "medicine",
+            "silk-robe",
+            "smoke-bomb",
+            "tiger-tally"
+          ],
+          "level": 10,
+          "turns": 1589,
+          "battles": 40,
+          "renown": 0
+        },
+        {
+          "seed": 7,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 1536,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 11,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "taishi-ci",
+            "xiahou-dun"
+          ],
+          "itemsSeen": [
+            "bun",
+            "elixir",
+            "herb",
+            "identify-scroll",
+            "iron-sword",
+            "leather-armor",
+            "medicine",
+            "swift-boots",
+            "tiger-tally"
+          ],
+          "level": 10,
+          "turns": 2401,
+          "battles": 54,
+          "renown": 0
+        },
+        {
+          "seed": 8,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 903,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 12,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "gan-ning",
+            "xiahou-dun"
+          ],
+          "itemsSeen": [
+            "bun",
+            "dragon-armor",
+            "elixir",
+            "herb",
+            "identify-scroll",
+            "iron-sword",
+            "jade-seal",
+            "leather-armor",
+            "medicine",
+            "rice-sack",
+            "scout-map"
+          ],
+          "level": 10,
+          "turns": 1996,
+          "battles": 40,
+          "renown": 0
+        },
+        {
+          "seed": 9,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 377,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 6,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-warband"
+          ],
+          "recruited": [],
+          "itemsSeen": [
+            "bun",
+            "herb",
+            "identify-scroll",
+            "iron-sword",
+            "leather-armor",
+            "scout-map",
+            "silk-robe",
+            "treatment-kit"
+          ],
+          "level": 6,
+          "turns": 911,
+          "battles": 16,
+          "renown": 0
+        },
+        {
+          "seed": 10,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 711,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 11,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband"
+          ],
+          "recruited": [
+            "gan-ning",
+            "xiahou-dun"
+          ],
+          "itemsSeen": [
+            "ancient-blade",
+            "bun",
+            "elixir",
+            "herb",
+            "identify-scroll",
+            "jade-seal",
+            "leather-armor",
+            "medicine",
+            "rice-sack",
+            "scale-armor",
+            "swift-boots",
+            "tiger-tally",
+            "treatment-kit"
+          ],
+          "level": 10,
+          "turns": 1838,
+          "battles": 51,
+          "renown": 0
+        },
+        {
+          "seed": 11,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 446,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 7,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-warband"
+          ],
+          "recruited": [
+            "xiahou-dun"
+          ],
+          "itemsSeen": [
+            "ancient-blade",
+            "bun",
+            "herb",
+            "long-spear",
+            "medicine",
+            "silk-robe",
+            "swift-boots",
+            "tiger-tally",
+            "war-fan"
+          ],
+          "level": 7,
+          "turns": 1016,
+          "battles": 25,
+          "renown": 0
+        },
+        {
+          "seed": 12,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 512,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 8,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-warband"
+          ],
+          "recruited": [],
+          "itemsSeen": [
+            "ancient-blade",
+            "bun",
+            "herb",
+            "identify-scroll",
+            "iron-sword",
+            "rice-sack",
+            "scale-armor"
+          ],
+          "level": 7,
+          "turns": 1133,
+          "battles": 24,
+          "renown": 0
+        },
+        {
+          "seed": 13,
+          "outcome": "cleared",
+          "failCause": null,
+          "actions": 880,
+          "campaignId": "yellow-turban",
+          "cleared": true,
+          "depthReached": 15,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-jiao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "gan-ning",
+            "taishi-ci"
+          ],
+          "itemsSeen": [
+            "bun",
+            "elixir",
+            "fire-pot",
+            "herb",
+            "identify-scroll",
+            "jade-seal",
+            "leather-armor",
+            "medicine",
+            "rice-sack",
+            "tiger-tally",
+            "treatment-kit"
+          ],
+          "level": 10,
+          "turns": 2254,
+          "battles": 53,
+          "renown": 0
+        },
+        {
+          "seed": 14,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 1142,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 14,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "gan-ning",
+            "taishi-ci"
+          ],
+          "itemsSeen": [
+            "ancient-blade",
+            "bun",
+            "herb",
+            "rice-sack",
+            "scout-map"
+          ],
+          "level": 10,
+          "turns": 2227,
+          "battles": 43,
+          "renown": 0
+        },
+        {
+          "seed": 15,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 1120,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 15,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "xiahou-dun",
+            "taishi-ci"
+          ],
+          "itemsSeen": [
+            "bun",
+            "elixir",
+            "fire-pot",
+            "herb",
+            "identify-scroll",
+            "leather-armor",
+            "long-spear",
+            "medicine",
+            "rice-sack",
+            "swift-boots",
+            "tiger-tally",
+            "treatment-kit"
+          ],
+          "level": 10,
+          "turns": 2297,
+          "battles": 46,
+          "renown": 0
+        },
+        {
+          "seed": 16,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 377,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 6,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "yt-band",
+            "yt-elite",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts"
+          ],
+          "recruited": [],
+          "itemsSeen": [
+            "bun",
+            "herb",
+            "identify-scroll",
+            "tiger-tally"
+          ],
+          "level": 6,
+          "turns": 747,
+          "battles": 18,
+          "renown": 0
+        },
+        {
+          "seed": 17,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 1001,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 14,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "xiahou-dun",
+            "gan-ning"
+          ],
+          "itemsSeen": [
+            "bun",
+            "elixir",
+            "fire-pot",
+            "herb",
+            "jade-seal",
+            "leather-armor",
+            "medicine",
+            "rice-sack",
+            "scout-map",
+            "smoke-bomb",
+            "tiger-tally",
+            "treatment-kit"
+          ],
+          "level": 10,
+          "turns": 2253,
+          "battles": 43,
+          "renown": 0
+        },
+        {
+          "seed": 18,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 800,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 12,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband"
+          ],
+          "recruited": [
+            "gan-ning"
+          ],
+          "itemsSeen": [
+            "bun",
+            "dragon-armor",
+            "elixir",
+            "fire-pot",
+            "herb",
+            "identify-scroll",
+            "medicine",
+            "rice-sack",
+            "scale-armor",
+            "scout-map",
+            "smoke-bomb",
+            "war-fan"
+          ],
+          "level": 10,
+          "turns": 1540,
+          "battles": 41,
+          "renown": 0
+        },
+        {
+          "seed": 19,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 1248,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 12,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "gan-ning",
+            "xiahou-dun"
+          ],
+          "itemsSeen": [
+            "bun",
+            "herb",
+            "identify-scroll",
+            "medicine",
+            "rice-sack",
+            "scout-map",
+            "silk-robe",
+            "swift-boots",
+            "tiger-tally"
+          ],
+          "level": 10,
+          "turns": 1940,
+          "battles": 44,
+          "renown": 0
+        }
+      ]
+    },
+    {
+      "dungeonLayout": "compact-v2",
+      "runs": 20,
+      "outcomes": {
+        "failed": 20
+      },
+      "meanTurns": 1506,
+      "meanDepth": 9.95,
+      "meanBattles": 33.2,
+      "rows": [
+        {
+          "seed": 0,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 466,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 7,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-warband"
+          ],
+          "recruited": [],
+          "itemsSeen": [
+            "bun",
+            "herb",
+            "horn-bow",
+            "iron-sword",
+            "rice-sack",
+            "smoke-bomb"
+          ],
+          "level": 7,
+          "turns": 921,
+          "battles": 22,
+          "renown": 0
+        },
+        {
+          "seed": 1,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 851,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 12,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "taishi-ci",
+            "gan-ning"
+          ],
+          "itemsSeen": [
+            "ancient-blade",
+            "bun",
+            "fire-pot",
+            "herb",
+            "horn-bow",
+            "identify-scroll",
+            "iron-sword",
+            "medicine",
+            "treatment-kit"
+          ],
+          "level": 10,
+          "turns": 1706,
+          "battles": 43,
+          "renown": 0
+        },
+        {
+          "seed": 2,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 296,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 7,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-warband"
+          ],
+          "recruited": [],
+          "itemsSeen": [
+            "bun",
+            "herb",
+            "identify-scroll",
+            "jade-seal",
+            "leather-armor",
+            "smoke-bomb"
+          ],
+          "level": 6,
+          "turns": 793,
+          "battles": 21,
+          "renown": 0
+        },
+        {
+          "seed": 3,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 170,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 5,
+          "defeatedGroups": [
+            "yt-band",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts"
+          ],
+          "recruited": [],
+          "itemsSeen": [
+            "bun",
+            "herb",
+            "identify-scroll",
+            "leather-armor"
+          ],
+          "level": 3,
+          "turns": 575,
+          "battles": 12,
+          "renown": 0
+        },
+        {
+          "seed": 4,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 1058,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 12,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "xiahou-dun"
+          ],
+          "itemsSeen": [
+            "bun",
+            "elixir",
+            "fire-pot",
+            "herb",
+            "identify-scroll",
+            "iron-sword",
+            "medicine",
+            "scale-armor",
+            "smoke-bomb",
+            "tiger-tally"
+          ],
+          "level": 10,
+          "turns": 2000,
+          "battles": 42,
+          "renown": 0
+        },
+        {
+          "seed": 5,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 360,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 7,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts"
+          ],
+          "recruited": [
+            "gan-ning"
+          ],
+          "itemsSeen": [
+            "bun",
+            "herb",
+            "tiger-tally"
+          ],
+          "level": 6,
+          "turns": 845,
+          "battles": 18,
+          "renown": 0
+        },
+        {
+          "seed": 6,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 1192,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 14,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "taishi-ci",
+            "xiahou-dun"
+          ],
+          "itemsSeen": [
+            "ancient-blade",
+            "bun",
+            "elixir",
+            "herb",
+            "iron-sword",
+            "jade-seal",
+            "medicine",
+            "scout-map",
+            "silk-robe",
+            "smoke-bomb",
+            "tiger-tally",
+            "treatment-kit"
+          ],
+          "level": 10,
+          "turns": 2151,
+          "battles": 49,
+          "renown": 0
+        },
+        {
+          "seed": 7,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 955,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 10,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-warband"
+          ],
+          "recruited": [
+            "taishi-ci"
+          ],
+          "itemsSeen": [
+            "bun",
+            "herb",
+            "identify-scroll",
+            "medicine",
+            "rice-sack",
+            "tiger-tally"
+          ],
+          "level": 9,
+          "turns": 1871,
+          "battles": 39,
+          "renown": 0
+        },
+        {
+          "seed": 8,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 1023,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 12,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "gan-ning",
+            "xiahou-dun"
+          ],
+          "itemsSeen": [
+            "bun",
+            "dragon-armor",
+            "elixir",
+            "fire-pot",
+            "herb",
+            "iron-sword",
+            "jade-seal",
+            "leather-armor",
+            "medicine",
+            "rice-sack",
+            "scale-armor",
+            "scout-map",
+            "treatment-kit"
+          ],
+          "level": 10,
+          "turns": 1950,
+          "battles": 43,
+          "renown": 0
+        },
+        {
+          "seed": 9,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 325,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 6,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "yt-band",
+            "yt-elite",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-warband"
+          ],
+          "recruited": [],
+          "itemsSeen": [
+            "bun",
+            "herb",
+            "identify-scroll",
+            "iron-sword",
+            "jade-seal",
+            "leather-armor",
+            "scout-map",
+            "treatment-kit"
+          ],
+          "level": 6,
+          "turns": 894,
+          "battles": 19,
+          "renown": 0
+        },
+        {
+          "seed": 10,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 842,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 11,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "gan-ning",
+            "xiahou-dun"
+          ],
+          "itemsSeen": [
+            "ancient-blade",
+            "bun",
+            "dragon-armor",
+            "elixir",
+            "herb",
+            "identify-scroll",
+            "medicine",
+            "rice-sack",
+            "tiger-tally",
+            "treatment-kit"
+          ],
+          "level": 10,
+          "turns": 1782,
+          "battles": 38,
+          "renown": 0
+        },
+        {
+          "seed": 11,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 802,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 12,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "xiahou-dun",
+            "gan-ning"
+          ],
+          "itemsSeen": [
+            "ancient-blade",
+            "bun",
+            "dragon-armor",
+            "herb",
+            "jade-seal",
+            "leather-armor",
+            "long-spear",
+            "medicine",
+            "rice-sack",
+            "silk-robe",
+            "swift-boots",
+            "tiger-tally"
+          ],
+          "level": 10,
+          "turns": 1711,
+          "battles": 42,
+          "renown": 0
+        },
+        {
+          "seed": 12,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 434,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 7,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "yt-band",
+            "yt-cult",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-warband"
+          ],
+          "recruited": [
+            "xiahou-dun"
+          ],
+          "itemsSeen": [
+            "ancient-blade",
+            "bun",
+            "herb",
+            "identify-scroll",
+            "iron-sword",
+            "leather-armor",
+            "rice-sack",
+            "scout-map"
+          ],
+          "level": 7,
+          "turns": 980,
+          "battles": 21,
+          "renown": 0
+        },
+        {
+          "seed": 13,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 1035,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 15,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "gan-ning",
+            "taishi-ci"
+          ],
+          "itemsSeen": [
+            "ancient-blade",
+            "bun",
+            "elixir",
+            "herb",
+            "identify-scroll",
+            "iron-sword",
+            "jade-seal",
+            "leather-armor",
+            "medicine",
+            "rice-sack",
+            "scale-armor",
+            "scout-map",
+            "tiger-tally",
+            "treatment-kit"
+          ],
+          "level": 10,
+          "turns": 2423,
+          "battles": 55,
+          "renown": 0
+        },
+        {
+          "seed": 14,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 1139,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 15,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-vanguard",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "gan-ning",
+            "taishi-ci"
+          ],
+          "itemsSeen": [
+            "bun",
+            "herb",
+            "medicine",
+            "rice-sack",
+            "scout-map",
+            "treatment-kit"
+          ],
+          "level": 10,
+          "turns": 2279,
+          "battles": 40,
+          "renown": 0
+        },
+        {
+          "seed": 15,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 511,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 8,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-warband"
+          ],
+          "recruited": [
+            "xiahou-dun"
+          ],
+          "itemsSeen": [
+            "ancient-blade",
+            "bun",
+            "fire-pot",
+            "herb",
+            "identify-scroll",
+            "leather-armor",
+            "medicine",
+            "scale-armor",
+            "swift-boots"
+          ],
+          "level": 7,
+          "turns": 1149,
+          "battles": 23,
+          "renown": 0
+        },
+        {
+          "seed": 16,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 965,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 10,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-warband"
+          ],
+          "recruited": [
+            "taishi-ci"
+          ],
+          "itemsSeen": [
+            "bun",
+            "elixir",
+            "fire-pot",
+            "herb",
+            "identify-scroll",
+            "medicine",
+            "rice-sack",
+            "swift-boots"
+          ],
+          "level": 8,
+          "turns": 1714,
+          "battles": 30,
+          "renown": 0
+        },
+        {
+          "seed": 17,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 480,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 7,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-warband"
+          ],
+          "recruited": [
+            "xiahou-dun"
+          ],
+          "itemsSeen": [
+            "bun",
+            "fire-pot",
+            "herb",
+            "iron-sword",
+            "leather-armor",
+            "medicine",
+            "smoke-bomb"
+          ],
+          "level": 7,
+          "turns": 998,
+          "battles": 23,
+          "renown": 0
+        },
+        {
+          "seed": 18,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 888,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 10,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-warband"
+          ],
+          "recruited": [
+            "gan-ning"
+          ],
+          "itemsSeen": [
+            "bun",
+            "elixir",
+            "fire-pot",
+            "herb",
+            "identify-scroll",
+            "long-spear",
+            "scale-armor",
+            "scout-map",
+            "silk-robe",
+            "smoke-bomb",
+            "tiger-tally"
+          ],
+          "level": 10,
+          "turns": 1686,
+          "battles": 40,
+          "renown": 0
+        },
+        {
+          "seed": 19,
+          "outcome": "failed",
+          "failCause": "battle",
+          "actions": 817,
+          "campaignId": "yellow-turban",
+          "cleared": false,
+          "depthReached": 12,
+          "defeatedGroups": [
+            "boss-zhang-bao",
+            "boss-zhang-liang",
+            "yt-band",
+            "yt-cult",
+            "yt-elite",
+            "yt-host",
+            "yt-rabble",
+            "yt-raiders",
+            "yt-scouts",
+            "yt-warband",
+            "yt-zealots"
+          ],
+          "recruited": [
+            "gan-ning",
+            "xiahou-dun"
+          ],
+          "itemsSeen": [
+            "bun",
+            "dragon-armor",
+            "herb",
+            "identify-scroll",
+            "iron-sword",
+            "long-spear",
+            "medicine",
+            "rice-sack",
+            "scout-map",
+            "silk-robe",
+            "swift-boots",
+            "tiger-tally",
+            "treatment-kit"
+          ],
+          "level": 10,
+          "turns": 1692,
+          "battles": 44,
+          "renown": 0
+        }
+      ]
+    }
+  ]
+}

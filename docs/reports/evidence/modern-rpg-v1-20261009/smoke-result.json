@@ -1,0 +1,1567 @@
+{
+  "reachedBattle": true,
+  "steps": 4,
+  "final": {
+    "phase": "dungeon",
+    "depth": 1,
+    "turn": 31,
+    "enemies": [
+      {
+        "dx": 0,
+        "dy": 2,
+        "approach": "se"
+      }
+    ]
+  },
+  "errors": [],
+  "layouts": [
+    {
+      "screen": "title",
+      "width": 390,
+      "scrollWidth": 390,
+      "smallTargets": [],
+      "brokenImages": []
+    },
+    {
+      "screen": "dungeon",
+      "width": 390,
+      "scrollWidth": 390,
+      "smallTargets": [],
+      "brokenImages": []
+    },
+    {
+      "screen": "battle",
+      "width": 390,
+      "scrollWidth": 390,
+      "smallTargets": [],
+      "brokenImages": []
+    },
+    {
+      "screen": "bag",
+      "width": 390,
+      "scrollWidth": 390,
+      "smallTargets": [],
+      "brokenImages": []
+    }
+  ],
+  "manifestAssets": [
+    {
+      "path": "portraits/liu-bei.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/cao-cao.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/sun-quan.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/guan-yu.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhang-fei.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhao-yun.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/huang-zhong.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhuge-liang.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhang-liao.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/xiahou-dun.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/jia-xu.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/taishi-ci.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhou-yu.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/gan-ning.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/hua-tuo.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-zhang-bao.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-zhang-liang.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-zhang-jiao.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/regular-spear.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/regular-archer.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/regular-raider.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/regular-guard.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/regular-marine.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-dong-zhuo.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-li-ru.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-ji-ling.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-yuan-shu.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-gong-sui.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-meng-tan.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-bian-xi.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-wang-zhi.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-xiahou-en.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-cai-mao.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-zhang-yun.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-pang-de.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-yu-jin.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-zhu-ran.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-meng-you.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-wu-tu-gu.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/yt-spear.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/yt-archer.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/yt-raider.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/yt-sorcerer.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/yt-chanter.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/tribal-warrior.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/tribal-shaman.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/lu-bu.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/sun-jian.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/yuan-shao.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/cao-ren.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/hua-xiong.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/chen-gong.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zang-ba.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/gao-shun.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/mi-zhu.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/xu-chu.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/dian-wei.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/xun-yu.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/yan-liang.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/wen-chou.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/lu-su.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/huang-gai.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/pang-tong.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/cheng-pu.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/ma-chao.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/wei-yan.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/fa-zheng.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/xu-huang.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/xiahou-yuan.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/lu-xun.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/lu-meng.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhou-tai.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/meng-huo.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhu-rong.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/ma-su.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/sima-yi.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/jiang-wei.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhang-he.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/deng-ai.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/liu-bei-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/cao-cao-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/sun-quan-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/guan-yu-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhang-fei-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhao-yun-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/huang-zhong-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhuge-liang-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhang-liao-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/xiahou-dun-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/jia-xu-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/taishi-ci-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhou-yu-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/gan-ning-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/hua-tuo-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-zhang-bao-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-zhang-liang-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-zhang-jiao-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/regular-spear-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/regular-archer-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/regular-raider-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/regular-guard-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/regular-marine-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-dong-zhuo-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-li-ru-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-ji-ling-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-yuan-shu-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-gong-sui-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-meng-tan-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-bian-xi-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-wang-zhi-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-xiahou-en-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-cai-mao-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-zhang-yun-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-pang-de-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-yu-jin-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-zhu-ran-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-meng-you-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/boss-wu-tu-gu-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/yt-spear-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/yt-archer-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/yt-raider-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/yt-sorcerer-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/yt-chanter-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/tribal-warrior-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/tribal-shaman-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/lu-bu-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/sun-jian-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/yuan-shao-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/cao-ren-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/hua-xiong-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/chen-gong-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zang-ba-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/gao-shun-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/mi-zhu-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/xu-chu-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/dian-wei-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/xun-yu-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/yan-liang-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/wen-chou-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/lu-su-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/huang-gai-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/pang-tong-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/cheng-pu-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/ma-chao-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/wei-yan-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/fa-zheng-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/xu-huang-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/xiahou-yuan-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/lu-xun-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/lu-meng-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhou-tai-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/meng-huo-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhu-rong-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/ma-su-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/sima-yi-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/jiang-wei-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/zhang-he-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "portraits/deng-ai-full.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/liu-bei.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/cao-cao.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/sun-quan.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/guan-yu.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/zhang-fei.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/zhao-yun.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/huang-zhong.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/zhuge-liang.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/zhang-liao.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/xiahou-dun.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/jia-xu.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/taishi-ci.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/zhou-yu.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/gan-ning.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/hua-tuo.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/yt-spear.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/yt-archer.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/yt-raider.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/yt-sorcerer.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/yt-chanter.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-zhang-bao.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-zhang-liang.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-zhang-jiao.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/lu-bu.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/sun-jian.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/yuan-shao.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/cao-ren.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/hua-xiong.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/chen-gong.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/zang-ba.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/gao-shun.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/mi-zhu.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/xu-chu.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/dian-wei.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/xun-yu.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/yan-liang.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/wen-chou.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/lu-su.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/huang-gai.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/pang-tong.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/cheng-pu.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/ma-chao.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/wei-yan.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/fa-zheng.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/xu-huang.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/xiahou-yuan.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/lu-xun.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/lu-meng.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/zhou-tai.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/meng-huo.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/zhu-rong.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/ma-su.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/sima-yi.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/jiang-wei.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/zhang-he.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/deng-ai.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-dong-zhuo.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-li-ru.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-ji-ling.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-yuan-shu.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-gong-sui.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-meng-tan.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-bian-xi.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-wang-zhi.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-xiahou-en.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-cai-mao.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-zhang-yun.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-pang-de.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-yu-jin.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-zhu-ran.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-meng-you.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/boss-wu-tu-gu.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/tribal-warrior.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/tribal-shaman.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/regular-spear.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/regular-archer.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/regular-raider.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/regular-guard.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/regular-marine.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/dong-halberd.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/dong-archer.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/xiliang-cavalry.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/gate-guard.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-fire-thrower.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-xiliang-guard.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-bandit.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-yuan-shu-infantry.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-yuan-shu-archer.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-bing-cavalry.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-marine.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-trap-guard.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-hebei-infantry.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-hebei-crossbow.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-hebei-cavalry.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-cao-gate-guard.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-hebei-halberd.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-wuchao-guard.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-cao-infantry.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-cao-archer.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-tiger-cavalry.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-qingzhou.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-jing-marine.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-naval-guard.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-liu-zhang-infantry.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-wei-archer.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-xiliang-heavy-cavalry.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-wei-elite.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-ambusher.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-seven-army.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-wu-infantry.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-wu-archer.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-jiangdong-marine.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-wu-ambusher.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-jiefan.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-nanman.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-poison-dart.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-tribal-shaman.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-elephant.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-rattan-guard.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-wei-infantry.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-wei-crossbow.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-wei-cavalry.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-heavy-infantry.svg",
+      "decoded": true
+    },
+    {
+      "path": "tokens/enemy-supply-raider.svg",
+      "decoded": true
+    },
+    {
+      "path": "tiles/ink-dungeon-v1.svg",
+      "decoded": true
+    },
+    {
+      "path": "tiles/dungeon-stone-material-v2.jpg",
+      "decoded": true
+    },
+    {
+      "path": "reference/liu-bei-bust-concept-v1.jpg",
+      "decoded": true
+    },
+    {
+      "path": "reference/liu-bei-full-body-concept-v1.jpg",
+      "decoded": true
+    },
+    {
+      "path": "reference/cao-cao-bust-concept-v1.jpg",
+      "decoded": true
+    },
+    {
+      "path": "reference/cao-cao-full-body-concept-v1.jpg",
+      "decoded": true
+    },
+    {
+      "path": "reference/sun-quan-bust-concept-v2.jpg",
+      "decoded": true
+    },
+    {
+      "path": "reference/sun-quan-full-body-concept-v1.jpg",
+      "decoded": true
+    },
+    {
+      "path": "reference/sima-yi-master-concept-v2.jpg",
+      "decoded": true
+    },
+    {
+      "path": "reference/dong-zhuo-lu-bu-boss-concept.jpg",
+      "decoded": true
+    },
+    {
+      "path": "reference/e2-boss-trio-yuan-shao-cao-cao-cao-ren.jpg",
+      "decoded": true
+    },
+    {
+      "path": "reference/lu-xun-meng-huo-boss-concept.jpg",
+      "decoded": true
+    },
+    {
+      "path": "reference/dungeon-surfaces-concept-v1.jpg",
+      "decoded": true
+    },
+    {
+      "path": "reference/dungeon-objects-concept-v1.jpg",
+      "decoded": true
+    },
+    {
+      "path": "reference/dungeon-trap-mark-concept-v2.png",
+      "decoded": true
+    },
+    {
+      "path": "reference/dungeon-sorcery-mark-concept-v3.png",
+      "decoded": true
+    },
+    {
+      "path": "reference/story-scene-ui.jpg",
+      "decoded": true
+    },
+    {
+      "path": "reference/visual-bible-approved-source.png",
+      "decoded": true
+    },
+    {
+      "path": "reference/liu-bei-exploration-token-concept-v2.png",
+      "decoded": true
+    },
+    {
+      "path": "reference/cao-cao-exploration-token-concept-v2.png",
+      "decoded": true
+    },
+    {
+      "path": "reference/sun-quan-exploration-token-concept-v2.png",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/guan-yu.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/zhang-fei.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/zhao-yun.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/huang-zhong.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/zhuge-liang.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/zhang-liao.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/xiahou-dun.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/jia-xu.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/taishi-ci.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/zhou-yu.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/gan-ning.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/hua-tuo.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/yt-spear.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/yt-archer.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/yt-raider.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/yt-sorcerer.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/yt-chanter.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-zhang-bao.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-zhang-liang.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-zhang-jiao.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/lu-bu.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/sun-jian.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/yuan-shao.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/cao-ren.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/hua-xiong.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/chen-gong.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/zang-ba.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/gao-shun.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/mi-zhu.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/xu-chu.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/dian-wei.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/xun-yu.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/yan-liang.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/wen-chou.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/lu-su.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/huang-gai.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/pang-tong.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/cheng-pu.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/ma-chao.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/wei-yan.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/fa-zheng.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/xu-huang.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/xiahou-yuan.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/lu-xun.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/lu-meng.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/zhou-tai.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/meng-huo.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/zhu-rong.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/ma-su.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/sima-yi.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/jiang-wei.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/zhang-he.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/deng-ai.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-dong-zhuo.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-li-ru.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-ji-ling.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-yuan-shu.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-gong-sui.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-meng-tan.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-bian-xi.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-wang-zhi.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-xiahou-en.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-cai-mao.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-zhang-yun.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-pang-de.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-yu-jin.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-zhu-ran.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-meng-you.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/boss-wu-tu-gu.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/tribal-warrior.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/tribal-shaman.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/regular-spear.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/regular-archer.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/regular-raider.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/regular-guard.webp",
+      "decoded": true
+    },
+    {
+      "path": "tokens/illustrated/regular-marine.webp",
+      "decoded": true
+    }
+  ],
+  "fallbackPassed": true,
+  "fallbackErrors": []
+}

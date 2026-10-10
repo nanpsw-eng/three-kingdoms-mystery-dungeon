@@ -1,21 +1,14 @@
-# SESSION HANDOFF — 승인 수묵 UX v2
+# SESSION HANDOFF — 현대 RPG v1
 
-## 현재 기준
+## 현재 상태 (2026-10-09)
 
-- Repo nanpsw-eng/three-kingdoms-mystery-dungeon. AI-OS exactv0.4.4 /64b5115a698cc6a94cd8df80abb2ee7109010764. AGENTS.md 및 DEC-025.
-- 운영 게임 릴리스 ee9be2262f450cd4a12752e1feaa3bf025905bdf /Vercel dpl_4nBf14Vizvp2AjQXyjCmHXqVaYro READY. 이전 탐험·전투·효과요약·필드28 전체 릴리스 완료. 반복 구현 금지.
-- 2026-10-08 사용자 적대적 UX검토→핵심3화면 시안→① 구현 진행 승인. Branch feature/ink-ux-approved-v2는 운영 위의 delta.
-- 2026-10-08 추가 ① 운영 반영·배포 승인. PR #23 MERGED; 릴리스 main CI/visual-smoke/deploy SUCCESS. 정식 주소 연결 및 브라우저 신규원정·탐험·공격확인/취소·저장복원 PASS.
-
-## 구현 / 원장
-
-- 명세 docs/art/UX_APPROVED_V2_SPEC.md; 보고서 docs/reports/INK_UX_V2_20261008.md; evidence docs/reports/evidence/ink-ux-v2-20261008/.
-- 탐험 명령·조건·목표·한지버튼·더보기, 전투 대상→실행/무료취소·청록행동자·자동설정, 이어하기/새편성 분리·세이브 대체 확인 구현.
-- ContentPack 실제 depth 해금 목표만 표시. 생성 시안의 상자/카드 보상은 제외. 도메인/밸런스/RNG/save v1/앞3뒤2는 그대로.
-- 로컬 Domain161/build, 탐험10, 전투7+확인3/실제기술/5v5, 신규UX, 모바일/대비/field28/e2e/도감40/전체48장수·89종적·16화면/원본재료·시안연결 PASS. 원격 checks는 branch의 exact HEAD를 확인.
-- 대량 자산 병렬 decode의 간헐 EncodingError는 테스트 동시해독4개로 제한해 모든 자산을 검사한다. 원본 자산을 삭제/재생성하지 않았다.
-- 실물 모바일/스크린리더/오조작률/장기5인 영입은 NOT_RUN. UI 기능/레이아웃 검증을 디자인 완성도 보증으로 표현하지 않는다.
+- Repo nanpsw-eng/three-kingdoms-mystery-dungeon. AI-OS exactv0.4.4 /64b5115a698cc6a94cd8df80abb2ee7109010764. AGENTS.md Human Gates 유지.
+- Branch feature/modern-rpg-redesign, PR #25. 사용자 현대 RPG 실제 구현 및 방 축소 후 “계속 개선해” 승인 완료. main merge/운영 배포 승인 대기. 운영 main은88becf53409586f0bf513c34bb418d07237907f0. 이 작업을 운영 완료로 혼동하지 않는다.
+- 구현 코드 검증 SHA f0a5a63a44f451ac15cd1a98d0817178a83c50ff. 이후 문서/증거 커밋은 동일 프로그램 소스/자산이다. Domain165/build/원격 visual-smoke 전 suite PASS. 문서와 실제 캡처: docs/reports/MODERN_RPG_V1_20261009.md 및 evidence/modern-rpg-v1-20261009/.
+- 주요 Delta: 현대 전신/얼굴/물품 atlas, navy UI,8방향 release1회/freecancel/별도대기,전투 대상→공격,기술 비용/효과,신규 compact-v2 방4~6과9×9camera. 층48×34유지. 총48캐릭터에 신규 그림7고유+9공용 역할을 매핑.
+- 기존 save v1/명령 재생은 legacy-v1; 신규 옵션만compact-v2. 12개 이전 지도 hash와 기존/신규 후속 층 재생 검증 PASS. 새 compact 저장 이후에는88becf5 전체 artifact rollback 금지: 호환 생성기를 보존하는 수정 릴리스 필요.
+- managed localbrowser/control-browser 불가로 원격 Actions Chromium 사용. 실물 터치/스크린리더/장기5인 실제 영입/난이도 체감은 NOT_RUN. 5v5는 presentation adapter 검증이며 실제 영입 진행 증거로 쓰지 않는다. 자동 플레이40회는 관찰이며 난이도 동일성 입증 아님.
 
 ## 다음
 
-승인3화면 운영 반영 완료. 이번 릴리스를 반복 구현/재배포하지 않는다. 배포 기록 문서 커밋은 게임 릴리스와 동일 소스/자산이다. 다음 콘텐츠 후보는 도감 열전/상세이며 새 작업 승인 시 범위를 정한다.
+PR25 검토 결과와 구체적 preview를 사용자에게 제시하고 main merge/운영 반영 결정을 받는다. 승인 전 merge/promote하지 않는다. 승인 시 exact HEAD checks/main drift/생성 버전 복구 계획을 재확인하고 기존 Vercel 경로로 배포·확인한다. 다음 추가 개선은 실물 플레이 피드백 후 정한다. 이미 통과한 범위를 재구현하지 않는다.
