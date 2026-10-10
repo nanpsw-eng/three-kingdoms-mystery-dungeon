@@ -21,7 +21,7 @@ async function audit(label, expectedMembers = 3) {
    parties:[...document.querySelectorAll('.member')].map(el=>({text:el.innerText,...rect(el)})),
    clipped:[...document.querySelectorAll('.expedition-title,.expedition-stats span,.member-info')].filter(el=>el.scrollWidth>el.clientWidth+1).map(el=>el.textContent)};
  });
- if(metrics.scrollHeight>metrics.height+1 || metrics.map.width<180) {
+ if(metrics.scrollHeight>metrics.height+1 || metrics.map.width<180 || (metrics.width<metrics.height && metrics.map.width<metrics.width-1)) {
   writeFileSync(out+'/exploration-layout-failure.json',JSON.stringify({label,...metrics},null,2));
   await page.screenshot({path:out+'/exploration-layout-failure.png',fullPage:true});
  }
