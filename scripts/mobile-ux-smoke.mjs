@@ -52,6 +52,7 @@ try {
   const before = await state();
   await page.getByRole('button', {name:'대기',exact:true}).click();
   assert.equal((await state()).turn, before.turn + 1, 'touch wait advances turn');
+  await page.getByRole('button', {name:'더보기',exact:true}).click();
   await page.getByRole('button', {name:'부대',exact:true}).click();
   const bodies = page.locator('.fullbody-illustration');
   assert.equal(await bodies.count(), 3);

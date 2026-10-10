@@ -1,0 +1,1936 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "label": "320x568",
+      "width": 320,
+      "height": 568,
+      "scrollWidth": 320,
+      "scrollHeight": 568,
+      "map": {
+        "x": 0,
+        "y": 76.5,
+        "width": 320,
+        "height": 320,
+        "bottom": 396.5,
+        "right": 320
+      },
+      "sections": [
+        {
+          "name": "exploration-header",
+          "x": 8,
+          "y": 6,
+          "width": 304,
+          "height": 63,
+          "bottom": 69,
+          "right": 312
+        },
+        {
+          "name": "map-stage",
+          "x": 0,
+          "y": 73,
+          "width": 320,
+          "height": 327,
+          "bottom": 400,
+          "right": 320
+        },
+        {
+          "name": "dungeon-controls",
+          "x": 8,
+          "y": 404,
+          "width": 304,
+          "height": 140,
+          "bottom": 544,
+          "right": 312
+        },
+        {
+          "name": "exploration-message",
+          "x": 8,
+          "y": 548,
+          "width": 304,
+          "height": 14,
+          "bottom": 562,
+          "right": 312
+        }
+      ],
+      "controls": [
+        {
+          "label": "더보기",
+          "x": 244,
+          "y": 6,
+          "width": 64,
+          "height": 44,
+          "bottom": 50,
+          "right": 308
+        },
+        {
+          "label": "↑",
+          "x": 54.65625,
+          "y": 407,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 451.65625,
+          "right": 99.328125
+        },
+        {
+          "label": "↗",
+          "x": 99.328125,
+          "y": 407,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 451.65625,
+          "right": 144
+        },
+        {
+          "label": "→",
+          "x": 99.328125,
+          "y": 451.65625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 496.328125,
+          "right": 144
+        },
+        {
+          "label": "↘",
+          "x": 99.328125,
+          "y": 496.328125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 541,
+          "right": 144
+        },
+        {
+          "label": "↓",
+          "x": 54.65625,
+          "y": 496.328125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 541,
+          "right": 99.328125
+        },
+        {
+          "label": "↙",
+          "x": 10,
+          "y": 496.328125,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 541,
+          "right": 54.65625
+        },
+        {
+          "label": "←",
+          "x": 10,
+          "y": 451.65625,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 496.328125,
+          "right": 54.65625
+        },
+        {
+          "label": "↖",
+          "x": 10,
+          "y": 407,
+          "width": 44.65625,
+          "height": 44.65625,
+          "bottom": 451.65625,
+          "right": 54.65625
+        },
+        {
+          "label": "취소",
+          "x": 54.65625,
+          "y": 451.65625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 496.328125,
+          "right": 99.328125
+        },
+        {
+          "label": "대기1턴",
+          "x": 151,
+          "y": 404,
+          "width": 78.5,
+          "height": 44,
+          "bottom": 448,
+          "right": 229.5
+        },
+        {
+          "label": "자동 이동발견·조우 정지",
+          "x": 233.5,
+          "y": 404,
+          "width": 78.5,
+          "height": 44,
+          "bottom": 448,
+          "right": 312
+        },
+        {
+          "label": "함정 찾기1턴 · 함정·통로",
+          "x": 151,
+          "y": 452,
+          "width": 78.5,
+          "height": 44,
+          "bottom": 496,
+          "right": 229.5
+        },
+        {
+          "label": "사물 조사요술진 파괴 1턴",
+          "x": 233.5,
+          "y": 452,
+          "width": 78.5,
+          "height": 44,
+          "bottom": 496,
+          "right": 312
+        },
+        {
+          "label": "계단 내려가기",
+          "x": 151,
+          "y": 500,
+          "width": 161,
+          "height": 44,
+          "bottom": 544,
+          "right": 312
+        }
+      ],
+      "portraits": [],
+      "parties": [],
+      "clipped": []
+    },
+    {
+      "label": "360x640",
+      "width": 360,
+      "height": 640,
+      "scrollWidth": 360,
+      "scrollHeight": 640,
+      "map": {
+        "x": 0,
+        "y": 92.5,
+        "width": 360,
+        "height": 360,
+        "bottom": 452.5,
+        "right": 360
+      },
+      "sections": [
+        {
+          "name": "exploration-header",
+          "x": 8,
+          "y": 6,
+          "width": 344,
+          "height": 63,
+          "bottom": 69,
+          "right": 352
+        },
+        {
+          "name": "map-stage",
+          "x": 0,
+          "y": 73,
+          "width": 360,
+          "height": 399,
+          "bottom": 472,
+          "right": 360
+        },
+        {
+          "name": "dungeon-controls",
+          "x": 8,
+          "y": 476,
+          "width": 344,
+          "height": 140,
+          "bottom": 616,
+          "right": 352
+        },
+        {
+          "name": "exploration-message",
+          "x": 8,
+          "y": 620,
+          "width": 344,
+          "height": 14,
+          "bottom": 634,
+          "right": 352
+        }
+      ],
+      "controls": [
+        {
+          "label": "더보기",
+          "x": 284,
+          "y": 6,
+          "width": 64,
+          "height": 44,
+          "bottom": 50,
+          "right": 348
+        },
+        {
+          "label": "↑",
+          "x": 54.65625,
+          "y": 479,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 523.65625,
+          "right": 99.328125
+        },
+        {
+          "label": "↗",
+          "x": 99.328125,
+          "y": 479,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 523.65625,
+          "right": 144
+        },
+        {
+          "label": "→",
+          "x": 99.328125,
+          "y": 523.65625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 568.328125,
+          "right": 144
+        },
+        {
+          "label": "↘",
+          "x": 99.328125,
+          "y": 568.328125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 613,
+          "right": 144
+        },
+        {
+          "label": "↓",
+          "x": 54.65625,
+          "y": 568.328125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 613,
+          "right": 99.328125
+        },
+        {
+          "label": "↙",
+          "x": 10,
+          "y": 568.328125,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 613,
+          "right": 54.65625
+        },
+        {
+          "label": "←",
+          "x": 10,
+          "y": 523.65625,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 568.328125,
+          "right": 54.65625
+        },
+        {
+          "label": "↖",
+          "x": 10,
+          "y": 479,
+          "width": 44.65625,
+          "height": 44.65625,
+          "bottom": 523.65625,
+          "right": 54.65625
+        },
+        {
+          "label": "취소",
+          "x": 54.65625,
+          "y": 523.65625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 568.328125,
+          "right": 99.328125
+        },
+        {
+          "label": "대기1턴",
+          "x": 151,
+          "y": 476,
+          "width": 98.5,
+          "height": 44,
+          "bottom": 520,
+          "right": 249.5
+        },
+        {
+          "label": "자동 이동발견·조우 정지",
+          "x": 253.5,
+          "y": 476,
+          "width": 98.5,
+          "height": 44,
+          "bottom": 520,
+          "right": 352
+        },
+        {
+          "label": "함정 찾기1턴 · 함정·통로",
+          "x": 151,
+          "y": 524,
+          "width": 98.5,
+          "height": 44,
+          "bottom": 568,
+          "right": 249.5
+        },
+        {
+          "label": "사물 조사요술진 파괴 1턴",
+          "x": 253.5,
+          "y": 524,
+          "width": 98.5,
+          "height": 44,
+          "bottom": 568,
+          "right": 352
+        },
+        {
+          "label": "계단 내려가기",
+          "x": 151,
+          "y": 572,
+          "width": 201,
+          "height": 44,
+          "bottom": 616,
+          "right": 352
+        }
+      ],
+      "portraits": [],
+      "parties": [],
+      "clipped": []
+    },
+    {
+      "label": "390x660",
+      "width": 390,
+      "height": 660,
+      "scrollWidth": 390,
+      "scrollHeight": 660,
+      "map": {
+        "x": 0,
+        "y": 87.5,
+        "width": 390,
+        "height": 390,
+        "bottom": 477.5,
+        "right": 390
+      },
+      "sections": [
+        {
+          "name": "exploration-header",
+          "x": 8,
+          "y": 6,
+          "width": 374,
+          "height": 63,
+          "bottom": 69,
+          "right": 382
+        },
+        {
+          "name": "map-stage",
+          "x": 0,
+          "y": 73,
+          "width": 390,
+          "height": 419,
+          "bottom": 492,
+          "right": 390
+        },
+        {
+          "name": "dungeon-controls",
+          "x": 8,
+          "y": 496,
+          "width": 374,
+          "height": 140,
+          "bottom": 636,
+          "right": 382
+        },
+        {
+          "name": "exploration-message",
+          "x": 8,
+          "y": 640,
+          "width": 374,
+          "height": 14,
+          "bottom": 654,
+          "right": 382
+        }
+      ],
+      "controls": [
+        {
+          "label": "더보기",
+          "x": 314,
+          "y": 6,
+          "width": 64,
+          "height": 44,
+          "bottom": 50,
+          "right": 378
+        },
+        {
+          "label": "↑",
+          "x": 54.65625,
+          "y": 499,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 543.65625,
+          "right": 99.328125
+        },
+        {
+          "label": "↗",
+          "x": 99.328125,
+          "y": 499,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 543.65625,
+          "right": 144
+        },
+        {
+          "label": "→",
+          "x": 99.328125,
+          "y": 543.65625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 588.328125,
+          "right": 144
+        },
+        {
+          "label": "↘",
+          "x": 99.328125,
+          "y": 588.328125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 633,
+          "right": 144
+        },
+        {
+          "label": "↓",
+          "x": 54.65625,
+          "y": 588.328125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 633,
+          "right": 99.328125
+        },
+        {
+          "label": "↙",
+          "x": 10,
+          "y": 588.328125,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 633,
+          "right": 54.65625
+        },
+        {
+          "label": "←",
+          "x": 10,
+          "y": 543.65625,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 588.328125,
+          "right": 54.65625
+        },
+        {
+          "label": "↖",
+          "x": 10,
+          "y": 499,
+          "width": 44.65625,
+          "height": 44.65625,
+          "bottom": 543.65625,
+          "right": 54.65625
+        },
+        {
+          "label": "취소",
+          "x": 54.65625,
+          "y": 543.65625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 588.328125,
+          "right": 99.328125
+        },
+        {
+          "label": "대기1턴",
+          "x": 154,
+          "y": 496,
+          "width": 112,
+          "height": 44,
+          "bottom": 540,
+          "right": 266
+        },
+        {
+          "label": "자동 이동발견·조우 정지",
+          "x": 270,
+          "y": 496,
+          "width": 112,
+          "height": 44,
+          "bottom": 540,
+          "right": 382
+        },
+        {
+          "label": "함정 찾기1턴 · 함정·통로",
+          "x": 154,
+          "y": 544,
+          "width": 112,
+          "height": 44,
+          "bottom": 588,
+          "right": 266
+        },
+        {
+          "label": "사물 조사요술진 파괴 1턴",
+          "x": 270,
+          "y": 544,
+          "width": 112,
+          "height": 44,
+          "bottom": 588,
+          "right": 382
+        },
+        {
+          "label": "계단 내려가기",
+          "x": 154,
+          "y": 592,
+          "width": 228,
+          "height": 44,
+          "bottom": 636,
+          "right": 382
+        }
+      ],
+      "portraits": [],
+      "parties": [],
+      "clipped": []
+    },
+    {
+      "label": "390x844",
+      "width": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "scrollHeight": 844,
+      "map": {
+        "x": 0,
+        "y": 179.5,
+        "width": 390,
+        "height": 390,
+        "bottom": 569.5,
+        "right": 390
+      },
+      "sections": [
+        {
+          "name": "exploration-header",
+          "x": 8,
+          "y": 6,
+          "width": 374,
+          "height": 63,
+          "bottom": 69,
+          "right": 382
+        },
+        {
+          "name": "map-stage",
+          "x": 0,
+          "y": 73,
+          "width": 390,
+          "height": 603,
+          "bottom": 676,
+          "right": 390
+        },
+        {
+          "name": "dungeon-controls",
+          "x": 8,
+          "y": 680,
+          "width": 374,
+          "height": 140,
+          "bottom": 820,
+          "right": 382
+        },
+        {
+          "name": "exploration-message",
+          "x": 8,
+          "y": 824,
+          "width": 374,
+          "height": 14,
+          "bottom": 838,
+          "right": 382
+        }
+      ],
+      "controls": [
+        {
+          "label": "더보기",
+          "x": 314,
+          "y": 6,
+          "width": 64,
+          "height": 44,
+          "bottom": 50,
+          "right": 378
+        },
+        {
+          "label": "↑",
+          "x": 54.65625,
+          "y": 683,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 727.65625,
+          "right": 99.328125
+        },
+        {
+          "label": "↗",
+          "x": 99.328125,
+          "y": 683,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 727.65625,
+          "right": 144
+        },
+        {
+          "label": "→",
+          "x": 99.328125,
+          "y": 727.65625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 772.328125,
+          "right": 144
+        },
+        {
+          "label": "↘",
+          "x": 99.328125,
+          "y": 772.328125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 817,
+          "right": 144
+        },
+        {
+          "label": "↓",
+          "x": 54.65625,
+          "y": 772.328125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 817,
+          "right": 99.328125
+        },
+        {
+          "label": "↙",
+          "x": 10,
+          "y": 772.328125,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 817,
+          "right": 54.65625
+        },
+        {
+          "label": "←",
+          "x": 10,
+          "y": 727.65625,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 772.328125,
+          "right": 54.65625
+        },
+        {
+          "label": "↖",
+          "x": 10,
+          "y": 683,
+          "width": 44.65625,
+          "height": 44.65625,
+          "bottom": 727.65625,
+          "right": 54.65625
+        },
+        {
+          "label": "취소",
+          "x": 54.65625,
+          "y": 727.65625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 772.328125,
+          "right": 99.328125
+        },
+        {
+          "label": "대기1턴",
+          "x": 154,
+          "y": 680,
+          "width": 112,
+          "height": 44,
+          "bottom": 724,
+          "right": 266
+        },
+        {
+          "label": "자동 이동발견·조우 정지",
+          "x": 270,
+          "y": 680,
+          "width": 112,
+          "height": 44,
+          "bottom": 724,
+          "right": 382
+        },
+        {
+          "label": "함정 찾기1턴 · 함정·통로",
+          "x": 154,
+          "y": 728,
+          "width": 112,
+          "height": 44,
+          "bottom": 772,
+          "right": 266
+        },
+        {
+          "label": "사물 조사요술진 파괴 1턴",
+          "x": 270,
+          "y": 728,
+          "width": 112,
+          "height": 44,
+          "bottom": 772,
+          "right": 382
+        },
+        {
+          "label": "계단 내려가기",
+          "x": 154,
+          "y": 776,
+          "width": 228,
+          "height": 44,
+          "bottom": 820,
+          "right": 382
+        }
+      ],
+      "portraits": [],
+      "parties": [],
+      "clipped": []
+    },
+    {
+      "label": "412x740",
+      "width": 412,
+      "height": 740,
+      "scrollWidth": 412,
+      "scrollHeight": 740,
+      "map": {
+        "x": 0,
+        "y": 116.5,
+        "width": 412,
+        "height": 412,
+        "bottom": 528.5,
+        "right": 412
+      },
+      "sections": [
+        {
+          "name": "exploration-header",
+          "x": 8,
+          "y": 6,
+          "width": 396,
+          "height": 63,
+          "bottom": 69,
+          "right": 404
+        },
+        {
+          "name": "map-stage",
+          "x": 0,
+          "y": 73,
+          "width": 412,
+          "height": 499,
+          "bottom": 572,
+          "right": 412
+        },
+        {
+          "name": "dungeon-controls",
+          "x": 8,
+          "y": 576,
+          "width": 396,
+          "height": 140,
+          "bottom": 716,
+          "right": 404
+        },
+        {
+          "name": "exploration-message",
+          "x": 8,
+          "y": 720,
+          "width": 396,
+          "height": 14,
+          "bottom": 734,
+          "right": 404
+        }
+      ],
+      "controls": [
+        {
+          "label": "더보기",
+          "x": 336,
+          "y": 6,
+          "width": 64,
+          "height": 44,
+          "bottom": 50,
+          "right": 400
+        },
+        {
+          "label": "↑",
+          "x": 54.65625,
+          "y": 579,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 623.65625,
+          "right": 99.328125
+        },
+        {
+          "label": "↗",
+          "x": 99.328125,
+          "y": 579,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 623.65625,
+          "right": 144
+        },
+        {
+          "label": "→",
+          "x": 99.328125,
+          "y": 623.65625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 668.328125,
+          "right": 144
+        },
+        {
+          "label": "↘",
+          "x": 99.328125,
+          "y": 668.328125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 713,
+          "right": 144
+        },
+        {
+          "label": "↓",
+          "x": 54.65625,
+          "y": 668.328125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 713,
+          "right": 99.328125
+        },
+        {
+          "label": "↙",
+          "x": 10,
+          "y": 668.328125,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 713,
+          "right": 54.65625
+        },
+        {
+          "label": "←",
+          "x": 10,
+          "y": 623.65625,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 668.328125,
+          "right": 54.65625
+        },
+        {
+          "label": "↖",
+          "x": 10,
+          "y": 579,
+          "width": 44.65625,
+          "height": 44.65625,
+          "bottom": 623.65625,
+          "right": 54.65625
+        },
+        {
+          "label": "취소",
+          "x": 54.65625,
+          "y": 623.65625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 668.328125,
+          "right": 99.328125
+        },
+        {
+          "label": "대기1턴",
+          "x": 154,
+          "y": 576,
+          "width": 123,
+          "height": 44,
+          "bottom": 620,
+          "right": 277
+        },
+        {
+          "label": "자동 이동발견·조우 정지",
+          "x": 281,
+          "y": 576,
+          "width": 123,
+          "height": 44,
+          "bottom": 620,
+          "right": 404
+        },
+        {
+          "label": "함정 찾기1턴 · 함정·통로",
+          "x": 154,
+          "y": 624,
+          "width": 123,
+          "height": 44,
+          "bottom": 668,
+          "right": 277
+        },
+        {
+          "label": "사물 조사요술진 파괴 1턴",
+          "x": 281,
+          "y": 624,
+          "width": 123,
+          "height": 44,
+          "bottom": 668,
+          "right": 404
+        },
+        {
+          "label": "계단 내려가기",
+          "x": 154,
+          "y": 672,
+          "width": 250,
+          "height": 44,
+          "bottom": 716,
+          "right": 404
+        }
+      ],
+      "portraits": [],
+      "parties": [],
+      "clipped": []
+    },
+    {
+      "label": "768x1024",
+      "width": 768,
+      "height": 1024,
+      "scrollWidth": 768,
+      "scrollHeight": 1024,
+      "map": {
+        "x": 0,
+        "y": 80.5,
+        "width": 768,
+        "height": 768,
+        "bottom": 848.5,
+        "right": 768
+      },
+      "sections": [
+        {
+          "name": "exploration-header",
+          "x": 8,
+          "y": 6,
+          "width": 752,
+          "height": 63,
+          "bottom": 69,
+          "right": 760
+        },
+        {
+          "name": "map-stage",
+          "x": 0,
+          "y": 73,
+          "width": 768,
+          "height": 783,
+          "bottom": 856,
+          "right": 768
+        },
+        {
+          "name": "dungeon-controls",
+          "x": 8,
+          "y": 860,
+          "width": 752,
+          "height": 140,
+          "bottom": 1000,
+          "right": 760
+        },
+        {
+          "name": "exploration-message",
+          "x": 8,
+          "y": 1004,
+          "width": 752,
+          "height": 14,
+          "bottom": 1018,
+          "right": 760
+        }
+      ],
+      "controls": [
+        {
+          "label": "더보기",
+          "x": 692,
+          "y": 6,
+          "width": 64,
+          "height": 44,
+          "bottom": 50,
+          "right": 756
+        },
+        {
+          "label": "↑",
+          "x": 54.65625,
+          "y": 863,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 907.65625,
+          "right": 99.328125
+        },
+        {
+          "label": "↗",
+          "x": 99.328125,
+          "y": 863,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 907.65625,
+          "right": 144
+        },
+        {
+          "label": "→",
+          "x": 99.328125,
+          "y": 907.65625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 952.328125,
+          "right": 144
+        },
+        {
+          "label": "↘",
+          "x": 99.328125,
+          "y": 952.328125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 997,
+          "right": 144
+        },
+        {
+          "label": "↓",
+          "x": 54.65625,
+          "y": 952.328125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 997,
+          "right": 99.328125
+        },
+        {
+          "label": "↙",
+          "x": 10,
+          "y": 952.328125,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 997,
+          "right": 54.65625
+        },
+        {
+          "label": "←",
+          "x": 10,
+          "y": 907.65625,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 952.328125,
+          "right": 54.65625
+        },
+        {
+          "label": "↖",
+          "x": 10,
+          "y": 863,
+          "width": 44.65625,
+          "height": 44.65625,
+          "bottom": 907.65625,
+          "right": 54.65625
+        },
+        {
+          "label": "취소",
+          "x": 54.65625,
+          "y": 907.65625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 952.328125,
+          "right": 99.328125
+        },
+        {
+          "label": "대기1턴",
+          "x": 154,
+          "y": 860,
+          "width": 301,
+          "height": 44,
+          "bottom": 904,
+          "right": 455
+        },
+        {
+          "label": "자동 이동발견·조우 정지",
+          "x": 459,
+          "y": 860,
+          "width": 301,
+          "height": 44,
+          "bottom": 904,
+          "right": 760
+        },
+        {
+          "label": "함정 찾기1턴 · 함정·통로",
+          "x": 154,
+          "y": 908,
+          "width": 301,
+          "height": 44,
+          "bottom": 952,
+          "right": 455
+        },
+        {
+          "label": "사물 조사요술진 파괴 1턴",
+          "x": 459,
+          "y": 908,
+          "width": 301,
+          "height": 44,
+          "bottom": 952,
+          "right": 760
+        },
+        {
+          "label": "계단 내려가기",
+          "x": 154,
+          "y": 956,
+          "width": 606,
+          "height": 44,
+          "bottom": 1000,
+          "right": 760
+        }
+      ],
+      "portraits": [],
+      "parties": [],
+      "clipped": []
+    },
+    {
+      "label": "844x390",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "scrollHeight": 390,
+      "map": {
+        "x": 54.5,
+        "y": 73,
+        "width": 311,
+        "height": 311,
+        "bottom": 384,
+        "right": 365.5
+      },
+      "sections": [
+        {
+          "name": "exploration-header",
+          "x": 8,
+          "y": 6,
+          "width": 828,
+          "height": 63,
+          "bottom": 69,
+          "right": 836
+        },
+        {
+          "name": "map-stage",
+          "x": 0,
+          "y": 73,
+          "width": 420,
+          "height": 311,
+          "bottom": 384,
+          "right": 420
+        },
+        {
+          "name": "dungeon-controls",
+          "x": 432,
+          "y": 73,
+          "width": 404,
+          "height": 293,
+          "bottom": 366,
+          "right": 836
+        },
+        {
+          "name": "exploration-message",
+          "x": 432,
+          "y": 370,
+          "width": 404,
+          "height": 14,
+          "bottom": 384,
+          "right": 836
+        }
+      ],
+      "controls": [
+        {
+          "label": "더보기",
+          "x": 768,
+          "y": 6,
+          "width": 64,
+          "height": 44,
+          "bottom": 50,
+          "right": 832
+        },
+        {
+          "label": "↑",
+          "x": 478.65625,
+          "y": 152.5,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 197.15625,
+          "right": 523.328125
+        },
+        {
+          "label": "↗",
+          "x": 523.328125,
+          "y": 152.5,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 197.15625,
+          "right": 568
+        },
+        {
+          "label": "→",
+          "x": 523.328125,
+          "y": 197.15625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 241.828125,
+          "right": 568
+        },
+        {
+          "label": "↘",
+          "x": 523.328125,
+          "y": 241.828125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 286.5,
+          "right": 568
+        },
+        {
+          "label": "↓",
+          "x": 478.65625,
+          "y": 241.828125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 286.5,
+          "right": 523.328125
+        },
+        {
+          "label": "↙",
+          "x": 434,
+          "y": 241.828125,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 286.5,
+          "right": 478.65625
+        },
+        {
+          "label": "←",
+          "x": 434,
+          "y": 197.15625,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 241.828125,
+          "right": 478.65625
+        },
+        {
+          "label": "↖",
+          "x": 434,
+          "y": 152.5,
+          "width": 44.65625,
+          "height": 44.65625,
+          "bottom": 197.15625,
+          "right": 478.65625
+        },
+        {
+          "label": "취소",
+          "x": 478.65625,
+          "y": 197.15625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 241.828125,
+          "right": 523.328125
+        },
+        {
+          "label": "대기1턴",
+          "x": 578,
+          "y": 149.5,
+          "width": 127,
+          "height": 44,
+          "bottom": 193.5,
+          "right": 705
+        },
+        {
+          "label": "자동 이동발견·조우 정지",
+          "x": 709,
+          "y": 149.5,
+          "width": 127,
+          "height": 44,
+          "bottom": 193.5,
+          "right": 836
+        },
+        {
+          "label": "함정 찾기1턴 · 함정·통로",
+          "x": 578,
+          "y": 197.5,
+          "width": 127,
+          "height": 44,
+          "bottom": 241.5,
+          "right": 705
+        },
+        {
+          "label": "사물 조사요술진 파괴 1턴",
+          "x": 709,
+          "y": 197.5,
+          "width": 127,
+          "height": 44,
+          "bottom": 241.5,
+          "right": 836
+        },
+        {
+          "label": "계단 내려가기",
+          "x": 578,
+          "y": 245.5,
+          "width": 258,
+          "height": 44,
+          "bottom": 289.5,
+          "right": 836
+        }
+      ],
+      "portraits": [],
+      "parties": [],
+      "clipped": []
+    },
+    {
+      "label": "mechanic-layout-360x640",
+      "width": 360,
+      "height": 640,
+      "scrollWidth": 360,
+      "scrollHeight": 640,
+      "map": {
+        "x": 0,
+        "y": 101.5,
+        "width": 360,
+        "height": 360,
+        "bottom": 461.5,
+        "right": 360
+      },
+      "sections": [
+        {
+          "name": "exploration-header",
+          "x": 8,
+          "y": 6,
+          "width": 344,
+          "height": 81,
+          "bottom": 87,
+          "right": 352
+        },
+        {
+          "name": "map-stage",
+          "x": 0,
+          "y": 91,
+          "width": 360,
+          "height": 381,
+          "bottom": 472,
+          "right": 360
+        },
+        {
+          "name": "dungeon-controls",
+          "x": 8,
+          "y": 476,
+          "width": 344,
+          "height": 140,
+          "bottom": 616,
+          "right": 352
+        },
+        {
+          "name": "exploration-message",
+          "x": 8,
+          "y": 620,
+          "width": 344,
+          "height": 14,
+          "bottom": 634,
+          "right": 352
+        }
+      ],
+      "controls": [
+        {
+          "label": "더보기",
+          "x": 284,
+          "y": 6,
+          "width": 64,
+          "height": 44,
+          "bottom": 50,
+          "right": 348
+        },
+        {
+          "label": "↑",
+          "x": 54.65625,
+          "y": 479,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 523.65625,
+          "right": 99.328125
+        },
+        {
+          "label": "↗",
+          "x": 99.328125,
+          "y": 479,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 523.65625,
+          "right": 144
+        },
+        {
+          "label": "→",
+          "x": 99.328125,
+          "y": 523.65625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 568.328125,
+          "right": 144
+        },
+        {
+          "label": "↘",
+          "x": 99.328125,
+          "y": 568.328125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 613,
+          "right": 144
+        },
+        {
+          "label": "↓",
+          "x": 54.65625,
+          "y": 568.328125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 613,
+          "right": 99.328125
+        },
+        {
+          "label": "↙",
+          "x": 10,
+          "y": 568.328125,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 613,
+          "right": 54.65625
+        },
+        {
+          "label": "←",
+          "x": 10,
+          "y": 523.65625,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 568.328125,
+          "right": 54.65625
+        },
+        {
+          "label": "↖",
+          "x": 10,
+          "y": 479,
+          "width": 44.65625,
+          "height": 44.65625,
+          "bottom": 523.65625,
+          "right": 54.65625
+        },
+        {
+          "label": "취소",
+          "x": 54.65625,
+          "y": 523.65625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 568.328125,
+          "right": 99.328125
+        },
+        {
+          "label": "대기1턴",
+          "x": 151,
+          "y": 476,
+          "width": 98.5,
+          "height": 44,
+          "bottom": 520,
+          "right": 249.5
+        },
+        {
+          "label": "자동 이동발견·조우 정지",
+          "x": 253.5,
+          "y": 476,
+          "width": 98.5,
+          "height": 44,
+          "bottom": 520,
+          "right": 352
+        },
+        {
+          "label": "함정 찾기1턴 · 함정·통로",
+          "x": 151,
+          "y": 524,
+          "width": 98.5,
+          "height": 44,
+          "bottom": 568,
+          "right": 249.5
+        },
+        {
+          "label": "사물 조사요술진 파괴 1턴",
+          "x": 253.5,
+          "y": 524,
+          "width": 98.5,
+          "height": 44,
+          "bottom": 568,
+          "right": 352
+        },
+        {
+          "label": "계단 내려가기",
+          "x": 151,
+          "y": 572,
+          "width": 201,
+          "height": 44,
+          "bottom": 616,
+          "right": 352
+        }
+      ],
+      "portraits": [],
+      "parties": [],
+      "clipped": []
+    },
+    {
+      "label": "mechanic-layout-390x660",
+      "width": 390,
+      "height": 660,
+      "scrollWidth": 390,
+      "scrollHeight": 660,
+      "map": {
+        "x": 0,
+        "y": 96.5,
+        "width": 390,
+        "height": 390,
+        "bottom": 486.5,
+        "right": 390
+      },
+      "sections": [
+        {
+          "name": "exploration-header",
+          "x": 8,
+          "y": 6,
+          "width": 374,
+          "height": 81,
+          "bottom": 87,
+          "right": 382
+        },
+        {
+          "name": "map-stage",
+          "x": 0,
+          "y": 91,
+          "width": 390,
+          "height": 401,
+          "bottom": 492,
+          "right": 390
+        },
+        {
+          "name": "dungeon-controls",
+          "x": 8,
+          "y": 496,
+          "width": 374,
+          "height": 140,
+          "bottom": 636,
+          "right": 382
+        },
+        {
+          "name": "exploration-message",
+          "x": 8,
+          "y": 640,
+          "width": 374,
+          "height": 14,
+          "bottom": 654,
+          "right": 382
+        }
+      ],
+      "controls": [
+        {
+          "label": "더보기",
+          "x": 314,
+          "y": 6,
+          "width": 64,
+          "height": 44,
+          "bottom": 50,
+          "right": 378
+        },
+        {
+          "label": "↑",
+          "x": 54.65625,
+          "y": 499,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 543.65625,
+          "right": 99.328125
+        },
+        {
+          "label": "↗",
+          "x": 99.328125,
+          "y": 499,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 543.65625,
+          "right": 144
+        },
+        {
+          "label": "→",
+          "x": 99.328125,
+          "y": 543.65625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 588.328125,
+          "right": 144
+        },
+        {
+          "label": "↘",
+          "x": 99.328125,
+          "y": 588.328125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 633,
+          "right": 144
+        },
+        {
+          "label": "↓",
+          "x": 54.65625,
+          "y": 588.328125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 633,
+          "right": 99.328125
+        },
+        {
+          "label": "↙",
+          "x": 10,
+          "y": 588.328125,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 633,
+          "right": 54.65625
+        },
+        {
+          "label": "←",
+          "x": 10,
+          "y": 543.65625,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 588.328125,
+          "right": 54.65625
+        },
+        {
+          "label": "↖",
+          "x": 10,
+          "y": 499,
+          "width": 44.65625,
+          "height": 44.65625,
+          "bottom": 543.65625,
+          "right": 54.65625
+        },
+        {
+          "label": "취소",
+          "x": 54.65625,
+          "y": 543.65625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 588.328125,
+          "right": 99.328125
+        },
+        {
+          "label": "대기1턴",
+          "x": 154,
+          "y": 496,
+          "width": 112,
+          "height": 44,
+          "bottom": 540,
+          "right": 266
+        },
+        {
+          "label": "자동 이동발견·조우 정지",
+          "x": 270,
+          "y": 496,
+          "width": 112,
+          "height": 44,
+          "bottom": 540,
+          "right": 382
+        },
+        {
+          "label": "함정 찾기1턴 · 함정·통로",
+          "x": 154,
+          "y": 544,
+          "width": 112,
+          "height": 44,
+          "bottom": 588,
+          "right": 266
+        },
+        {
+          "label": "사물 조사요술진 파괴 1턴",
+          "x": 270,
+          "y": 544,
+          "width": 112,
+          "height": 44,
+          "bottom": 588,
+          "right": 382
+        },
+        {
+          "label": "계단 내려가기",
+          "x": 154,
+          "y": 592,
+          "width": 228,
+          "height": 44,
+          "bottom": 636,
+          "right": 382
+        }
+      ],
+      "portraits": [],
+      "parties": [],
+      "clipped": []
+    },
+    {
+      "label": "mechanic-layout-844x390",
+      "width": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "scrollHeight": 390,
+      "map": {
+        "x": 63.5,
+        "y": 91,
+        "width": 293,
+        "height": 293,
+        "bottom": 384,
+        "right": 356.5
+      },
+      "sections": [
+        {
+          "name": "exploration-header",
+          "x": 8,
+          "y": 6,
+          "width": 828,
+          "height": 81,
+          "bottom": 87,
+          "right": 836
+        },
+        {
+          "name": "map-stage",
+          "x": 0,
+          "y": 91,
+          "width": 420,
+          "height": 293,
+          "bottom": 384,
+          "right": 420
+        },
+        {
+          "name": "dungeon-controls",
+          "x": 432,
+          "y": 91,
+          "width": 404,
+          "height": 275,
+          "bottom": 366,
+          "right": 836
+        },
+        {
+          "name": "exploration-message",
+          "x": 432,
+          "y": 370,
+          "width": 404,
+          "height": 14,
+          "bottom": 384,
+          "right": 836
+        }
+      ],
+      "controls": [
+        {
+          "label": "더보기",
+          "x": 768,
+          "y": 6,
+          "width": 64,
+          "height": 44,
+          "bottom": 50,
+          "right": 832
+        },
+        {
+          "label": "↑",
+          "x": 478.65625,
+          "y": 161.5,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 206.15625,
+          "right": 523.328125
+        },
+        {
+          "label": "↗",
+          "x": 523.328125,
+          "y": 161.5,
+          "width": 44.671875,
+          "height": 44.65625,
+          "bottom": 206.15625,
+          "right": 568
+        },
+        {
+          "label": "→",
+          "x": 523.328125,
+          "y": 206.15625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 250.828125,
+          "right": 568
+        },
+        {
+          "label": "↘",
+          "x": 523.328125,
+          "y": 250.828125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 295.5,
+          "right": 568
+        },
+        {
+          "label": "↓",
+          "x": 478.65625,
+          "y": 250.828125,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 295.5,
+          "right": 523.328125
+        },
+        {
+          "label": "↙",
+          "x": 434,
+          "y": 250.828125,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 295.5,
+          "right": 478.65625
+        },
+        {
+          "label": "←",
+          "x": 434,
+          "y": 206.15625,
+          "width": 44.65625,
+          "height": 44.671875,
+          "bottom": 250.828125,
+          "right": 478.65625
+        },
+        {
+          "label": "↖",
+          "x": 434,
+          "y": 161.5,
+          "width": 44.65625,
+          "height": 44.65625,
+          "bottom": 206.15625,
+          "right": 478.65625
+        },
+        {
+          "label": "취소",
+          "x": 478.65625,
+          "y": 206.15625,
+          "width": 44.671875,
+          "height": 44.671875,
+          "bottom": 250.828125,
+          "right": 523.328125
+        },
+        {
+          "label": "대기1턴",
+          "x": 578,
+          "y": 158.5,
+          "width": 127,
+          "height": 44,
+          "bottom": 202.5,
+          "right": 705
+        },
+        {
+          "label": "자동 이동발견·조우 정지",
+          "x": 709,
+          "y": 158.5,
+          "width": 127,
+          "height": 44,
+          "bottom": 202.5,
+          "right": 836
+        },
+        {
+          "label": "함정 찾기1턴 · 함정·통로",
+          "x": 578,
+          "y": 206.5,
+          "width": 127,
+          "height": 44,
+          "bottom": 250.5,
+          "right": 705
+        },
+        {
+          "label": "사물 조사요술진 파괴 1턴",
+          "x": 709,
+          "y": 206.5,
+          "width": 127,
+          "height": 44,
+          "bottom": 250.5,
+          "right": 836
+        },
+        {
+          "label": "계단 내려가기",
+          "x": 578,
+          "y": 254.5,
+          "width": 258,
+          "height": 44,
+          "bottom": 298.5,
+          "right": 836
+        }
+      ],
+      "portraits": [],
+      "parties": [],
+      "clipped": []
+    }
+  ],
+  "errors": []
+}

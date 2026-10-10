@@ -15,13 +15,13 @@ async function audit(label, expectedMembers = 3) {
  const metrics=await page.evaluate(()=>{
   const rect=el=>{const r=el.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,right:r.right};};
   const map=document.querySelector('#map');
-  const controls=[...document.querySelectorAll('.dungeon-controls button,.utility-bar button,.map-guide-button')].map(el=>({label:el.textContent,...rect(el)}));
+  const controls=[...document.querySelectorAll('.dungeon-controls button,.exploration-menu-button,.map-guide-button')].map(el=>({label:el.textContent,...rect(el)}));
   return {width:innerWidth,height:innerHeight,scrollWidth:document.documentElement.scrollWidth,scrollHeight:document.documentElement.scrollHeight,
    map:rect(map),sections:[...document.querySelector('#app').children].map(el=>({name:el.className,...rect(el)})),controls,portraits:[...document.querySelectorAll('.expedition-party img')].map(rect),
    parties:[...document.querySelectorAll('.member')].map(el=>({text:el.innerText,...rect(el)})),
    clipped:[...document.querySelectorAll('.expedition-title,.expedition-stats span,.member-info')].filter(el=>el.scrollWidth>el.clientWidth+1).map(el=>el.textContent)};
  });
- if(metrics.scrollHeight>metrics.height+1 || metrics.map.width<180) {
+ if(metrics.scrollHeight>metrics.height+1 || metrics.map.width<180 || (metrics.width<metrics.height && metrics.map.width<metrics.width-1)) {
   writeFileSync(out+'/exploration-layout-failure.json',JSON.stringify({label,...metrics},null,2));
   await page.screenshot({path:out+'/exploration-layout-failure.png',fullPage:true});
  }
@@ -30,7 +30,9 @@ async function audit(label, expectedMembers = 3) {
  assert.ok(metrics.map.width>=180&&Math.abs(metrics.map.width-metrics.map.height)<1,label+' readable square map');
  for(const c of metrics.controls) assert.ok(c.width>=44&&c.height>=44&&c.x>=0&&c.y>=0&&c.right<=metrics.width+1&&c.bottom<=metrics.height+1,label+' control '+c.label);
  assert.ok(metrics.portraits.every(x=>x.width>=28&&x.height>=28),label+' portraits visible');
- assert.equal(metrics.parties.length,expectedMembers,label+' expected party fixture');
+ assert.equal(metrics.parties.length,0,label+' party details stay folded');
+ assert.equal(await page.locator('.field-legend,.utility-bar').count(),0,label+' no permanent legend or menu row');
+ if(metrics.width<metrics.height)assert.ok(metrics.map.width>=metrics.width-1,label+' map fills portrait width');
  assert.deepEqual(metrics.clipped,[],label+' text clipping');
  results.push({label,...metrics});
 }
@@ -49,21 +51,18 @@ try {
  await page.setViewportSize({width:390,height:660});
  assert.equal(await page.locator('.pad [data-direction]').count(),8,'all eight directions remain available');
  assert.equal(await page.getByRole('button',{name:'계단 내려가기',exact:true}).isDisabled(),true,'stairs require standing on stairs');
- // DOM layout stress only: five cards and a long mechanic label, without inventing gameplay progress.
+ // Long mechanic labels must keep the full-width map and controls usable.
  for(const [width,height] of [[360,640],[390,660],[844,390]]){
   // Resize triggers a full real-screen render; install the fixture after it settles.
   await page.setViewportSize({width,height});await page.waitForTimeout(150);
   await page.evaluate(()=>{
-  const party=document.querySelector('.expedition-party');
-  while(party.children.length<5)party.append(party.children[1].cloneNode(true));
-  party.dataset.count='5';party.style.setProperty('--party-size','5');
   const condition=document.createElement('div');condition.className='expedition-conditions';
   condition.innerHTML='<span class="urgent">火 · 火勢 증가 3턴 · 물길 개방까지 2턴</span>';
   document.querySelector('.exploration-header').append(condition);
   });
   await page.waitForTimeout(100);
   assert.equal(await page.locator('.expedition-conditions').count(),1);
-  await audit(`five-card-mechanic-layout-${width}x${height}`,5);
+  await audit(`mechanic-layout-${width}x${height}`);
  }
  await page.reload({waitUntil:'networkidle'});await page.getByRole('button',{name:'이어하기',exact:true}).click();
  await page.setViewportSize({width:390,height:660});
@@ -77,10 +76,11 @@ try {
  assert.ok(closeBox.y>=0&&closeBox.y+closeBox.height<=660);
  await close();assert.deepEqual(await state(),before,'reading legend consumes no turn');
  for(const label of ['부대','상태','기록','도움말']){
-  if(['상태','도움말'].includes(label)) await page.getByRole('button',{name:'더보기',exact:true}).click();
+  await page.getByRole('button',{name:'더보기',exact:true}).click();
   await page.getByRole('button',{name:label,exact:true}).click();assert.ok(await page.locator('.sheet').isVisible());await close();
   assert.deepEqual(await state(),before,label+' consumes no turn');
  }
+ await page.getByRole('button',{name:'더보기',exact:true}).click();
  await page.getByRole('button',{name:/^가방 /}).click();await close();assert.deepEqual(await state(),before);
  await page.getByRole('button',{name:'대기',exact:true}).click();assert.equal((await state()).turn,before.turn+1);
  await page.getByRole('button',{name:'함정 찾기',exact:true}).click();assert.equal((await state()).turn,before.turn+2);

@@ -228,7 +228,7 @@ function render(): void {
   else if (modal === "party") renderParty();
   else if (modal === "help") renderHelp();
   else if (modal === "map-guide") renderMapGuide();
-  else if (modal === "more") sheet(h("h2", {}, "탐험 메뉴"), button("상태", () => { modal = "status"; render(); }), button("지도 안내", () => { modal = "map-guide"; render(); }), button("도움말", () => { modal = "help"; render(); }));
+  else if (modal === "more") sheet(h("h2", {}, "탐험 메뉴"), button("가방 " + run!.inventory().length + "/10", () => { modal = "bag"; render(); }), button("부대", () => { modal = "party"; render(); }), button("기록", () => { modal = "log"; render(); }), button("상태", () => { modal = "status"; render(); }), button("지도 안내", () => { modal = "map-guide"; render(); }), button("도움말", () => { modal = "help"; render(); }));
   else if (modal === "auto-settings") renderAutoSettings();
   else if (modal === "skills" || modal === "battle-items" || modal === "tactics") renderBattlePanel();
   else if (modal === "log") sheet(h("h2", {}, "행동 기록"), ...log.map(line => h("p", {}, line)));
@@ -319,7 +319,7 @@ function explorationHeader(): HTMLElement {
   const r = run!, dungeon = r.dungeon;
   return h("header", { class: "exploration-header" },
     h("div", { class: "expedition-heading" },
-      h("h1", { class: "expedition-title" }, r.campaign.name, h("span", { class: "floor-seal" }, r.depth + "F"))),
+      h("h1", { class: "expedition-title" }, r.campaign.name, h("span", { class: "floor-seal" }, r.depth + "F")), button("더보기", () => { modal = "more"; render(); }, {class:"exploration-menu-button", "aria-label":"더보기"})),
     h("div", { class: "expedition-stats", "aria-label": "원정 상태" },
       h("span", { class: "food-stat" }, icon("rice-sack", 22), "군량 ", h("b", { class: "num" }, String(r.food))),
       h("span", {}, "금 ", h("b", { class: "num" }, String(r.gold))),
@@ -361,25 +361,24 @@ function travelTo(target: { x: number; y: number }): void {
 function renderDungeon(): void {
   const r = run!;
   const canvas = h("canvas", { id: "map", "aria-label": "던전 지도", "aria-describedby": "map-instruction", "data-view-radius": String(mapRadius) });
-  const stage = h("div", { class: "map-stage" }, canvas, h("div", {class:"field-legend","aria-hidden":"true"}, h("span", {class:"ally"},"● 아군"),h("span", {class:"enemy"},"▲ 적"),h("span", {class:"loot"},"◆ 물품")), button(mapRadius === 4 ? "넓게 보기" : "크게 보기", () => { mapRadius = mapRadius === 4 ? 7 : 4; render(); }, { class: "map-zoom-button" }));
+  const stage = h("div", { class: "map-stage" }, canvas, button(mapRadius === 4 ? "넓게 보기" : "크게 보기", () => { mapRadius = mapRadius === 4 ? 7 : 4; render(); }, { class: "map-zoom-button" }));
   canvas.addEventListener("pointerup", (event) => travelTo(tileAt(canvas, r.dungeon, event.clientX, event.clientY)));
   const onStairs = r.dungeon.position.x === r.dungeon.floor.stairs.x && r.dungeon.position.y === r.dungeon.floor.stairs.y;
   const pad = thumbPad(move); cancelPad = pad.cancel;
   put(
-    explorationHeader(), h("div", {class:"exploration-goal",role:"status"}, onStairs ? "계단 위입니다 · 다음 층으로 내려갈 수 있습니다." : r.food <= 20 ? "군량 부족 주의 · 음식과 계단을 찾으세요." : r.dungeon.visibleEnemies().length ? "적 부대 발견 · 접촉하면 전투가 시작됩니다." : "계단을 찾아 다음 층으로 내려가세요."), stage, partyBars(true),
+    explorationHeader(), stage,
     h("div", { class: "dungeon-controls" },
       h("div", {class:"pad-wrap"}, pad.element, h("small",{},"밀고 놓으면 1칸 · 중앙 취소")),
       h("div", { class: "exploration-actions grow" },
         explorationCommand("대기", "1턴", () => { act({ type: "dungeon", command: { type: "wait" } }); render(); }),
-        explorationCommand("자동 이동", "발견·적 조우 시 정지", () => { act({ type: "auto-explore" }); render(); }, true),
+        explorationCommand("자동 이동", "발견·조우 정지", () => { act({ type: "auto-explore" }); render(); }, true),
         explorationCommand("함정 찾기", "1턴 · 함정·통로", () => { act({ type: "dungeon", command: { type: "search" } }); render(); }),
-        explorationCommand("사물 조사", "요술진 파괴 시 1턴", () => { act({ type: "dungeon", command: { type: "interact" } }); render(); }),
+        explorationCommand("사물 조사", "요술진 파괴 1턴", () => { act({ type: "dungeon", command: { type: "interact" } }); render(); }),
         button("계단 내려가기", () => { act({ type: "dungeon", command: { type: "descend" } }); render(); }, { disabled: !onStairs }),
       )),
-    utilityBar(true),
     h("div", { class: "exploration-message" },
-      h("span", { id: "map-instruction" }, onStairs ? "계단 위 · 다음 층으로 이동 가능" : "지도 터치 또는 8방향기로 이동"),
-      h("div", { class: "latest-event", role: "status" }, log[0] ?? "방향 버튼으로도 이동할 수 있습니다.")),
+      h("span", { id: "map-instruction", class:"sr-only" }, "지도 터치 또는 8방향기로 이동 · 상태와 가방은 더보기"),
+      h("div", { class: "latest-event", role: "status" }, r.food <= 20 ? "군량 부족 주의 · 음식과 계단을 찾으세요." : r.dungeon.visibleEnemies().length ? "적 부대 발견 · 접촉하면 전투가 시작됩니다." : log[0] ?? "계단을 찾아 다음 층으로 내려가세요.")),
   );
   const enemyKey = (groupId: string): string => {
     const units = r.group(groupId)?.units ?? [];
