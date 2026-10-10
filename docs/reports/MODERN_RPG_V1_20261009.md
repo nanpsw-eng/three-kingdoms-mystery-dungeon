@@ -1,6 +1,6 @@
 # 현대 RPG v1 구현·검증
 
-Status: IMPLEMENTED / PREVIEW READY / 운영 승인 대기. 사용자 승인 범위: 현대 2D RPG 시각·UI·조작 교체 및 방 축소 검토 이후 계속 개선. PR [#25](https://github.com/nanpsw-eng/three-kingdoms-mystery-dungeon/pull/25).
+Status: PRODUCTION RELEASED 2026-10-10. 사용자 승인 범위: 현대 2D RPG 시각·UI·조작 교체 및 방 축소 검토 이후 계속 개선. PR [#25](https://github.com/nanpsw-eng/three-kingdoms-mystery-dungeon/pull/25).
 
 ## 결과
 
@@ -58,3 +58,14 @@ CI [push37906718602](https://github.com/nanpsw-eng/three-kingdoms-mystery-dungeo
 운영 main88becf53409586f0bf513c34bb418d07237907f0 및 정식 도메인은 이번 개편으로 변경하지 않았다. AGENTS.md §7은 main merge/production release에 사용자 승인을 요구한다.
 
 기존 save v1/options 누락은 legacy-v1, 새 웹 원정만compact-v2. 새 compact 저장 후 구형88becf5 전체 배포 artifact로 rollback하면 재생 호환이 깨지므로 생성 버전 지원을 보존하는 수정 릴리스로 복구한다. 세이브 삭제/일괄 변환을 사용하지 않는다. 명세와 DEC-026에 동일 계약을 기록했다.
+
+
+## 2026-10-10 운영 릴리스 완료
+
+사용자 ① 정식 배포 진행 승인. PR25 merged, 릴리스 commit `00ffd4b715c410f1fb5f3dee7a30a43aaad71317`.
+
+- Vercel production `dpl_5vdioC3iC25sLDYUai8ULpBbHt4F` READY, [정식 주소](https://three-kingdoms-mystery-dungeon.vercel.app/) alias가 위 commit으로 연결됨.
+- main [CI38054028617](https://github.com/nanpsw-eng/three-kingdoms-mystery-dungeon/actions/runs/38054028617), [visual-smoke38054028645](https://github.com/nanpsw-eng/three-kingdoms-mystery-dungeon/actions/runs/38054028645), [deploy38054028660](https://github.com/nanpsw-eng/three-kingdoms-mystery-dungeon/actions/runs/38054028660) SUCCESS. deploy는 기존 gh-pages 배포이며 Vercel은 Git integration으로 배포.
+- 공개 HTTP로 HTML·실행 main.js·modern atlas3 응답 확인. 실행 코드/그림3 SHA256은 검증한 site/ 파일과 모두 일치. 증거 production-http-20261010.json.
+- Vercel protected-fetch는 protection bypass API 권한403을 반환했으나 공개 HTTP는 인증 없이 정상 응답. 권한 설정 변경/인증 우회 없이 공개 경로만 확인. 운영 주소에서 실제 브라우저 조작은 NOT_RUN; 실제 Chromium 게임흐름은 동일 main 코드의 Actions suite PASS.
+- 이 기록을 추가한 후속 문서 커밋은 src/web/scripts/test/workflow 변경이 없는 동일 프로그램이다. 기존 생성 버전 저장 계약/호환 복구 제한 유지. 실물 모바일 조작감·장기 난이도는 후속 사용자 플레이 피드백으로 확인한다.

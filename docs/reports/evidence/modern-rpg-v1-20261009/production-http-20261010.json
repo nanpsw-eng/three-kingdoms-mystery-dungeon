@@ -1,0 +1,32 @@
+{
+  "url": "https://three-kingdoms-mystery-dungeon.vercel.app/",
+  "deployment": "dpl_5vdioC3iC25sLDYUai8ULpBbHt4F",
+  "commit": "00ffd4b715c410f1fb5f3dee7a30a43aaad71317",
+  "files": [
+    {
+      "path": "web/src/main.js",
+      "bytes": 57461,
+      "sha256": "fe99dc9130d3160bd216effbee84a0c9560bf5bdabc66716341912854706045c",
+      "matchesBuiltFile": true
+    },
+    {
+      "path": "assets/modern/characters-v1.webp",
+      "bytes": 714476,
+      "sha256": "6f0c0f84826dfbbca10dc1dedb520aa0c5774a69799b087990907caec9a17dee",
+      "matchesBuiltFile": true
+    },
+    {
+      "path": "assets/modern/objects-v1.webp",
+      "bytes": 592670,
+      "sha256": "a3fa6f5d712a6486382aa0499128e4d5bf37e38b9eb25bedb7295e0776051a1a",
+      "matchesBuiltFile": true
+    },
+    {
+      "path": "assets/modern/terrain-v1.webp",
+      "bytes": 350030,
+      "sha256": "daf09c3f80b1e4fb70761b6b88ef12e81a717479c54a3b0b471f79e315b5f115",
+      "matchesBuiltFile": true
+    }
+  ],
+  "note": "Public HTTP checks; production browser interaction NOT_RUN. Vercel bypass API returned403; public HTTP succeeded without credentials."
+}

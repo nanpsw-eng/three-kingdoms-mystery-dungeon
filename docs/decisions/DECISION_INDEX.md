@@ -29,7 +29,7 @@
 | DEC-023 | 자동 승인 구현 Delta (A-01~) — `DEC-023-AUTO_APPROVED_DELTAS.md` | APPROVED (delegated) |
 | DEC-024 | 스토리 확장(E1~E9) 승인 + 전면 위임, DEC-005 범위 Delta — `DEC-024-STORY_EXPANSION_APPROVAL.md` | APPROVED |
 | DEC-025 | 이전 아트 방향: 현대 수묵 그래픽 노블 × 연환화 — `DEC-025-ART_DIRECTION.md` | SUPERSEDED visually by DEC-026 |
-| DEC-026 | 현대 2D RPG UI·8방향 조작·버전별 작은 방 — `DEC-026-MODERN_RPG_UI.md` | IMPLEMENTATION APPROVED / production pending |
+| DEC-026 | 현대 2D RPG UI·8방향 조작·버전별 작은 방 — `DEC-026-MODERN_RPG_UI.md` | APPROVED / PRODUCTION RELEASED 2026-10-10 |
 
 ## Open Decisions
 - 최종 기술 스택/Architecture — MVP는 A-26(무프레임워크 정적 웹)으로 진행, 상용 스택 확정은 OPEN
