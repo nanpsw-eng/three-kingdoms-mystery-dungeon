@@ -72,6 +72,7 @@ if (reachedBattle) {
   for (let i = 0; i < 150 && (await state()).phase === "battle"; i += 1) await page.waitForTimeout(100);
   await page.screenshot({ path: out + "/04-after-battle.png", fullPage: true });
 }
+await tap(page.getByRole("button", { name: "더보기", exact: true }));
 await tap(page.getByRole("button", { name: /가방/ }));
 await page.screenshot({ path: out + "/05-bag.png", fullPage: true });
 const final = await state();
